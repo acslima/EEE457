@@ -1,0 +1,618 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     13955,        461]*)
+(*NotebookOutlinePosition[     14892,        491]*)
+(*  CellTagsIndexPosition[     14848,        487]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    FormBox[
+      StyleBox[\(\(3\^a\)\(\ \)\(Prova\)\(\ \)\(de\)\(\ \
+\)\(Transmiss\[ATilde]o\)\(\ \)\),
+        "Title",
+        Evaluatable->False], TraditionalForm]], "Input",
+  CellDingbat->"\[GraySquare]",
+  TextJustification->0.5],
+
+Cell[BoxData[
+    FormBox[
+      StyleBox[\(Quest\[ATilde]o\ 1\),
+        "Section",
+        Evaluatable->False,
+        CounterAssignments->{{"Section", 1}, {"Equation", 0}, {"Figure", 0}, {
+            "Subsubtitle", 0}},
+        CounterBoxOptions->{CounterStyle->"Section"}], 
+      TraditionalForm]], "Input"],
+
+Cell[BoxData[
+    StyleBox[\(Quadripolo\ para\ 150  km\),
+      "Text",
+      Evaluatable->False]], "Input"],
+
+Cell[BoxData[{
+    \(\(A150 = 
+        0.9534\ \[ExponentialE]\^\(\[ImaginaryI] \((0.3*\[Pi]/180)\)\);\)\), \
+"\[IndentingNewLine]", 
+    \(\(B150 = 
+        90.33\ \[ExponentialE]\^\(\[ImaginaryI] \((84.1*\[Pi]/180)\)\);\)\), \
+"\[IndentingNewLine]", 
+    \(\(C150 = 
+        0.001014  \[ExponentialE]\^\(\[ImaginaryI] \
+\((90.4*\[Pi]/180)\)\);\)\), "\[IndentingNewLine]", 
+    \(\(D150 = A150;\)\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"Q150", "=", 
+        RowBox[{"(", GridBox[{
+              {"A150", "B150"},
+              {"C150", "D150"}
+              }], ")"}]}], ";"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Q300 = Q150 . Q150\)], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(\(0.8177487839737473`\)\(\[InvisibleSpace]\)\) + 
+                0.01829750922483113`\ \[ImaginaryI]\), \
+\(\(\(16.80780004764322`\)\(\[InvisibleSpace]\)\) + 
+                171.41920543575617`\ \[ImaginaryI]\)},
+            {\(\(-0.000023621512473346287`\) + 
+                0.001933350902596709`\ \[ImaginaryI]\), \
+\(\(\(0.8177487839737473`\)\(\[InvisibleSpace]\)\) + 
+                0.01829750922483113`\ \[ImaginaryI]\)}
+            },
+          ColumnAlignments->{Decimal}], "\[NoBreak]", ")"}], 
+      TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{" ", 
+        RowBox[{"Qnc", "=", 
+          RowBox[{"(", GridBox[{
+                {\(Abs[Q300[\([1, 1]\)]]\ \[Angle]\ [
+                      180/\[Pi]\ Arg[Q300[\([1, 1]\)]]]\), \(Abs[
+                      Q300[\([1, 2]\)]]\ \[Angle]\ [\ 
+                      180/\[Pi]\ Arg[Q300[\([1, 2]\)]]]\)},
+                {\(Abs[Q300[\([2, 1]\)]]\ \[Angle]\ [
+                      180/\[Pi]\ Arg[Q300[\([2, 1]\)]]]\), \(Abs[
+                      Q300[\([2, 2]\)]]\ \[Angle][
+                      180/\[Pi]\ Arg[Q300[\([2, 2]\)]]]\)}
+                }], ")"}], "\[NoBreak]"}]}], TraditionalForm]], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(0.8179534659956978`\ \(\[Angle](
+                  1.281805815896029`)\)\), \(172.241244`\ \(\[Angle](
+                  84.39999999999999`)\)\)},
+            {\(0.0019334951999999996`\ \(\[Angle](
+                  90.69999999999999`)\)\), \(0.8179534659956978`\ \(\[Angle](
+                  1.281805815896029`)\)\)}
+            }], "\[NoBreak]", ")"}], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(Como\ a\ LT\ deve\ ter\ compensada\ 60  %\ da\ reat\[AHat]ncia\
+\ temos\),
+      "Text",
+      Evaluatable->False]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Z300 = Q300[\([1, 2]\)]\), "\[IndentingNewLine]", 
+    \(XC300 = \(-I\)\ 0.6*Im[Z300]\)}], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`\(\(16.80780004764322`\)\(\[InvisibleSpace]\)\) + 
+      171.41920543575617`\ \[ImaginaryI]\)], "Output"],
+
+Cell[BoxData[
+    \(TraditionalForm\`\(-102.85152326145369`\)\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\((a)\)\ \ O\ quadripolo\ para\ o\ banco\ de\ capacitores\ \[EAcute]\ \
+dado\ por\)], "Input",
+  Evaluatable->False],
+
+Cell[BoxData[{\(Acap = 1;\), "\[IndentingNewLine]", \(Dcap = 
+        1;\), "\[IndentingNewLine]", \(Ccap = 
+        0;\), "\[IndentingNewLine]", \(Bcap = 
+        XC300\ ;\), "\[IndentingNewLine]", 
+    RowBox[{"Qcap", "=", 
+      RowBox[{"(", GridBox[{
+            {"Acap", "Bcap"},
+            {"Ccap", "Dcap"}
+            }], ")"}], "\[IndentingNewLine]"}]}], "Input"],
+
+Cell[BoxData[
+    StyleBox[\(\((b)\)\ O\ Quadripolo\ para\ o\ conjunto\ LT150 + 
+        Capacitor\ s\[EAcute]rie + L150\ \[EAcute]\ dado\ por\),
+      "Text",
+      Evaluatable->False]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Qtotal = Q150 . Qcap . Q150\)], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(\(0.9171728266392363`\)\(\[InvisibleSpace]\)\) + 
+                0.019512263494642676`\ \[ImaginaryI]\), \
+\(\(\(17.786797820043017`\)\(\[InvisibleSpace]\)\) + 
+                77.93522195561052`\ \[ImaginaryI]\)},
+            {\(\(-0.00002509803433390171`\) + 
+                0.0020390921191733944`\ \[ImaginaryI]\), \
+\(\(\(0.9171728266392364`\)\(\[InvisibleSpace]\)\) + 
+                0.019512263494642676`\ \[ImaginaryI]\)}
+            },
+          ColumnAlignments->{Decimal}], "\[NoBreak]", ")"}], 
+      TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(Q\ total\ em\ coordenadas\ polares\),
+      "Text",
+      Evaluatable->False]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Qpolar", "=", 
+      RowBox[{"(", GridBox[{
+            {\(Abs[Qtotal[\([1, 1]\)]]\ \[Angle]\ [
+                  180/\[Pi]\ Arg[Qtotal[\([1, 1]\)]]]\), \(Abs[
+                  Qtotal[\([1, 2]\)]]\ \[Angle]\ [\ 
+                  180/\[Pi]\ Arg[Qtotal[\([1, 2]\)]]]\)},
+            {\(Abs[Qtotal[\([2, 1]\)]]\ \[Angle]\ [
+                  180/\[Pi]\ Arg[Qtotal[\([2, 1]\)]]]\), \(Abs[
+                  Qtotal[\([2, 2]\)]]\ \[Angle][
+                  180/\[Pi]\ Arg[Qtotal[\([2, 2]\)]]]\)}
+            }], ")"}]}]], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(0.9173803586038295`\ \(\[Angle](
+                  1.2187471068421931`)\)\), \(79.9391581014046`\ \(\[Angle](
+                  77.14384102550811`)\)\)},
+            {\(0.0020392465720953093`\ \(\[Angle](
+                  90.70518581091238`)\)\), \(0.9173803586038296`\ \(\[Angle](
+                  1.2187471068421931`)\)\)}
+            }], "\[NoBreak]", ")"}], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(\((c)\)\ para\ a\ Lt\ sem\ compensa\[CCedilla]\[ATilde]o\ e\ \
+com\ carga\ nominal, \ vr = 345  kv, \ s = 400  MVA\),
+      "Text"]], "Input",
+  Evaluatable->False],
+
+Cell[BoxData[{
+    \(\(Vr = 345*10^3;\)\), "\[IndentingNewLine]", 
+    \(\(S = 400.00*10^6;\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Ir = S\/\(\(\@3\) Vr\)\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`669.3916164517401`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"R", "=", 
+        RowBox[{"(", GridBox[{
+              {\(Vr\/\@3\)},
+              {"Ir"}
+              }], ")"}]}], ";"}], "\[IndentingNewLine]", \(S = 
+      Q300 . R\)}], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(\(174134.9812349621`\)\(\[InvisibleSpace]\)\) + 
+                118391.18381489103`\ \[ImaginaryI]\)},
+            {\(\(\(542.6891094837539`\)\(\[InvisibleSpace]\)\) + 
+                397.3443283750648`\ \[ImaginaryI]\)}
+            },
+          ColumnAlignments->{Decimal}], "\[NoBreak]", ")"}], 
+      TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(colocando\ em\ coordenadas\ polares\ e\ expressando\ as\ tens\
+\[OTilde]es\ como\ fase\ neutro\),
+      "Text"]], "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Spolar", "=", 
+      RowBox[{"(", GridBox[{
+            {\(Abs[S[\([1, 1]\)]]\ \[Angle]\ [
+                  180/\[Pi]\ Arg[S[\([1, 1]\)]]]\)},
+            {\(Abs[S[\([2, 1]\)]]\ \[Angle]\ [
+                  180/\[Pi]\ Arg[S[\([2, 1]\)]]]\)}
+            }], ")"}]}]], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(210569.38071522154`\ \(\[Angle](34.21106623581987`)\)\)},
+            {\(672.6023972928592`\ \(\[Angle](36.21071965953467`)\)\)}
+            }], "\[NoBreak]", ")"}], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(\(Queda\)\(\ \)\(de\)\(\ \)\(tens\[ATilde]o\)\(\ \)\),
+      "Text",
+      Evaluatable->False]], "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[CapitalDelta]v = \((\(-R[\([1, 1]\)]\) + 
+          Abs[S[\([1, 1]\)]])\)\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`11383.537844800681`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[CapitalDelta]vp = \((\(-R[\([1, 1]\)]\) + Abs[S[\([1, \
+1]\)]])\)\/\(345/\@3\)\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`57.15033599153014`\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(\((d)\)\ para\ a\ Lt\ compensada\ em\ vazio\),
+      "Text",
+      Evaluatable->False]], "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Rc", "=", 
+      RowBox[{"(", GridBox[{
+            {\(Vr\/\@3\)},
+            {"0"}
+            }], ")"}]}]], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(115000\ \@3\)},
+            {"0"}
+            }], "\[NoBreak]", ")"}], TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Sc = Qtotal . Rc\)], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(\(182687.84253198266`\)\(\[InvisibleSpace]\)\) + 
+                3886.566650490145`\ \[ImaginaryI]\)},
+            {\(\(-4.999173123188974`\) + 
+                406.15828244798524`\ \[ImaginaryI]\)}
+            },
+          ColumnAlignments->{Decimal}], "\[NoBreak]", ")"}], 
+      TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Abs[Sc]\)], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"182729.17996127272`"},
+            {"406.1890472834207`"}
+            },
+          ColumnAlignments->{Decimal}], "\[NoBreak]", ")"}], 
+      TraditionalForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    StyleBox[\(Vs\ fase - fase\),
+      "Text",
+      Evaluatable->False]], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`317369.1824581685`\ fase\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Abs[Sc[\([1, 1]\)] \@3]\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`316496.2237183211`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[CapitalDelta]vc = \((\(-Rc[\([1, 1]\)]\) + 
+          Abs[Sc[\([1, 1]\)]])\)\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`\(-16456.662909148145`\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[CapitalDelta]vcp = \((\(-Rc[\([1, 1]\)]\) + Abs[Sc[\([1, \
+1]\)]])\)\/\(345/\@3\)\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`\(-82.61964139617054`\)\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    StyleBox[\(Pot\[EHat]ncia\ \ M\[AAcute]xima\ \ Transmitida\),
+      "Text",
+      Evaluatable->False], "\[IndentingNewLine]", 
+    StyleBox[\(para\ o\ caso\ n\[ATilde]o\ compensado\),
+      "Text",
+      Evaluatable->False], "\n", \(Pr = 400\), "\n", \(Qr = 0.0\)}], "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Pmax = 
+      Abs[S[\([1, 
+                1]\)]]\ Vr\/Abs[Q300[\([1, 2]\)]] - \(\(\(Abs[
+                  Q300[\([1, 1]\)]]\ Vr\^2\)\/Abs[Q300[\([1, 2]\)]]\) \(Cos[
+            Arg[Q300[\([1, 2]\)] - 
+                Arg[Q300[\([1, 1]\)]]]]\)\(\[IndentingNewLine]\)\)\)], "Input"],
+
+Cell[BoxData[
+    \(TraditionalForm\`3.6668680678212327`*^8\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    StyleBox[\(Quest\[ATilde]o\ 2\),
+      "Section",
+      Evaluatable->False]], "Input"],
+
+Cell[BoxData[
+    StyleBox[\(Como\ a\ fonte\ \[EAcute]\ sem\ imped\[AHat]ncia\ temos\ \
+\[Rho]s = \(\(-1\)\ e\ \[Rho]r = 1.0\), \ 
+      as\ ondas\ de\ tens\[ATilde]o\ s\[ATilde]o\ totalmente\ refletidas\ no\ \
+lado\ receptor\ e\ invertidas\ no\ lado\ emissor\),
+      "Text",
+      Evaluatable->False]], "Input"]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 695}},
+ScreenStyleEnvironment->"Working",
+PrintingStyleEnvironment->"Printout",
+WindowToolbars->"RulerBar",
+WindowSize->{1016, 668},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingOptions->{"PrintingMargins"->{{2.75, 2.75}, {2.75, 2.75}}},
+CellLabelAutoDelete->True,
+CounterBoxOptions->{CounterStyle->Automatic},
+StyleDefinitions -> "ArticleClassic.nb"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 251, 7, 56, "Input"],
+Cell[1971, 58, 313, 8, 35, "Input"],
+Cell[2287, 68, 108, 3, 31, "Input"],
+Cell[2398, 73, 411, 10, 92, "Input"],
+Cell[2812, 85, 192, 6, 42, "Input"],
+
+Cell[CellGroupData[{
+Cell[3029, 95, 51, 1, 31, "Input"],
+Cell[3083, 98, 628, 13, 46, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3748, 116, 646, 13, 46, "Input"],
+Cell[4397, 131, 469, 9, 46, "Output"]
+}, Open  ]],
+Cell[4881, 143, 154, 4, 31, "Input"],
+
+Cell[CellGroupData[{
+Cell[5060, 151, 120, 2, 51, "Input"],
+Cell[5183, 155, 142, 2, 30, "Output"],
+Cell[5328, 159, 90, 1, 30, "Output"]
+}, Open  ]],
+Cell[5433, 163, 136, 3, 31, "Input",
+  Evaluatable->False],
+Cell[5572, 168, 372, 8, 144, "Input"],
+Cell[5947, 178, 196, 4, 31, "Input"],
+
+Cell[CellGroupData[{
+Cell[6168, 186, 60, 1, 31, "Input"],
+Cell[6231, 189, 630, 13, 46, "Output"]
+}, Open  ]],
+Cell[6876, 205, 117, 3, 31, "Input"],
+
+Cell[CellGroupData[{
+Cell[7018, 212, 554, 11, 89, "Input"],
+Cell[7575, 225, 477, 9, 46, "Output"]
+}, Open  ]],
+Cell[8067, 237, 193, 4, 31, "Input",
+  Evaluatable->False],
+Cell[8263, 243, 107, 2, 51, "Input"],
+
+Cell[CellGroupData[{
+Cell[8395, 249, 55, 1, 49, "Input"],
+Cell[8453, 252, 69, 1, 30, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8559, 258, 226, 7, 75, "Input"],
+Cell[8788, 267, 421, 9, 46, "Output"]
+}, Open  ]],
+Cell[9224, 279, 173, 4, 31, "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+Cell[9422, 287, 304, 7, 42, "Input"],
+Cell[9729, 296, 279, 5, 46, "Output"]
+}, Open  ]],
+Cell[10023, 304, 156, 4, 31, "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+Cell[10204, 312, 108, 2, 31, "Input"],
+Cell[10315, 316, 70, 1, 30, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10422, 322, 113, 2, 54, "Input"],
+Cell[10538, 326, 69, 1, 30, "Output"]
+}, Open  ]],
+Cell[10622, 330, 148, 4, 31, "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+Cell[10795, 338, 146, 5, 52, "Input"],
+Cell[10944, 345, 184, 5, 50, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11165, 355, 49, 1, 31, "Input"],
+Cell[11217, 358, 398, 9, 46, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11652, 372, 40, 1, 31, "Input"],
+Cell[11695, 375, 253, 7, 46, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11985, 387, 98, 3, 31, "Input"],
+Cell[12086, 392, 75, 1, 30, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12198, 398, 56, 1, 34, "Input"],
+Cell[12257, 401, 69, 1, 30, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12363, 407, 111, 2, 31, "Input"],
+Cell[12477, 411, 75, 1, 30, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12589, 417, 116, 2, 54, "Input"],
+Cell[12708, 421, 74, 1, 30, "Output"]
+}, Open  ]],
+Cell[12797, 425, 316, 7, 91, "Input",
+  Evaluatable->False],
+
+Cell[CellGroupData[{
+Cell[13138, 436, 302, 6, 106, "Input"],
+Cell[13443, 444, 73, 1, 31, "Output"]
+}, Open  ]],
+Cell[13531, 448, 104, 3, 36, "Input"],
+Cell[13638, 453, 313, 6, 49, "Input"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

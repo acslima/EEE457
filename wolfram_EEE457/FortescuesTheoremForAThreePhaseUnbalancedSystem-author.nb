@@ -1,0 +1,3920 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    166079,       3911]
+NotebookOptionsPosition[    159480,       3715]
+NotebookOutlinePosition[    161103,       3765]
+CellTagsIndexPosition[    160767,       3753]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Fortescue's Theorem for a Three-Phase Unbalanced System", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.519121815515625*^9, {3.519121917796875*^9, 
+   3.519121922796875*^9}, {3.51946197784375*^9, 3.5194619795*^9}, {
+   3.5196619317913113`*^9, 3.519661936147747*^9}, {3.520113252109375*^9, 
+   3.52011327303125*^9}, {3.520113505*^9, 3.520113528703125*^9}, {
+   3.52011359784375*^9, 3.520113603171875*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "faseAx", ",", "faseAy", ",", "faseBx", ",", "faseBy", ",", "faseCx", 
+       ",", "faseCy", ",", "CSPax", ",", "CSPay", ",", "CSNax", ",", "CSNay", 
+       ",", "CSPbx", ",", "CSPby", ",", "CSNbx", ",", "CSNby", ",", "CSPcx", 
+       ",", "CSPcy", ",", "CSNcx", ",", "CSNcy"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", " ", "\[IndentingNewLine]", "\t\t\t\t\t", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Thickness", "[", "0.005", "]"}], ",", "\[IndentingNewLine]",
+          "\t\t\t\t", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"VECTORS", " ", "OF", " ", "PHASES"}], "*)"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"plotting", " ", "the", " ", "phase", " ", "A"}], "*)"}], 
+         "\t", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0.5", ",", "0.5", ",", "1"}], "]"}], ",", 
+         "\t                            ", "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"faseAx", "=", 
+               RowBox[{"(", 
+                RowBox[{"Ia", "*", 
+                 RowBox[{"Cos", "[", 
+                  RowBox[{
+                   RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                   RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+              ",", 
+              RowBox[{"faseAy", "=", 
+               RowBox[{"(", 
+                RowBox[{"Ia", "*", 
+                 RowBox[{"Sin", "[", 
+                  RowBox[{
+                   RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                   RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], 
+                ")"}]}]}], "}"}]}], "}"}], "]"}], ",", "  \t\t\t", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"plotting", " ", "the", " ", "phase", " ", "B"}], "*)"}], 
+         "\t", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", "0.5", ",", "0.5"}], "]"}], ",", 
+         "                                           ", "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"faseBx", "=", 
+               RowBox[{"(", 
+                RowBox[{"Ib", "*", 
+                 RowBox[{"Cos", "[", 
+                  RowBox[{
+                   RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                   RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+              ",", 
+              RowBox[{"faseBy", "=", 
+               RowBox[{"(", 
+                RowBox[{"Ib", "*", 
+                 RowBox[{"Sin", "[", 
+                  RowBox[{
+                   RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                   RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], 
+                ")"}]}]}], "}"}]}], "}"}], "]"}], ",", "\t  ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"plotting", " ", "the", " ", "phase", " ", "C"}], "*)"}], 
+         "\t", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0.5", ",", "1", ",", "0.5"}], "]"}], ",", 
+         "                  ", "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"faseCx", "=", 
+               RowBox[{"(", 
+                RowBox[{"Ic", "*", 
+                 RowBox[{"Cos", "[", 
+                  RowBox[{
+                   RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                   RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+              ",", 
+              RowBox[{"faseCy", "=", 
+               RowBox[{"(", 
+                RowBox[{"Ic", "*", 
+                 RowBox[{"Sin", "[", 
+                  RowBox[{
+                   RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                   RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], 
+                ")"}]}]}], "}"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"VECTORS", " ", "OF", " ", "PHASES", " ", "A"}], "*)"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "plotting", " ", "the", " ", "vector", " ", "of", " ", "positive", 
+           " ", "sequence", " ", "of", " ", "phase", " ", "A"}], " ", "*)"}], 
+         "    ", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", 
+         "                                 ", "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPax", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", " ", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}], ",", 
+              RowBox[{"CSPay", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "plotting", " ", "the", " ", "vector", " ", "of", " ", "negative", 
+           " ", "sequence", " ", "of", " ", "phase", " ", "A"}], " ", "*)"}], 
+         "    ", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", " ", "1", ",", " ", "0"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], " ", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"CSNax", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", " ", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}], ",", 
+              RowBox[{"CSNay", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Plotting", " ", "the", " ", "vector", " ", "negative", " ", 
+           "sequence", " ", "of", " ", "phase", " ", "A", " ", "at", " ", 
+           "the", " ", "tip", " ", "of", " ", "the", " ", "positive", " ", 
+           "sequence", " ", "vector", " ", "of", " ", "phase", " ", "A"}], 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", " ", "0", ",", " ", "1"}], "]"}], ",", "     ", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"CSPax", ",", "CSPay"}], "}"}], " ", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"CSPax", "+", "CSNax"}], ",", 
+              RowBox[{"CSPay", "+", "CSNay"}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Plotting", " ", "the", " ", "vector", " ", "zero", " ", "sequence",
+            " ", "of", " ", "phase", " ", "A", " ", "at", " ", "the", " ", 
+           "tip", " ", "of", " ", "the", " ", "negative", " ", "sequence", 
+           " ", "vector", " ", "of", " ", "phase", " ", "A"}], "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", "   ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPax", "+", "CSNax"}], ",", 
+              RowBox[{"CSPay", "+", "CSNay"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPax", "+", "CSNax", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "/", "3"}], ")"}], "*", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", " ", 
+                   RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                 ")"}]}]}], ",", 
+              RowBox[{"CSPay", "+", "CSNay", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "/", "3"}], ")"}], "*", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                 ")"}]}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", "\t", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"VECTORS", " ", "OF", " ", "PHASES", " ", "B"}], "*)"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "plotting", " ", "the", " ", "vector", " ", "of", " ", "positive", 
+           " ", "sequence", " ", "of", " ", "phase", " ", "B"}], " ", "*)"}], 
+         " ", "\[IndentingNewLine]", "  ", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", "     ", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPbx", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", " ", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "120", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "240", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}], ",", 
+              RowBox[{"CSPby", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "120", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "240", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "plotting", " ", "the", " ", "vector", " ", "of", " ", "negative", 
+           " ", "sequence", " ", "of", " ", "phase", " ", "B"}], " ", "*)"}], 
+         "  ", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", " ", "1", ",", " ", "0"}], "]"}], ",", "     ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], " ", "}"}], ",", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSNbx", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", " ", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "240", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "120", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], " ", ")"}]}], ",", " ", "\[IndentingNewLine]", 
+              RowBox[{"CSNby", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "240", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "120", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], " ", ")"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Plotting", " ", "the", " ", "vector", " ", "negative", " ", 
+           "sequence", " ", "of", " ", "phase", " ", "B", " ", "at", " ", 
+           "the", " ", "tip", " ", "of", " ", "the", " ", "positive", " ", 
+           "sequence", " ", "vector", " ", "of", " ", "phase", " ", "B"}], 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", " ", "0", ",", " ", "1"}], "]"}], ",", "     ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"CSPbx", ",", "CSPby"}], " ", "}"}], " ", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"CSPbx", "+", "CSNbx"}], " ", ",", 
+              RowBox[{"CSPby", "+", "CSNby"}]}], " ", "}"}]}], "}"}], "]"}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Plotting", " ", "the", " ", "vector", " ", "zero", " ", "sequence",
+            " ", "of", " ", "phase", " ", "B", " ", "at", " ", "the", " ", 
+           "tip", " ", "of", " ", "the", " ", "negative", " ", "sequence", 
+           " ", "vector", " ", "of", " ", "phase", " ", "B"}], "*)"}], 
+         "\[IndentingNewLine]", " ", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", "   ", 
+         "\[IndentingNewLine]", "\t", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"CSPbx", "+", "CSNbx"}], " ", ",", 
+              RowBox[{"CSPby", "+", "CSNby"}]}], " ", "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", "  ", 
+             RowBox[{
+              RowBox[{"CSPbx", "+", "CSNbx", "  ", "+", "  ", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "/", "3"}], ")"}], "*", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", " ", 
+                   RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                 ")"}]}]}], ",", " ", "\[IndentingNewLine]", 
+              RowBox[{"CSPby", "+", "CSNby", " ", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "/", "3"}], ")"}], "*", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                 ")"}]}]}]}], " ", "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{"VECTORS", " ", "OF", " ", "PHASES", " ", "C"}], "*)"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "plotting", " ", "the", " ", "vector", " ", "of", " ", "positive", 
+           " ", "sequence", " ", "of", " ", "phase", " ", "C"}], " ", "*)"}], 
+         " ", "\[IndentingNewLine]", "   ", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", "     ", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPcx", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", " ", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "120", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "240", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}], ",", 
+              RowBox[{"CSPcy", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "120", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "240", "+", "120"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], ")"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "plotting", " ", "the", " ", "vector", " ", "of", " ", "negative", 
+           " ", "sequence", " ", "of", " ", "phase", " ", "C"}], " ", "*)"}], 
+         "  ", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", " ", "1", ",", " ", "0"}], "]"}], ",", "     ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], " ", "}"}], " ", ",", 
+            "\[IndentingNewLine]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSNcx", "=", 
+               RowBox[{"(", "  ", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", " ", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "240", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "120", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], " ", ")"}]}], ",", " ", "\[IndentingNewLine]", 
+              RowBox[{"CSNcy", "=", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"1", "/", "3"}], ")"}], "*", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]a", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]b", "+", "240", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                   "+", 
+                   RowBox[{"(", 
+                    RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"\[Theta]c", "+", "120", "+", "240"}], ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                  ")"}]}], " ", ")"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Plotting", " ", "the", " ", "vector", " ", "negative", " ", 
+           "sequence", " ", "of", " ", "phase", " ", "C", " ", "at", " ", 
+           "the", " ", "tip", " ", "of", " ", "the", " ", "positive", " ", 
+           "sequence", " ", "vector", " ", "of", " ", "phase", " ", "C"}], 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"0", ",", " ", "0", ",", " ", "1"}], "]"}], ",", "  ", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"CSPcx", ",", "CSPcy"}], " ", "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPcx", "+", "CSNcx"}], ",", 
+              RowBox[{"CSPcy", "+", "CSNcy"}]}], " ", "}"}]}], "}"}], "]"}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Plotting", " ", "the", " ", "vector", " ", "zero", " ", "sequence",
+            " ", "of", " ", "phase", " ", "C", " ", "at", " ", "the", " ", 
+           "tip", " ", "of", " ", "the", " ", "negative", " ", "sequence", 
+           " ", "vector", " ", "of", " ", "phase", " ", "C"}], "*)"}], 
+         "                        ", "\[IndentingNewLine]", 
+         RowBox[{"RGBColor", " ", "[", 
+          RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", "   \t", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Arrow", "[", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"CSPcx", "+", "CSNcx"}], ",", 
+              RowBox[{"CSPcy", "+", "CSNcy"}]}], "}"}], ",", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"CSPcx", "+", "CSNcx", " ", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "/", "3"}], ")"}], "*", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"Ia", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", " ", 
+                   RowBox[{"Ib", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ic", "*", 
+                    RowBox[{"Cos", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                 ")"}]}]}], " ", ",", " ", 
+              RowBox[{"CSPcy", "+", "CSNcy", "+", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "/", "3"}], ")"}], "*", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"Ia", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]a", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ib", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]b", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}], 
+                  "+", 
+                  RowBox[{"(", 
+                   RowBox[{"Ic", "*", 
+                    RowBox[{"Sin", "[", 
+                    RowBox[{
+                    RowBox[{"(", "\[Theta]c", ")"}], "*", 
+                    RowBox[{"(", 
+                    RowBox[{"\[Pi]", "/", "180"}], ")"}]}], "]"}]}], ")"}]}], 
+                 ")"}]}]}]}], " ", "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Epilog", "\[Rule]", 
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Framed", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<Pos\>\"", ",", "\"\<a\>\""}], "]"}], ",", "8", 
+                ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"1", ",", "0.0", ",", ".47"}], "]"}], ",", "Bold"}], 
+               "]"}], ",", 
+              RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"CSPax", "/", "1.3"}], ")"}], ",", 
+              RowBox[{"(", 
+               RowBox[{"CSPay", "/", "1.3"}], ")"}]}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Framed", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<Pos\>\"", ",", "\"\<b\>\""}], "]"}], ",", "8", 
+                ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"1", ",", "0.1", ",", ".87"}], "]"}], ",", "Bold"}], 
+               "]"}], ",", 
+              RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"CSPbx", "/", "1.3"}], ")"}], ",", 
+              RowBox[{"(", 
+               RowBox[{"CSPby", "/", "1.3"}], ")"}]}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Framed", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<Pos\>\"", ",", "\"\<c\>\""}], "]"}], ",", "8", 
+                ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"1", ",", "0.2", ",", "1.00"}], "]"}], ",", "Bold"}],
+                "]"}], ",", 
+              RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"CSPcx", "/", "1.3"}], ")"}], ",", 
+              RowBox[{"(", 
+               RowBox[{"CSPcy", "/", "1.3"}], ")"}]}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Framed", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<Neg\>\"", ",", "\"\<a\>\""}], "]"}], ",", "8", 
+                ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"1", ",", "0.0", ",", ".47"}], "]"}], ",", "Bold"}], 
+               "]"}], ",", 
+              RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"CSNax", "/", "1.3"}], ")"}], ",", 
+              RowBox[{"(", 
+               RowBox[{"CSNay", "/", "1.3"}], ")"}]}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Framed", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<Neg\>\"", ",", "\"\<b\>\""}], "]"}], ",", "8", 
+                ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"1", ",", "0.1", ",", ".87"}], "]"}], ",", "Bold"}], 
+               "]"}], ",", 
+              RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"CSNbx", "/", "1.3"}], ")"}], ",", 
+              RowBox[{"(", 
+               RowBox[{"CSNby", "/", "1.3"}], ")"}]}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Framed", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<Neg\>\"", ",", "\"\<c\>\""}], "]"}], ",", "8", 
+                ",", 
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"1", ",", "0.2", ",", "1.00"}], "]"}], ",", "Bold"}],
+                "]"}], ",", 
+              RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"CSNcx", "/", "1.3"}], ")"}], ",", 
+              RowBox[{"(", 
+               RowBox[{"CSNcy", "/", "1.3"}], ")"}]}], "}"}]}], "]"}]}], 
+         "\[IndentingNewLine]", "}"}]}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Axes", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"X", ",", "Y"}], "}"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Black", ",", "Bold"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"PlotLabel", "\[Rule]", "\"\<Symmetric Components\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1.0"}], ",", "1.0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1.0"}], ",", "1.0"}], "}"}]}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Frame", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"500", ",", "500"}], "}"}]}]}], "\[IndentingNewLine]", 
+      "]"}]}], "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Phase A\>\"", ",", " ", "Bold", ",", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"0.5", ",", "0.5", ",", "1"}], "]"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Amplitude (p.u.)\>\"", ",", " ", "Bold"}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Ia", ",", "0.8", ",", "\"\<\!\(\*SubscriptBox[\(I\), \(a\)]\)\>\""}], 
+      "}"}], ",", "0", ",", "1", ",", "0.01", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Phase (Degrees)\>\"", ",", " ", "Bold"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Theta]a", ",", "45", ",", 
+       "\"\<\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)\>\""}], "}"}], ",", "0",
+      ",", "360", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Phase B\>\"", ",", " ", "Bold", ",", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"1", ",", "0.5", ",", "0.5"}], "]"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Amplitude (p.u.)\>\"", ",", " ", "Bold"}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Ib", ",", "0.8", ",", "\"\<\!\(\*SubscriptBox[\(I\), \(b\)]\)\>\""}], 
+      "}"}], ",", "0", ",", "1", ",", "0.01", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Phase (Degrees)\>\"", ",", " ", "Bold"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Theta]b", ",", "240", ",", 
+       "\"\<\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)\>\""}], "}"}], ",", "0",
+      ",", "360", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Phase C\>\"", ",", " ", "Bold", ",", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{".5", ",", "1", ",", ".5"}], "]"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Amplitude (p.u.)\>\"", ",", " ", "Bold"}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Ic", ",", "0.8", ",", "\"\<\!\(\*SubscriptBox[\(I\), \(c\)]\)\>\""}], 
+      "}"}], ",", "0", ",", "1", ",", "0.01", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<Phase (Degrees)\>\"", ",", " ", "Bold"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Theta]c", ",", "120", ",", 
+       "\"\<\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)\>\""}], "}"}], ",", "0",
+      ",", "360", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.500813029765625*^9, {3.519459312453125*^9, 
+   3.5194593695625*^9}, {3.519459405015625*^9, 3.519459442484375*^9}, {
+   3.5194602375*^9, 3.5194602986875*^9}, {3.519460356375*^9, 
+   3.519460439609375*^9}, {3.519661440920229*^9, 3.519661719119046*^9}, {
+   3.52011268465625*^9, 3.52011286959375*^9}, {3.52011291903125*^9, 
+   3.520112920421875*^9}, {3.520112977390625*^9, 3.520112978671875*^9}, {
+   3.52011301234375*^9, 3.520113063015625*^9}, {3.520113093953125*^9, 
+   3.52011311225*^9}, {3.520113158390625*^9, 3.520113159296875*^9}, {
+   3.520113302484375*^9, 3.520113304640625*^9}, {3.52011335228125*^9, 
+   3.5201134528125*^9}, {3.52016460340625*^9, 3.520164612671875*^9}, {
+   3.52019352352159*^9, 3.5201935262394123`*^9}, {3.520193586025372*^9, 
+   3.520193586798477*^9}, {3.520193628536578*^9, 3.520193788784773*^9}, {
+   3.520618116953125*^9, 3.520618129125*^9}, {3.520618606515625*^9, 
+   3.52061867846875*^9}, {3.520618998828125*^9, 3.520619017171875*^9}, {
+   3.520619189984375*^9, 3.520619247890625*^9}, {3.520619338578125*^9, 
+   3.520619348921875*^9}, {3.52061939209375*^9, 3.520619426390625*^9}, {
+   3.52061946753125*^9, 3.520619478953125*^9}, {3.5207765468514547`*^9, 
+   3.5207765481647787`*^9}, {3.520776584709227*^9, 3.5207765884254208`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+    0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+    45, $CellContext`\[Theta]b$$ = 240, $CellContext`\[Theta]c$$ = 120, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["Phase A", Bold, 
+        RGBColor[0.5, 0.5, 1]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ia$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]a$$], 45, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase B", Bold, 
+        RGBColor[1, 0.5, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ib$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]b$$], 240, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase C", Bold, 
+        RGBColor[0.5, 1, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ic$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]c$$], 120, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1}}, 
+    Typeset`size$$ = {500., {248., 252.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`Ia$4257$$ = 0, $CellContext`\[Theta]a$4258$$ = 
+    0, $CellContext`Ib$4259$$ = 0, $CellContext`\[Theta]b$4260$$ = 
+    0, $CellContext`Ic$4261$$ = 0, $CellContext`\[Theta]c$4262$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+        0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+        45, $CellContext`\[Theta]b$$ = 240, $CellContext`\[Theta]c$$ = 120}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Ia$$, $CellContext`Ia$4257$$, 0], 
+        Hold[$CellContext`\[Theta]a$$, $CellContext`\[Theta]a$4258$$, 0], 
+        Hold[$CellContext`Ib$$, $CellContext`Ib$4259$$, 0], 
+        Hold[$CellContext`\[Theta]b$$, $CellContext`\[Theta]b$4260$$, 0], 
+        Hold[$CellContext`Ic$$, $CellContext`Ic$4261$$, 0], 
+        Hold[$CellContext`\[Theta]c$$, $CellContext`\[Theta]c$4262$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`faseAx$, $CellContext`faseAy$, \
+$CellContext`faseBx$, $CellContext`faseBy$, $CellContext`faseCx$, \
+$CellContext`faseCy$, $CellContext`CSPax$, $CellContext`CSPay$, \
+$CellContext`CSNax$, $CellContext`CSNay$, $CellContext`CSPbx$, \
+$CellContext`CSPby$, $CellContext`CSNbx$, $CellContext`CSNby$, \
+$CellContext`CSPcx$, $CellContext`CSPcy$, $CellContext`CSNcx$, \
+$CellContext`CSNcy$}, 
+        Graphics[{
+          Thickness[0.005], 
+          RGBColor[0.5, 0.5, 1], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseAx$ = $CellContext`Ia$$ 
+              Cos[$CellContext`\[Theta]a$$ (Pi/
+                 180)], $CellContext`faseAy$ = $CellContext`Ia$$ 
+              Sin[$CellContext`\[Theta]a$$ (Pi/180)]}}], 
+          RGBColor[1, 0.5, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseBx$ = $CellContext`Ib$$ 
+              Cos[$CellContext`\[Theta]b$$ (Pi/
+                 180)], $CellContext`faseBy$ = $CellContext`Ib$$ 
+              Sin[$CellContext`\[Theta]b$$ (Pi/180)]}}], 
+          RGBColor[0.5, 1, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseCx$ = $CellContext`Ic$$ 
+              Cos[$CellContext`\[Theta]c$$ (Pi/
+                 180)], $CellContext`faseCy$ = $CellContext`Ic$$ 
+              Sin[$CellContext`\[Theta]c$$ (Pi/180)]}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240) (Pi/
+                   180)]), $CellContext`CSPay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120) (Pi/
+                   180)]), $CellContext`CSNay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPax$, $CellContext`CSPay$}, \
+{$CellContext`CSPax$ + $CellContext`CSNax$, $CellContext`CSPay$ + \
+$CellContext`CSNay$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPax$ + $CellContext`CSNax$, \
+$CellContext`CSPay$ + $CellContext`CSNay$}, {$CellContext`CSPax$ + \
+$CellContext`CSNax$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPay$ + $CellContext`CSNay$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/
+                   180)]), $CellContext`CSPby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/
+                   180)]), $CellContext`CSNby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPbx$, $CellContext`CSPby$}, \
+{$CellContext`CSPbx$ + $CellContext`CSNbx$, $CellContext`CSPby$ + \
+$CellContext`CSNby$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPbx$ + $CellContext`CSNbx$, \
+$CellContext`CSPby$ + $CellContext`CSNby$}, {$CellContext`CSPbx$ + \
+$CellContext`CSNbx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPby$ + $CellContext`CSNby$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/
+                   180)]), $CellContext`CSPcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/
+                   180)]), $CellContext`CSNcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPcx$, $CellContext`CSPcy$}, \
+{$CellContext`CSPcx$ + $CellContext`CSNcx$, $CellContext`CSPcy$ + \
+$CellContext`CSNcy$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPcx$ + $CellContext`CSNcx$, \
+$CellContext`CSPcy$ + $CellContext`CSNcy$}, {$CellContext`CSPcx$ + \
+$CellContext`CSNcx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPcy$ + $CellContext`CSNcy$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}]}, Epilog -> {
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSPax$/1.3, $CellContext`CSPay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSPbx$/1.3, $CellContext`CSPby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSPcx$/1.3, $CellContext`CSPcy$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSNax$/1.3, $CellContext`CSNay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSNbx$/1.3, $CellContext`CSNby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSNcx$/1.3, $CellContext`CSNcy$/
+             1.3}]}, Axes -> True, 
+         FrameLabel -> {$CellContext`X, $CellContext`Y}, LabelStyle -> 
+         Directive[Black, Bold], PlotLabel -> "Symmetric Components", 
+         PlotRange -> {{-1., 1.}, {-1., 1.}}, PlotRangeClipping -> True, 
+         Frame -> True, ImageSize -> {500, 500}]], "Specifications" :> {
+        Style["Phase A", Bold, 
+         RGBColor[0.5, 0.5, 1]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ia$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]a$$, 45, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase B", Bold, 
+         RGBColor[1, 0.5, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ib$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]b$$, 240, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase C", Bold, 
+         RGBColor[0.5, 1, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ic$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]c$$, 120, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{700., {278., 283.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1192593874]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "In 1918, C. L. Fortescue stated his theorem: ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]], "InlineMath"],
+ " unbalanced phasors can be represented by ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]], "InlineMath"],
+ " systems of ",
+ Cell[BoxData[
+  FormBox["N", TraditionalForm]], "InlineMath"],
+ " balanced phasors. Sequence components were created to facilitate \
+calculations in unbalanced circuits and systems. Using the theory of \
+symmetrical components, it is easier to analyze the problems of unbalanced \
+systems (e.g. unbalanced load) and cases of faults in electric power systems \
+(e.g. monophasic faults).\n\nAccording to [1], \"Fortescue defined a linear \
+transformation from three-phase components to a new set of components called \
+symmetrical components. The advantage of this transformation is that for \
+balanced three-phase networks the equivalent circuit obtained for the \
+symmetrical components, called sequence networks, are separated into three \
+uncoupled networks. Furthermore, for unbalanced three-phase systems, the \
+three sequence networks are connected only at the points of unbalance. As a \
+result, sequence networks for many cases of unbalanced three-phase systems \
+are relatively easy to analyze. The symmetrical component method is basically \
+a modeling technique that permits systematic analysis and design of \
+three-phase systems. Decoupling a detailed three-phase network into three \
+simpler sequence networks reveals complicated phenomena in more simplistic \
+terms. Sequence network results can then be superimposed to obtain \
+three-phase results. The application of symmetrical components to \
+unsymmetrical fault studies is indispensable.\"\n\nThe positive sequence \
+consists of three phasors, one for each phase, with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "120"}], TraditionalForm]], "InlineMath"],
+ " degrees of angular displacement and equal magnitude. Thus, phase B is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "120"}], TraditionalForm]], "InlineMath"],
+ " degrees from phase A, and phase C is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "120"}], TraditionalForm]], "InlineMath"],
+ " degrees from phase B. A negative sequence is similar to the positive \
+component, but instead of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "120"}], TraditionalForm]], "InlineMath"],
+ " degrees, the displacement is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"+", "120"}], TraditionalForm]], "InlineMath"],
+ " degrees. The zero sequence is represented by three vectors of equal \
+magnitude and equal angular displacement."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.52019380368334*^9, 3.5201938262811832`*^9}, 3.520193871029818*^9, {
+   3.520193905895336*^9, 3.520194085861354*^9}, {3.5201941945748587`*^9, 
+   3.520194438683325*^9}, {3.520194790962471*^9, 3.520194792750744*^9}, 
+   3.52019794161036*^9, {3.5201980497810183`*^9, 3.520198109613172*^9}, {
+   3.520852866132406*^9, 3.520852866412422*^9}},
+ CellID->1468839793],
+
+Cell["\<\
+Here are the basic equations of the three-phase symmetric components:\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520579476296875*^9, 3.5205794783125*^9}, {
+   3.520618571828125*^9, 3.5206185754375*^9}, {3.520621376463688*^9, 
+   3.520621402011148*^9}},
+ CellID->3732099],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", "a"], "=", 
+    RowBox[{
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "pos"}]], "+", 
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "neg"}]], "+", 
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "zero"}]]}]}], TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.52062142058709*^9, 3.5206214330110283`*^9}, 
+   3.520621496024026*^9},
+ CellID->1644798330],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", "b"], "=", 
+    RowBox[{
+     SubscriptBox["I", 
+      RowBox[{"b", ",", "pos"}]], "+", 
+     SubscriptBox["I", 
+      RowBox[{"b", ",", "neg"}]], "+", 
+     SubscriptBox["I", 
+      RowBox[{"b", ",", "zero"}]]}]}], TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.520621469522078*^9, 3.520621503710438*^9}},
+ CellID->1716028126],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", "c"], "=", 
+    RowBox[{
+     SubscriptBox["I", 
+      RowBox[{"c", ",", "pos"}]], "+", 
+     SubscriptBox["I", 
+      RowBox[{"c", ",", "neg"}]], "+", 
+     SubscriptBox["I", 
+      RowBox[{"c", ",", "zero"}]]}]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.520621518941576*^9, 3.5206215327726707`*^9}, {
+  3.520622041696022*^9, 3.520622042668021*^9}},
+ CellID->579334472],
+
+Cell[TextData[{
+ "The vector ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]], "InlineMath"],
+ " has unit length and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"+", "120"}], TraditionalForm]], "InlineMath"],
+ "\[Degree] angular displacement. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5205786028125*^9, 3.5205786028125*^9}, {
+   3.520578923796875*^9, 3.520578947296875*^9}, {3.52057908403125*^9, 
+   3.520579120859375*^9}, {3.52057919096875*^9, 3.520579202453125*^9}, {
+   3.520579484359375*^9, 3.52057948940625*^9}, {3.520579596796875*^9, 
+   3.5205795968125*^9}, {3.5206215415362787`*^9, 3.520621556383407*^9}, {
+   3.520622046093515*^9, 3.520622061518351*^9}, {3.520622133967348*^9, 
+   3.5206222035311527`*^9}, {3.52062239960295*^9, 3.5206224082525187`*^9}, {
+   3.520852962582923*^9, 3.5208529802359324`*^9}},
+ CellID->591686143],
+
+Cell["The positive sequence is:", "ManipulateCaption",
+ CellChangeTimes->{3.35696210375764*^9, 3.520579540625*^9, 
+  3.5206222149180803`*^9},
+ CellID->892990609],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", 
+     RowBox[{"b", ",", "pos"}]], "=", 
+    RowBox[{
+     SuperscriptBox["a", "2"], " ", 
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "pos"}]]}]}], TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.5206222241700153`*^9, 3.520622227602214*^9}, {
+   3.520622268164806*^9, 3.520622289803461*^9}, 3.520622391543413*^9, {
+   3.520623711921875*^9, 3.520623713828125*^9}},
+ CellID->183615406],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", 
+     RowBox[{"c", ",", "pos"}]], "=", 
+    RowBox[{"a", " ", 
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "pos"}]]}]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.5206222241700153`*^9, 3.520622227602214*^9}, {
+  3.520622268164806*^9, 3.520622289803461*^9}, {3.520622367059638*^9, 
+  3.520622394527508*^9}},
+ CellID->90127903],
+
+Cell["The negative sequence is:", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.520578381125*^9, 3.5205783839375*^9}, {3.520578834484375*^9, 
+   3.5205788345*^9}, {3.520579542609375*^9, 3.52057954878125*^9}, 
+   3.5206224164271107`*^9},
+ CellID->408939116],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", 
+     RowBox[{"b", ",", "neg"}]], "=", 
+    RowBox[{"a", " ", 
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "neg"}]]}]}], TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.5206222241700153`*^9, 3.520622227602214*^9}, {
+  3.520622268164806*^9, 3.520622289803461*^9}, {3.520622367059638*^9, 
+  3.520622394527508*^9}, {3.520622458415434*^9, 3.5206224956289454`*^9}},
+ CellID->22767272],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", 
+     RowBox[{"c", ",", "neg"}]], "=", 
+    RowBox[{
+     SuperscriptBox["a", "2"], " ", 
+     SubscriptBox["I", 
+      RowBox[{"a", ",", "neg"}]]}]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.5206222241700153`*^9, 3.520622227602214*^9}, {
+   3.520622268164806*^9, 3.520622289803461*^9}, 3.520622391543413*^9, {
+   3.520622462514543*^9, 3.520622463239499*^9}, {3.520622502166638*^9, 
+   3.52062252692594*^9}},
+ CellID->803694586],
+
+Cell["The zero sequence is:", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.520578381125*^9, 3.5205783839375*^9}, {3.520578834484375*^9, 
+   3.520578835578125*^9}, {3.52057955159375*^9, 3.52057955928125*^9}, {
+   3.520622556053515*^9, 3.5206225566634617`*^9}},
+ CellID->209088079],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", 
+     RowBox[{"a", ",", "zero"}]], "=", 
+    RowBox[{
+     SubscriptBox["I", 
+      RowBox[{"b", ",", "zero"}]], "=", 
+     SubscriptBox["I", 
+      RowBox[{"c", ",", "zero"}]]}]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.520622568239354*^9, 3.520622604700514*^9}},
+ CellID->397451338],
+
+Cell["\<\
+The phasor diagram comes from these equations. See [1], where these relations \
+are given in terms of matrices. More details can be found in [2], where the \
+matrix relation is also illustrated.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.520578381125*^9, 3.5205783839375*^9}, {3.520578834484375*^9, 
+   3.5205788355625*^9}, {3.520578875515625*^9, 3.520578875703125*^9}, {
+   3.520579508734375*^9, 3.5205795113125*^9}, {3.5205796325625*^9, 
+   3.520579650734375*^9}, {3.520579739578125*^9, 3.52057973965625*^9}, {
+   3.520618493703125*^9, 3.520618561109375*^9}, {3.520622617789178*^9, 
+   3.520622689412504*^9}, 3.5208530827237945`*^9, {3.520853155451954*^9, 
+   3.5208531557399707`*^9}},
+ CellID->430122655],
+
+Cell["\<\
+The sequence components can be used to create filters that identify the type \
+of fault that occurs, depending on the magnitude and angle of the three \
+components. Any kind of fault can be modeled and analyzed by symmetrical \
+components, where each fault can be represented by an equivalent circuit. For \
+example, in the case of a fault on phase A, the three phasors of sequence \
+components are equal in magnitude and angle. All cases of unbalanced faults \
+can be analyzed by symmetric components theory, like monophasic, biphasic, \
+and biphasic with ground. References [3], [4], and [5] show the calculation \
+methods and equivalent circuits for each type of fault, and [6] shows some \
+phasor formats.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.52019380368334*^9, 3.5201938262811832`*^9}, 3.520193871029818*^9, {
+   3.520193905895336*^9, 3.520194085861354*^9}, {3.5201941945748587`*^9, 
+   3.520194528088182*^9}, {3.520194794893856*^9, 3.520194796101344*^9}, {
+   3.520194826411353*^9, 3.5201949877630253`*^9}, {3.520618504140625*^9, 
+   3.520618510359375*^9}, 3.520853236700601*^9},
+ CellID->1090677218],
+
+Cell["\<\
+The phasor diagram illustrates the components of positive sequence, negative \
+sequence, and zero sequence of a three-phase system, and the original vector \
+of each phase. This Demonstration lets you see that the sums of the sequence \
+components of each phase always result in the original vector.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.52019380368334*^9, 3.5201938262811832`*^9}, 3.520193871029818*^9, {
+   3.520193905895336*^9, 3.520194085861354*^9}, {3.5201941945748587`*^9, 
+   3.520194528088182*^9}, {3.520194794893856*^9, 3.520194796101344*^9}, {
+   3.520194826411353*^9, 3.520195025470728*^9}, {3.520619662453125*^9, 
+   3.52061966246875*^9}},
+ CellID->1790704886],
+
+Cell[TextData[{
+ "The last two snapshots illustrate cases of failure: monophasic fault and \
+biphasic without ground fault. Note that for the monophasic fault, the three \
+symmetrical components have the same magnitude and angle. For biphasic \
+without ground fault, the positive and negative components have the same \
+length and the angle is ",
+ Cell[BoxData[
+  FormBox["180", TraditionalForm]], "InlineMath"],
+ "\[Degree] out of phase, since the zero sequence is zero. ",
+ "These results are precisely what is expected when the equivalent circuits \
+are solved."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520619663203125*^9, 3.52061966359375*^9}, {
+   3.5206202615625*^9, 3.52062031675*^9}, {3.520853277534937*^9, 
+   3.5208532783559837`*^9}},
+ CellID->285664207],
+
+Cell["Observations: ", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.52019380368334*^9, 3.5201938262811832`*^9}, 3.520193871029818*^9, {
+   3.520193905895336*^9, 3.520194085861354*^9}, {3.5201941945748587`*^9, 
+   3.520194528088182*^9}, {3.520194794893856*^9, 3.520194796101344*^9}, {
+   3.520194826411353*^9, 3.520195076857901*^9}, {3.520195856752646*^9, 
+   3.520195856759034*^9}},
+ CellID->1541189944],
+
+Cell[TextData[{
+ "\[Bullet] The angles should be input using positive values (e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"-", "120"}], "\[Rule]", "240"}], TraditionalForm]], "InlineMath"],
+ ")."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520173600453125*^9, 3.520173601203125*^9}, {
+   3.52019380368334*^9, 3.5201938262811832`*^9}, 3.520193871029818*^9, {
+   3.520193905895336*^9, 3.520194085861354*^9}, {3.5201941945748587`*^9, 
+   3.520194528088182*^9}, {3.520194794893856*^9, 3.520194796101344*^9}, {
+   3.520194826411353*^9, 3.520195076857901*^9}, {3.520195856752646*^9, 
+   3.520195859404821*^9}, {3.520198230238052*^9, 3.520198230238205*^9}, {
+   3.520623873265625*^9, 3.52062387340625*^9}, {3.5208533799157925`*^9, 
+   3.5208533876672363`*^9}, 3.5208534993086214`*^9},
+ CellID->650705515],
+
+Cell["\<\
+\[Bullet] The green arrows are the positive sequence.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5206187145625*^9, 3.5206187353125*^9}, {
+   3.520622815100293*^9, 3.5206228155736637`*^9}, {3.520623866484375*^9, 
+   3.52062386659375*^9}, {3.5208533947496414`*^9, 3.5208534029551105`*^9}},
+ CellID->529057542],
+
+Cell["\<\
+\[Bullet] The blue and yellow arrows are the negative sequence, which is \
+shown twice to show (1) symmetry (yellow); and (2) that the sum of its \
+components is the original vector (blue).\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520618735828125*^9, 3.520618755328125*^9}, {
+   3.52061887078125*^9, 3.5206188765*^9}, {3.520618980953125*^9, 
+   3.520618991796875*^9}, 3.52061912528125*^9, {3.520622819737157*^9, 
+   3.520622873673306*^9}, {3.520623839796875*^9, 3.52062386928125*^9}, {
+   3.5208533964047356`*^9, 3.520853477788391*^9}},
+ CellID->294850756],
+
+Cell["\<\
+\[Bullet] The red arrows are the zero sequence.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520618756015625*^9, 3.520618770734375*^9}, {
+   3.520622879873159*^9, 3.520622880335553*^9}, {3.520623875203125*^9, 
+   3.520623875328125*^9}, {3.520623967359375*^9, 3.52062396753125*^9}, 
+   3.5208533987078676`*^9},
+ CellID->647864191]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+    0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+    45, $CellContext`\[Theta]b$$ = 240, $CellContext`\[Theta]c$$ = 120, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["Phase A", Bold, 
+        RGBColor[0.5, 0.5, 1]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ia$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]a$$], 45, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase B", Bold, 
+        RGBColor[1, 0.5, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ib$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]b$$], 240, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase C", Bold, 
+        RGBColor[0.5, 1, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ic$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]c$$], 120, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1}}, 
+    Typeset`size$$ = {500., {248., 252.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`Ia$4340$$ = 0, $CellContext`\[Theta]a$4341$$ = 
+    0, $CellContext`Ib$4342$$ = 0, $CellContext`\[Theta]b$4343$$ = 
+    0, $CellContext`Ic$4344$$ = 0, $CellContext`\[Theta]c$4345$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+        0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+        45, $CellContext`\[Theta]b$$ = 240, $CellContext`\[Theta]c$$ = 120}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Ia$$, $CellContext`Ia$4340$$, 0], 
+        Hold[$CellContext`\[Theta]a$$, $CellContext`\[Theta]a$4341$$, 0], 
+        Hold[$CellContext`Ib$$, $CellContext`Ib$4342$$, 0], 
+        Hold[$CellContext`\[Theta]b$$, $CellContext`\[Theta]b$4343$$, 0], 
+        Hold[$CellContext`Ic$$, $CellContext`Ic$4344$$, 0], 
+        Hold[$CellContext`\[Theta]c$$, $CellContext`\[Theta]c$4345$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`faseAx$, $CellContext`faseAy$, \
+$CellContext`faseBx$, $CellContext`faseBy$, $CellContext`faseCx$, \
+$CellContext`faseCy$, $CellContext`CSPax$, $CellContext`CSPay$, \
+$CellContext`CSNax$, $CellContext`CSNay$, $CellContext`CSPbx$, \
+$CellContext`CSPby$, $CellContext`CSNbx$, $CellContext`CSNby$, \
+$CellContext`CSPcx$, $CellContext`CSPcy$, $CellContext`CSNcx$, \
+$CellContext`CSNcy$}, 
+        Graphics[{
+          Thickness[0.005], 
+          RGBColor[0.5, 0.5, 1], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseAx$ = $CellContext`Ia$$ 
+              Cos[$CellContext`\[Theta]a$$ (Pi/
+                 180)], $CellContext`faseAy$ = $CellContext`Ia$$ 
+              Sin[$CellContext`\[Theta]a$$ (Pi/180)]}}], 
+          RGBColor[1, 0.5, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseBx$ = $CellContext`Ib$$ 
+              Cos[$CellContext`\[Theta]b$$ (Pi/
+                 180)], $CellContext`faseBy$ = $CellContext`Ib$$ 
+              Sin[$CellContext`\[Theta]b$$ (Pi/180)]}}], 
+          RGBColor[0.5, 1, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseCx$ = $CellContext`Ic$$ 
+              Cos[$CellContext`\[Theta]c$$ (Pi/
+                 180)], $CellContext`faseCy$ = $CellContext`Ic$$ 
+              Sin[$CellContext`\[Theta]c$$ (Pi/180)]}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240) (Pi/
+                   180)]), $CellContext`CSPay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120) (Pi/
+                   180)]), $CellContext`CSNay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPax$, $CellContext`CSPay$}, \
+{$CellContext`CSPax$ + $CellContext`CSNax$, $CellContext`CSPay$ + \
+$CellContext`CSNay$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPax$ + $CellContext`CSNax$, \
+$CellContext`CSPay$ + $CellContext`CSNay$}, {$CellContext`CSPax$ + \
+$CellContext`CSNax$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPay$ + $CellContext`CSNay$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/
+                   180)]), $CellContext`CSPby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/
+                   180)]), $CellContext`CSNby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPbx$, $CellContext`CSPby$}, \
+{$CellContext`CSPbx$ + $CellContext`CSNbx$, $CellContext`CSPby$ + \
+$CellContext`CSNby$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPbx$ + $CellContext`CSNbx$, \
+$CellContext`CSPby$ + $CellContext`CSNby$}, {$CellContext`CSPbx$ + \
+$CellContext`CSNbx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPby$ + $CellContext`CSNby$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/
+                   180)]), $CellContext`CSPcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/
+                   180)]), $CellContext`CSNcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPcx$, $CellContext`CSPcy$}, \
+{$CellContext`CSPcx$ + $CellContext`CSNcx$, $CellContext`CSPcy$ + \
+$CellContext`CSNcy$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPcx$ + $CellContext`CSNcx$, \
+$CellContext`CSPcy$ + $CellContext`CSNcy$}, {$CellContext`CSPcx$ + \
+$CellContext`CSNcx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPcy$ + $CellContext`CSNcy$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}]}, Epilog -> {
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSPax$/1.3, $CellContext`CSPay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSPbx$/1.3, $CellContext`CSPby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSPcx$/1.3, $CellContext`CSPcy$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSNax$/1.3, $CellContext`CSNay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSNbx$/1.3, $CellContext`CSNby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSNcx$/1.3, $CellContext`CSNcy$/
+             1.3}]}, Axes -> True, 
+         FrameLabel -> {$CellContext`X, $CellContext`Y}, LabelStyle -> 
+         Directive[Black, Bold], PlotLabel -> "Symmetric Components", 
+         PlotRange -> {{-1., 1.}, {-1., 1.}}, PlotRangeClipping -> True, 
+         Frame -> True, ImageSize -> {500, 500}]], "Specifications" :> {
+        Style["Phase A", Bold, 
+         RGBColor[0.5, 0.5, 1]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ia$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]a$$, 45, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase B", Bold, 
+         RGBColor[1, 0.5, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ib$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]b$$, 240, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase C", Bold, 
+         RGBColor[0.5, 1, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ic$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]c$$, 120, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{700., {278., 283.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1460362867]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+    0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+    45, $CellContext`\[Theta]b$$ = 360, $CellContext`\[Theta]c$$ = 120, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["Phase A", Bold, 
+        RGBColor[0.5, 0.5, 1]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ia$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]a$$], 45, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase B", Bold, 
+        RGBColor[1, 0.5, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ib$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]b$$], 360, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase C", Bold, 
+        RGBColor[0.5, 1, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ic$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]c$$], 120, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1}}, 
+    Typeset`size$$ = {500., {248., 252.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`Ia$4423$$ = 0, $CellContext`\[Theta]a$4424$$ = 
+    0, $CellContext`Ib$4425$$ = 0, $CellContext`\[Theta]b$4426$$ = 
+    0, $CellContext`Ic$4427$$ = 0, $CellContext`\[Theta]c$4428$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+        0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+        45, $CellContext`\[Theta]b$$ = 360, $CellContext`\[Theta]c$$ = 120}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Ia$$, $CellContext`Ia$4423$$, 0], 
+        Hold[$CellContext`\[Theta]a$$, $CellContext`\[Theta]a$4424$$, 0], 
+        Hold[$CellContext`Ib$$, $CellContext`Ib$4425$$, 0], 
+        Hold[$CellContext`\[Theta]b$$, $CellContext`\[Theta]b$4426$$, 0], 
+        Hold[$CellContext`Ic$$, $CellContext`Ic$4427$$, 0], 
+        Hold[$CellContext`\[Theta]c$$, $CellContext`\[Theta]c$4428$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`faseAx$, $CellContext`faseAy$, \
+$CellContext`faseBx$, $CellContext`faseBy$, $CellContext`faseCx$, \
+$CellContext`faseCy$, $CellContext`CSPax$, $CellContext`CSPay$, \
+$CellContext`CSNax$, $CellContext`CSNay$, $CellContext`CSPbx$, \
+$CellContext`CSPby$, $CellContext`CSNbx$, $CellContext`CSNby$, \
+$CellContext`CSPcx$, $CellContext`CSPcy$, $CellContext`CSNcx$, \
+$CellContext`CSNcy$}, 
+        Graphics[{
+          Thickness[0.005], 
+          RGBColor[0.5, 0.5, 1], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseAx$ = $CellContext`Ia$$ 
+              Cos[$CellContext`\[Theta]a$$ (Pi/
+                 180)], $CellContext`faseAy$ = $CellContext`Ia$$ 
+              Sin[$CellContext`\[Theta]a$$ (Pi/180)]}}], 
+          RGBColor[1, 0.5, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseBx$ = $CellContext`Ib$$ 
+              Cos[$CellContext`\[Theta]b$$ (Pi/
+                 180)], $CellContext`faseBy$ = $CellContext`Ib$$ 
+              Sin[$CellContext`\[Theta]b$$ (Pi/180)]}}], 
+          RGBColor[0.5, 1, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseCx$ = $CellContext`Ic$$ 
+              Cos[$CellContext`\[Theta]c$$ (Pi/
+                 180)], $CellContext`faseCy$ = $CellContext`Ic$$ 
+              Sin[$CellContext`\[Theta]c$$ (Pi/180)]}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240) (Pi/
+                   180)]), $CellContext`CSPay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120) (Pi/
+                   180)]), $CellContext`CSNay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPax$, $CellContext`CSPay$}, \
+{$CellContext`CSPax$ + $CellContext`CSNax$, $CellContext`CSPay$ + \
+$CellContext`CSNay$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPax$ + $CellContext`CSNax$, \
+$CellContext`CSPay$ + $CellContext`CSNay$}, {$CellContext`CSPax$ + \
+$CellContext`CSNax$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPay$ + $CellContext`CSNay$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/
+                   180)]), $CellContext`CSPby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/
+                   180)]), $CellContext`CSNby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPbx$, $CellContext`CSPby$}, \
+{$CellContext`CSPbx$ + $CellContext`CSNbx$, $CellContext`CSPby$ + \
+$CellContext`CSNby$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPbx$ + $CellContext`CSNbx$, \
+$CellContext`CSPby$ + $CellContext`CSNby$}, {$CellContext`CSPbx$ + \
+$CellContext`CSNbx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPby$ + $CellContext`CSNby$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/
+                   180)]), $CellContext`CSPcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/
+                   180)]), $CellContext`CSNcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPcx$, $CellContext`CSPcy$}, \
+{$CellContext`CSPcx$ + $CellContext`CSNcx$, $CellContext`CSPcy$ + \
+$CellContext`CSNcy$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPcx$ + $CellContext`CSNcx$, \
+$CellContext`CSPcy$ + $CellContext`CSNcy$}, {$CellContext`CSPcx$ + \
+$CellContext`CSNcx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPcy$ + $CellContext`CSNcy$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}]}, Epilog -> {
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSPax$/1.3, $CellContext`CSPay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSPbx$/1.3, $CellContext`CSPby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSPcx$/1.3, $CellContext`CSPcy$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSNax$/1.3, $CellContext`CSNay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSNbx$/1.3, $CellContext`CSNby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSNcx$/1.3, $CellContext`CSNcy$/
+             1.3}]}, Axes -> True, 
+         FrameLabel -> {$CellContext`X, $CellContext`Y}, LabelStyle -> 
+         Directive[Black, Bold], PlotLabel -> "Symmetric Components", 
+         PlotRange -> {{-1., 1.}, {-1., 1.}}, PlotRangeClipping -> True, 
+         Frame -> True, ImageSize -> {500, 500}]], "Specifications" :> {
+        Style["Phase A", Bold, 
+         RGBColor[0.5, 0.5, 1]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ia$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]a$$, 45, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase B", Bold, 
+         RGBColor[1, 0.5, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ib$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]b$$, 360, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase C", Bold, 
+         RGBColor[0.5, 1, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ic$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]c$$, 120, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{700., {278., 283.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->728104106],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+    0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+    0, $CellContext`\[Theta]b$$ = 240, $CellContext`\[Theta]c$$ = 120, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["Phase A", Bold, 
+        RGBColor[0.5, 0.5, 1]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ia$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]a$$], 0, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase B", Bold, 
+        RGBColor[1, 0.5, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ib$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]b$$], 240, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase C", Bold, 
+        RGBColor[0.5, 1, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ic$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]c$$], 120, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1}}, 
+    Typeset`size$$ = {500., {248., 252.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`Ia$4506$$ = 0, $CellContext`\[Theta]a$4507$$ = 
+    0, $CellContext`Ib$4508$$ = 0, $CellContext`\[Theta]b$4509$$ = 
+    0, $CellContext`Ic$4510$$ = 0, $CellContext`\[Theta]c$4511$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Ia$$ = 0.8, $CellContext`Ib$$ = 
+        0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+        0, $CellContext`\[Theta]b$$ = 240, $CellContext`\[Theta]c$$ = 120}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Ia$$, $CellContext`Ia$4506$$, 0], 
+        Hold[$CellContext`\[Theta]a$$, $CellContext`\[Theta]a$4507$$, 0], 
+        Hold[$CellContext`Ib$$, $CellContext`Ib$4508$$, 0], 
+        Hold[$CellContext`\[Theta]b$$, $CellContext`\[Theta]b$4509$$, 0], 
+        Hold[$CellContext`Ic$$, $CellContext`Ic$4510$$, 0], 
+        Hold[$CellContext`\[Theta]c$$, $CellContext`\[Theta]c$4511$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`faseAx$, $CellContext`faseAy$, \
+$CellContext`faseBx$, $CellContext`faseBy$, $CellContext`faseCx$, \
+$CellContext`faseCy$, $CellContext`CSPax$, $CellContext`CSPay$, \
+$CellContext`CSNax$, $CellContext`CSNay$, $CellContext`CSPbx$, \
+$CellContext`CSPby$, $CellContext`CSNbx$, $CellContext`CSNby$, \
+$CellContext`CSPcx$, $CellContext`CSPcy$, $CellContext`CSNcx$, \
+$CellContext`CSNcy$}, 
+        Graphics[{
+          Thickness[0.005], 
+          RGBColor[0.5, 0.5, 1], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseAx$ = $CellContext`Ia$$ 
+              Cos[$CellContext`\[Theta]a$$ (Pi/
+                 180)], $CellContext`faseAy$ = $CellContext`Ia$$ 
+              Sin[$CellContext`\[Theta]a$$ (Pi/180)]}}], 
+          RGBColor[1, 0.5, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseBx$ = $CellContext`Ib$$ 
+              Cos[$CellContext`\[Theta]b$$ (Pi/
+                 180)], $CellContext`faseBy$ = $CellContext`Ib$$ 
+              Sin[$CellContext`\[Theta]b$$ (Pi/180)]}}], 
+          RGBColor[0.5, 1, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseCx$ = $CellContext`Ic$$ 
+              Cos[$CellContext`\[Theta]c$$ (Pi/
+                 180)], $CellContext`faseCy$ = $CellContext`Ic$$ 
+              Sin[$CellContext`\[Theta]c$$ (Pi/180)]}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240) (Pi/
+                   180)]), $CellContext`CSPay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120) (Pi/
+                   180)]), $CellContext`CSNay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPax$, $CellContext`CSPay$}, \
+{$CellContext`CSPax$ + $CellContext`CSNax$, $CellContext`CSPay$ + \
+$CellContext`CSNay$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPax$ + $CellContext`CSNax$, \
+$CellContext`CSPay$ + $CellContext`CSNay$}, {$CellContext`CSPax$ + \
+$CellContext`CSNax$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPay$ + $CellContext`CSNay$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/
+                   180)]), $CellContext`CSPby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/
+                   180)]), $CellContext`CSNby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPbx$, $CellContext`CSPby$}, \
+{$CellContext`CSPbx$ + $CellContext`CSNbx$, $CellContext`CSPby$ + \
+$CellContext`CSNby$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPbx$ + $CellContext`CSNbx$, \
+$CellContext`CSPby$ + $CellContext`CSNby$}, {$CellContext`CSPbx$ + \
+$CellContext`CSNbx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPby$ + $CellContext`CSNby$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/
+                   180)]), $CellContext`CSPcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/
+                   180)]), $CellContext`CSNcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPcx$, $CellContext`CSPcy$}, \
+{$CellContext`CSPcx$ + $CellContext`CSNcx$, $CellContext`CSPcy$ + \
+$CellContext`CSNcy$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPcx$ + $CellContext`CSNcx$, \
+$CellContext`CSPcy$ + $CellContext`CSNcy$}, {$CellContext`CSPcx$ + \
+$CellContext`CSNcx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPcy$ + $CellContext`CSNcy$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}]}, Epilog -> {
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSPax$/1.3, $CellContext`CSPay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSPbx$/1.3, $CellContext`CSPby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSPcx$/1.3, $CellContext`CSPcy$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSNax$/1.3, $CellContext`CSNay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSNbx$/1.3, $CellContext`CSNby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSNcx$/1.3, $CellContext`CSNcy$/
+             1.3}]}, Axes -> True, 
+         FrameLabel -> {$CellContext`X, $CellContext`Y}, LabelStyle -> 
+         Directive[Black, Bold], PlotLabel -> "Symmetric Components", 
+         PlotRange -> {{-1., 1.}, {-1., 1.}}, PlotRangeClipping -> True, 
+         Frame -> True, ImageSize -> {500, 500}]], "Specifications" :> {
+        Style["Phase A", Bold, 
+         RGBColor[0.5, 0.5, 1]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ia$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]a$$, 0, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase B", Bold, 
+         RGBColor[1, 0.5, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ib$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]b$$, 240, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase C", Bold, 
+         RGBColor[0.5, 1, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ic$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]c$$, 120, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{700., {278., 283.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->883888936],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Ia$$ = 0., $CellContext`Ib$$ = 
+    0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+    0, $CellContext`\[Theta]b$$ = 0, $CellContext`\[Theta]c$$ = 180, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["Phase A", Bold, 
+        RGBColor[0.5, 0.5, 1]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ia$$], 0., "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0, 
+      1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]a$$], 0, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase B", Bold, 
+        RGBColor[1, 0.5, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ib$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]b$$], 0, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1}, {
+      Hold[
+       Style["Phase C", Bold, 
+        RGBColor[0.5, 1, 0.5]]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["Amplitude (p.u.)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ic$$], 0.8, "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0,
+       1, 0.01}, {
+      Hold[
+       Style["Phase (Degrees)", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]c$$], 180, 
+       "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1}}, 
+    Typeset`size$$ = {500., {248., 252.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`Ia$4589$$ = 0, $CellContext`\[Theta]a$4590$$ = 
+    0, $CellContext`Ib$4591$$ = 0, $CellContext`\[Theta]b$4592$$ = 
+    0, $CellContext`Ic$4593$$ = 0, $CellContext`\[Theta]c$4594$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Ia$$ = 0., $CellContext`Ib$$ = 
+        0.8, $CellContext`Ic$$ = 0.8, $CellContext`\[Theta]a$$ = 
+        0, $CellContext`\[Theta]b$$ = 0, $CellContext`\[Theta]c$$ = 180}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Ia$$, $CellContext`Ia$4589$$, 0], 
+        Hold[$CellContext`\[Theta]a$$, $CellContext`\[Theta]a$4590$$, 0], 
+        Hold[$CellContext`Ib$$, $CellContext`Ib$4591$$, 0], 
+        Hold[$CellContext`\[Theta]b$$, $CellContext`\[Theta]b$4592$$, 0], 
+        Hold[$CellContext`Ic$$, $CellContext`Ic$4593$$, 0], 
+        Hold[$CellContext`\[Theta]c$$, $CellContext`\[Theta]c$4594$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`faseAx$, $CellContext`faseAy$, \
+$CellContext`faseBx$, $CellContext`faseBy$, $CellContext`faseCx$, \
+$CellContext`faseCy$, $CellContext`CSPax$, $CellContext`CSPay$, \
+$CellContext`CSNax$, $CellContext`CSNay$, $CellContext`CSPbx$, \
+$CellContext`CSPby$, $CellContext`CSNbx$, $CellContext`CSNby$, \
+$CellContext`CSPcx$, $CellContext`CSPcy$, $CellContext`CSNcx$, \
+$CellContext`CSNcy$}, 
+        Graphics[{
+          Thickness[0.005], 
+          RGBColor[0.5, 0.5, 1], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseAx$ = $CellContext`Ia$$ 
+              Cos[$CellContext`\[Theta]a$$ (Pi/
+                 180)], $CellContext`faseAy$ = $CellContext`Ia$$ 
+              Sin[$CellContext`\[Theta]a$$ (Pi/180)]}}], 
+          RGBColor[1, 0.5, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseBx$ = $CellContext`Ib$$ 
+              Cos[$CellContext`\[Theta]b$$ (Pi/
+                 180)], $CellContext`faseBy$ = $CellContext`Ib$$ 
+              Sin[$CellContext`\[Theta]b$$ (Pi/180)]}}], 
+          RGBColor[0.5, 1, 0.5], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`faseCx$ = $CellContext`Ic$$ 
+              Cos[$CellContext`\[Theta]c$$ (Pi/
+                 180)], $CellContext`faseCy$ = $CellContext`Ic$$ 
+              Sin[$CellContext`\[Theta]c$$ (Pi/180)]}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240) (Pi/
+                   180)]), $CellContext`CSPay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNax$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120) (Pi/
+                   180)]), $CellContext`CSNay$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPax$, $CellContext`CSPay$}, \
+{$CellContext`CSPax$ + $CellContext`CSNax$, $CellContext`CSPay$ + \
+$CellContext`CSNay$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPax$ + $CellContext`CSNax$, \
+$CellContext`CSPay$ + $CellContext`CSNay$}, {$CellContext`CSPax$ + \
+$CellContext`CSNax$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPay$ + $CellContext`CSNay$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/
+                   180)]), $CellContext`CSPby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 240) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNbx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/
+                   180)]), $CellContext`CSNby$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 120) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPbx$, $CellContext`CSPby$}, \
+{$CellContext`CSPbx$ + $CellContext`CSNbx$, $CellContext`CSPby$ + \
+$CellContext`CSNby$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPbx$ + $CellContext`CSNbx$, \
+$CellContext`CSPby$ + $CellContext`CSNby$}, {$CellContext`CSPbx$ + \
+$CellContext`CSNbx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPby$ + $CellContext`CSNby$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}], 
+          RGBColor[0, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSPcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/
+                   180)]), $CellContext`CSPcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 120) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 120 + 120) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 240 + 120) (Pi/180)])}}], 
+          RGBColor[1, 1, 0], 
+          
+          Arrow[{{0, 
+            0}, {$CellContext`CSNcx$ = (1/
+               3) ($CellContext`Ia$$ 
+                Cos[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Cos[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Cos[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/
+                   180)]), $CellContext`CSNcy$ = (1/
+               3) ($CellContext`Ia$$ 
+                Sin[($CellContext`\[Theta]a$$ + 240) (Pi/
+                   180)] + $CellContext`Ib$$ 
+                Sin[($CellContext`\[Theta]b$$ + 240 + 240) (Pi/
+                   180)] + $CellContext`Ic$$ 
+                Sin[($CellContext`\[Theta]c$$ + 120 + 240) (Pi/180)])}}], 
+          RGBColor[0, 0, 1], 
+          
+          Arrow[{{$CellContext`CSPcx$, $CellContext`CSPcy$}, \
+{$CellContext`CSPcx$ + $CellContext`CSNcx$, $CellContext`CSPcy$ + \
+$CellContext`CSNcy$}}], 
+          RGBColor[1, 0, 0], 
+          
+          Arrow[{{$CellContext`CSPcx$ + $CellContext`CSNcx$, \
+$CellContext`CSPcy$ + $CellContext`CSNcy$}, {$CellContext`CSPcx$ + \
+$CellContext`CSNcx$ + (1/
+               3) ($CellContext`Ia$$ 
+                Cos[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Cos[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Cos[$CellContext`\[Theta]c$$ (Pi/
+                   180)]), $CellContext`CSPcy$ + $CellContext`CSNcy$ + (1/
+               3) ($CellContext`Ia$$ 
+                Sin[$CellContext`\[Theta]a$$ (Pi/180)] + $CellContext`Ib$$ 
+                Sin[$CellContext`\[Theta]b$$ (Pi/180)] + $CellContext`Ic$$ 
+                Sin[$CellContext`\[Theta]c$$ (Pi/180)])}}]}, Epilog -> {
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSPax$/1.3, $CellContext`CSPay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSPbx$/1.3, $CellContext`CSPby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Pos", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSPcx$/1.3, $CellContext`CSPcy$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "a"], 8, 
+              RGBColor[1, 0., 0.47], Bold], Background -> 
+             LightYellow], {$CellContext`CSNax$/1.3, $CellContext`CSNay$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "b"], 8, 
+              RGBColor[1, 0.1, 0.87], Bold], Background -> 
+             LightYellow], {$CellContext`CSNbx$/1.3, $CellContext`CSNby$/
+             1.3}], 
+           Inset[
+            Framed[
+             Style[
+              Subscript["Neg", "c"], 8, 
+              RGBColor[1, 0.2, 1.], Bold], Background -> 
+             LightYellow], {$CellContext`CSNcx$/1.3, $CellContext`CSNcy$/
+             1.3}]}, Axes -> True, 
+         FrameLabel -> {$CellContext`X, $CellContext`Y}, LabelStyle -> 
+         Directive[Black, Bold], PlotLabel -> "Symmetric Components", 
+         PlotRange -> {{-1., 1.}, {-1., 1.}}, PlotRangeClipping -> True, 
+         Frame -> True, ImageSize -> {500, 500}]], "Specifications" :> {
+        Style["Phase A", Bold, 
+         RGBColor[0.5, 0.5, 1]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ia$$, 0., 
+          "\!\(\*SubscriptBox[\(I\), \(a\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]a$$, 0, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(a\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase B", Bold, 
+         RGBColor[1, 0.5, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ib$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(b\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]b$$, 0, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(b\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["Phase C", Bold, 
+         RGBColor[0.5, 1, 0.5]], 
+        Style[
+        "Amplitude (p.u.)", 
+         Bold], {{$CellContext`Ic$$, 0.8, 
+          "\!\(\*SubscriptBox[\(I\), \(c\)]\)"}, 0, 1, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Tiny}, 
+        Style[
+        "Phase (Degrees)", 
+         Bold], {{$CellContext`\[Theta]c$$, 180, 
+          "\!\(\*SubscriptBox[\(\[Theta]\), \(c\)]\)"}, 0, 360, 1, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{700., {278., 283.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1376961053]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["References", "DetailNotes",
+ CellChangeTimes->{{3.520195183083843*^9, 3.5201951888815937`*^9}, {
+  3.52061846803125*^9, 3.52061846803125*^9}},
+ CellID->2091349154],
+
+Cell[TextData[{
+ "[1] ",
+ ButtonBox["http://users.ece.utexas.edu/~grady/_05_EE394J _ 2_Spring12 \
+_Symmetrical _Components.pdf",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://users.ece.utexas.edu/~grady/_05_EE394J_2_Spring12_Symmetrical_\
+Components.pdf"], None},
+  ButtonNote->
+   "http://users.ece.utexas.edu/~grady/_05_EE394J_2_Spring12_Symmetrical_\
+Components.pdf"]
+}], "DetailNotes",
+ CellChangeTimes->{{3.577023171743062*^9, 3.577023201559043*^9}},
+ CellID->478024850],
+
+Cell[TextData[{
+ "[2] W. D. Stevenson, Jr., ",
+ StyleBox["Elements of Power System Analysis",
+  FontSlant->"Italic"],
+ ", 3rd ed., New York: McGraw\[Dash]Hill, New York, 1975."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.52061847140625*^9, 3.520618473359375*^9}, {
+   3.5208536581797085`*^9, 3.5208536691563363`*^9}, 3.521410323141756*^9},
+ CellID->647329086],
+
+Cell[TextData[{
+ "[3] ",
+ ButtonBox["http://csus-dspace.calstate.edu/bitstream/handle/10211.9/1369/PDF.\
+pdf?sequence=1",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://csus-dspace.calstate.edu/bitstream/handle/10211.9/1369/PDF.\
+pdf?sequence=1"], None},
+  ButtonNote->
+   "http://csus-dspace.calstate.edu/bitstream/handle/10211.9/1369/PDF.pdf?\
+sequence=1"]
+}], "DetailNotes",
+ CellChangeTimes->{{3.577023229148802*^9, 3.5770232433612227`*^9}},
+ CellID->453026004],
+
+Cell[TextData[{
+ "[4] ",
+ ButtonBox["http://en.wikipedia.org/wiki/Symmetrical_components",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://en.wikipedia.org/wiki/Symmetrical_components"], 
+    "http://en.wikipedia.org/wiki/Symmetrical_components"},
+  ButtonNote->"http://en.wikipedia.org/wiki/Symmetrical_components"],
+ " "
+}], "DetailNotes",
+ CellChangeTimes->{{3.520195198782687*^9, 3.520195209806402*^9}, 
+   3.520618486390625*^9, {3.5208537164400406`*^9, 3.520853716441041*^9}},
+ CellID->816245777],
+
+Cell[TextData[{
+ "[5] ",
+ ButtonBox["http://www.elect.mrt.ac.lk/EE423_%20 Fault_Analysis _Notes.pdf",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.elect.mrt.ac.lk/EE423_%20Fault_Analysis_Notes.pdf"], 
+    "http://www.elect.mrt.ac.lk/EE423_%20Fault_Analysis_Notes.pdf"},
+  ButtonNote->"http://www.elect.mrt.ac.lk/EE423_%20Fault_Analysis_Notes.pdf"],
+ " "
+}], "DetailNotes",
+ CellChangeTimes->{{3.520195198782687*^9, 3.5201952110191193`*^9}, 
+   3.520618487359375*^9, {3.5208537330809927`*^9, 3.5208537330819926`*^9}},
+ CellID->517237003],
+
+Cell[TextData[{
+ "[6] ",
+ ButtonBox["http://www.gedigitalenergy.com/smartgrid/Dec07/7-symmetrical.pdf",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.gedigitalenergy.com/smartgrid/Dec07/7-symmetrical.pdf"], 
+    "http://www.gedigitalenergy.com/smartgrid/Dec07/7-symmetrical.pdf"},
+  ButtonNote->
+   "http://www.gedigitalenergy.com/smartgrid/Dec07/7-symmetrical.pdf"],
+ " "
+}], "DetailNotes",
+ CellChangeTimes->{{3.520195198782687*^9, 3.520195212219028*^9}, 
+   3.520618489265625*^9, {3.5208537446076517`*^9, 3.520853744608652*^9}},
+ CellID->188506365]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.5196618070288363`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.5196618082609596`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.5196618087570095`*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520113214875*^9, 3.520113214875*^9}},
+ CellID->698752929],
+
+Cell["Fortescue", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.520113215546875*^9, 3.52011321740625*^9}},
+ CellID->39682178],
+
+Cell["Fortescue's theorem", "SearchTerms",
+ CellChangeTimes->{3.35696210375764*^9, 3.520113214875*^9},
+ CellID->285523052],
+
+Cell["unbalanced system", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5191209295*^9, 3.5191209295*^9}, {
+   3.51912114359375*^9, 3.519121143828125*^9}, {3.51912117909375*^9, 
+   3.519121180171875*^9}},
+ CellID->463163371],
+
+Cell["asymmetric system", "SearchTerms",
+ CellChangeTimes->{3.35696210375764*^9, 3.5191211885625*^9},
+ CellID->89628551],
+
+Cell["symmetrical component", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.51912093734375*^9, 3.51912094825*^9}, {
+   3.519120991046875*^9, 3.51912099328125*^9}, 3.519121042*^9},
+ CellID->391495149],
+
+Cell["positive sequence", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.519120949796875*^9, 3.51912095434375*^9}, {
+   3.51912104375*^9, 3.519121051859375*^9}},
+ CellID->191012839],
+
+Cell["negative sequence", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.519120954609375*^9, 3.51912100484375*^9}, {
+   3.519121053140625*^9, 3.51912106134375*^9}},
+ CellID->691691820],
+
+Cell["zero sequence", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.519120954609375*^9, 3.519121013484375*^9}, {
+   3.519121063328125*^9, 3.5191210705*^9}},
+ CellID->67126243],
+
+Cell["phasor diagram", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.519120954609375*^9, 3.51912101521875*^9}, {
+   3.5191210716875*^9, 3.5191211275625*^9}},
+ CellID->255505695],
+
+Cell["three-phase system", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.519120964046875*^9, 3.519120981609375*^9}, 
+   3.51912101465625*^9, {3.51912119128125*^9, 3.5191211919375*^9}},
+ CellID->433776273]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["AC Synchronous Machine Vector Diagram",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/ACSynchronousMachineVectorDiagram/"]\
+, None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/ACSynchronousMachineVectorDiagram/"]], \
+"RelatedLinks",
+ CellChangeTimes->{{3.519661853912524*^9, 3.519661853912524*^9}},
+ CellID->517256750]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Daniel Motter",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Daniel+Motter."]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Daniel+Motter."]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.50081317475*^9, 3.500813182953125*^9}, {
+   3.500813227984375*^9, 3.50081324715625*^9}, {3.5194612860625*^9, 
+   3.51946128684375*^9}, {3.519461350515625*^9, 3.519461350515625*^9}, 
+   3.5194613884375*^9, 3.5196618216923027`*^9, 3.519661918691002*^9}],
+
+Cell[TextData[{
+ "Based on a program by: ",
+ ButtonBox["Harley H. Hartman",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Harley+H.+\
+Hartman"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Harley+H.+Hartman"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.50081317475*^9, 3.500813182953125*^9}, {
+   3.500813227984375*^9, 3.500813240765625*^9}, {3.51945694625*^9, 
+   3.519456955890625*^9}, {3.519461368890625*^9, 3.519461369953125*^9}, {
+   3.5196618308782215`*^9, 3.5196618602891617`*^9}, {3.5196619140295353`*^9, 
+   3.5196619165717897`*^9}},
+ CellID->76029604],
+
+Cell["", "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.51912279375*^9, 3.519122794046875*^9}, {
+   3.51946136525*^9, 3.51946136571875*^9}},
+ CellID->918943998]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{991, 897},
+WindowMargins->{{Automatic, -1129}, {Automatic, -28}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[149748, 3435, 355, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[150106, 3446, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[150787, 3464, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[151130, 3477, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[151770, 3494, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[152617, 3517, 395, 10, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[153015, 3529, 1507, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[154525, 3563, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 159859, 3726},
+ {"RotateAndZoomIn3D", 159969, 3729},
+ {"DragLocators", 160080, 3732},
+ {"CreateAndDeleteLocators", 160197, 3735},
+ {"SliderZoom", 160312, 3738},
+ {"GamepadControls", 160419, 3741},
+ {"AutomaticAnimation", 160534, 3744},
+ {"BookmarkAnimation", 160652, 3747}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 422, 6, 74, "DemoTitle"],
+Cell[1004, 30, 33, 0, 287, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[1062, 34, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[1116, 38, 50226, 1180, 2688, "Input"],
+Cell[51345, 1220, 15949, 342, 573, "Output",
+ CellID->1192593874]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67340, 1568, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[67379, 1570, 3077, 60, 296, "ManipulateCaption",
+ CellID->1468839793],
+Cell[70459, 1632, 310, 7, 22, "ManipulateCaption",
+ CellID->3732099],
+Cell[70772, 1641, 469, 16, 26, "ManipulateCaption",
+ CellID->1644798330],
+Cell[71244, 1659, 442, 15, 26, "ManipulateCaption",
+ CellID->1716028126],
+Cell[71689, 1676, 492, 16, 26, "ManipulateCaption",
+ CellID->579334472],
+Cell[72184, 1694, 863, 19, 23, "ManipulateCaption",
+ CellID->591686143],
+Cell[73050, 1715, 161, 3, 22, "ManipulateCaption",
+ CellID->892990609],
+Cell[73214, 1720, 501, 15, 26, "ManipulateCaption",
+ CellID->183615406],
+Cell[73718, 1737, 449, 14, 26, "ManipulateCaption",
+ CellID->90127903],
+Cell[74170, 1753, 327, 6, 22, "ManipulateCaption",
+ CellID->408939116],
+Cell[74500, 1761, 497, 14, 26, "ManipulateCaption",
+ CellID->22767272],
+Cell[75000, 1777, 550, 16, 26, "ManipulateCaption",
+ CellID->803694586],
+Cell[75553, 1795, 351, 6, 22, "ManipulateCaption",
+ CellID->209088079],
+Cell[75907, 1803, 407, 14, 25, "ManipulateCaption",
+ CellID->397451338],
+Cell[76317, 1819, 797, 14, 37, "ManipulateCaption",
+ CellID->430122655],
+Cell[77117, 1835, 1202, 19, 77, "ManipulateCaption",
+ CellID->1090677218],
+Cell[78322, 1856, 767, 13, 49, "ManipulateCaption",
+ CellID->1790704886],
+Cell[79092, 1871, 795, 16, 65, "ManipulateCaption",
+ CellID->285664207],
+Cell[79890, 1889, 475, 8, 21, "ManipulateCaption",
+ CellID->1541189944],
+Cell[80368, 1899, 839, 17, 22, "ManipulateCaption",
+ CellID->650705515],
+Cell[81210, 1918, 347, 7, 22, "ManipulateCaption",
+ CellID->529057542],
+Cell[81560, 1927, 598, 11, 36, "ManipulateCaption",
+ CellID->294850756],
+Cell[82161, 1940, 367, 8, 22, "ManipulateCaption",
+ CellID->647864191]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[82565, 1953, 28, 0, 168, "ThumbnailSection"],
+Cell[82596, 1955, 15949, 342, 573, "Output",
+ CellID->1460362867]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[98582, 2302, 28, 0, 143, "SnapshotsSection"],
+Cell[98613, 2304, 15948, 342, 573, "Output",
+ CellID->728104106],
+Cell[114564, 2648, 15944, 342, 573, "Output",
+ CellID->883888936],
+Cell[130511, 2992, 15933, 342, 573, "Output",
+ CellID->1376961053]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[146481, 3339, 26, 0, 336, "DetailsSection"],
+Cell[146510, 3341, 169, 3, 22, "DetailNotes",
+ CellID->2091349154],
+Cell[146682, 3346, 487, 13, 22, "DetailNotes",
+ CellID->478024850],
+Cell[147172, 3361, 380, 9, 22, "DetailNotes",
+ CellID->647329086],
+Cell[147555, 3372, 476, 13, 22, "DetailNotes",
+ CellID->453026004],
+Cell[148034, 3387, 511, 12, 22, "DetailNotes",
+ CellID->816245777],
+Cell[148548, 3401, 553, 12, 22, "DetailNotes",
+ CellID->517237003],
+Cell[149104, 3415, 567, 13, 22, "DetailNotes",
+ CellID->188506365]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[149708, 3433, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[149748, 3435, 355, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[150106, 3446, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[150787, 3464, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[151130, 3477, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[151770, 3494, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[152617, 3517, 395, 10, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[153015, 3529, 1507, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[154525, 3563, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[155470, 3589, 30, 0, 155, "SearchTermsSection"],
+Cell[155503, 3591, 127, 3, 22, "SearchTerms",
+ CellID->698752929],
+Cell[155633, 3596, 140, 3, 22, "SearchTerms",
+ CellID->39682178],
+Cell[155776, 3601, 122, 2, 22, "SearchTerms",
+ CellID->285523052],
+Cell[155901, 3605, 238, 5, 22, "SearchTerms",
+ CellID->463163371],
+Cell[156142, 3612, 120, 2, 22, "SearchTerms",
+ CellID->89628551],
+Cell[156265, 3616, 214, 4, 22, "SearchTerms",
+ CellID->391495149],
+Cell[156482, 3622, 195, 4, 22, "SearchTerms",
+ CellID->191012839],
+Cell[156680, 3628, 198, 4, 22, "SearchTerms",
+ CellID->691691820],
+Cell[156881, 3634, 190, 4, 22, "SearchTerms",
+ CellID->67126243],
+Cell[157074, 3640, 192, 4, 22, "SearchTerms",
+ CellID->255505695],
+Cell[157269, 3646, 219, 4, 22, "SearchTerms",
+ CellID->433776273]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[157525, 3655, 31, 0, 141, "RelatedLinksSection"],
+Cell[157559, 3657, 387, 9, 22, "RelatedLinks",
+ CellID->517256750]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[157983, 3671, 25, 0, 141, "AuthorSection"],
+Cell[158011, 3673, 596, 14, 22, "Author"],
+Cell[158610, 3689, 670, 16, 22, "Author",
+ CellID->76029604],
+Cell[159283, 3707, 169, 4, 22, "Author",
+ CellID->918943998]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,779 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     30026,        769]
+NotebookOptionsPosition[     28944,        728]
+NotebookOutlinePosition[     29557,        752]
+CellTagsIndexPosition[     29514,        749]
+WindowFrame->Generic
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Diagrama Fasorial em Linhas de Transmiss\[ATilde]o\
+\>", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ CellChangeTimes->{{3.419766747343904*^9, 3.419766769652224*^9}},
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Thickness", "[", "0.01", "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"Vt", " ", "-", " ", "Green"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0", ",", "0.46", ",", "0.05"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Arrow", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Vt", ",", "0"}], "}"}]}], "}"}], "]"}], ",", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"It", " ", "-", " ", "Orange"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"1", ",", ".47", ",", "0"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Arrow", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"It", ",", 
+            RowBox[{"It", "*", 
+             RowBox[{"Tan", "[", 
+              RowBox[{"(", 
+               RowBox[{"\[Theta]", "/", 
+                RowBox[{"(", 
+                 FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "]"}]}]}], 
+           "}"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"Ra", " ", "*", " ", "It"}], ")"}], " ", "-", " ", "Blue"}],
+         " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"ColorData", "[", 
+        RowBox[{"\"\<HTML\>\"", ",", "\"\<SlateBlue\>\""}], "]"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"Arrow", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Vt", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Vt", "+", 
+              RowBox[{"(", 
+               RowBox[{"It", "*", "Ra"}], ")"}]}], ")"}], ",", 
+            RowBox[{"(", 
+             RowBox[{"It", "*", "Ra", "*", 
+              RowBox[{"Tan", "[", 
+               RowBox[{"(", 
+                RowBox[{"\[Theta]", "/", 
+                 RowBox[{"(", 
+                  FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "]"}]}], 
+             ")"}]}], "}"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"Xa", " ", "+", " ", "Xs"}], ")"}], " ", "*", " ", "It"}],
+           ")"}], " ", "-", " ", "Brown"}], " ", "*)"}], 
+       "\[IndentingNewLine]", "Brown", ",", 
+       RowBox[{"Arrow", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Vt", "+", 
+              RowBox[{"(", 
+               RowBox[{"It", "*", "Ra"}], ")"}]}], ")"}], ",", 
+            RowBox[{"(", 
+             RowBox[{"It", "*", "Ra", "*", 
+              RowBox[{"Tan", "[", 
+               RowBox[{"(", 
+                RowBox[{"\[Theta]", "/", 
+                 RowBox[{"(", 
+                  FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "]"}]}], 
+             ")"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Vt", "+", 
+              RowBox[{"(", 
+               RowBox[{"It", "*", "Ra"}], ")"}], "+", 
+              RowBox[{"(", 
+               RowBox[{"It", "*", "Xs", "*", 
+                RowBox[{"Cos", "[", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"\[Theta]", "/", 
+                    RowBox[{"(", 
+                    FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "+", 
+                  FractionBox["\[Pi]", "2"]}], "]"}]}], ")"}]}], ")"}], ",", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"It", "*", "Ra", "*", 
+                RowBox[{"Tan", "[", 
+                 RowBox[{"(", 
+                  RowBox[{"\[Theta]", "/", 
+                   RowBox[{"(", 
+                    FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "]"}]}], 
+               ")"}], "+", 
+              RowBox[{"(", 
+               RowBox[{"It", "*", "Xs", "*", 
+                RowBox[{"Sin", "[", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"\[Theta]", "/", 
+                    RowBox[{"(", 
+                    FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "+", 
+                  FractionBox["\[Pi]", "2"]}], "]"}]}], ")"}]}], ")"}]}], 
+           "}"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"Xa", " ", "+", " ", "Xs"}], ")"}], " ", "+", " ", 
+             "Ra"}], ")"}], " ", "*", " ", "It"}], ")"}], " ", "-", " ", 
+         "Black"}], " ", "*)"}], "\[IndentingNewLine]", "Black", ",", 
+       RowBox[{"Arrow", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Vt", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"eg1", "=", 
+             RowBox[{"(", 
+              RowBox[{"Vt", "+", 
+               RowBox[{"(", 
+                RowBox[{"It", "*", "Ra"}], ")"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"It", "*", "Xs", "*", 
+                 RowBox[{"Cos", "[", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"\[Theta]", "/", 
+                    RowBox[{"(", 
+                    FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "+", 
+                   FractionBox["\[Pi]", "2"]}], "]"}]}], ")"}]}], ")"}]}], 
+            ",", 
+            RowBox[{"eg2", "=", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"It", "*", "Ra", "*", 
+                 RowBox[{"Tan", "[", 
+                  RowBox[{"(", 
+                   RowBox[{"\[Theta]", "/", 
+                    RowBox[{"(", 
+                    FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "]"}]}], 
+                ")"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"It", "*", "Xs", "*", 
+                 RowBox[{"Sin", "[", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"\[Theta]", "/", 
+                    RowBox[{"(", 
+                    FractionBox["180", "\[Pi]"], ")"}]}], ")"}], "+", 
+                   FractionBox["\[Pi]", "2"]}], "]"}]}], ")"}]}], ")"}]}]}], 
+           "}"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"generated", " ", "voltage", " ", 
+          RowBox[{"(", "Eg", ")"}]}], " ", "-", " ", "Violet"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"1", ",", "0", ",", ".47"}], "]"}], ",", 
+       RowBox[{"Arrow", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"eg1", ",", "eg2"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Axes", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"FrameLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<real\>\"", ",", "\"\<reactive\>\""}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"LabelStyle", "\[Rule]", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Black", ",", "Bold"}], "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"PlotLabel", "\[Rule]", "\"\<Synchronous Machine\>\""}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "850"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "500"}], ",", "500"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Frame", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"400", ",", " ", "400"}], "}"}]}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "add", " ", "text", " ", "box", " ", "insets", " ", "as", " ", 
+       "epilog"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Epilog", "\[Rule]", 
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Inset", "[", 
+         RowBox[{
+          RowBox[{"Framed", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", "\[IndentingNewLine]", 
+             RowBox[{
+             "\"\<\!\(\*SubscriptBox[\(E\), \(g\)]\)\>\"", ",", "10", ",", 
+              RowBox[{"RGBColor", "[", 
+               RowBox[{"1", ",", "0", ",", ".47"}], "]"}], ",", "Bold"}], 
+             "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"eg1", "/", "1.25"}], ")"}], ",", 
+            RowBox[{"(", 
+             RowBox[{"eg2", "/", "1.25"}], ")"}]}], "}"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Inset", "[", 
+         RowBox[{
+          RowBox[{"Framed", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"\[Theta]", ">", 
+                  RowBox[{"-", "1"}]}], " ", "&&", " ", 
+                 RowBox[{"\[Theta]", "<", " ", "1"}]}], " ", ",", 
+                "\"\<power factor = unity\>\"", ",", "\[IndentingNewLine]", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"\[Theta]", ">", "0"}], ",", 
+                  "\"\<power factor = leading\>\"", ",", 
+                  "\"\<power factor = lagging\>\""}], "]"}]}], "]"}], 
+              "\[IndentingNewLine]", ",", "14"}], "]"}], ",", 
+            RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"550", ",", 
+            RowBox[{"-", "420"}]}], "}"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Inset", "[", 
+         RowBox[{
+          RowBox[{"Framed", "[", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+              RowBox[{"Row", "[", 
+               RowBox[{"{", "\[IndentingNewLine]", 
+                RowBox[{"\"\<power angle = \>\"", ",", " ", 
+                 RowBox[{"NumberForm", "[", 
+                  RowBox[{
+                   RowBox[{"SetPrecision", "[", 
+                    RowBox[{
+                    RowBox[{"Chop", "[", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"ArcTan", "[", 
+                    FractionBox["eg2", "eg1"], "]"}], "*", 
+                    FractionBox["180", "\[Pi]"]}], ")"}], "]"}], ",", "2"}], 
+                    "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"2", ",", "2"}], "}"}]}], "]"}]}], "}"}], "]"}], 
+              ",", "14"}], "]"}], ",", 
+            RowBox[{"Background", "\[Rule]", "LightYellow"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"550", ",", 
+            RowBox[{"-", "320"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+       "}"}]}]}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "end", " ", "of", " ", "epilog", " ", "for", " ", "vector", " ", 
+      "plot"}], " ", "*)"}], "\[IndentingNewLine]", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"add", " ", "sliders"}], " ", "*)"}], " ", "\[IndentingNewLine]", 
+   
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<bus parameters\>\"", ",", " ", "Bold"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<terminal voltage (Vt)\>\"", ",", "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"0", ",", "0.46", ",", "0.05"}], "]"}], ",", " ", "Bold"}], 
+    "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Vt", ",", "480", ",", "\"\<\>\""}], "}"}], ",", 
+     "\[IndentingNewLine]", "400", ",", "600", ",", ".01", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+    "\"\<line current (\!\(\*SubscriptBox[\(I\), \(t\)]\))\>\"", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"1", ",", ".47", ",", "0"}], "]"}], ",", " ", "Bold"}], "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"It", ",", "100", ",", "\"\<\>\""}], "}"}], ",", 
+     "\[IndentingNewLine]", "0", ",", "200", ",", ".01", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "\"\<phase angle (pf)\>\"", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Theta]", " ", ",", 
+       RowBox[{"-", "15"}], ",", "\"\<\>\""}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"-", "80"}], ",", "80", ",", ".01", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<machine parameters\>\"", ",", " ", "Bold"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+    "\"\<armature resistance (\!\(\*SubscriptBox[\(R\), \(a\)]\))\>\"", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ColorData", "[", 
+      RowBox[{"\"\<HTML\>\"", ",", "\"\<SlateBlue\>\""}], "]"}], ",", 
+     "Bold"}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Ra", ",", "0.5", ",", "\"\<\!\(\*SubscriptBox[\(R\), \(a\)]\)\>\""}], 
+      "}"}], ",", "\[IndentingNewLine]", "0.1", ",", "0.75", ",", ".01", ",", 
+     
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{
+    "\"\<reactances (\!\(\*SubscriptBox[\(X\), \(s\)]\) + \!\(\*SubscriptBox[\
+\(X\), \(a\)]\))\>\"", ",", "Brown", ",", "Bold"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Xs", ",", "1.0", ",", "\"\<\!\(\*SubscriptBox[\(X\), \(s\)]\)\>\""}], 
+      "}"}], ",", "\[IndentingNewLine]", "0.2", ",", "1.50", ",", ".01", ",", 
+     
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", "Manipulate"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.401808814703125*^9, {3.401809920255063*^9, 
+   3.401809925661936*^9}, {3.401809957681249*^9, 3.4018100097653737`*^9}, {
+   3.4018100749135027`*^9, 3.401810150828497*^9}, {3.4018102965952873`*^9, 
+   3.4018103044399414`*^9}, {3.4018103589618464`*^9, 3.401810369416176*^9}, {
+   3.4018115102287507`*^9, 3.4018116459639945`*^9}, {3.4024127203683195`*^9, 
+   3.4024127625401945`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`It$$ = 100, $CellContext`Ra$$ = 
+    0.5, $CellContext`Vt$$ = 480, $CellContext`Xs$$ = 
+    1., $CellContext`\[Theta]$$ = -15, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[
+       Style["bus parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["terminal voltage (Vt)", 
+        RGBColor[0, 0.46, 0.05], Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Vt$$], 480, ""}, 400, 600, 0.01}, {
+      Hold[
+       Style["line current (\!\(\*SubscriptBox[\(I\), \(t\)]\))", 
+        RGBColor[1, 0.47, 0], Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`It$$], 100, ""}, 0, 200, 0.01}, {
+      Hold["phase angle (pf)"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Theta]$$], -15, ""}, -80, 80, 0.01}, {
+      Hold[
+       Style["machine parameters", Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["armature resistance (\!\(\*SubscriptBox[\(R\), \(a\)]\))", 
+        RGBColor[
+        0.41568627450980394`, 0.35294117647058826`, 0.803921568627451], 
+        Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Ra$$], 0.5, "\!\(\*SubscriptBox[\(R\), \(a\)]\)"}, 
+      0.1, 0.75, 0.01}, {
+      Hold[
+       Style[
+       "reactances (\!\(\*SubscriptBox[\(X\), \(s\)]\) + \
+\!\(\*SubscriptBox[\(X\), \(a\)]\))", 
+        RGBColor[0.6, 0.4, 0.2], Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Xs$$], 1., "\!\(\*SubscriptBox[\(X\), \(s\)]\)"}, 
+      0.2, 1.5, 0.01}}, Typeset`size$$ = {400., {198., 202.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`Vt$45017$$ = 0, $CellContext`It$45018$$ = 
+    0, $CellContext`\[Theta]$45019$$ = 0, $CellContext`Ra$45020$$ = 
+    0, $CellContext`Xs$45021$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`It$$ = 100, $CellContext`Ra$$ = 
+        0.5, $CellContext`Vt$$ = 480, $CellContext`Xs$$ = 
+        1., $CellContext`\[Theta]$$ = -15}, "ControllerVariables" :> {
+        Hold[$CellContext`Vt$$, $CellContext`Vt$45017$$, 0], 
+        Hold[$CellContext`It$$, $CellContext`It$45018$$, 0], 
+        Hold[$CellContext`\[Theta]$$, $CellContext`\[Theta]$45019$$, 0], 
+        Hold[$CellContext`Ra$$, $CellContext`Ra$45020$$, 0], 
+        Hold[$CellContext`Xs$$, $CellContext`Xs$45021$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Graphics[{
+         Thickness[0.01], 
+         RGBColor[0, 0.46, 0.05], 
+         Arrow[{{0, 0}, {$CellContext`Vt$$, 0}}], 
+         RGBColor[1, 0.47, 0], 
+         Arrow[{{0, 
+           0}, {$CellContext`It$$, $CellContext`It$$ 
+            Tan[$CellContext`\[Theta]$$/(180/Pi)]}}], 
+         ColorData["HTML", "SlateBlue"], 
+         Arrow[{{$CellContext`Vt$$, 
+            0}, {$CellContext`Vt$$ + $CellContext`It$$ $CellContext`Ra$$, \
+$CellContext`It$$ $CellContext`Ra$$ Tan[$CellContext`\[Theta]$$/(180/Pi)]}}], 
+         Brown, 
+         Arrow[{{$CellContext`Vt$$ + $CellContext`It$$ $CellContext`Ra$$, \
+$CellContext`It$$ $CellContext`Ra$$ 
+            Tan[$CellContext`\[Theta]$$/(180/
+              Pi)]}, {$CellContext`Vt$$ + $CellContext`It$$ $CellContext`Ra$$ + \
+$CellContext`It$$ $CellContext`Xs$$ 
+             Cos[$CellContext`\[Theta]$$/(180/Pi) + 
+               Pi/2], $CellContext`It$$ $CellContext`Ra$$ 
+             Tan[$CellContext`\[Theta]$$/(180/
+               Pi)] + $CellContext`It$$ $CellContext`Xs$$ 
+             Sin[$CellContext`\[Theta]$$/(180/Pi) + Pi/2]}}], Black, 
+         Arrow[{{$CellContext`Vt$$, 
+            0}, {$CellContext`eg1 = $CellContext`Vt$$ + $CellContext`It$$ \
+$CellContext`Ra$$ + $CellContext`It$$ $CellContext`Xs$$ 
+              Cos[$CellContext`\[Theta]$$/(180/Pi) + 
+                Pi/2], $CellContext`eg2 = $CellContext`It$$ $CellContext`Ra$$ 
+              Tan[$CellContext`\[Theta]$$/(180/
+                Pi)] + $CellContext`It$$ $CellContext`Xs$$ 
+              Sin[$CellContext`\[Theta]$$/(180/Pi) + Pi/2]}}], 
+         RGBColor[1, 0, 0.47], 
+         Arrow[{{0, 0}, {$CellContext`eg1, $CellContext`eg2}}]}, Axes -> True,
+         FrameLabel -> {"real", "reactive"}, LabelStyle -> 
+        Directive[Black, Bold], PlotLabel -> "Synchronous Machine", 
+        PlotRange -> {{0, 850}, {-500, 500}}, PlotRangeClipping -> True, 
+        Frame -> True, ImageSize -> {400, 400}, Epilog -> {
+          Inset[
+           Framed[
+            Style["\!\(\*SubscriptBox[\(E\), \(g\)]\)", 10, 
+             RGBColor[1, 0, 0.47], Bold], Background -> 
+            LightYellow], {$CellContext`eg1/1.25, $CellContext`eg2/1.25}], 
+          Inset[
+           Framed[
+            Style[
+             If[
+              And[$CellContext`\[Theta]$$ > -1, $CellContext`\[Theta]$$ < 1], 
+              "power factor = unity", 
+              
+              If[$CellContext`\[Theta]$$ > 0, "power factor = leading", 
+               "power factor = lagging"]], 14], Background -> LightYellow], {
+           550, -420}], 
+          Inset[
+           Framed[
+            Style[
+             Row[{"power angle = ", 
+               NumberForm[
+                SetPrecision[
+                 Chop[ArcTan[$CellContext`eg2/$CellContext`eg1] (180/Pi)], 
+                 2], {2, 2}]}], 14], Background -> LightYellow], {
+           550, -320}]}], "Specifications" :> {
+        Style["bus parameters", Bold], 
+        Style["terminal voltage (Vt)", 
+         RGBColor[0, 0.46, 0.05], Bold], {{$CellContext`Vt$$, 480, ""}, 400, 
+         600, 0.01, Appearance -> "Labeled", ImageSize -> Small}, 
+        Style["line current (\!\(\*SubscriptBox[\(I\), \(t\)]\))", 
+         RGBColor[1, 0.47, 0], Bold], {{$CellContext`It$$, 100, ""}, 0, 200, 
+         0.01, Appearance -> "Labeled", ImageSize -> Small}, 
+        "phase angle (pf)", {{$CellContext`\[Theta]$$, -15, ""}, -80, 80, 
+         0.01, Appearance -> "Labeled", ImageSize -> Small}, Delimiter, 
+        Style["machine parameters", Bold], 
+        Style["armature resistance (\!\(\*SubscriptBox[\(R\), \(a\)]\))", 
+         RGBColor[
+         0.41568627450980394`, 0.35294117647058826`, 0.803921568627451], 
+         Bold], {{$CellContext`Ra$$, 0.5, 
+          "\!\(\*SubscriptBox[\(R\), \(a\)]\)"}, 0.1, 0.75, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Small}, 
+        Style[
+        "reactances (\!\(\*SubscriptBox[\(X\), \(s\)]\) + \!\(\*SubscriptBox[\
+\(X\), \(a\)]\))", 
+         RGBColor[0.6, 0.4, 0.2], 
+         Bold], {{$CellContext`Xs$$, 1., 
+          "\!\(\*SubscriptBox[\(X\), \(s\)]\)"}, 0.2, 1.5, 0.01, Appearance -> 
+         "Labeled", ImageSize -> Small}}, 
+      "Options" :> {ControlPlacement -> Left, TrackedSymbols :> Manipulate}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{613., {225., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->50263611]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["THIS NOTEBOOK IS THE SOURCE CODE FROM", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "\"",
+ ButtonBox["AC Synchronous Machine Vector Diagram",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/ACSynchronousMachineVectorDiagram/\
+"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/ACSynchronousMachineVectorDiagram/"],
+ "\"",
+ " from ",
+ ButtonBox["The Wolfram Demonstrations Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+ "\[ParagraphSeparator]\[NonBreakingSpace]",
+ ButtonBox["http://demonstrations.wolfram.com/\
+ACSynchronousMachineVectorDiagram/",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/ACSynchronousMachineVectorDiagram/\
+"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/ACSynchronousMachineVectorDiagram/"]
+}], "Text",
+ CellMargins->{{48, Inherited}, {0, Inherited}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.5]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[" ", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Harley H. Hartman",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Harley+H.+\
+Hartman"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Harley+H.+Hartman"]
+}], "Text",
+ CellDingbat->"\[FilledSmallSquare]",
+ CellMargins->{{66, 48}, {2, 4}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.6]],
+
+Cell[TextData[{
+ "A full-function Wolfram ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " 6 system is required to edit this notebook.\n",
+ StyleBox[ButtonBox["GET WOLFRAM MATHEMATICA 6 \[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.wolfram.com/products/mathematica/"], None},
+  ButtonNote->"http://www.wolfram.com/products/mathematica/"],
+  FontFamily->"Helvetica",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->RGBColor[1, 0.42, 0]]
+}], "Text",
+ CellFrame->True,
+ CellMargins->{{48, 68}, {8, 28}},
+ CellFrameMargins->12,
+ CellFrameColor->RGBColor[0.865507, 0.90634, 0.680751],
+ CellChangeTimes->{3.3750111182355957`*^9},
+ ParagraphSpacing->{1., 1.},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.411765],
+ Background->RGBColor[0.986023, 0.991363, 0.969818]],
+
+Cell[TextData[{
+ "\[Copyright] ",
+ StyleBox[ButtonBox["The Wolfram Demonstrations Project & Contributors",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Terms of Use",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/termsofuse.html"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/termsofuse.html"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Make a new version of this Demonstration \
+\[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/participate/upload.jsp?id=\
+ACSynchronousMachineVectorDiagram"], None},
+  ButtonNote->None],
+  FontColor->GrayLevel[0.6]]
+}], "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellMargins->{{48, 10}, {20, 50}},
+ CellFrameMargins->{{6, 0}, {6, 6}},
+ CellFrameColor->GrayLevel[0.6],
+ FontFamily->"Verdana",
+ FontSize->9,
+ FontColor->GrayLevel[0.6]]
+}, Open  ]]
+},
+Editable->True,
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{780, 650},
+WindowMargins->{{Automatic, 329}, {Automatic, 48}},
+WindowElements->{
+ "StatusArea", "MemoryMonitor", "MagnificationPopUp", "VerticalScrollBar", 
+  "MenuBar"},
+WindowTitle->"Diagrama Fasorial em Linhas de Transmiss\[ATilde]o - Source",
+DockedCells->{},
+CellContext->Notebook,
+FrontEndVersion->"6.0 for Linux x86 (32-bit) (June 19, 2007)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[591, 23, 316, 7, 73, "Section"],
+Cell[CellGroupData[{
+Cell[932, 34, 16082, 398, 1705, "Input"],
+Cell[17017, 434, 7627, 154, 70, "Output",
+ CellID->50263611]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24693, 594, 373, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[25069, 605, 993, 29, 70, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26099, 639, 337, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[26439, 650, 445, 14, 70, "Text"],
+Cell[26887, 666, 829, 24, 70, "Text"],
+Cell[27719, 692, 1209, 33, 70, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature JSj5BkTDx8f#WB0w0MqL2WPo *)

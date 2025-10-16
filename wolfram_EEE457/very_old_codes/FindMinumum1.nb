@@ -1,0 +1,2111 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     31263,        885]*)
+(*NotebookOutlinePosition[     61075,       1987]*)
+(*  CellTagsIndexPosition[     61031,       1983]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["FindMinumum and FindRoot for 1D functions.", "Title"],
+
+Cell["\<\
+ Code Generation for FindMinimum[ ] and FindRoot[ ] 
+of a 1D function using MathCode\
+\>", "Subtitle"],
+
+Cell["Copyright \[Copyright] MathCore AB 1998-2006", "Copyright"],
+
+Cell[TextData[{
+  "The function ",
+  StyleBox["FindMinimum[] ",
+    FontWeight->"Bold"],
+  " finds a local minumum of given function and given starting value. \
+Function cannot be translated by MathCode directly because\n--- its argument \
+is a symbolic expression \n --- numerical algorithms for minimization are not \
+included in MathCode runtime library\n The solution is to write a ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " function which replicates ",
+  StyleBox["FindMinimum[ ]",
+    FontWeight->"Bold"],
+  " operation using compilable subset.\n This notebook illustrates how to do \
+that for finction with one argument. \n ",
+  StyleBox["FindRoot[ ]",
+    FontWeight->"Bold"],
+  " can be implemented using ",
+  StyleBox["FindMinumum[ ] ",
+    FontWeight->"Bold"],
+  "as well."
+}], "Text"],
+
+Cell["\<\
+
+This is how FindMinumum works in Mathematica\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FindMinimum[Cos[x], {x, 1}]\)], "Input"],
+
+Cell[BoxData[
+    \({\(-1.`\), {x \[Rule] 3.1415926555856286`}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Needs["\<MathCode`\>"]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("MathCode C++ 1.4.0"\[InvisibleSpace]" for "\
+\[InvisibleSpace]"mingw32"\[InvisibleSpace]" loaded from \
+"\[InvisibleSpace]"c:\\cvsroot\\omath\\MathCode"\),
+      SequenceForm[ 
+      "MathCode C++ 1.4.0", " for ", "mingw32", " loaded from ", 
+        "c:\\cvsroot\\omath\\MathCode"],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SetDirectory[
+      ToFileName[{$MCRoot, "\<Demos\>", "\<FindMinimum\>"}]]\)], "Input"],
+
+Cell[BoxData[
+    \("c:\\cvsroot\\omath\\MathCode\\Demos\\FindMinimum"\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "\nThis function ",
+  StyleBox["LookupMin[ ]",
+    FontWeight->"Bold"],
+  " replicates ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ",
+  StyleBox["FindMinimum[ ]",
+    FontWeight->"Bold"],
+  ". The arguments are: \n",
+  StyleBox["iters",
+    FontWeight->"Bold"],
+  " - maximal number of iterations\n",
+  StyleBox["k",
+    FontWeight->"Bold"],
+  " - trial step multiplier\n",
+  StyleBox["alphastart",
+    FontWeight->"Bold"],
+  " - a small number needed for computation of approximation of derivatives\n\
+",
+  StyleBox["startp",
+    FontWeight->"Bold"],
+  " - start value for search\n",
+  StyleBox["accuracy",
+    FontWeight->"Bold"],
+  " - algorithm stoops when steps are less than accuracy\n",
+  StyleBox["debug",
+    FontWeight->"Bold"],
+  " - whether additional debugging is needed.\nThe minimized function name is \
+not passed to ",
+  StyleBox["LookupMin[ ]",
+    FontWeight->"Bold"],
+  ". The name is always ",
+  StyleBox["Func[ ]. ",
+    FontWeight->"Bold"],
+  "Later we will see how to adjust this name \"on the flight\"."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(LookupMin[Integer\ iters_, Real\ k_, 
+          Real\ alphastart_, Real\ startp_, Real\ accuracy_, 
+          Integer\ debug_] \[Rule] {Real, 
+          Real} := \[IndentingNewLine]Module[{Real\ p = startp, 
+          Integer\ i = 0, 
+          Real\ currentAccuracy = 99999. , \[IndentingNewLine]Real\ alpha = 
+            alphastart, \[IndentingNewLine]Real\ df}, \
+\[IndentingNewLine]While[\((i < iters)\) && \((currentAccuracy > 
+                accuracy)\), \[IndentingNewLine]df = \((Func[p + alpha] - 
+                  Func[p])\)/alpha; \[IndentingNewLine]p = 
+            p - k*df; \[IndentingNewLine]alpha = 
+            Abs[k*df]/2; \[IndentingNewLine]i = 
+            i + 1; \[IndentingNewLine]currentAccuracy = 
+            Abs[k*df]; \[IndentingNewLine]If[debug > 0, 
+            Print[{Func[p], p, 
+                currentAccuracy}]];\[IndentingNewLine]]; \
+\[IndentingNewLine]{p, 
+          Func[p]}\[IndentingNewLine]\[IndentingNewLine]]\)\)\)], "Input"],
+
+Cell["Functions to minimize", "Text"],
+
+Cell[BoxData[
+    \(\(Func1[Real\ u_] \[Rule] Real := Cos[u] + 4;\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(Func2[Real\ u_] \[Rule] Real := u\ Sin[u + 1];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Plot[Func2[u], {u, \(-2\), 2}]\)], "Input"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.238095 0.0882114 0.306076 [
+[.02381 .07571 -6 -9 ]
+[.02381 .07571 6 0 ]
+[.2619 .07571 -6 -9 ]
+[.2619 .07571 6 0 ]
+[.7381 .07571 -3 -9 ]
+[.7381 .07571 3 0 ]
+[.97619 .07571 -3 -9 ]
+[.97619 .07571 3 0 ]
+[.4875 .24125 -18 -4.5 ]
+[.4875 .24125 0 4.5 ]
+[.4875 .39429 -6 -4.5 ]
+[.4875 .39429 0 4.5 ]
+[.4875 .54732 -18 -4.5 ]
+[.4875 .54732 0 4.5 ]
+[ 0 0 0 0 ]
+[ 1 .61803 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 g
+.25 Mabswid
+[ ] 0 setdash
+.02381 .08821 m
+.02381 .09446 L
+s
+[(-2)] .02381 .07571 0 1 Mshowa
+.2619 .08821 m
+.2619 .09446 L
+s
+[(-1)] .2619 .07571 0 1 Mshowa
+.7381 .08821 m
+.7381 .09446 L
+s
+[(1)] .7381 .07571 0 1 Mshowa
+.97619 .08821 m
+.97619 .09446 L
+s
+[(2)] .97619 .07571 0 1 Mshowa
+.125 Mabswid
+.07143 .08821 m
+.07143 .09196 L
+s
+.11905 .08821 m
+.11905 .09196 L
+s
+.16667 .08821 m
+.16667 .09196 L
+s
+.21429 .08821 m
+.21429 .09196 L
+s
+.30952 .08821 m
+.30952 .09196 L
+s
+.35714 .08821 m
+.35714 .09196 L
+s
+.40476 .08821 m
+.40476 .09196 L
+s
+.45238 .08821 m
+.45238 .09196 L
+s
+.54762 .08821 m
+.54762 .09196 L
+s
+.59524 .08821 m
+.59524 .09196 L
+s
+.64286 .08821 m
+.64286 .09196 L
+s
+.69048 .08821 m
+.69048 .09196 L
+s
+.78571 .08821 m
+.78571 .09196 L
+s
+.83333 .08821 m
+.83333 .09196 L
+s
+.88095 .08821 m
+.88095 .09196 L
+s
+.92857 .08821 m
+.92857 .09196 L
+s
+.25 Mabswid
+0 .08821 m
+1 .08821 L
+s
+.5 .24125 m
+.50625 .24125 L
+s
+[(0.5)] .4875 .24125 1 0 Mshowa
+.5 .39429 m
+.50625 .39429 L
+s
+[(1)] .4875 .39429 1 0 Mshowa
+.5 .54732 m
+.50625 .54732 L
+s
+[(1.5)] .4875 .54732 1 0 Mshowa
+.125 Mabswid
+.5 .11882 m
+.50375 .11882 L
+s
+.5 .14943 m
+.50375 .14943 L
+s
+.5 .18003 m
+.50375 .18003 L
+s
+.5 .21064 m
+.50375 .21064 L
+s
+.5 .27186 m
+.50375 .27186 L
+s
+.5 .30246 m
+.50375 .30246 L
+s
+.5 .33307 m
+.50375 .33307 L
+s
+.5 .36368 m
+.50375 .36368 L
+s
+.5 .42489 m
+.50375 .42489 L
+s
+.5 .4555 m
+.50375 .4555 L
+s
+.5 .48611 m
+.50375 .48611 L
+s
+.5 .51672 m
+.50375 .51672 L
+s
+.5 .0576 m
+.50375 .0576 L
+s
+.5 .027 m
+.50375 .027 L
+s
+.5 .57793 m
+.50375 .57793 L
+s
+.5 .60854 m
+.50375 .60854 L
+s
+.25 Mabswid
+.5 0 m
+.5 .61803 L
+s
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+.5 Mabswid
+.02381 .60332 m
+.06244 .50621 L
+.10458 .40018 L
+.14415 .30534 L
+.18221 .22242 L
+.22272 .14662 L
+.26171 .08846 L
+.28158 .06503 L
+.30316 .04459 L
+.31323 .03685 L
+.32392 .02992 L
+.33393 .02461 L
+.34309 .02076 L
+.3525 .01779 L
+.35769 .01658 L
+.36007 .01613 L
+.36262 .01572 L
+.365 .01539 L
+.36716 .01515 L
+.36933 .01497 L
+.37137 .01484 L
+.37253 .01479 L
+.37376 .01475 L
+.37481 .01472 L
+.37596 .01472 L
+.3772 .01472 L
+.37789 .01473 L
+.37852 .01475 L
+.37975 .01479 L
+.38092 .01484 L
+.38329 .01499 L
+.38551 .01519 L
+.38795 .01547 L
+.39057 .01584 L
+.39592 .01682 L
+.40083 .01798 L
+.4098 .02073 L
+.41925 .0245 L
+.43899 .03511 L
+.45736 .0481 L
+.4964 .08436 L
+.5379 .13286 L
+.57788 .18537 L
+.61635 .23728 L
+.65727 .28957 L
+.69667 .33285 L
+.71647 .35071 L
+.73456 .36422 L
+.75401 .37539 L
+.76472 .37991 L
+Mistroke
+.77006 .38171 L
+.7749 .38307 L
+.77952 .38413 L
+.78451 .385 L
+.78726 .38535 L
+.78978 .3856 L
+.79103 .3857 L
+.7922 .38577 L
+.79341 .38583 L
+.79405 .38585 L
+.79474 .38587 L
+.79598 .3859 L
+.79712 .3859 L
+.79837 .38589 L
+.799 .38587 L
+.79969 .38585 L
+.80086 .38581 L
+.80211 .38573 L
+.80437 .38556 L
+.80661 .38533 L
+.80895 .38501 L
+.81314 .38428 L
+.81816 .38312 L
+.82271 .38179 L
+.83292 .37784 L
+.84238 .37296 L
+.8513 .36728 L
+.87136 .35059 L
+.88982 .33037 L
+.92928 .27153 L
+.96722 .19531 L
+.97619 .1746 L
+Mfstroke
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  ImageSize->{288, 177.938},
+  ImageMargins->{{0, 0}, {0, 0}},
+  ImageRegion->{{0, 1}, {0, 1}},
+  ImageCache->GraphicsData["Bitmap", "\<\
+CF5dJ6E]HGAYHf4PAg9QL6QYHg<PAVmbKF5d0`40004P0000/B000`400?l00000o`00003oS`3oool0
+0`000000oooo0?ooo`2>0?ooo`00S`3oool00`000000oooo0?ooo`2>0?ooo`00S`3oool00`000000
+oooo0?ooo`2>0?ooo`00S`3oool00`000000oooo0?ooo`2>0?ooo`00IP3oool<000001d0oooo00<0
+00000?ooo`3oool0SP3oool006@0oooo0P00000<0?ooo`@000006@3oool00`000000oooo0?ooo`2>
+0?ooo`00H@3oool300000180oooo0P00000G0?ooo`030000003oool0oooo08h0oooo001O0?ooo`80
+00005`3oool00`000000oooo0?ooo`0D0?ooo`800000S`3oool005d0oooo0P00000J0?ooo`800000
+503oool00`000000oooo0?ooo`2>0?ooo`00F`3oool2000001h0oooo0P00000B0?ooo`030000003o
+ool0oooo08h0oooo001J0?ooo`030000003oool0oooo0200oooo0P00000@0?ooo`030000003oool0
+oooo08h0oooo001H0?ooo`8000009@3oool2000000h0oooo00<000000?ooo`3oool0SP3oool005L0
+oooo00<000000?ooo`3oool09`3oool2000000`0oooo00<000000?ooo`3oool0SP3oool000P0oooo
+100000100?ooo`D000001@3oool00`000000oooo0?ooo`0Z0?ooo`030000003oool0oooo00T0oooo
+00<000000?ooo`3oool0?`3oool5000003l0oooo100000070?ooo`00203oool00`000000oooo0?oo
+o`130?ooo`030000003oool0oooo00@0oooo00<000000?ooo`3oool0;03oool00`000000oooo0?oo
+o`080?ooo`030000003oool0oooo0440oooo00<000000?ooo`3oool0?`3oool00`000000oooo0?oo
+o`080?ooo`002@3oool00`000000oooo0?ooo`120?ooo`030000003oool0oooo0080oooo0P00000`
+0?ooo`030000003oool0oooo00L0oooo00<000000?ooo`3oool0@@3oool00`000000oooo0?ooo`10
+0?ooo`030000003oool0oooo00L0oooo00020?ooo`@00000103oool00`000000oooo0?ooo`0i0?oo
+o`@00000103oool01@000000oooo0?ooo`3oool0000003<0oooo00<000000?ooo`3oool01P3oool2
+00000480oooo00<000000?ooo`3oool0@@3oool00`000000oooo0?ooo`060?ooo`00203oool01000
+0000oooo0?ooo`0000120?ooo`040000003oool0oooo000003D0oooo00<000000?ooo`3oool01@3o
+ool00`000000oooo0?ooo`110?ooo`030000003oool0oooo03l0oooo00@000000?ooo`3oool00000
+1`3oool000T0oooo0P0000120?ooo`80000000<0oooo0000003oool0=P3oool00`000000oooo0?oo
+o`040?ooo`030000003oool0oooo0400oooo0P0000120?ooo`800000203oool004l0oooo00<00000
+0?ooo`3oool0=`3oool00`000000oooo0?ooo`030?ooo`030000003oool0oooo08h0oooo001?0?oo
+o`030000003oool0oooo03P0oooo00<000000?ooo`3oool00P3oool00`000000oooo0?ooo`2>0?oo
+o`00CP3oool00`000000oooo0?ooo`0j0?ooo`050000003oool0oooo0?ooo`000000T03oool004d0
+oooo00<000000?ooo`3oool0?03oool010000000oooo0?ooo`00002@0?ooo`00C03oool00`000000
+oooo0?ooo`0n0?ooo`030000003oool000000900oooo001<0?ooo`030000003oool0oooo03l0oooo
+0P00002@0?ooo`00o`00000P00000040oooo00070?ooo`030000003oool0oooo00X0oooo00<00000
+0?ooo`3oool02`3oool00`000000oooo0?ooo`0;0?ooo`030000003oool0oooo00X0oooo00<00000
+0?ooo`3oool02P3oool2000000`0oooo00<000000?ooo`3oool02`3oool00`000000oooo0?ooo`0;
+0?ooo`030000003oool0oooo00X0oooo00<000000?ooo`3oool02`3oool2000000`0oooo00<00000
+0?ooo`3oool02P3oool00`000000oooo0?ooo`0;0?ooo`030000003oool0oooo00/0oooo00<00000
+0?ooo`3oool02P3oool00`000000oooo0?ooo`0;0?ooo`030000003oool0oooo00X0oooo00<00000
+0?ooo`3oool02`3oool00`000000oooo0?ooo`0;0?ooo`030000003oool0oooo00X0oooo00<00000
+0?ooo`3oool01P3oool000L0oooo00<000000?ooo`3oool0@03oool2000004<0oooo00<000000?oo
+o`000000@@3oool00`000000oooo0?ooo`110?ooo`030000003oool0oooo00H0oooo00190?ooo`03
+0000003oool0oooo04<0oooo00<000000?ooo`000000SP3oool004P0oooo00<000000?ooo`3oool0
+A03oool010000000oooo0?ooo`00002=0?ooo`00B03oool00`000000oooo0?ooo`140?ooo`050000
+003oool0oooo0?ooo`000000S03oool004L0oooo00<000000?ooo`3oool0A@3oool00`000000oooo
+0?ooo`020?ooo`030000003oool0oooo08T0oooo00160?ooo`030000003oool0oooo04H0oooo00<0
+00000?ooo`3oool00`3oool00`000000oooo0?ooo`280?ooo`00AP3oool00`000000oooo0?ooo`16
+0?ooo`030000003oool0oooo00@0oooo00<000000?ooo`3oool0Q`3oool004D0oooo00<000000?oo
+o`3oool0A`3oool2000000H0oooo00<000000?ooo`3oool0QP3oool004D0oooo00<000000?ooo`3o
+ool0A`3oool00`000000oooo0?ooo`050?ooo`030000003oool0oooo08H0oooo00140?ooo`030000
+003oool0oooo04P0oooo00<000000?ooo`3oool01P3oool00`000000oooo0?ooo`250?ooo`00@`3o
+ool00`000000oooo0?ooo`190?ooo`030000003oool0oooo00L0oooo00<000000?ooo`3oool0Q03o
+ool004<0oooo00<000000?ooo`3oool0B@3oool00`000000oooo0?ooo`080?ooo`030000003oool0
+oooo08<0oooo00120?ooo`030000003oool0oooo04X0oooo00<000000?ooo`3oool02@3oool00`00
+0000oooo0?ooo`220?ooo`00@@3oool00`000000oooo0?ooo`1;0?ooo`030000003oool0oooo00T0
+oooo00<000000?ooo`3oool0PP3oool00440oooo00<000000?ooo`3oool0B`3oool00`000000oooo
+0?ooo`0:0?ooo`030000003oool0oooo0840oooo00100?ooo`030000003oool0oooo04`0oooo0P00
+000<0?ooo`030000003oool0oooo0800oooo000o0?ooo`030000003oool0oooo04d0oooo00<00000
+0?ooo`3oool0303oool00`000000oooo0?ooo`1o0?ooo`00?`3oool00`000000oooo0?ooo`1=0?oo
+o`030000003oool0oooo00`0oooo00<000000?ooo`3oool0O`3oool003h0oooo00<000000?ooo`3o
+ool0CP3oool00`000000oooo0?ooo`0=0?ooo`030000003oool0oooo07h0oooo000n0?ooo`030000
+003oool0oooo04h0oooo00<000000?ooo`3oool03P3oool00`000000oooo0?ooo`1m0?ooo`00?@3o
+ool00`000000oooo0?ooo`1?0?ooo`030000003oool0oooo00l0oooo00<000000?ooo`3oool0O03o
+ool003d0oooo00<000000?ooo`3oool0C`3oool00`000000oooo0?ooo`0?0?ooo`030000003oool0
+oooo07`0oooo000l0?ooo`030000003oool0oooo0500oooo00<000000?ooo`3oool0403oool00`00
+0000oooo0?ooo`1k0?ooo`00>`3oool00`000000oooo0?ooo`1A0?ooo`030000003oool0oooo0140
+oooo00<000000?ooo`3oool0L@3oool00`000000oooo0?ooo`060?ooo`00>`3oool00`000000oooo
+0?ooo`1A0?ooo`8000004`3oool00`000000oooo0?ooo`1`0?ooo`030000003oool0oooo00H0oooo
+000j0?ooo`030000003oool0oooo0580oooo00<000000?ooo`3oool04P3oool00`000000oooo0?oo
+o`1_0?ooo`030000003oool0oooo00L0oooo000j0?ooo`030000003oool0oooo0580oooo00<00000
+0?ooo`3oool04`3oool00`000000oooo0?ooo`1^0?ooo`030000003oool0oooo00L0oooo000i0?oo
+o`030000003oool0oooo05<0oooo00<000000?ooo`3oool0503oool00`000000oooo0?ooo`1/0?oo
+o`030000003oool0oooo00P0oooo000i0?ooo`030000003oool0oooo05<0oooo00<000000?ooo`3o
+ool05@3oool00`000000oooo0?ooo`1[0?ooo`030000003oool0oooo00P0oooo000h0?ooo`030000
+003oool0oooo05@0oooo00<000000?ooo`3oool05@3oool00`000000oooo0?ooo`1Z0?ooo`030000
+003oool0oooo00T0oooo000g0?ooo`030000003oool0oooo05D0oooo00<000000?ooo`3oool05P3o
+ool00`000000oooo0?ooo`1Y0?ooo`030000003oool0oooo00T0oooo000g0?ooo`030000003oool0
+oooo05D0oooo00<000000?ooo`3oool05`3oool00`000000oooo0?ooo`1W0?ooo`030000003oool0
+oooo00X0oooo000f0?ooo`030000003oool0oooo05H0oooo00<000000?ooo`3oool0603oool00`00
+0000oooo0?ooo`1V0?ooo`030000003oool0oooo00X0oooo000f0?ooo`030000003oool0oooo05H0
+oooo0P00000I0?ooo`030000003oool0oooo06D0oooo00<000000?ooo`3oool02`3oool003D0oooo
+00<000000?ooo`3oool0E`3oool00`000000oooo0?ooo`0I0?ooo`030000003oool0oooo06@0oooo
+00<000000?ooo`3oool02`3oool003D0oooo00<000000?ooo`3oool0E`3oool00`000000oooo0?oo
+o`0J0?ooo`030000003oool0oooo0680oooo00<000000?ooo`3oool0303oool003@0oooo00<00000
+0?ooo`3oool0F03oool00`000000oooo0?ooo`0K0?ooo`030000003oool0oooo0640oooo00<00000
+0?ooo`3oool0303oool003@0oooo00<000000?ooo`3oool0F03oool00`000000oooo0?ooo`0L0?oo
+o`030000003oool0oooo05l0oooo00<000000?ooo`3oool03@3oool003<0oooo00<000000?ooo`3o
+ool0F@3oool00`000000oooo0?ooo`0L0?ooo`030000003oool0oooo05l0oooo00<000000?ooo`3o
+ool03@3oool003<0oooo00<000000?ooo`3oool0F@3oool00`000000oooo0?ooo`0M0?ooo`030000
+003oool0oooo05d0oooo00<000000?ooo`3oool03P3oool00380oooo00<000000?ooo`3oool0AP3o
+ool2000000@0oooo0P0000040?ooo`8000001P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo05`0oooo00<000000?ooo`3oool03P3oool00380oooo00<000000?ooo`3oool0A@3oool0
+10000000oooo0?ooo`0000080?ooo`040000003oool0oooo000000D0oooo00<000000?ooo`3oool0
+7`3oool00`000000oooo0?ooo`1J0?ooo`030000003oool0oooo00l0oooo000a0?ooo`030000003o
+ool0oooo04H0oooo00@000000?ooo`3oool000002`3oool00`000000oooo0?ooo`030?ooo`<00000
+803oool00`000000oooo0?ooo`1I0?ooo`030000003oool0oooo00l0oooo000a0?ooo`030000003o
+ool0oooo04H0oooo00@000000?ooo`3oool000002@3oool2000000H0oooo00<000000?ooo`3oool0
+803oool00`000000oooo0?ooo`1H0?ooo`030000003oool0oooo0100oooo000`0?ooo`030000003o
+ool0oooo04L0oooo00@000000?ooo`3oool000002@3oool00`000000oooo0?ooo`050?ooo`030000
+003oool0oooo0240oooo00<000000?ooo`3oool0E`3oool00`000000oooo0?ooo`0@0?ooo`00<03o
+ool00`000000oooo0?ooo`180?ooo`8000002P3oool3000000D0oooo00<000000?ooo`3oool08P3o
+ool00`000000oooo0?ooo`1E0?ooo`030000003oool0oooo0140oooo000_0?ooo`030000003oool0
+oooo05d0oooo00<000000?ooo`3oool08`3oool00`000000oooo0?ooo`1D0?ooo`030000003oool0
+oooo0140oooo000_0?ooo`030000003oool0oooo05d0oooo00<000000?ooo`3oool0903oool00`00
+0000oooo0?ooo`1B0?ooo`030000003oool0oooo0180oooo000^0?ooo`030000003oool0oooo05h0
+oooo00<000000?ooo`3oool0903oool00`000000oooo0?ooo`1B0?ooo`030000003oool0oooo0180
+oooo000^0?ooo`030000003oool0oooo05h0oooo00<000000?ooo`3oool09@3oool00`000000oooo
+0?ooo`1@0?ooo`030000003oool0oooo01<0oooo000^0?ooo`030000003oool0oooo05h0oooo0P00
+000W0?ooo`030000003oool0oooo04l0oooo00<000000?ooo`3oool04`3oool002d0oooo00<00000
+0?ooo`3oool0G`3oool00`000000oooo0?ooo`0W0?ooo`030000003oool0oooo04d0oooo00<00000
+0?ooo`3oool0503oool002d0oooo00<000000?ooo`3oool0G`3oool00`000000oooo0?ooo`0X0?oo
+o`030000003oool0oooo04`0oooo00<000000?ooo`3oool0503oool002`0oooo00<000000?ooo`3o
+ool0H03oool00`000000oooo0?ooo`0X0?ooo`030000003oool0oooo04/0oooo00<000000?ooo`3o
+ool05@3oool002`0oooo00<000000?ooo`3oool0H03oool00`000000oooo0?ooo`0Y0?ooo`030000
+003oool0oooo04T0oooo00<000000?ooo`3oool05P3oool002/0oooo00<000000?ooo`3oool0H@3o
+ool00`000000oooo0?ooo`0Z0?ooo`030000003oool0oooo04P0oooo00<000000?ooo`3oool05P3o
+ool002/0oooo00<000000?ooo`3oool0H@3oool00`000000oooo0?ooo`0[0?ooo`030000003oool0
+oooo04H0oooo00<000000?ooo`3oool05`3oool002X0oooo00<000000?ooo`3oool0HP3oool00`00
+0000oooo0?ooo`0/0?ooo`030000003oool0oooo04@0oooo00<000000?ooo`3oool0603oool002X0
+oooo00<000000?ooo`3oool0HP3oool00`000000oooo0?ooo`0]0?ooo`030000003oool0oooo04<0
+oooo00<000000?ooo`3oool0603oool002T0oooo00<000000?ooo`3oool0H`3oool2000002h0oooo
+00<000000?ooo`3oool0@P3oool00`000000oooo0?ooo`0I0?ooo`00:@3oool00`000000oooo0?oo
+o`1S0?ooo`030000003oool0oooo02h0oooo00<000000?ooo`3oool0@@3oool00`000000oooo0?oo
+o`0I0?ooo`00:@3oool00`000000oooo0?ooo`1S0?ooo`030000003oool0oooo02l0oooo00<00000
+0?ooo`3oool0?`3oool00`000000oooo0?ooo`0J0?ooo`00:03oool00`000000oooo0?ooo`1T0?oo
+o`030000003oool0oooo0300oooo00<000000?ooo`3oool0?@3oool00`000000oooo0?ooo`0K0?oo
+o`00:03oool00`000000oooo0?ooo`1T0?ooo`030000003oool0oooo0340oooo00<000000?ooo`3o
+ool0?03oool00`000000oooo0?ooo`0K0?ooo`009`3oool00`000000oooo0?ooo`1U0?ooo`030000
+003oool0oooo0380oooo00<000000?ooo`3oool0>P3oool00`000000oooo0?ooo`0L0?ooo`009`3o
+ool00`000000oooo0?ooo`1U0?ooo`030000003oool0oooo0380oooo00<000000?ooo`3oool0>@3o
+ool00`000000oooo0?ooo`0M0?ooo`009`3oool00`000000oooo0?ooo`1U0?ooo`030000003oool0
+oooo03<0oooo00<000000?ooo`3oool0>03oool00`000000oooo0?ooo`0M0?ooo`009P3oool00`00
+0000oooo0?ooo`1V0?ooo`030000003oool0oooo03@0oooo00<000000?ooo`3oool0=P3oool00`00
+0000oooo0?ooo`0N0?ooo`009P3oool00`000000oooo0?ooo`1V0?ooo`800000=P3oool00`000000
+oooo0?ooo`0d0?ooo`030000003oool0oooo01l0oooo000U0?ooo`030000003oool0oooo06L0oooo
+00<000000?ooo`3oool0=P3oool00`000000oooo0?ooo`0b0?ooo`030000003oool0oooo0200oooo
+000U0?ooo`030000003oool0oooo06L0oooo00<000000?ooo`3oool0=`3oool00`000000oooo0?oo
+o`0`0?ooo`030000003oool0oooo0240oooo000U0?ooo`030000003oool0oooo06L0oooo00<00000
+0?ooo`3oool0>03oool2000002l0oooo00<000000?ooo`3oool08P3oool002@0oooo00<000000?oo
+o`3oool0J03oool00`000000oooo0?ooo`0j0?ooo`030000003oool0oooo02/0oooo00<000000?oo
+o`3oool08`3oool002@0oooo00<000000?ooo`3oool0J03oool00`000000oooo0?ooo`0k0?ooo`03
+0000003oool0oooo02T0oooo00<000000?ooo`3oool0903oool002<0oooo00<000000?ooo`3oool0
+J@3oool00`000000oooo0?ooo`0l0?ooo`030000003oool0oooo02L0oooo00<000000?ooo`3oool0
+9@3oool002<0oooo00<000000?ooo`3oool0J@3oool00`000000oooo0?ooo`0m0?ooo`8000009P3o
+ool00`000000oooo0?ooo`0V0?ooo`008P3oool00`000000oooo0?ooo`1Z0?ooo`030000003oool0
+oooo03l0oooo00<000000?ooo`3oool08P3oool00`000000oooo0?ooo`0W0?ooo`008P3oool00`00
+0000oooo0?ooo`1Z0?ooo`800000@@3oool00`000000oooo0?ooo`0P0?ooo`030000003oool0oooo
+02P0oooo000R0?ooo`030000003oool0oooo06X0oooo00<000000?ooo`3oool0@@3oool2000001h0
+oooo0P00000[0?ooo`008@3oool00`000000oooo0?ooo`1[0?ooo`030000003oool0oooo04<0oooo
+0P00000J0?ooo`800000;@3oool00240oooo00<000000?ooo`3oool0J`3oool00`000000oooo0?oo
+o`150?ooo`<000005@3oool2000002l0oooo000P0?ooo`030000003oool0oooo06`0oooo00<00000
+0?ooo`3oool0B03oool200000140oooo0P00000a0?ooo`00803oool00`000000oooo0?ooo`1/0?oo
+o`030000003oool0oooo04X0oooo0`00000;0?ooo`<00000<`3oool00200oooo00<000000?ooo`3o
+ool0H`3oool5000000@0oooo00<000000?ooo`3oool0C@3oool;000003H0oooo000O0?ooo`030000
+003oool0oooo06H0oooo00<000000?ooo`3oool0103oool00`000000oooo0?ooo`2>0?ooo`007`3o
+ool00`000000oooo0?ooo`1V0?ooo`030000003oool0oooo00@0oooo0`00002>0?ooo`007P3oool0
+0`000000oooo0?ooo`1W0?ooo`030000003oool0oooo00@0oooo00<000000?ooo`3oool0SP3oool0
+01h0oooo00<000000?ooo`3oool0I`3oool00`000000oooo0?ooo`040?ooo`030000003oool0oooo
+08h0oooo000N0?ooo`030000003oool0oooo06H0oooo0P0000060?ooo`030000003oool0oooo08h0
+oooo000M0?ooo`030000003oool0oooo06l0oooo00<000000?ooo`3oool0SP3oool001d0oooo00<0
+00000?ooo`3oool0K`3oool00`000000oooo0?ooo`2>0?ooo`00703oool00`000000oooo0?ooo`1`
+0?ooo`030000003oool0oooo08h0oooo000L0?ooo`030000003oool0oooo0700oooo00<000000?oo
+o`3oool0SP3oool001`0oooo00<000000?ooo`3oool0L03oool00`000000oooo0?ooo`2>0?ooo`00
+6`3oool00`000000oooo0?ooo`1a0?ooo`800000S`3oool001/0oooo00<000000?ooo`3oool0L@3o
+ool00`000000oooo0?ooo`2>0?ooo`006P3oool00`000000oooo0?ooo`1b0?ooo`030000003oool0
+oooo08h0oooo000J0?ooo`030000003oool0oooo0780oooo00<000000?ooo`3oool0SP3oool001X0
+oooo00<000000?ooo`3oool0LP3oool00`000000oooo0?ooo`2>0?ooo`006@3oool00`000000oooo
+0?ooo`1c0?ooo`030000003oool0oooo08h0oooo000I0?ooo`030000003oool0oooo07<0oooo00<0
+00000?ooo`3oool0SP3oool001P0oooo00<000000?ooo`3oool0M03oool00`000000oooo0?ooo`2>
+0?ooo`00603oool00`000000oooo0?ooo`1d0?ooo`030000003oool0oooo08h0oooo000H0?ooo`03
+0000003oool0oooo07@0oooo0P00002?0?ooo`005`3oool00`000000oooo0?ooo`1e0?ooo`030000
+003oool0oooo08h0oooo000G0?ooo`030000003oool0oooo07D0oooo00<000000?ooo`3oool0SP3o
+ool001H0oooo00<000000?ooo`3oool0MP3oool00`000000oooo0?ooo`2>0?ooo`005P3oool00`00
+0000oooo0?ooo`1f0?ooo`030000003oool0oooo08h0oooo000F0?ooo`030000003oool0oooo07H0
+oooo00<000000?ooo`3oool0SP3oool001D0oooo00<000000?ooo`3oool0M`3oool00`000000oooo
+0?ooo`2>0?ooo`005@3oool00`000000oooo0?ooo`1g0?ooo`030000003oool0oooo08h0oooo000D
+0?ooo`030000003oool0oooo07P0oooo00<000000?ooo`3oool0SP3oool001@0oooo00<000000?oo
+o`3oool0N03oool2000008l0oooo000D0?ooo`030000003oool0oooo07P0oooo00<000000?ooo`3o
+ool0SP3oool001<0oooo00<000000?ooo`3oool0N@3oool00`000000oooo0?ooo`2>0?ooo`004`3o
+ool00`000000oooo0?ooo`1i0?ooo`030000003oool0oooo08h0oooo000B0?ooo`030000003oool0
+oooo07X0oooo00<000000?ooo`3oool0SP3oool00180oooo00<000000?ooo`3oool0NP3oool00`00
+0000oooo0?ooo`2>0?ooo`004P3oool00`000000oooo0?ooo`1j0?ooo`030000003oool0oooo08h0
+oooo000A0?ooo`030000003oool0oooo07/0oooo00<000000?ooo`3oool0SP3oool00140oooo00<0
+00000?ooo`3oool0N`3oool2000008l0oooo000@0?ooo`030000003oool0oooo07`0oooo00<00000
+0?ooo`3oool0SP3oool00100oooo00<000000?ooo`3oool0O03oool00`000000oooo0?ooo`2>0?oo
+o`00403oool00`000000oooo0?ooo`1l0?ooo`030000003oool0oooo08h0oooo000?0?ooo`030000
+003oool0oooo07d0oooo00<000000?ooo`3oool0SP3oool000l0oooo00<000000?ooo`3oool0O@3o
+ool00`000000oooo0?ooo`2>0?ooo`003P3oool00`000000oooo0?ooo`1n0?ooo`030000003oool0
+oooo08h0oooo000>0?ooo`030000003oool0oooo06T0oooo1@0000020?ooo`800000103oool20000
+00H0oooo00<000000?ooo`3oool0SP3oool000h0oooo00<000000?ooo`3oool0J`3oool00`000000
+oooo0?ooo`070?ooo`040000003oool0oooo000000D0oooo00<000000?ooo`3oool0SP3oool000d0
+oooo00<000000?ooo`3oool0K03oool00`000000oooo0?ooo`0:0?ooo`030000003oool0oooo00<0
+oooo0`00002>0?ooo`003@3oool00`000000oooo0?ooo`1/0?ooo`030000003oool0oooo00P0oooo
+0P0000060?ooo`030000003oool0oooo08h0oooo000<0?ooo`030000003oool0oooo06d0oooo00<0
+00000?ooo`3oool0203oool00`000000oooo0?ooo`050?ooo`030000003oool0oooo08h0oooo000<
+0?ooo`030000003oool0oooo06`0oooo0P00000:0?ooo`<000001@3oool00`000000oooo0?ooo`2>
+0?ooo`00303oool00`000000oooo0?ooo`200?ooo`030000003oool0oooo08h0oooo000;0?ooo`03
+0000003oool0oooo0840oooo00<000000?ooo`3oool0SP3oool000/0oooo00<000000?ooo`3oool0
+P@3oool00`000000oooo0?ooo`2>0?ooo`002`3oool00`000000oooo0?ooo`210?ooo`030000003o
+ool0oooo08h0oooo000:0?ooo`030000003oool0oooo0880oooo00<000000?ooo`3oool0SP3oool0
+00X0oooo00<000000?ooo`3oool0PP3oool2000008l0oooo00090?ooo`030000003oool0oooo08<0
+oooo00<000000?ooo`3oool0SP3oool000T0oooo00<000000?ooo`3oool0P`3oool00`000000oooo
+0?ooo`2>0?ooo`002@3oool00`000000oooo0?ooo`230?ooo`030000003oool0oooo08h0oooo0008
+0?ooo`030000003oool0oooo08@0oooo00<000000?ooo`3oool0SP3oool000P0oooo00<000000?oo
+o`3oool0Q03oool00`000000oooo0?ooo`2>0?ooo`001`3oool00`000000oooo0?ooo`250?ooo`03
+0000003oool0oooo08h0oooo00070?ooo`030000003oool0oooo08D0oooo00<000000?ooo`3oool0
+SP3oool008l0oooo00<000000?ooo`3oool0SP3oool008l0oooo0P00002?0?ooo`00S`3oool00`00
+0000oooo0?ooo`2>0?ooo`00S`3oool00`000000oooo0?ooo`2>0?ooo`00\
+\>"],
+  ImageRangeCache->{{{0, 287}, {176.938, 0}} -> {-2.10521, -0.288211, \
+0.0146705, 0.0114121}}],
+
+Cell[BoxData[
+    TagBox[\(\[SkeletonIndicator]  Graphics  \[SkeletonIndicator]\),
+      False,
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+
+Try to minimize in Mathematica\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(mm = FindMinimum[Func2[v], {v, \(-1\)}]\)], "Input"],
+
+Cell[BoxData[
+    \({\(-0.24012524415530795`\), {v \[Rule] \(-0.520268992107989`\)}}\)], \
+"Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Try to minimize using our ",
+  StyleBox["LookupMin",
+    FontWeight->"Bold"],
+  " function"
+}], "Text"],
+
+Cell[BoxData[
+    \(\(Func[u_] := Func2[u];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(lm = LookupMin[500, 0.1, 0.01, \(-1. \), 0.0000001, 0]\)], "Input"],
+
+Cell[BoxData[
+    \({\(-0.5202694059459493`\), \(-0.24012524415513598`\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(Print[{mm\[LeftDoubleBracket]1\[RightDoubleBracket] - 
+          lm\[LeftDoubleBracket]2\[RightDoubleBracket], \((v /. \ 
+              mm\[LeftDoubleBracket]2\[RightDoubleBracket])\)\  - 
+          lm\[LeftDoubleBracket]1\[RightDoubleBracket]}]\)\(\
+\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[BoxData[
+    \({\(-1.7197354651443675`*^-13\), 4.1383796023364283`*^-7}\)], "Print"]
+}, Open  ]],
+
+Cell[TextData[{
+  "\nCompile ",
+  StyleBox["LookupMin",
+    FontWeight->"Bold"],
+  " to C++. Note that we use Func2 instead of Func replacing it on the \
+flight."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(BuildCode[MacroRules \[Rule] {Func \[Rule] Func2}]\)], "Input"],
+
+Cell[BoxData[
+    \("Successful compilation to C++: 3 function(s)"\)], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(InstallCode[]\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Global"\[InvisibleSpace]" is installed."\),
+      SequenceForm[ "Global", " is installed."],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \(LinkObject[".\\Globalml.exe", 9, 2]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(cm = LookupMin[500, 0.1, 0.01, \(-1. \), 0.0000001, 0]\)], "Input"],
+
+Cell[BoxData[
+    \({\(-0.5202694059035576`\), \(-0.240125244155136`\)}\)], "Output"]
+}, Open  ]],
+
+Cell["How accurate are C++ computations ?", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Print[{mm\[LeftDoubleBracket]1\[RightDoubleBracket] - 
+          cm\[LeftDoubleBracket]2\[RightDoubleBracket], \((v /. \ 
+              mm\[LeftDoubleBracket]2\[RightDoubleBracket])\)\  - 
+          cm\[LeftDoubleBracket]1\[RightDoubleBracket]}]\)], "Input"],
+
+Cell[BoxData[
+    \({\(-1.7194579093882112`*^-13\), 4.1379556858789357`*^-7}\)], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(UninstallCode[];\)\)], "Input"],
+
+Cell["\<\
+
+Using FindRoot[ ]\
+\>", "Subtitle"],
+
+Cell[TextData[{
+  "\nFinding the root in ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". This function is normally used for solving non-linear equations."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(mathroot = x /. FindRoot[Sin[x] \[Equal] Log[x], {x, 0.5}]\)], "Input"],
+
+Cell[BoxData[
+    \(2.219107148913746`\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+
+The problem is reduced to finding minumum of the residual function.\
+\>", \
+"Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FindMinimum[\((Sin[x] - Log[x])\)^2, {x, 0.5}]\)], "Input"],
+
+Cell[BoxData[
+    \({2.294993478814369`*^-19, {x \[Rule] 2.2191071493680594`}}\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+
+Prepare the resifual function for MathCode compilation\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(Func3[Real\ u_] \[Rule] Real := \((Sin[u] - Log[u])\)^2;\)\)], "Input"],
+
+Cell["\<\
+
+Compute the result\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(BuildCode[MacroRules \[Rule] {Func \[Rule] Func3}];\)\)], "Input"],
+
+Cell[BoxData[
+    \("Successful compilation to C++: 4 function(s)"\)], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(InstallCode[];\)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Global"\[InvisibleSpace]" is installed."\),
+      SequenceForm[ "Global", " is installed."],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(croot = \(LookupMin[500, 0.1, 0.01, 0.5, 0.0000001, 
+          0]\)[\([1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(2.219106784059143`\)], "Output"]
+}, Open  ]],
+
+Cell["Check accuracy", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(croot - mathroot\)], "Input"],
+
+Cell[BoxData[
+    \(\(-3.648546029744182`*^-7\)\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(UninstallCode[];\)\)], "Input"],
+
+Cell["CleanMathCodeFiles[Confirm -> False, CleanAllBut -> {}];", "Input"]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 949}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{678, 905},
+WindowMargins->{{133, Automatic}, {8, Automatic}},
+ShowCellTags->True,
+StyleDefinitions -> Notebook[{
+  
+  Cell[CellGroupData[{
+  Cell["Style Definitions", "Subtitle"],
+  
+  Cell["\<\
+
+Modify the definitions below to change the default appearance of all cells in \
+
+a given style.  Make modifications to any definition using commands in the 
+Format menu.
+\
+\>", "Text"],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Style Environment Names", "Section"],
+  
+  Cell[StyleData[All, "Working"],
+    PageWidth->WindowWidth,
+    ScriptMinSize->9],
+  
+  Cell[StyleData[All, "Presentation"],
+    PageWidth->WindowWidth,
+    ScriptMinSize->12,
+    FontSize->16],
+  
+  Cell[StyleData[All, "Condensed"],
+    PageWidth->WindowWidth,
+    CellBracketOptions->{"Margins"->{1, 1},
+    "Widths"->{0, 5}},
+    ScriptMinSize->8,
+    FontSize->11],
+  
+  Cell[StyleData[All, "Printout"],
+    PageWidth->PaperWidth,
+    ScriptMinSize->7,
+    FontSize->10,
+    PrivateFontOptions->{"FontType"->"Outline"}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Notebook Options", "Section"],
+  
+  Cell["\<\
+
+The options defined for the style below will be used at the Notebook level.
+\
+\>", "Text"],
+  
+  Cell[StyleData["Notebook"],
+    PageHeaders->{{Cell[ 
+            TextData[ {
+              CounterBox[ "Page"]}], "PageNumber"], None, Cell[ 
+            TextData[ {
+              ValueBox[ "FileName"]}], "Header"]}, {Cell[ 
+            TextData[ {
+              ValueBox[ "FileName"]}], "Header"], None, Cell[ 
+            TextData[ {
+              CounterBox[ "Page"]}], "PageNumber"]}},
+    PageHeaderLines->{True, True},
+    PrintingOptions->{"FirstPageHeader"->False,
+    "FacingPages"->True},
+    CellFrameLabelMargins->6,
+    StyleMenuListing->None]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Styles for Headings", "Section"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Title"],
+    ShowCellBracket->False,
+    CellMargins->{{0, 0}, {0, 0}},
+    PageBreakBelow->False,
+    LineSpacing->{1, 0},
+    CounterIncrements->"Title",
+    CounterAssignments->{{"Section", 0}, {"Equation", 0}, {"Figure", 0}, {
+        "Subtitle", 0}, {"Subsubtitle", 0}},
+    FontSize->34,
+    FontColor->GrayLevel[1],
+    Background->RGBColor[0, 0, 1]],
+  
+  Cell[StyleData["Title", "Presentation"],
+    CellMargins->{{0, 0}, {0, 0}},
+    LineSpacing->{1, 0},
+    FontSize->44],
+  
+  Cell[StyleData["Title", "Condensed"],
+    CellMargins->{{0, 0}, {0, 0}},
+    FontSize->20],
+  
+  Cell[StyleData["Title", "Printout"],
+    CellMargins->{{0, 0}, {0, 0}},
+    FontSize->24,
+    FontTracking->"Plain",
+    Background->GrayLevel[0]]
+  }, Open  ]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Subtitle"],
+    ShowCellBracket->False,
+    CellMargins->{{0, 0}, {0, 0}},
+    PageBreakBelow->False,
+    LineSpacing->{1, 3},
+    ParagraphIndent->-96,
+    CounterIncrements->"Subtitle",
+    CounterAssignments->{{"Section", 0}, {"Equation", 0}, {"Figure", 0}, {
+        "Subsubtitle", 0}},
+    FontFamily->"Helvetica",
+    FontSize->18,
+    FontColor->GrayLevel[1],
+    Background->RGBColor[0.2, 0.700008, 0.700008]],
+  
+  Cell[StyleData["Subtitle", "Presentation"],
+    CellMargins->{{0, 0}, {0, 0}},
+    LineSpacing->{1, 6},
+    ParagraphIndent->-157,
+    FontSize->30],
+  
+  Cell[StyleData["Subtitle", "Condensed"],
+    CellMargins->{{0, 0}, {0, 0}},
+    ParagraphIndent->-78,
+    FontSize->14],
+  
+  Cell[StyleData["Subtitle", "Printout"],
+    CellMargins->{{0, 0}, {0, 0}},
+    ParagraphIndent->-85,
+    FontSize->16,
+    Background->GrayLevel[0.6]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Subsubtitle"],
+    ShowCellBracket->False,
+    CellMargins->{{10, 4}, {30, 10}},
+    PageBreakBelow->False,
+    CounterIncrements->"Subsubtitle",
+    CounterAssignments->{{"Section", 0}, {"Equation", 0}, {"Figure", 0}},
+    FontFamily->"Helvetica",
+    FontSize->14,
+    FontSlant->"Italic"],
+  
+  Cell[StyleData["Subsubtitle", "Presentation"],
+    CellMargins->{{8, 10}, {40, 20}},
+    LineSpacing->{1, 0},
+    FontSize->24],
+  
+  Cell[StyleData["Subsubtitle", "Condensed"],
+    CellMargins->{{8, 10}, {12, 8}},
+    FontSize->12],
+  
+  Cell[StyleData["Subsubtitle", "Printout"],
+    CellMargins->{{9, 10}, {50, 10}},
+    FontSize->14]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Section"],
+    CellFrame->{{6, 0}, {0, 1}},
+    CellDingbat->None,
+    CellMargins->{{12, Inherited}, {4, 24}},
+    CellGroupingRules->{"SectionGrouping", 30},
+    PageBreakBelow->False,
+    CellFrameMargins->6,
+    CounterIncrements->"Section",
+    CounterAssignments->{{"Subsection", 0}, {"Subsubsection", 0}},
+    FontFamily->"Helvetica",
+    FontSize->16,
+    FontWeight->"Bold",
+    FontColor->RGBColor[0.571389, 0.19675, 0.570504]],
+  
+  Cell[StyleData["Section", "Presentation"],
+    CellMargins->{{10, 10}, {8, 32}},
+    LineSpacing->{1, 2},
+    FontSize->24,
+    FontTracking->"Condensed"],
+  
+  Cell[StyleData["Section", "Condensed"],
+    CellMargins->{{8, Inherited}, {2, 12}},
+    FontSize->12],
+  
+  Cell[StyleData["Section", "Printout"],
+    CellMargins->{{9, 0}, {2, 50}},
+    FontSize->14,
+    FontTracking->"Plain",
+    FontColor->GrayLevel[0]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Subsection"],
+    CellMargins->{{12, Inherited}, {8, 20}},
+    CellGroupingRules->{"SectionGrouping", 40},
+    PageBreakBelow->False,
+    CounterIncrements->"Subsection",
+    CounterAssignments->{{"Subsubsection", 0}},
+    FontFamily->"Helvetica",
+    FontSize->13,
+    FontWeight->"Bold"],
+  
+  Cell[StyleData["Subsection", "Presentation"],
+    CellMargins->{{11, 10}, {8, 32}},
+    LineSpacing->{1, 0},
+    FontSize->22],
+  
+  Cell[StyleData["Subsection", "Condensed"],
+    CellMargins->{{8, Inherited}, {2, 12}},
+    FontSize->12],
+  
+  Cell[StyleData["Subsection", "Printout"],
+    CellMargins->{{9, 0}, {4, 40}},
+    FontSize->12]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Subsubsection"],
+    CellDingbat->"\[FilledSquare]",
+    CellMargins->{{25, Inherited}, {8, 12}},
+    CellGroupingRules->{"SectionGrouping", 50},
+    PageBreakBelow->False,
+    CounterIncrements->"Subsubsection",
+    FontFamily->"Times",
+    FontSize->13,
+    FontWeight->"Bold"],
+  
+  Cell[StyleData["Subsubsection", "Presentation"],
+    CellMargins->{{29, 10}, {8, 26}},
+    LineSpacing->{1, 0},
+    FontSize->18],
+  
+  Cell[StyleData["Subsubsection", "Condensed"],
+    CellMargins->{{22, Inherited}, {2, 12}},
+    FontSize->10],
+  
+  Cell[StyleData["Subsubsection", "Printout"],
+    CellMargins->{{21, 0}, {4, 20}},
+    FontSize->11]
+  }, Open  ]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Styles for Body Text", "Section"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Text"],
+    CellMargins->{{12, 10}, {5, 5}},
+    LineSpacing->{1, 3},
+    ParagraphSpacing->{0, 12},
+    CounterIncrements->"Text",
+    FontFamily->"Times"],
+  
+  Cell[StyleData["Text", "Presentation"],
+    CellMargins->{{13, 10}, {8, 8}},
+    LineSpacing->{1, 5},
+    ParagraphSpacing->{0, 12}],
+  
+  Cell[StyleData["Text", "Condensed"],
+    CellMargins->{{8, 10}, {4, 4}},
+    LineSpacing->{1, 1},
+    ParagraphSpacing->{0, 4}],
+  
+  Cell[StyleData["Text", "Printout"],
+    CellMargins->{{9, 0}, {4, 4}},
+    ParagraphSpacing->{0, 6}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["SmallText"],
+    CellMargins->{{12, 10}, {5, 5}},
+    LineSpacing->{1, 3},
+    ParagraphSpacing->{0, 6},
+    CounterIncrements->"SmallText",
+    FontFamily->"Helvetica",
+    FontSize->9],
+  
+  Cell[StyleData["SmallText", "Presentation"],
+    CellMargins->{{13, 10}, {8, 8}},
+    LineSpacing->{1, 5},
+    FontSize->12],
+  
+  Cell[StyleData["SmallText", "Condensed"],
+    CellMargins->{{8, 10}, {2, 2}},
+    LineSpacing->{1, 2},
+    FontSize->9],
+  
+  Cell[StyleData["SmallText", "Printout"],
+    CellMargins->{{9, 0}, {4, 4}},
+    FontSize->7]
+  }, Closed]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Styles for Input/Output", "Section"],
+  
+  Cell["\<\
+
+The cells in this section define styles used for input and output to the 
+kernel.  Be careful when modifying, renaming, or removing these styles, 
+because the front end associates special meanings with these style names.
+\
+\>", "Text"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Input"],
+    CellFrame->{{3, 0}, {0, 0}},
+    CellMargins->{{52, 10}, {8, 8}},
+    Evaluatable->True,
+    CellGroupingRules->"InputGrouping",
+    CellHorizontalScrolling->True,
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    CellLabelMargins->{{5, Inherited}, {Inherited, Inherited}},
+    DefaultFormatType->DefaultInputFormatType,
+    FormatType->InputForm,
+    ShowStringCharacters->True,
+    NumberMarks->True,
+    CounterIncrements->"Input",
+    FontWeight->"Bold",
+    Background->RGBColor[1, 1, 0]],
+  
+  Cell[StyleData["Input", "Presentation"],
+    CellMargins->{{62, Inherited}, {10, 10}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["Input", "Condensed"],
+    CellMargins->{{40, 10}, {4, 4}}],
+  
+  Cell[StyleData["Input", "Printout"],
+    CellMargins->{{44, 0}, {6, 6}},
+    Background->GrayLevel[0.8]]
+  }, Closed]],
+  
+  Cell[StyleData["InlineInput"],
+    Evaluatable->True,
+    CellGroupingRules->"InputGrouping",
+    CellHorizontalScrolling->True,
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    DefaultFormatType->DefaultInputFormatType,
+    AutoItalicWords->{},
+    FormatType->InputForm,
+    ShowStringCharacters->True,
+    NumberMarks->True,
+    CounterIncrements->"Input",
+    FontWeight->"Bold"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Output"],
+    CellFrame->{{3, 0}, {0, 0}},
+    CellMargins->{{52, 10}, {8, 8}},
+    CellEditDuplicate->True,
+    CellGroupingRules->"OutputGrouping",
+    CellHorizontalScrolling->True,
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    GeneratedCell->True,
+    CellAutoOverwrite->True,
+    CellLabelMargins->{{3, Inherited}, {Inherited, Inherited}},
+    DefaultFormatType->DefaultOutputFormatType,
+    FormatType->InputForm,
+    CounterIncrements->"Output",
+    Background->RGBColor[1, 0.900008, 0.900008]],
+  
+  Cell[StyleData["Output", "Presentation"],
+    CellMargins->{{62, Inherited}, {12, 5}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["Output", "Condensed"],
+    CellMargins->{{40, Inherited}, {4, 1}}],
+  
+  Cell[StyleData["Output", "Printout"],
+    CellMargins->{{44, 0}, {6, 2}},
+    Background->GrayLevel[0.900008]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Message"],
+    CellMargins->{{62, Inherited}, {Inherited, Inherited}},
+    CellGroupingRules->"OutputGrouping",
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    GeneratedCell->True,
+    CellAutoOverwrite->True,
+    ShowCellLabel->False,
+    DefaultFormatType->DefaultOutputFormatType,
+    FormatType->InputForm,
+    CounterIncrements->"Message",
+    StyleMenuListing->None,
+    FontColor->RGBColor[1, 0, 0]],
+  
+  Cell[StyleData["Message", "Presentation"],
+    CellMargins->{{74, Inherited}, {Inherited, Inherited}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["Message", "Condensed"],
+    CellMargins->{{50, Inherited}, {Inherited, Inherited}}],
+  
+  Cell[StyleData["Message", "Printout"],
+    CellMargins->{{54, Inherited}, {Inherited, Inherited}},
+    FontColor->GrayLevel[0]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Print"],
+    CellMargins->{{62, Inherited}, {Inherited, Inherited}},
+    CellGroupingRules->"OutputGrouping",
+    CellHorizontalScrolling->True,
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    GeneratedCell->True,
+    CellAutoOverwrite->True,
+    ShowCellLabel->False,
+    DefaultFormatType->DefaultOutputFormatType,
+    FormatType->InputForm,
+    CounterIncrements->"Print",
+    StyleMenuListing->None],
+  
+  Cell[StyleData["Print", "Presentation"],
+    CellMargins->{{74, Inherited}, {Inherited, Inherited}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["Print", "Condensed"],
+    CellMargins->{{50, Inherited}, {Inherited, Inherited}}],
+  
+  Cell[StyleData["Print", "Printout"],
+    CellMargins->{{54, Inherited}, {Inherited, Inherited}}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Graphics"],
+    CellMargins->{{62, Inherited}, {Inherited, Inherited}},
+    CellGroupingRules->"GraphicsGrouping",
+    CellHorizontalScrolling->True,
+    PageBreakWithin->False,
+    GeneratedCell->True,
+    CellAutoOverwrite->True,
+    ShowCellLabel->False,
+    DefaultFormatType->DefaultOutputFormatType,
+    FormatType->InputForm,
+    CounterIncrements->"Graphics",
+    StyleMenuListing->None],
+  
+  Cell[StyleData["Graphics", "Presentation"],
+    CellMargins->{{74, Inherited}, {Inherited, Inherited}}],
+  
+  Cell[StyleData["Graphics", "Condensed"],
+    CellMargins->{{52, Inherited}, {Inherited, Inherited}},
+    ImageSize->{175, 175}],
+  
+  Cell[StyleData["Graphics", "Printout"],
+    CellMargins->{{54, Inherited}, {Inherited, Inherited}},
+    ImageSize->{250, 250}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["CellLabel"],
+    StyleMenuListing->None,
+    FontFamily->"Helvetica",
+    FontSize->11,
+    FontWeight->"Bold",
+    FontColor->RGBColor[0.571389, 0.19675, 0.570504]],
+  
+  Cell[StyleData["CellLabel", "Presentation"],
+    FontSize->12],
+  
+  Cell[StyleData["CellLabel", "Condensed"],
+    FontSize->8],
+  
+  Cell[StyleData["CellLabel", "Printout"],
+    FontSize->8,
+    FontColor->GrayLevel[0]]
+  }, Closed]]
+  }, Open  ]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Unique Styles", "Section"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Author"],
+    ShowCellBracket->False,
+    CellMargins->{{10, 4}, {2, 10}},
+    FontSize->16,
+    FontSlant->"Italic"],
+  
+  Cell[StyleData["Author", "Presentation"],
+    CellMargins->{{12, 10}, {2, 12}},
+    LineSpacing->{1, 5},
+    ParagraphSpacing->{0, 12},
+    FontSize->20],
+  
+  Cell[StyleData["Author", "Condensed"],
+    CellMargins->{{8, 10}, {1, 4}},
+    LineSpacing->{1, 1},
+    ParagraphSpacing->{0, 4},
+    FontSize->12],
+  
+  Cell[StyleData["Author", "Printout"],
+    CellMargins->{{9, 0}, {4, 12}},
+    ParagraphSpacing->{0, 6},
+    FontSize->14]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Copyright"],
+    ShowCellBracket->False,
+    CellMargins->{{10, 10}, {40, 2}},
+    FontFamily->"Helvetica",
+    FontSize->9],
+  
+  Cell[StyleData["Copyright", "Presentation"],
+    CellMargins->{{12, 10}, {50, 2}},
+    LineSpacing->{1, 5},
+    FontSize->12],
+  
+  Cell[StyleData["Copyright", "Condensed"],
+    CellMargins->{{8, 10}, {12, 1}},
+    LineSpacing->{1, 2},
+    FontSize->9],
+  
+  Cell[StyleData["Copyright", "Printout"],
+    CellMargins->{{9, 0}, {72, 4}},
+    FontSize->7]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Example"],
+    CellMargins->{{12, 10}, {5, 12}},
+    LineSpacing->{1, 3},
+    ParagraphSpacing->{0, 12},
+    CounterIncrements->"Example",
+    FontFamily->"Times",
+    FontWeight->"Bold"],
+  
+  Cell[StyleData["Example", "Presentation"],
+    CellMargins->{{18, 10}, {8, 20}},
+    LineSpacing->{1, 5},
+    ParagraphSpacing->{0, 12}],
+  
+  Cell[StyleData["Example", "Condensed"],
+    CellMargins->{{8, 10}, {4, 8}},
+    LineSpacing->{1, 1},
+    ParagraphSpacing->{0, 4}],
+  
+  Cell[StyleData["Example", "Printout"],
+    CellMargins->{{9, 0}, {4, 10}},
+    ParagraphSpacing->{0, 6}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Definition"],
+    CellFrame->{{3, 0}, {0, 0}},
+    CellMargins->{{52, 10}, {8, 8}},
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    CellLabelMargins->{{23, Inherited}, {Inherited, Inherited}},
+    ShowStringCharacters->True,
+    CounterIncrements->"Definition",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold",
+    FontColor->GrayLevel[1],
+    Background->RGBColor[0.2, 0.700008, 0.700008]],
+  
+  Cell[StyleData["Definition", "Presentation"],
+    CellMargins->{{62, Inherited}, {5, 12}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["Definition", "Condensed"],
+    CellMargins->{{40, 10}, {1, 4}}],
+  
+  Cell[StyleData["Definition", "Printout"],
+    CellMargins->{{44, 0}, {2, 6}},
+    Background->GrayLevel[0.6]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Theorem"],
+    CellFrame->{{3, 0}, {0, 0}},
+    CellMargins->{{52, 10}, {8, 8}},
+    PageBreakWithin->False,
+    GroupPageBreakWithin->False,
+    CellLabelMargins->{{23, Inherited}, {Inherited, Inherited}},
+    ShowStringCharacters->True,
+    CounterIncrements->"Theorem",
+    FontFamily->"Helvetica",
+    FontWeight->"Bold",
+    FontColor->GrayLevel[1],
+    Background->RGBColor[0.571389, 0.19675, 0.570504]],
+  
+  Cell[StyleData["Theorem", "Presentation"],
+    CellMargins->{{62, Inherited}, {5, 12}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["Theorem", "Condensed"],
+    CellMargins->{{40, 10}, {1, 4}}],
+  
+  Cell[StyleData["Theorem", "Printout"],
+    CellMargins->{{44, 0}, {2, 6}},
+    Background->GrayLevel[0.4]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["ExerciseMain"],
+    CellFrame->{{6, 0}, {0, 1}},
+    CellMargins->{{12, Inherited}, {4, 20}},
+    CellGroupingRules->{"SectionGrouping", 30},
+    PageBreakBelow->False,
+    CellFrameColor->RGBColor[0.571389, 0.19675, 0.570504],
+    CounterIncrements->"Subsection",
+    CounterAssignments->{{"Subsubsection", 0}},
+    FontFamily->"Helvetica",
+    FontSize->16,
+    FontWeight->"Bold",
+    FontColor->RGBColor[0.571389, 0.19675, 0.570504]],
+  
+  Cell[StyleData["ExerciseMain", "Presentation"],
+    CellMargins->{{18, 10}, {8, 32}},
+    LineSpacing->{1, 2},
+    FontSize->24,
+    FontTracking->"Condensed"],
+  
+  Cell[StyleData["ExerciseMain", "Condensed"],
+    CellMargins->{{8, Inherited}, {2, 12}},
+    FontSize->12],
+  
+  Cell[StyleData["ExerciseMain", "Printout"],
+    CellMargins->{{9, 0}, {2, 50}},
+    CellFrameColor->GrayLevel[0.500008],
+    FontSize->14,
+    FontTracking->"Plain",
+    FontColor->GrayLevel[0]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Exercise"],
+    CellDingbat->"\[FilledDownTriangle]",
+    CellMargins->{{23, Inherited}, {4, 18}},
+    CellGroupingRules->{"SectionGrouping", 50},
+    PageBreakBelow->False,
+    CounterIncrements->"Subsubsection",
+    FontFamily->"Times",
+    FontSize->13,
+    FontWeight->"Bold",
+    FontColor->RGBColor[0.571389, 0.19675, 0.570504]],
+  
+  Cell[StyleData["Exercise", "Presentation"],
+    CellMargins->{{33, 10}, {8, 26}},
+    LineSpacing->{1, 0},
+    FontSize->18],
+  
+  Cell[StyleData["Exercise", "Condensed"],
+    CellMargins->{{17, Inherited}, {2, 12}},
+    FontSize->10],
+  
+  Cell[StyleData["Exercise", "Printout"],
+    CellFrame->{{0, 0}, {0.5, 0}},
+    CellDingbat->None,
+    CellMargins->{{9, 0}, {6, 20}},
+    FontSize->11,
+    FontColor->GrayLevel[0]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["ExerciseText"],
+    CellMargins->{{62, 10}, {5, 5}},
+    LineSpacing->{1, 3},
+    ParagraphSpacing->{0, 8},
+    CounterIncrements->"ExcersiceText",
+    FontFamily->"Times"],
+  
+  Cell[StyleData["ExerciseText", "Presentation"],
+    CellMargins->{{74, 10}, {8, 8}},
+    LineSpacing->{1, 5},
+    ParagraphSpacing->{0, 12}],
+  
+  Cell[StyleData["ExerciseText", "Condensed"],
+    CellMargins->{{52, 10}, {2, 2}},
+    LineSpacing->{1, 1},
+    ParagraphSpacing->{0, 4}],
+  
+  Cell[StyleData["ExerciseText", "Printout"],
+    CellMargins->{{54, 0}, {4, 4}},
+    ParagraphSpacing->{0, 6}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Itemize"],
+    CellDingbat->"\[FilledSmallCircle]",
+    CellMargins->{{65, Inherited}, {8, 8}},
+    FontFamily->"Times",
+    FontSize->13,
+    FontWeight->"Bold"],
+  
+  Cell[StyleData["Itemize", "Presentation"],
+    CellMargins->{{Inherited, 10}, {8, 12}},
+    LineSpacing->{1, 0},
+    FontSize->18],
+  
+  Cell[StyleData["Itemize", "Condensed"],
+    CellMargins->{{Inherited, Inherited}, {2, 12}},
+    FontSize->10],
+  
+  Cell[StyleData["Itemize", "Printout"],
+    CellMargins->{{Inherited, 0}, {4, 20}},
+    FontSize->11]
+  }, Open  ]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["DisplayCode"],
+    CellFrame->2,
+    CellMargins->{{52, 10}, {8, 8}},
+    CellHorizontalScrolling->True,
+    PageBreakWithin->True,
+    CellLabelMargins->{{5, Inherited}, {Inherited, Inherited}},
+    DefaultFormatType->DefaultInputFormatType,
+    FormatType->InputForm,
+    ShowStringCharacters->True,
+    NumberMarks->True,
+    FontWeight->"Bold",
+    Background->RGBColor[1, 1, 0]],
+  
+  Cell[StyleData["DisplayCode", "Presentation"],
+    CellMargins->{{62, Inherited}, {10, 10}},
+    LineSpacing->{1, 0}],
+  
+  Cell[StyleData["DisplayCode", "Condensed"],
+    CellMargins->{{40, 10}, {4, 4}}],
+  
+  Cell[StyleData["DisplayCode", "Printout"],
+    CellMargins->{{44, 0}, {6, 6}},
+    Background->GrayLevel[0.8]]
+  }, Closed]]
+  }, Open  ]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Formulas and Programming", "Section"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["DisplayFormula"],
+    CellMargins->{{62, 10}, {2, 10}},
+    CellHorizontalScrolling->True,
+    ScriptLevel->0,
+    SingleLetterItalics->True,
+    UnderoverscriptBoxOptions->{LimitsPositioning->True}],
+  
+  Cell[StyleData["DisplayFormula", "Presentation"],
+    CellMargins->{{74, 10}, {2, 10}},
+    FontSize->18],
+  
+  Cell[StyleData["DisplayFormula", "Condensed"],
+    CellMargins->{{52, 10}, {2, 10}},
+    FontSize->10],
+  
+  Cell[StyleData["DisplayFormula", "Printout"],
+    CellMargins->{{54, 10}, {2, 10}},
+    FontSize->10]
+  }, Open  ]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["ChemicalFormula"],
+    CellMargins->{{62, 10}, {2, 10}},
+    AutoSpacing->False,
+    ScriptLevel->1,
+    ScriptBaselineShifts->{0.6, Automatic},
+    SingleLetterItalics->False,
+    ZeroWidthTimes->True],
+  
+  Cell[StyleData["ChemicalFormula", "Presentation"],
+    CellMargins->{{74, 10}, {2, 10}},
+    FontSize->10],
+  
+  Cell[StyleData["ChemicalFormula", "Condensed"],
+    CellMargins->{{52, 10}, {2, 10}},
+    FontSize->10],
+  
+  Cell[StyleData["ChemicalFormula", "Printout"],
+    CellMargins->{{54, 10}, {2, 10}},
+    FontSize->10]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Program"],
+    CellMargins->{{12, 10}, {Inherited, 6}},
+    FontFamily->"Courier"],
+  
+  Cell[StyleData["Program", "Presentation"],
+    CellMargins->{{13, 30}, {Inherited, 4}},
+    FontSize->9.5],
+  
+  Cell[StyleData["Program", "Condensed"],
+    CellMargins->{{8, 10}, {Inherited, 4}},
+    FontSize->9.5],
+  
+  Cell[StyleData["Program", "Printout"],
+    CellMargins->{{9, 0}, {Inherited, 4}},
+    FontSize->9.5]
+  }, Closed]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Styles for Automatic Numbering", "Section"],
+  
+  Cell["\<\
+
+The following styles are useful for numbered equations, figures, etc.  They 
+automatically give the cell a FrameLabel containing a reference to a 
+particular counter, and also increment that counter.
+\
+\>", "Text"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["NumberedEquation"],
+    CellMargins->{{62, 10}, {Inherited, Inherited}},
+    CellFrameLabels->{{None, Cell[ 
+            TextData[ {"(", 
+              CounterBox[ "NumberedEquation"], ")"}]]}, {None, None}},
+    DefaultFormatType->DefaultInputFormatType,
+    CounterIncrements->"NumberedEquation",
+    FormatTypeAutoConvert->False],
+  
+  Cell[StyleData["NumberedEquation", "Presentation"],
+    CellMargins->{{74, 10}, {Inherited, Inherited}}],
+  
+  Cell[StyleData["NumberedEquation", "Condensed"],
+    CellMargins->{{52, 10}, {Inherited, Inherited}}],
+  
+  Cell[StyleData["NumberedEquation", "Printout"],
+    CellMargins->{{54, 0}, {Inherited, Inherited}}]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["NumberedFigure"],
+    CellMargins->{{62, 145}, {Inherited, Inherited}},
+    CellFrameLabels->{{None, None}, {Cell[ 
+            TextData[ {"Figure ", 
+              CounterBox[ "NumberedFigure"]}]], None}},
+    CounterIncrements->"NumberedFigure",
+    ImageMargins->{{43, Inherited}, {Inherited, 0}},
+    FormatTypeAutoConvert->False],
+  
+  Cell[StyleData["NumberedFigure", "Presentation"]],
+  
+  Cell[StyleData["NumberedFigure", "Condensed"]],
+  
+  Cell[StyleData["NumberedFigure", "Printout"]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["NumberedTable"],
+    CellMargins->{{62, 145}, {Inherited, Inherited}},
+    CellFrameLabels->{{None, None}, {Cell[ 
+            TextData[ {"Table ", 
+              CounterBox[ "NumberedTable"]}]], None}},
+    TextAlignment->Center,
+    CounterIncrements->"NumberedTable",
+    FormatTypeAutoConvert->False],
+  
+  Cell[StyleData["NumberedTable", "Presentation"]],
+  
+  Cell[StyleData["NumberedTable", "Condensed"]],
+  
+  Cell[StyleData["NumberedTable", "Printout"]]
+  }, Open  ]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Styles for Headers and Footers", "Section"],
+  
+  Cell[StyleData["Header"],
+    CellMargins->{{0, 0}, {4, 1}},
+    StyleMenuListing->None,
+    FontFamily->"Helvetica",
+    FontSize->9,
+    FontSlant->"Italic"],
+  
+  Cell[StyleData["Footer"],
+    CellMargins->{{0, 0}, {0, 4}},
+    StyleMenuListing->None,
+    FontFamily->"Helvetica",
+    FontSize->6],
+  
+  Cell[StyleData["PageNumber"],
+    CellMargins->{{0, 0}, {4, 1}},
+    StyleMenuListing->None,
+    FontFamily->"Helvetica",
+    FontSize->9,
+    FontWeight->"Bold"]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell["Hyperlink Styles", "Section"],
+  
+  Cell["\<\
+
+The cells below define styles useful for making hypertext ButtonBoxes.  The 
+\"Hyperlink\" style is for links within the same Notebook, or between 
+Notebooks.
+\
+\>", "Text"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["Hyperlink"],
+    StyleMenuListing->None,
+    ButtonStyleMenuListing->Automatic,
+    FontColor->RGBColor[0, 0, 1],
+    Background->None,
+    FontVariations->{"Underline"->True},
+    ButtonBoxOptions->{ButtonFunction:>(FrontEndExecute[ {
+        FrontEnd`NotebookLocate[ #2]}]&),
+    Active->True,
+    ButtonFrame->"None",
+    ButtonNote->ButtonData}],
+  
+  Cell[StyleData["Hyperlink", "Presentation"]],
+  
+  Cell[StyleData["Hyperlink", "Condensed"]],
+  
+  Cell[StyleData["Hyperlink", "Printout"],
+    FontColor->GrayLevel[0],
+    Background->GrayLevel[1]]
+  }, Closed]],
+  
+  Cell["\<\
+
+The following styles are for linking automatically to the on-line help 
+system.
+\
+\>", "Text"],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["MainBookLink"],
+    StyleMenuListing->None,
+    ButtonStyleMenuListing->Automatic,
+    FontColor->GrayLevel[1],
+    Background->RGBColor[1, 0.4, 0],
+    ButtonBoxOptions->{ButtonFunction:>(FrontEndExecute[ {
+        FrontEnd`HelpBrowserLookup[ "MainBook", #]}]&),
+    Active->True,
+    ButtonFrame->"None"}],
+  
+  Cell[StyleData["MainBookLink", "Presentation"]],
+  
+  Cell[StyleData["MainBookLink", "Condensed"]],
+  
+  Cell[StyleData["MainBookLink", "Printout"],
+    FontColor->GrayLevel[0],
+    Background->GrayLevel[1]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["AddOnsLink"],
+    StyleMenuListing->None,
+    ButtonStyleMenuListing->Automatic,
+    FontFamily->"Courier",
+    FontColor->GrayLevel[1],
+    Background->RGBColor[1, 0.4, 0],
+    ButtonBoxOptions->{ButtonFunction:>(FrontEndExecute[ {
+        FrontEnd`HelpBrowserLookup[ "AddOns", #]}]&),
+    Active->True,
+    ButtonFrame->"None"}],
+  
+  Cell[StyleData["AddOnsLink", "Presentation"]],
+  
+  Cell[StyleData["AddOnsLink", "Condensed"]],
+  
+  Cell[StyleData["AddOnLink", "Printout"],
+    FontColor->GrayLevel[0],
+    Background->GrayLevel[1]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["RefGuideLink"],
+    StyleMenuListing->None,
+    ButtonStyleMenuListing->Automatic,
+    FontFamily->"Courier",
+    FontColor->GrayLevel[1],
+    Background->RGBColor[1, 0.4, 0],
+    ButtonBoxOptions->{ButtonFunction:>(FrontEndExecute[ {
+        FrontEnd`HelpBrowserLookup[ "RefGuideLink", #]}]&),
+    Active->True,
+    ButtonFrame->"None"}],
+  
+  Cell[StyleData["RefGuideLink", "Presentation"]],
+  
+  Cell[StyleData["RefGuideLink", "Condensed"]],
+  
+  Cell[StyleData["RefGuideLink", "Printout"],
+    FontColor->GrayLevel[0],
+    Background->GrayLevel[1]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["GettingStartedLink"],
+    StyleMenuListing->None,
+    ButtonStyleMenuListing->Automatic,
+    FontColor->GrayLevel[1],
+    Background->RGBColor[1, 0.4, 0],
+    ButtonBoxOptions->{ButtonFunction:>(FrontEndExecute[ {
+        FrontEnd`HelpBrowserLookup[ "GettingStarted", #]}]&),
+    Active->True,
+    ButtonFrame->"None"}],
+  
+  Cell[StyleData["GettingStartedLink", "Presentation"]],
+  
+  Cell[StyleData["GettingStartedLink", "Condensed"]],
+  
+  Cell[StyleData["GettingStartedLink", "Printout"],
+    FontColor->GrayLevel[0],
+    Background->GrayLevel[1]]
+  }, Closed]],
+  
+  Cell[CellGroupData[{
+  
+  Cell[StyleData["OtherInformationLink"],
+    StyleMenuListing->None,
+    ButtonStyleMenuListing->Automatic,
+    FontColor->GrayLevel[1],
+    Background->RGBColor[1, 0.4, 0],
+    ButtonBoxOptions->{ButtonFunction:>(FrontEndExecute[ {
+        FrontEnd`HelpBrowserLookup[ "OtherInformation", #]}]&),
+    Active->True,
+    ButtonFrame->"None"}],
+  
+  Cell[StyleData["OtherInformationLink", "Presentation"]],
+  
+  Cell[StyleData["OtherInformationLink", "Condensed"]],
+  
+  Cell[StyleData["OtherInformationLink", "Printout"],
+    FontColor->GrayLevel[0],
+    Background->GrayLevel[1]]
+  }, Closed]]
+  }, Open  ]]
+  }, Open  ]]
+  }]
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 59, 0, 55, "Title"],
+Cell[1816, 53, 112, 3, 66, "Subtitle"],
+Cell[1931, 58, 65, 0, 56, "Copyright"],
+Cell[1999, 60, 812, 21, 203, "Text"],
+Cell[2814, 83, 69, 3, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[2908, 90, 60, 1, 50, "Input"],
+Cell[2971, 93, 77, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3085, 99, 55, 1, 50, "Input"],
+Cell[3143, 102, 356, 7, 25, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3536, 114, 107, 2, 50, "Input"],
+Cell[3646, 118, 84, 1, 49, "Output"]
+}, Open  ]],
+Cell[3745, 122, 1073, 37, 296, "Text"],
+Cell[4821, 161, 1018, 18, 370, "Input"],
+Cell[5842, 181, 37, 0, 29, "Text"],
+Cell[5882, 183, 80, 1, 50, "Input"],
+Cell[5965, 186, 83, 1, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[6073, 191, 63, 1, 50, "Input"],
+Cell[6139, 194, 20469, 482, 186, 3805, 272, "GraphicsData", "PostScript", \
+"Graphics"],
+Cell[26611, 678, 130, 3, 49, "Output"]
+}, Open  ]],
+Cell[26756, 684, 55, 3, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[26836, 691, 72, 1, 50, "Input"],
+Cell[26911, 694, 100, 2, 49, "Output"]
+}, Open  ]],
+Cell[27026, 699, 122, 5, 29, "Text"],
+Cell[27151, 706, 58, 1, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[27234, 711, 87, 1, 50, "Input"],
+Cell[27324, 714, 87, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[27448, 720, 316, 6, 70, "Input"],
+Cell[27767, 728, 89, 1, 25, "Print"]
+}, Open  ]],
+Cell[27871, 732, 174, 6, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[28070, 742, 83, 1, 50, "Input"],
+Cell[28156, 745, 79, 1, 25, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[28272, 751, 82, 2, 70, "Input"],
+Cell[28357, 755, 165, 3, 25, "Print"],
+Cell[28525, 760, 69, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[28631, 766, 87, 1, 50, "Input"],
+Cell[28721, 769, 85, 1, 49, "Output"]
+}, Open  ]],
+Cell[28821, 773, 51, 0, 29, "Text"],
+
+Cell[CellGroupData[{
+Cell[28897, 777, 278, 4, 50, "Input"],
+Cell[29178, 783, 89, 1, 25, "Print"]
+}, Open  ]],
+Cell[29282, 787, 53, 1, 50, "Input"],
+Cell[29338, 790, 46, 3, 66, "Subtitle"],
+Cell[29387, 795, 178, 5, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[29590, 804, 91, 1, 50, "Input"],
+Cell[29684, 807, 52, 1, 49, "Output"]
+}, Open  ]],
+Cell[29751, 811, 94, 4, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[29870, 819, 79, 1, 50, "Input"],
+Cell[29952, 822, 92, 1, 49, "Output"]
+}, Open  ]],
+Cell[30059, 826, 79, 3, 60, "Text"],
+Cell[30141, 831, 93, 1, 50, "Input"],
+Cell[30237, 834, 43, 3, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[30305, 841, 88, 1, 50, "Input"],
+Cell[30396, 844, 79, 1, 25, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30512, 850, 51, 1, 50, "Input"],
+Cell[30566, 853, 165, 3, 25, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30768, 861, 109, 2, 50, "Input"],
+Cell[30880, 865, 52, 1, 49, "Output"]
+}, Open  ]],
+Cell[30947, 869, 30, 0, 29, "Text"],
+
+Cell[CellGroupData[{
+Cell[31002, 873, 49, 1, 50, "Input"],
+Cell[31054, 876, 61, 1, 49, "Output"]
+}, Open  ]],
+Cell[31130, 880, 53, 1, 50, "Input"],
+Cell[31186, 883, 73, 0, 50, "Input"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

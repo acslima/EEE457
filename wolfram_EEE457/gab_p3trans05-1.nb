@@ -1,0 +1,828 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     12537,        543]*)
+(*NotebookOutlinePosition[     13258,        567]*)
+(*  CellTagsIndexPosition[     13214,        563]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Gabarito da Terceira Prova de Transmiss\[ATilde]o", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Quest\[ATilde]o 1", "Section"],
+
+Cell[BoxData[{
+    \(\(A1 = 0.81534\ Exp[I\ 1.3\ Degree];\)\), "\[IndentingNewLine]", 
+    \(B1 = 172.2\ Exp[I\ 87.1\ Degree]; \ 
+    C1 = 0.00193\ Exp[I\ 90.4\ Degree];\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Vr = 345. \ 10^3/Sqrt[3]\)], "Input"],
+
+Cell[BoxData[
+    \(199185.84287042086`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Ir = 350. \ 10^3/\((Sqrt[3]\ 345)\)\ Exp[I\ ArcCos[ .92]]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(538.8602512436507`\)\(\[InvisibleSpace]\)\) - 
+      229.55350577650233`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(r1 = {{A1, B1}, {C1, A1}} . {Vr, \ Ir}\)], "Input"],
+
+Cell[BoxData[
+    \({\(\(206535.48152384156`\)\(\[InvisibleSpace]\)\) + 
+        94357.52603615007`\ \[ImaginaryI], \(\(440.8036905118072`\)\(\
+\[InvisibleSpace]\)\) + 207.2711053452153`\ \[ImaginaryI]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Abs[r1]\)], "Input"],
+
+Cell[BoxData[
+    \({227068.81742755396`, 487.1028686836657`}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A1\ Vr + \ B1\ Ir\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(206535.48152384156`\)\(\[InvisibleSpace]\)\) + 
+      94357.52603615006`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Item a", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Vs = {Abs[r1[\([1]\)]], Arg[r1[\([1]\)]]/Degree}\)], "Input"],
+
+Cell[BoxData[
+    \({227068.81742755396`, 24.553701865720367`}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Is = {Abs[r1[\([2]\)]], Arg[r1[\([2]\)]]/Degree}\)], "Input"],
+
+Cell[BoxData[
+    \({487.1028686836657`, 25.183464218243014`}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Item b", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(r2 = r1[\([1]\)]/A1\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(255872.4481623002`\)\(\[InvisibleSpace]\)\) + 
+      109951.06326767814`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(r3 = C1\ r2\)], "Input"],
+
+Cell[BoxData[
+    \(\(-215.6479632829393`\) + 492.3403283753441`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Vr1 = {Abs[r2], Arg[r2]/Degree}\)], "Input"],
+
+Cell[BoxData[
+    \({278495.8635999141`, 23.253701865720366`}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Vr11 = Sqrt[3]\ Vr1[\([1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(482368.9854528231`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Is = {Abs[r3], Arg[r3]/Degree}\)], "Input"],
+
+Cell[BoxData[
+    \({537.4970167478342`, 113.65370186572038`}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Vr1[\([1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(278495.8635999141`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Vr\)], "Input"],
+
+Cell[BoxData[
+    \(199185.84287042086`\)], "Output"]
+}, Open  ]],
+
+Cell["Regula\[CCedilla]\[ATilde]o de tens\[ATilde]o", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(100\ Abs[\((Vr1[\([1]\)] - Vr)\)/Vr]\)], "Input"],
+
+Cell[BoxData[
+    \(39.81709723270238`\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Item c", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(z = \ \((345\ )\)^2/100. \)], "Input"],
+
+Cell[BoxData[
+    \(1190.25`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Y = \(-I\)\ 1/z\)], "Input"],
+
+Cell[BoxData[
+    \(\(-0.0008401596303297626`\)\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Qr = {{1, 0}, {Y, 1}}\)], "Input"],
+
+Cell[BoxData[
+    \({{1, 0}, {\(-0.0008401596303297626`\)\ \[ImaginaryI], 1}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(Qc = Qr . {{A1, B1}, {C1, A1}};\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MatrixForm[Abs[Qc]]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0.8153400000000001`", "172.19999999999996`"},
+            {"0.0012451152472169838`", "0.9596854541296944`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(r4 = Qc . {Vr, \ Ir}\)], "Input"],
+
+Cell[BoxData[
+    \({\(\(206535.48152384156`\)\(\[InvisibleSpace]\)\) + 
+        94357.52603615007`\ \[ImaginaryI], \(\(520.07907470517`\)\(\
+\[InvisibleSpace]\)\) + 33.748331538165054`\ \[ImaginaryI]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Abs[r4]\)], "Input"],
+
+Cell[BoxData[
+    \({227068.81742755396`, 521.1729020467159`}\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Quest\[ATilde]o 2", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(l = 1470;\)\), "\[IndentingNewLine]", 
+    \(\(zserie = 0.0121 + I\ 0.1693;\)\), "\[IndentingNewLine]", 
+    \(\(yshunt = I\ 10.06\ 10^\(-6\);\)\), "\[IndentingNewLine]", 
+    \(\[Gamma] = Sqrt[zserie\ yshunt]\)}], "Input"],
+
+Cell[BoxData[
+    \(\(\(0.00004660678168173062`\)\(\[InvisibleSpace]\)\) + 
+      0.0013058829166884484`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Zc = Sqrt[zserie/\ yshunt]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(129.80943505849385`\)\(\[InvisibleSpace]\)\) - 
+      4.6328808828757975`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Item a", "Subsection"],
+
+Cell["Para 500kV", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Pn = \((500\ 10^3)\)^2/Sqrt[Im[zserie]/Im[yshunt]]\)], "Input"],
+
+Cell[BoxData[
+    \(1.9271278157996745`*^9\)], "Output"]
+}, Open  ]],
+
+Cell["Para 525kV", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Pn1 = \((1.05\ \ 500\ 10^3)\)^2/Sqrt[Im[zserie]/Im[yshunt]]\)], "Input"],
+
+Cell[BoxData[
+    \(2.1246584169191413`*^9\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MatrixForm[
+      Qlt = {{Cosh[\[Gamma]\ l], \ 
+            Sinh[\[Gamma]\ l]*Zc}, {Sinh[\[Gamma]\ l]/Zc, \ 
+            Cosh[\[Gamma]\ l]}}]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(-0.34262131274279023`\) + 
+                0.0644355929698122`\ \[ImaginaryI]\), \
+\(\(\(1.3217016191634912`\)\(\[InvisibleSpace]\)\) + 
+                122.38547713109449`\ \[ImaginaryI]\)},
+            {\(\(-0.00043897642405535636`\) + 
+                0.007240911312508806`\ \[ImaginaryI]\), \
+\(\(-0.34262131274279023`\) + 0.0644355929698122`\ \[ImaginaryI]\)}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Item b", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Abs[\((500\ 10^3/Sqrt[3])\)/Qlt[\([1, 1]\)]]\)], "Input"],
+
+Cell[BoxData[
+    \(828032.5728327751`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Arg[\((500\ 10^3/Sqrt[3])\)/Qlt[\([1, 1]\)]]/Degree\)], "Input"],
+
+Cell[BoxData[
+    \(\(-169.34899193426494`\)\)], "Output"]
+}, Open  ]],
+
+Cell["em pu", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \({Abs[1/Qlt[\([1, 1]\)]], Arg[1/Qlt[\([1, 1]\)]]/Degree}\)], "Input"],
+
+Cell[BoxData[
+    \({2.8683889729366863`, \(-169.34899193426494`\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Qlt[\([2, 1]\)]\ \((500\ 10^3/Sqrt[3])\)/Qlt[\([1, 1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(1465.3895744793213`\)\(\[InvisibleSpace]\)\) - 
+      5825.229567848083`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Abs[%]\)], "Input"],
+
+Cell[BoxData[
+    \(6006.71841550145`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Arg[%%]/Degree\)], "Input"],
+
+Cell[BoxData[
+    \(\(-75.87971165028917`\)\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Para encurtar a linha de forma a ter 300km de comprimento", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Zcap = Im[zserie]\ \((l - 300)\)\)], "Input"],
+
+Cell[BoxData[
+    \(198.08100000000002`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Yind = Im[yshunt]\ \((l - 300)\)\)], "Input"],
+
+Cell[BoxData[
+    \(0.0117702`\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Para encurtar a linha de forma a ter 2500km de comprimento", \
+"Subsection"],
+
+Cell[BoxData[
+    \(\(x = 2500 - l;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Zind = \(\(Im[zserie]\)\(\ \)\(x\)\(\ \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(174.37900000000002`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Ycap = \(\(Im[yshunt]\)\(\ \ \)\(x\)\(\ \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(0.010361800000000001`\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Colocando toda a compensa\[CCedilla]\[ATilde]o em apenas um  terminal da LT \
+no caso o emissor\
+\>", "Subsection"],
+
+Cell[BoxData[
+    \(\(Qcurto = {{1, 0}, {\(-I\)\ Yind, 1}} . {{1, \(-I\)\ Zcap}, {0, 
+              1}};\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(Qlongo = {{1, 0}, {I\ Ycap, 1}} . {{1, I\ Zind}, {0, 
+              1}};\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Qtotalcurto = Qcurto . Qlt\)], "Input"],
+
+Cell[BoxData[
+    \({{\(\(1.0916656409502667`\)\(\[InvisibleSpace]\)\) + 
+          0.15138848202312125`\ \[ImaginaryI], \(\(14.085168310216863`\)\(\
+\[InvisibleSpace]\)\) + 
+          190.25224938049914`\ \[ImaginaryI]}, \
+{\(\(0.0013428962870531854`\)\(\[InvisibleSpace]\)\) - 
+          0.005608211614604023`\ \[ImaginaryI], \(\(1.8966857129155605`\)\(\
+\[InvisibleSpace]\)\) - 0.10134965507510232`\ \[ImaginaryI]}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(1/Abs[Qtotalcurto[\([1, 1]\)]]\)], "Input"],
+
+Cell[BoxData[
+    \(0.9073482452778948`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Qtotalongo = Qlongo . Qlt\)], "Input"],
+
+Cell[BoxData[
+    \({{\(-1.6052841865067635`\) - 
+          0.012112676880536792`\ \[ImaginaryI], \(-9.914512647319393`\) + 
+          62.63951523631947`\ \[ImaginaryI]}, {\(-0.0003134672887546102`\) - 
+          0.009392722371236978`\ \[ImaginaryI], \(-0.9916794417184853`\) - 
+          0.03829660417918188`\ \[ImaginaryI]}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(1/Abs[Qtotalongo[\([1, 1]\)]]\)], "Input"],
+
+Cell[BoxData[
+    \(0.6229249265095422`\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1152}, {0, 791}},
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{1144, 764},
+WindowMargins->{{2, Automatic}, {Automatic, 1}},
+StyleDefinitions -> "Classroom.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 66, 0, 67, "Title"],
+
+Cell[CellGroupData[{
+Cell[1845, 55, 36, 0, 62, "Section"],
+Cell[1884, 57, 183, 3, 70, "Input"],
+
+Cell[CellGroupData[{
+Cell[2092, 64, 57, 1, 50, "Input"],
+Cell[2152, 67, 53, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2242, 73, 90, 1, 50, "Input"],
+Cell[2335, 76, 125, 2, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2497, 83, 71, 1, 50, "Input"],
+Cell[2571, 86, 216, 3, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2824, 94, 40, 1, 50, "Input"],
+Cell[2867, 97, 75, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2979, 103, 50, 1, 50, "Input"],
+Cell[3032, 106, 125, 2, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3194, 113, 28, 0, 52, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[3247, 117, 81, 1, 50, "Input"],
+Cell[3331, 120, 76, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3444, 126, 81, 1, 50, "Input"],
+Cell[3528, 129, 75, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3652, 136, 28, 0, 52, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[3705, 140, 52, 1, 50, "Input"],
+Cell[3760, 143, 125, 2, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3922, 150, 44, 1, 50, "Input"],
+Cell[3969, 153, 93, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4099, 159, 64, 1, 50, "Input"],
+Cell[4166, 162, 75, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4278, 168, 61, 1, 50, "Input"],
+Cell[4342, 171, 52, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4431, 177, 63, 1, 50, "Input"],
+Cell[4497, 180, 75, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4609, 186, 45, 1, 50, "Input"],
+Cell[4657, 189, 52, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4746, 195, 35, 1, 50, "Input"],
+Cell[4784, 198, 53, 1, 49, "Output"]
+}, Open  ]],
+Cell[4852, 202, 61, 0, 29, "Text"],
+
+Cell[CellGroupData[{
+Cell[4938, 206, 69, 1, 50, "Input"],
+Cell[5010, 209, 52, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5111, 216, 28, 0, 52, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[5164, 220, 58, 1, 50, "Input"],
+Cell[5225, 223, 42, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5304, 229, 48, 1, 50, "Input"],
+Cell[5355, 232, 76, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5468, 238, 54, 1, 50, "Input"],
+Cell[5525, 241, 91, 1, 49, "Output"]
+}, Open  ]],
+Cell[5631, 245, 68, 1, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[5724, 250, 52, 1, 50, "Input"],
+Cell[5779, 253, 393, 10, 77, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6209, 268, 53, 1, 50, "Input"],
+Cell[6265, 271, 215, 3, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6517, 279, 40, 1, 50, "Input"],
+Cell[6560, 282, 75, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6696, 290, 36, 0, 62, "Section"],
+
+Cell[CellGroupData[{
+Cell[6757, 294, 246, 4, 110, "Input"],
+Cell[7006, 300, 133, 2, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7176, 307, 59, 1, 50, "Input"],
+Cell[7238, 310, 126, 2, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7401, 317, 28, 0, 52, "Subsection"],
+Cell[7432, 319, 26, 0, 29, "Text"],
+
+Cell[CellGroupData[{
+Cell[7483, 323, 83, 1, 50, "Input"],
+Cell[7569, 326, 56, 1, 49, "Output"]
+}, Open  ]],
+Cell[7640, 330, 26, 0, 29, "Text"],
+
+Cell[CellGroupData[{
+Cell[7691, 334, 92, 1, 50, "Input"],
+Cell[7786, 337, 56, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7879, 343, 174, 4, 50, "Input"],
+Cell[8056, 349, 653, 15, 77, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8758, 370, 28, 0, 52, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[8811, 374, 77, 1, 50, "Input"],
+Cell[8891, 377, 52, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8980, 383, 84, 1, 50, "Input"],
+Cell[9067, 386, 58, 1, 49, "Output"]
+}, Open  ]],
+Cell[9140, 390, 21, 0, 29, "Text"],
+
+Cell[CellGroupData[{
+Cell[9186, 394, 88, 1, 50, "Input"],
+Cell[9277, 397, 81, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9395, 403, 89, 1, 50, "Input"],
+Cell[9487, 406, 125, 2, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9649, 413, 39, 1, 50, "Input"],
+Cell[9691, 416, 51, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9779, 422, 47, 1, 50, "Input"],
+Cell[9829, 425, 57, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9935, 432, 79, 0, 52, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[10039, 436, 65, 1, 50, "Input"],
+Cell[10107, 439, 53, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10197, 445, 65, 1, 50, "Input"],
+Cell[10265, 448, 44, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10358, 455, 82, 1, 52, "Subsection"],
+Cell[10443, 458, 50, 1, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[10518, 463, 75, 1, 50, "Input"],
+Cell[10596, 466, 53, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10686, 472, 77, 1, 50, "Input"],
+Cell[10766, 475, 55, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10870, 482, 125, 3, 52, "Subsection"],
+Cell[10998, 487, 119, 2, 50, "Input"],
+Cell[11120, 491, 109, 2, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[11254, 497, 59, 1, 50, "Input"],
+Cell[11316, 500, 432, 7, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11785, 512, 63, 1, 50, "Input"],
+Cell[11851, 515, 53, 1, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11941, 521, 58, 1, 50, "Input"],
+Cell[12002, 524, 340, 5, 49, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12379, 534, 62, 1, 50, "Input"],
+Cell[12444, 537, 53, 1, 49, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

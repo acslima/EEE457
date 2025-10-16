@@ -1,0 +1,816 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     31743,        806]
+NotebookOptionsPosition[     30218,        751]
+NotebookOutlinePosition[     30943,        777]
+CellTagsIndexPosition[     30900,        774]
+WindowTitle->Open Circuit Voltage Coupled into a Semi-Infinite Transmission \
+Line by an Exponential, Plane Waveform - Source
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Open Circuit Voltage Coupled into a Semi-Infinite Transmission Line by an \
+Exponential, Plane Waveform\
+\>", "Section",
+ CellFrame->{{0, 0}, {0, 0}},
+ ShowCellBracket->False,
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell[BoxData[
+ GraphicsBox[RasterBox[CompressedData["
+1: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
+FP/69esnAAAAAAAAAAAAwM74B4thROM=
+   "], {{0, 0}, {1800, 25}}, {0, 255},
+   ColorFunction->RGBColor],
+  ImageSize->{1800, 25},
+  PlotRange->{{0, 1800}, {0, 25}}]], "Section",
+ CellFrame->{{0, 0}, {0, 0}},
+ ShowCellBracket->False],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "Properties", " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Epsilon]", "=", 
+     RowBox[{"8.85", " ", 
+      RowBox[{"10", "^", 
+       RowBox[{"-", "12"}]}]}]}], ";"}], "          ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Permittivity", " ", "of", " ", "Free", " ", "Space"}], " ", "-",
+      " ", 
+     RowBox[{"F", "/", "m"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"c", "=", "300."}], ";"}], "                   ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Speed", " ", "of", " ", "Light"}], " ", "-", " ", 
+     RowBox[{"m", "/", 
+      StyleBox[
+       RowBox[{
+        StyleBox["m",
+         FontFamily->"Symbol"], "s"}]]}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Time", " ", "delay", " ", "of", " ", "ground", " ", "bounce"}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"To", "[", 
+      RowBox[{"\[Psi]_", ",", " ", "h_"}], "]"}], ":=", 
+     RowBox[{"2", " ", "h", " ", 
+      RowBox[{
+       RowBox[{"Sin", "[", 
+        RowBox[{"\[Psi]", " ", "Degree"}], "]"}], "/", "c"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Coupled", " ", "voltage", " ", "prior", " ", "to", " ", "arrival", " ", 
+     "of", " ", "the", " ", "ground", " ", "bounce", " ", "term"}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VCearly", "[", 
+      RowBox[{"t_", ",", " ", "\[Tau]1_"}], "]"}], ":=", 
+     RowBox[{"c", " ", "\[Tau]1", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"Exp", "[", 
+         RowBox[{
+          RowBox[{"-", "t"}], "/", "\[Tau]1"}], "]"}]}], ")"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Coupled", " ", "voltage", " ", "after", " ", "the", " ", "arrival", " ", 
+     "of", " ", "the", " ", "ground", " ", "bounce", " ", "term"}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VClate", "[", 
+      RowBox[{
+      "t_", ",", " ", "\[Tau]1_", ",", " ", "p_", ",", " ", "\[Psi]_", ",", 
+       " ", "\[Sigma]_", ",", " ", "h_"}], "]"}], ":=", 
+     RowBox[{"c", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"\[Tau]1", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Exp", "[", 
+            RowBox[{
+             RowBox[{"To", "[", 
+              RowBox[{"\[Psi]", ",", " ", "h"}], "]"}], "/", "\[Tau]1"}], 
+            "]"}], "-", "1"}], ")"}], " ", 
+         RowBox[{"Exp", "[", 
+          RowBox[{
+           RowBox[{"-", "t"}], "/", "\[Tau]1"}], "]"}]}], "-", 
+        RowBox[{"2000.", " ", "I", " ", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{"\[Epsilon]", "/", "\[Sigma]"}], "]"}], 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Sin", "[", 
+            RowBox[{"\[Psi]", " ", "Degree"}], "]"}], "^", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"2", " ", 
+              RowBox[{"Boole", "[", 
+               RowBox[{"p", "\[Equal]", "\"\<Vert\>\""}], "]"}]}]}], ")"}]}], 
+          ")"}], " ", 
+         RowBox[{"Sqrt", "[", "\[Tau]1", "]"}], 
+         RowBox[{"Exp", "[", 
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{"(", 
+             RowBox[{"t", "-", 
+              RowBox[{"To", "[", 
+               RowBox[{"\[Psi]", ",", " ", "h"}], "]"}]}], ")"}]}], "/", 
+           "\[Tau]1"}], "]"}], 
+         RowBox[{"Erf", "[", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{"t", "-", 
+               RowBox[{"To", "[", 
+                RowBox[{"\[Psi]", ",", "h"}], " ", "]"}]}], ")"}]}], "/", 
+            "\[Tau]1"}], "]"}], "]"}]}]}], ")"}]}]}], ";"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.440862533631254*^9, 3.440862551099797*^9}, 
+   3.440862618823515*^9, 3.440871565453974*^9, {3.4408716705659575`*^9, 
+   3.4408716722492456`*^9}, {3.44087215321762*^9, 3.4408721565997815`*^9}, {
+   3.440872205072242*^9, 3.4408722111507816`*^9}, {3.4408722947229137`*^9, 
+   3.440872330726574*^9}, {3.4408723745232334`*^9, 3.4408724035287795`*^9}, {
+   3.4408724615710435`*^9, 3.440872463659568*^9}, {3.4408725143919973`*^9, 
+   3.4408725971380715`*^9}, {3.4408727217481413`*^9, 3.440872727998128*^9}, {
+   3.4408728246780853`*^9, 3.4408728362273116`*^9}, {3.4409353250540533`*^9, 
+   3.44093532521907*^9}},
+ CellID->20537037],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"VCearly", "[", 
+        RowBox[{"t", ",", "\[Tau]1"}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", " ", "0", ",", 
+         RowBox[{"To", "[", 
+          RowBox[{"\[Psi]", ",", "5."}], "]"}]}], "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", "All"}], "}"}]}], 
+       ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", "Green"}]}], "]"}], ",", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"VClate", "[", 
+        RowBox[{
+        "t", ",", "\[Tau]1", ",", " ", "p", ",", " ", "\[Psi]", ",", " ", 
+         "\[Sigma]", ",", " ", "5."}], "]"}], " ", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", 
+         RowBox[{"To", "[", 
+          RowBox[{"\[Psi]", ",", " ", "5"}], "]"}], ",", 
+         RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", "All"}], "}"}]}], 
+       ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", "Green"}]}], "]"}], ",", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"VCearly", "[", 
+        RowBox[{"t", ",", "\[Tau]1"}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", " ", "0", ",", 
+         RowBox[{"To", "[", 
+          RowBox[{"\[Psi]", ",", "10."}], "]"}]}], "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", "All"}], "}"}]}], 
+       ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"VClate", "[", 
+        RowBox[{
+        "t", ",", "\[Tau]1", ",", " ", "p", ",", " ", "\[Psi]", ",", " ", 
+         "\[Sigma]", ",", " ", "10."}], "]"}], " ", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", 
+         RowBox[{"To", "[", 
+          RowBox[{"\[Psi]", ",", " ", "10"}], "]"}], ",", 
+         RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", "All"}], "}"}]}], 
+       ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"VCearly", "[", 
+        RowBox[{"t", ",", "\[Tau]1"}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", " ", "0", ",", 
+         RowBox[{"To", "[", 
+          RowBox[{"\[Psi]", ",", "15."}], "]"}]}], "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", "All"}], "}"}]}], 
+       ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", "Blue"}]}], "]"}], ",", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"VClate", "[", 
+        RowBox[{
+        "t", ",", "\[Tau]1", ",", " ", "p", ",", " ", "\[Psi]", ",", " ", 
+         "\[Sigma]", ",", " ", "15."}], "]"}], " ", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", 
+         RowBox[{"To", "[", 
+          RowBox[{"\[Psi]", ",", " ", "15"}], "]"}], ",", 
+         RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"5", "\[Tau]1"}]}], " ", "}"}], ",", "All"}], "}"}]}], 
+       ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", "Blue"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"500", ",", "350"}], "}"}]}], ",", 
+     RowBox[{"ImagePadding", "\[Rule]", "25"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Tau]1", ",", 
+       RowBox[{"1", "/", 
+        RowBox[{"(", "4.", ")"}]}], ",", " ", 
+       "\"\<time constant: \[Tau]1 ( 0.1-1 \[Mu]s )\>\""}], "}"}], ",", "0.1",
+      ",", "1.0", ",", " ", "0.01"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Psi]", ",", "30.", ",", " ", 
+       "\"\<elevation in degrees: ( 1 - 90)\>\""}], "}"}], ",", "1", ",", 
+     "90", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Sigma]", ",", "0.01", ",", " ", 
+       "\"\<ground conductivity: \[Sigma] ( 1/\[CapitalOmega]m )\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Infinity]", ",", "0.1", ",", "0.01", ",", "0.001"}], "}"}], 
+     ",", 
+     RowBox[{"ControlType", "\[Rule]", "Setter"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "p", ",", "\"\<Vert\>\"", ",", " ", 
+       "\"\<incident wave polarization\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<Vert\>\"", "\[Rule]", "\"\<vertical\>\""}], ",", 
+       RowBox[{"\"\<Horz\>\"", "\[Rule]", "\"\<horizontal\>\""}]}], "}"}], 
+     ",", 
+     RowBox[{"ControlType", "\[Rule]", "RadioButton"}]}], "}"}], ",", 
+   RowBox[{"RotateLabel", "\[Rule]", "True"}], ",", " ", 
+   RowBox[{"SaveDefinitions", "\[Rule]", " ", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.4408589008926845`*^9, 3.440860512449873*^9, {
+   3.440860762217097*^9, 3.440860767092128*^9}, {3.4408626061389527`*^9, 
+   3.4408626132136345`*^9}, {3.4408728823151135`*^9, 
+   3.4408728972309155`*^9}, {3.4408729467632236`*^9, 
+   3.4408729525300436`*^9}, {3.440935156464196*^9, 3.4409352973952875`*^9}, {
+   3.4410389717164*^9, 3.441038988082037*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`p$$ = "Vert", $CellContext`\[Sigma]$$ = 
+    0.01, $CellContext`\[Tau]1$$ = 0.25, $CellContext`\[Psi]$$ = 30., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Tau]1$$], 0.25, 
+       "time constant: \[Tau]1 ( 0.1-1 \[Mu]s )"}, 0.1, 1., 0.01}, {{
+       Hold[$CellContext`\[Psi]$$], 30., "elevation in degrees: ( 1 - 90)"}, 
+      1, 90, 1}, {{
+       Hold[$CellContext`\[Sigma]$$], 0.01, 
+       "ground conductivity: \[Sigma] ( 1/\[CapitalOmega]m )"}, {
+       DirectedInfinity[1], 0.1, 0.01, 0.001}}, {{
+       Hold[$CellContext`p$$], "Vert", "incident wave polarization"}, {
+      "Vert" -> "vertical", "Horz" -> "horizontal"}}}, Typeset`size$$ = {
+    500., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`\[Tau]1$2703$$ = 
+    0, $CellContext`\[Psi]$2704$$ = 0, $CellContext`\[Sigma]$2705$$ = 
+    0, $CellContext`p$2706$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`p$$ = "Vert", $CellContext`\[Sigma]$$ = 
+        0.01, $CellContext`\[Tau]1$$ = 0.25, $CellContext`\[Psi]$$ = 30.}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`\[Tau]1$$, $CellContext`\[Tau]1$2703$$, 0], 
+        Hold[$CellContext`\[Psi]$$, $CellContext`\[Psi]$2704$$, 0], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$2705$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$2706$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        Plot[
+         $CellContext`VCearly[$CellContext`t, $CellContext`\[Tau]1$$], \
+{$CellContext`t, 0, 
+          $CellContext`To[$CellContext`\[Psi]$$, 5.]}, 
+         PlotRange -> {{0, 5 $CellContext`\[Tau]1$$}, All}, PlotStyle -> 
+         Green], 
+        Plot[
+         $CellContext`VClate[$CellContext`t, $CellContext`\[Tau]1$$, \
+$CellContext`p$$, $CellContext`\[Psi]$$, $CellContext`\[Sigma]$$, 
+          5.], {$CellContext`t, 
+          $CellContext`To[$CellContext`\[Psi]$$, 5], 
+          5 $CellContext`\[Tau]1$$}, 
+         PlotRange -> {{0, 5 $CellContext`\[Tau]1$$}, All}, PlotStyle -> 
+         Green], 
+        Plot[
+         $CellContext`VCearly[$CellContext`t, $CellContext`\[Tau]1$$], \
+{$CellContext`t, 0, 
+          $CellContext`To[$CellContext`\[Psi]$$, 10.]}, 
+         PlotRange -> {{0, 5 $CellContext`\[Tau]1$$}, All}, PlotStyle -> Red], 
+        Plot[
+         $CellContext`VClate[$CellContext`t, $CellContext`\[Tau]1$$, \
+$CellContext`p$$, $CellContext`\[Psi]$$, $CellContext`\[Sigma]$$, 
+          10.], {$CellContext`t, 
+          $CellContext`To[$CellContext`\[Psi]$$, 10], 
+          5 $CellContext`\[Tau]1$$}, 
+         PlotRange -> {{0, 5 $CellContext`\[Tau]1$$}, All}, PlotStyle -> Red], 
+        Plot[
+         $CellContext`VCearly[$CellContext`t, $CellContext`\[Tau]1$$], \
+{$CellContext`t, 0, 
+          $CellContext`To[$CellContext`\[Psi]$$, 15.]}, 
+         PlotRange -> {{0, 5 $CellContext`\[Tau]1$$}, All}, PlotStyle -> 
+         Blue], 
+        Plot[
+         $CellContext`VClate[$CellContext`t, $CellContext`\[Tau]1$$, \
+$CellContext`p$$, $CellContext`\[Psi]$$, $CellContext`\[Sigma]$$, 
+          15.], {$CellContext`t, 
+          $CellContext`To[$CellContext`\[Psi]$$, 15], 
+          5 $CellContext`\[Tau]1$$}, 
+         PlotRange -> {{0, 5 $CellContext`\[Tau]1$$}, All}, PlotStyle -> 
+         Blue], ImageSize -> {500, 350}, ImagePadding -> 25], 
+      "Specifications" :> {{{$CellContext`\[Tau]1$$, 0.25, 
+          "time constant: \[Tau]1 ( 0.1-1 \[Mu]s )"}, 0.1, 1., 
+         0.01}, {{$CellContext`\[Psi]$$, 30., 
+          "elevation in degrees: ( 1 - 90)"}, 1, 90, 
+         1}, {{$CellContext`\[Sigma]$$, 0.01, 
+          "ground conductivity: \[Sigma] ( 1/\[CapitalOmega]m )"}, {
+          DirectedInfinity[1], 0.1, 0.01, 0.001}, ControlType -> 
+         Setter}, {{$CellContext`p$$, "Vert", "incident wave polarization"}, {
+         "Vert" -> "vertical", "Horz" -> "horizontal"}, ControlType -> 
+         RadioButton}}, "Options" :> {RotateLabel -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{545., {251., 256.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(({$CellContext`VCearly[
+          Pattern[$CellContext`t, 
+           Blank[]], 
+          Pattern[$CellContext`\[Tau]1, 
+           Blank[]]] := $CellContext`c $CellContext`\[Tau]1 (1 - 
+          Exp[-($CellContext`t/$CellContext`\[Tau]1)]), $CellContext`c = 
+        300., $CellContext`To[
+          Pattern[$CellContext`\[Psi], 
+           Blank[]], 
+          Pattern[$CellContext`h, 
+           Blank[]]] := 
+        2 $CellContext`h (Sin[$CellContext`\[Psi] Degree]/$CellContext`c), 
+        Attributes[PlotRange] = {ReadProtected}, $CellContext`VClate[
+          Pattern[$CellContext`t, 
+           Blank[]], 
+          Pattern[$CellContext`\[Tau]1, 
+           Blank[]], 
+          Pattern[$CellContext`p, 
+           Blank[]], 
+          Pattern[$CellContext`\[Psi], 
+           Blank[]], 
+          Pattern[$CellContext`\[Sigma], 
+           Blank[]], 
+          Pattern[$CellContext`h, 
+           
+           Blank[]]] := $CellContext`c ($CellContext`\[Tau]1 (
+            Exp[$CellContext`To[$CellContext`\[Psi], \
+$CellContext`h]/$CellContext`\[Tau]1] - 1) 
+           Exp[-($CellContext`t/$CellContext`\[Tau]1)] - 2000. I 
+          Sqrt[$CellContext`\[Epsilon]/$CellContext`\[Sigma]] 
+          Sin[$CellContext`\[Psi] Degree]^(1 - 2 
+            Boole[$CellContext`p == "Vert"]) Sqrt[$CellContext`\[Tau]1] 
+          Exp[-(($CellContext`t - $CellContext`To[$CellContext`\[Psi], \
+$CellContext`h])/$CellContext`\[Tau]1)] Erf[
+            
+            Sqrt[-(($CellContext`t - $CellContext`To[$CellContext`\[Psi], \
+$CellContext`h])/$CellContext`\[Tau]1)]]), $CellContext`\[Epsilon] = 
+        8.849999999999999*^-12}; Typeset`initDone$$ = True); ReleaseHold[
+       HoldComplete[{($CellContext`\[Epsilon] = 8.85 10^(-12); 
+          Null) ($CellContext`c = 300.; Null) ($CellContext`To[
+             Pattern[$CellContext`\[Psi], 
+              Blank[]], 
+             Pattern[$CellContext`h, 
+              Blank[]]] := 
+           2 $CellContext`h (Sin[$CellContext`\[Psi] Degree]/$CellContext`c); 
+          Null) ($CellContext`VCearly[
+             Pattern[$CellContext`t, 
+              Blank[]], 
+             Pattern[$CellContext`\[Tau]1, 
+              Blank[]]] := $CellContext`c $CellContext`\[Tau]1 (1 - 
+             Exp[(-$CellContext`t)/$CellContext`\[Tau]1]); 
+          Null) ($CellContext`VClate[
+             Pattern[$CellContext`t, 
+              Blank[]], 
+             Pattern[$CellContext`\[Tau]1, 
+              Blank[]], 
+             Pattern[$CellContext`p, 
+              Blank[]], 
+             Pattern[$CellContext`\[Psi], 
+              Blank[]], 
+             Pattern[$CellContext`\[Sigma], 
+              Blank[]], 
+             Pattern[$CellContext`h, 
+              
+              Blank[]]] := $CellContext`c ($CellContext`\[Tau]1 (
+               Exp[$CellContext`To[$CellContext`\[Psi], \
+$CellContext`h]/$CellContext`\[Tau]1] - 1) 
+              Exp[(-$CellContext`t)/$CellContext`\[Tau]1] - 2000. I 
+             Sqrt[$CellContext`\[Epsilon]/$CellContext`\[Sigma]] 
+             Sin[$CellContext`\[Psi] Degree]^(1 - 2 
+               Boole[$CellContext`p == "Vert"]) Sqrt[$CellContext`\[Tau]1] 
+             Exp[(-($CellContext`t - $CellContext`To[$CellContext`\[Psi], \
+$CellContext`h]))/$CellContext`\[Tau]1] Erf[
+               
+               Sqrt[(-($CellContext`t - $CellContext`To[$CellContext`\[Psi], \
+$CellContext`h]))/$CellContext`\[Tau]1]]); Null)}]]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->661160100],
+
+Cell[CellGroupData[{
+
+Cell["CAPTION", "Section",
+ CellFrame->{{0, 0}, {1, 0}},
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ FontFamily->"Helvetica",
+ FontSize->12,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell["\<\
+This Demonstration calculates the open circuit voltage coupled into a \
+semi-infinite transmission line above a conductive ground by a plane incident \
+electric field with an exponentially decaying magnitude. The graph shows the \
+variation of the voltage as a function of time for three transmission line \
+heights: 5 meters (green), 10 meters (red), and 15 meters (blue). The peak \
+magnitude of the incident electric field is 1 volt/meter. The calculated \
+voltage waveform has been normalized by a directivity function that depends \
+on the elevation and azimuthal angles of the incident field and the \
+attenuation and propagation constants of the transmission line.
+\
+\>", "Text"]
+}, Close]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["DETAILS", "Section",
+ CellFrame->{{0, 0}, {1, 0}},
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ FontFamily->"Helvetica",
+ FontSize->12,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell["\<\
+You can vary the time constant of the exponential decay, the elevation angle \
+of the incident field's arrival, the conductivity of the ground, and the \
+polarization of the incident electric field. The first snapshot is an example \
+where the time constant and the incident angle are taken to opposite \
+extremes. All three voltage waveforms are present but overlapping. The second \
+snapshot changes the ground beneath the transmission line to a perfect \
+conductor, creating the sharp transition point when the ground bounce \
+arrives. The third snapshot changes the polarization of the electric field. \
+In each case, all variables other than those specified as being changed are \
+the same as in the original plot.\
+\>", "Text"],
+
+Cell[TextData[{
+ "Based on Equation 3.30, page 54, in the textbook, Edward F. Vance, ",
+ StyleBox["Coupling to Shielded Cables",
+  FontSlant->"Italic"],
+ ", New York: Wiley, 1978."
+}], "Text"],
+
+Cell["\<\
+Approved for Unclassified-Unlimited release as SAND2009-0187P.\
+\>", "Text"]
+}, Close]],
+
+Cell[CellGroupData[{
+
+Cell["THIS NOTEBOOK IS THE SOURCE CODE FROM", "Text",
+ CellFrame->{{0, 0}, {0, 0}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell[TextData[{
+ "\"",
+ ButtonBox["Open Circuit Voltage Coupled into a Semi-Infinite Transmission \
+Line by an Exponential, Plane Waveform",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/\
+OpenCircuitVoltageCoupledIntoASemiInfiniteTransmissionLineBy/"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/\
+OpenCircuitVoltageCoupledIntoASemiInfiniteTransmissionLineBy/"],
+ "\"",
+ " from ",
+ ButtonBox["the Wolfram Demonstrations Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+ "\[ParagraphSeparator]\[NonBreakingSpace]",
+ ButtonBox["http://demonstrations.wolfram.com/\
+OpenCircuitVoltageCoupledIntoASemiInfiniteTransmissionLineBy/",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/\
+OpenCircuitVoltageCoupledIntoASemiInfiniteTransmissionLineBy/"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/\
+OpenCircuitVoltageCoupledIntoASemiInfiniteTransmissionLineBy/"]
+}], "Text",
+ CellMargins->{{48, Inherited}, {0, Inherited}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.5]],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Michael J. Walker",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Michael+J.+\
+Walker"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Michael+J.+Walker"]
+}], "Text",
+ CellDingbat->"\[FilledSmallSquare]",
+ CellMargins->{{66, 48}, {2, 4}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.6]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "A full-function Wolfram ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " system (Version 6 or higher) is required to edit this notebook.\n",
+ StyleBox[ButtonBox["GET WOLFRAM MATHEMATICA \[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.wolfram.com/products/mathematica/"], None},
+  ButtonNote->"http://www.wolfram.com/products/mathematica/"],
+  FontFamily->"Helvetica",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->RGBColor[1, 0.42, 0]]
+}], "Text",
+ CellFrame->True,
+ CellMargins->{{48, 68}, {8, 28}},
+ CellFrameMargins->12,
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ CellChangeTimes->{3.3750111182355957`*^9},
+ ParagraphSpacing->{1., 1.},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.411765],
+ Background->RGBColor[1, 1, 1]],
+
+Cell[TextData[{
+ "\[Copyright] ",
+ StyleBox[ButtonBox["Wolfram Demonstrations Project & Contributors",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Terms of Use",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/termsofuse.html"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/termsofuse.html"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Make a new version of this Demonstration \
+\[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/participate/upload.jsp?id=\
+OpenCircuitVoltageCoupledIntoASemiInfiniteTransmissionLineBy"], None},
+  ButtonNote->None],
+  FontColor->GrayLevel[0.6]]
+}], "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellMargins->{{48, 10}, {20, 50}},
+ CellFrameMargins->{{6, 0}, {6, 6}},
+ CellFrameColor->GrayLevel[0.6],
+ FontFamily->"Verdana",
+ FontSize->9,
+ FontColor->GrayLevel[0.6]]
+}, Open  ]]
+}, Open  ]]
+},
+Editable->True,
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+CellInsertionPointCell->None,
+WindowSize->{745, 650},
+WindowMargins->{{Inherited, Inherited}, {Inherited, 0}},
+WindowElements->{
+ "StatusArea", "MemoryMonitor", "MagnificationPopUp", "VerticalScrollBar", 
+  "MenuBar"},
+WindowTitle->"Open Circuit Voltage Coupled into a Semi-Infinite Transmission \
+Line by an Exponential, Plane Waveform - Source",
+DockedCells->{},
+CellContext->Notebook,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[705, 24, 231, 6, 70, "Section"],
+Cell[939, 32, 3700, 64, 70, "Section"],
+Cell[4642, 98, 4608, 120, 70, "Input",
+ InitializationCell->True,
+ CellID->20537037],
+Cell[9253, 220, 6172, 163, 70, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15462, 388, 8393, 173, 70, "Output",
+ CellID->661160100],
+Cell[CellGroupData[{
+Cell[23880, 565, 209, 6, 70, "Section"],
+Cell[24092, 573, 696, 11, 70, "Text"]
+}, Close]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24836, 590, 209, 6, 70, "Section"],
+Cell[25048, 598, 743, 11, 70, "Text"],
+Cell[25794, 611, 192, 5, 70, "Text"],
+Cell[25989, 618, 86, 2, 70, "Text"]
+}, Close]],
+Cell[CellGroupData[{
+Cell[26111, 625, 355, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[26469, 636, 1198, 32, 70, "Text"],
+Cell[27670, 670, 445, 14, 70, "Text"],
+Cell[CellGroupData[{
+Cell[28140, 688, 815, 24, 70, "Text"],
+Cell[28958, 714, 1232, 33, 70, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature DTz6bLjQnoSt5B0u1lecYe9U *)

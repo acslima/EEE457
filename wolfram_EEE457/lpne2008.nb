@@ -1,0 +1,1224 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     42190,       1215]
+NotebookOptionsPosition[     39579,       1122]
+NotebookOutlinePosition[     39965,       1138]
+CellTagsIndexPosition[     39922,       1135]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Compara\[CCedilla]\[ATilde]o de par\[AHat]metros de Linhas de Transmiss\
+\[ATilde]o\
+\>", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Op\[CCedilla]\[OTilde]es de programa", "Section",
+ FontSize->12],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Off", "[", 
+   RowBox[{
+    RowBox[{"General", "::", "\"\<spell\>\""}], ",", 
+    RowBox[{"General", "::", "\"\<spell1\>\""}]}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{
+    RowBox[{"{", "Graphics", "}"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", "450"}], ",", 
+    RowBox[{"BaseStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"14", ",", 
+       RowBox[{"FontFamily", "\[Rule]", "\"\<Helvetica\>\""}]}], "}"}]}]}], 
+   "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.428918685179036*^9, 3.428918686388695*^9}, 
+   3.48666963240994*^9},
+ FontSize->12,
+ CellLabel->"In[5]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Circuito Convencional 345kV", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"xy1", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "7.229"}], ",", "10.5"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "6.771"}], ",", " ", "10.500"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "0.229"}], ",", " ", "10.500"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"0.229", ",", " ", "10.500"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"7.229", ",", " ", "10.500"}], "}"}], ",", "\n", 
+      RowBox[{"{", 
+       RowBox[{"6.771", ",", " ", "10.500"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "5.000"}], ",", " ", "20.500"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"5.000", ",", " ", "20.500"}], "}"}]}], "}"}]}], ";"}],
+  FontSize->12]], "Input",
+ FontSize->12,
+ CellLabel->"In[6]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mostra1", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Circle", "[", 
+       RowBox[{"#", ",", ".25"}], "]"}], "}"}], "&"}], "/@", "xy1"}]}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[7]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"t1", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra1", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "10.1`"}], ",", "10.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"9", ",", "22"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4865044740987062`*^9, 3.486504482439403*^9}, 
+   3.486504573059811*^9, {3.486669564956037*^9, 3.486669565265398*^9}},
+ FontSize->12,
+ CellLabel->"In[71]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-7.229, 10.5}, 0.25], 
+   CircleBox[{-6.771, 10.5}, 0.25], CircleBox[{-0.229, 10.5}, 0.25], 
+   CircleBox[{0.229, 10.5}, 0.25], CircleBox[{7.229, 10.5}, 0.25], 
+   CircleBox[{6.771, 10.5}, 0.25], CircleBox[{-5., 20.5}, 0.25], 
+   CircleBox[{5., 20.5}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  ImageSize->450,
+  PlotRange->{{-10.1, 10.1}, {9, 22}}]], "Output",
+ CellChangeTimes->{3.428918693696029*^9, 3.486493326086712*^9, 
+  3.4865044835944757`*^9, 3.486504574196299*^9, 3.48666956667134*^9},
+ CellLabel->"Out[71]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<lt_345conv.pdf\>\"", ",", " ", "t1"}], "]"}], " "}]], "Input",
+ CellChangeTimes->{{3.48650450644658*^9, 3.486504525539359*^9}},
+ FontSize->12,
+ CellLabel->"In[13]:="],
+
+Cell[BoxData["\<\"lt_345conv.pdf\"\>"], "Output",
+ CellChangeTimes->{3.4865045363792*^9, 3.486504578044829*^9},
+ CellLabel->"Out[13]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Circuito Recapacitado 500kV", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xy2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "7.229"}], ",", " ", "8.639"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "7.229"}], ",", " ", "10.500"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.771"}], ",", " ", "10.500"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.771"}], ",", " ", "8.639"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.229"}], ",", " ", "10.500"}], "}"}], ",", "\n", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.229"}], ",", " ", "9.876"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"0.229", ",", " ", "9.876"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"0.229", ",", " ", "10.500"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"7.229", ",", " ", "8.639"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"7.229", ",", " ", "10.500"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"6.771", ",", " ", "10.500"}], "}"}], ",", "\n", 
+     RowBox[{"{", 
+      RowBox[{"6.771", ",", " ", "8.639"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.000"}], ",", " ", "20.500"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"5.000", ",", " ", "20.500"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[26]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mostra2", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Circle", "[", 
+       RowBox[{"#", ",", ".25"}], "]"}], "}"}], "&"}], "/@", "xy2"}]}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[27]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"t2", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra2", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "->", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "10"}], ",", "10"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"7.9", ",", "22"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.428918639589846*^9, 3.42891865478002*^9}, {
+  3.486669273704949*^9, 3.486669295438933*^9}, {3.486669778201943*^9, 
+  3.4866698178458433`*^9}},
+ FontSize->12,
+ CellLabel->"In[73]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-7.229, 8.639}, 0.25], 
+   CircleBox[{-7.229, 10.5}, 0.25], CircleBox[{-6.771, 10.5}, 0.25], 
+   CircleBox[{-6.771, 8.639}, 0.25], CircleBox[{-0.229, 10.5}, 0.25], 
+   CircleBox[{-0.229, 9.876}, 0.25], CircleBox[{0.229, 9.876}, 0.25], 
+   CircleBox[{0.229, 10.5}, 0.25], CircleBox[{7.229, 8.639}, 0.25], 
+   CircleBox[{7.229, 10.5}, 0.25], CircleBox[{6.771, 10.5}, 0.25], 
+   CircleBox[{6.771, 8.639}, 0.25], CircleBox[{-5., 20.5}, 0.25], 
+   CircleBox[{5., 20.5}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  ImageSize->450,
+  PlotRange->{{-10, 10}, {7.9, 22}}]], "Output",
+ CellChangeTimes->{{3.428918640328379*^9, 3.428918655797357*^9}, 
+   3.428918698876338*^9, 3.48649314196211*^9, {3.486669282298699*^9, 
+   3.48666929606048*^9}, 3.4866697801771717`*^9, 3.486669819755794*^9},
+ CellLabel->"Out[73]=",
+ ImageCache->GraphicsData["CompressedBitmap", "\<\
+eJztPT2v5NZ11L739u2uJG8SJ7ETO5FcGEk1sZJfwCauAqa0Ja7sxcIDuwgy
+2BiQJ4hUDCAgAwgBJlJBfUB0BEw1algN7JgSzDTTsBAbNiyogg0LFmxYEMLJ
+Oed+kDNvPjmzq2fpPeDNe3N577nnnnvu+br3Hv7Tw1/+/Gf/8vCXv3j08MUf
+Pn44+PkvHv3bi//4r4+x6OwZw3gmwN8fvmic4/9gGEsf9PMn9GGc4UcN4WwG
+SQXGs7KsSgPwFhl/+zV/Lrep0ykWjaGApg1UIVhGH+Jat/mdql6WUOJvhd+e
+47IL7LWCqqq5+7IsoCgr47YChc/KssInYJwvlSEcRPO+LCsLbFeUXO+51nC4
+HOHdb5V5tgGjRWE8L8uiiQX2LOVvrkD3t/znHn5U4E/6IMmFvyaY6n/TgbJO
+YGDgGIiWZ2BOQiZOODERW1FmWEMICy42bvHnXYimgxZIA+yhA3FRc6V84UIP
+C29x+wvoj0Zg90S9SViC11fP7sAkLiFxbQ1H9V9nAQxNDcIwejB0fChB/ESO
+JVEmJC2IcDagjJomWGyPYDywBOSB96ycqjrzoNcbQy4hleFENrkEywkhnomB
+DecxBGNLIl3IgZ9RA7B6Q0hXSf1tSGaCzNbQhTCOYe5IsmP1ICl45rI4hDCK
+IJD0c/wQohC7zUpFdx6s48fIHRUUiQ82wXQigcFLkjexaDyHNMVu3BGRGwYe
+MUAJrkUzO4IgTiD0p9ycpwjplyOdymxBM44EciDDGavLFNw+fu+7EFOFKoI+
+t7FhtoghiRfgDAUlkOkYzSpD2GEEYeByed/1IYpoaCkxMKTeQA4jgiQKYNLv
+cb0e91HKdfYNJOYYzFEI+qfOBC649kJkJ5xnxGsKeV2AYwocEWc9GTjciWlB
+UOrJ+A3/OedH3MJyiWtUi8XYZLavZHsWELGjmEiWXUKGA3OQBcoiRyKnOAif
+idIbLxpWwImgpeRldbOy1QQMfVnvEqDweYIc5lImH7iImulEss5tXMEmwg4V
+SzKxcD4VihnSNi3r1hIkIRIxH0yiSqMt2GcASa0IigTqia6UUIkcG0ZB3oJ1
+B2KiM5KFmglUIkbTEWiq0S3GNo6COdX4sE3vM649RbFkjAJN2NwfIvNPiP66
+rIwclkEoB3QZFCGtXF6Fai0avT74mSIYSGJju4oFLstqLYR6FgyGA7DNnlqv
+evQ8gkm4ltDZfChwqTShUYxDJYh3ZZ5JDChC17mvxag9GEDfFgvEwq4UoRcj
+E4ZBsUToyMEJ6jH/CVQmLUJPQkXocGKzqLxC6LsNoY1ha5or8AZSoLeIXcer
+xFYs0od5mECW5ZBnEbiTKaT16ohNWJQg9dg9lEQheFNcFc4Upo6UXlGp+yeO
+xslXdPaHRsPQPOdYPSx0D8WC6YcQGjaAWDA00vlcggEUToE3A9dxYDpzuA3S
+SZE4RWndnybLvOxaTGLFy4Y1YywIQVy+TW+oR1E/TJNqWZB/Ay0CTyokC8bO
+BAZmS19qiqcwc12YsGRkUp3JGRLCz5TCM4CxLZqPWXji7PWVvv0eDGbJEouT
+sB5MZihIQ5gOTUYhlKsgRZmkeW48xdkYCZ3pRBJABmOJ6gBn1EN6WYaxsiRQ
+qM6n4IwHWrUpziDcZiioe/0xzBeoo2ZjIdxnieTp51lgG/15gzIpE9btPRgh
+qYSy6cHYFX2jUmrNbwEjyVWS4v8rwVbpApW1DaZpsinh0coWkkMgnaEa7Jlg
+2Tb0Bw4zqwB7n2diOuqziGVyYB2zZ6P0EKsjjRbgzx18jvpoHkAQBOD7Puk6
+LRUItbkzRM0uZxrbu0GqJHiABpRpoY3VH8LANkU3fQeSUrHd84IhxgqNHksF
+WkPTWA2ihBnym2nZYNt98JJSc3nqO1p4idn1yBxVRKeJHQpFw4CK0AUL1Z6N
+KPUIY9OG4VB2bQ5gkdea6EWAMm4wZ7NSEv1T+UjomWXxXBcpKvK0Zd2SogmZ
+eI3oRV6pkejOjCggxpYE4LgBt/tTPd8V6s2IjA7jW210BP80xjYPrwfzXBvb
+n/Cfc6H/eT4mRBCFJUtRLCa932CZgjNy2PS/0NNa4dwJ69KypHII0j9Tg808
+ZdVoBFln4BQRkyoEiVD2eMHfVhCscjKE0IaLMyKxQjDxRjjRI0bmz2VZtkBb
+zB7CAs0FVYa2B2o+C2bIDAK+8E3+7+n8/3cajQJ1QQYFomvLkZGPUuQZl6Pl
+8UBWrdAgIrVBE/3T9VV/tgaq4HTj+4qiUiM0Gv+uEHVavNJ6mjeeCrLHNCqM
+lxUt/fFK+zOY+FqUGj/mz4tlN8Uck8I0Xt0Txo+OxPWsPeT7ZHejpR+B7wrT
+2GXLP24UCrokY17MEzT1lBk8YEdDDOeS5cQQtUOUIFXzGNyhWAdkgYo6t7Xy
+6rshFKnPUrg3Dl7dG8RxqApxaHxXEq8mT5dsqoqMVPGpjZaWjVUpS6Vlg9fp
+jFFDDS1qF4G0o0vjnxWPIbSqFPBvqV7I25Y23IXmRWHDDeappmZEhoJw/Pkn
+ntrKeDYermn3SkdcJUm+o1GuYD4kyW2Sw23SJ1m7kp+2WMqXUmQ3JkFjmjYk
+KeMpi2uCfEvC7/XQf/aS9STxGpKwcShkrQAvcSBpeIUkXkOSQ3GVJPmbbc2b
+MvEjAhXYbaLRZfFp9WEaxJATMw8kM6e1Xr7KI+uhY3JrTX8P9oC1dZhb8Nxr
+mJNladJyNn7cori1IqnG3qqkUrPX2Kjt2XuwJ6yXO+K6MtQ6dq80r5KpEjWi
+edn4AEpgtzwP1CoiyvaKbM/GQMsoFHa2DXGlhre+/YOOOMkhfV+BzkMYjybS
+4reWwJBEHBFVLQeyMkdDz9CiRAlmRXmyQRcB2aE+LKLsZflYSZDBLEKrYiEs
+6ZGU2ztad0dudYxlAo4KmknOOZfPqsRr6TgD3JY+Vq5Lm6taU6WnN3Rbkcie
+sI9e3RPGjzrieLbMmSR+i7xgg7gRhQVHefKyNny1ANCgSdOMOej3e7aVVg7j
+K02sF1vgyG5C+0g8l4bkX6v5RfN1YjeYs94NRZTSbVe9FA4u+ZchYofEEOpX
+rAOu/+Fy/fkQLV9r2ujdxNWEO5PENYz/BrZslloK87sPQUrLqQBvZOqelJoy
+5Hjp2x/flF2rskv+lNN5xqppdYUN/FxXZ2HAkYn7e3ZwU3b6Mt7UuVizGvNA
+xIX7Ew/CYCamcjBbimVfhwHclO2xGi91KFiJZQ6NtMXySvOHJy5bQUfsXpng
+xWj812QlULxkRBtla9Hhz//aBfc229Vja1mxOUF23gGk0qVFJlQz6dKLDnD+
+9kRtXpIVvvjiC4iiCGazGbiuy3/pO5ZrI2xbHYZ2d4+Kt/ao8w+HjeEH/PlN
+dJhreP/99+Gjjz6Czz77DD7//HP++84778Abb7zBz+lnj3oCuOjzzq4Gt7jF
+nV0w//6wUanAFhGKICAkySkX8Pbbb8MHH3zAiC0/O9PP9KxcbAR0zpXfe+89
+eP3116l8HYyXdqDNTxSyNIM0ZADQpweIJB9//DH3e9kqo7qabc+3AHjzzTdh
+OBxeAaoA9DQad3eTk/iMJqYNjAA9fvyYyjWGijevYHgFwC1466231jX7QbcJ
+p9VA7NPGkL4/evSI/moMqYzqXsHwCoAlDNvNOmJ4/WlIIIhF2hgSWxEfYrnG
+kMo28uEqAOJB4sVVoApAR1xpXZLoWF3gSmQtPzvTz9Yu8OXKYoHT4n733XdX
+F7iCsWuBb5G2UpwwBYivFNWUbKKfPepdlbZbGihpuwPmgdL2q6AH+fNJ2AzN
+k7f01y2i9onhcdPmKzXnn8gKxy6TTw/rVkTHTmXVfXJY5+oIZkdjzN/c2wvy
+UXvL8vYWDLpYWr9bA092rzaku241rnOCVHf7mws7ETxuZ3Cdx6e63N/q2oKk
+2sI/dH9uG2InoZ5C7NBdsm2IdbGxuqK4ZYeLUeRg1W8lBFqctOJw5V0xpGiB
+4v/rDKnfaEB398Fo80bUOqK1pdbx1tEWqaWQPnSraR3ST0HCi2XdffeoSxBH
+93ngNk6XQE9zqGf7vs06UX8qo/Y/TjSNp4JzDeJD/84wT2VEnBbalxBo+tVG
+GHuZNUc2P9CDPSZY9dqWtrusp2PaPsVIzWub2m60Gw5vsWs4S0HFLgGx1za1
+3WiVHd7iiccdr8NMbFk7hwbYXtvSdpfdd0zbI+Jyy1bgclxu+dmyKfirjTD2
+siSPbH4NInptjXa8uXpaaF9SaPAP3Iriz+sSnerS5iaK+fVrczPneziy64J2
+50vBidjt65vU6OfOhftvdDlTsW8YLg/U1QYLZr4Pc88Vh0c3hBp29bs5skYm
+Q63v2Aym8iZaXR/jrrdDPgqOOjlqO+Fad70LbAUndAT6Yz8T/V1oCP+pv24J
+Swk4RFi6QCduL8c1HEPpdQEkEbFQR/Nh6XbnUZGYLdGfciHuGI7pLnSVyxOg
+HK48efSnuYObgiMujOtjiiMv1qC6rBw1RXWRQbhYwGIRQlbC8xrg1QBRJa9+
+bwoQ7epSwUnma+4ZBZmu/p0OsAXp79AVZn5sDlyIsxyyJICRZahp/G5n0Op2
+YL91qQfJJC/MkRzpAlv8BRIZRZ7zyTfRzYizbzQ5FprgfKdunhPfqwU/XVBo
+PReEIj6SlyhhzrzMqRy4ly36TkymDtlSvV6vyZohZWLn6VTg6xx8NDJn/Osh
+PTzPw2eeN6P/5IXfHi+WLnS5q+iL3B4GIRR1NzhNsoNaX7Rqro7HMDAHnEzh
+OPYbq4vyK9fSu49f8kWdJxAEC6CUHBXvJAwhLgrIkSVzFAJFOkf2Y5nUqRcx
+meFYxq/HEenNFq9o0+AYXqGLugsUZGnBKTywbpZlSD2+0p94xwxAs0krC8Bx
+cCKwDZv1yq6F9rSMNy1A0WYK3BHYtg2Tecq7q33LBsuk9BN1dw6+A8VCyH3L
+EhfJ3MCHkSk2befHgQ7HPZmiIxL7XlHN0o6E5rGg6Q7ZaMGEGZPA5EwhNTg9
+vid9DGiVFGaOSpVzpIwCZGMhUb30CKxb98RtB7yJpa8PNalQjlCz9AXNA8rD
+xKlBCghmU3Bdj+///1VnuOJuYox2PCm/71HZlpXR5I4KuVJYyzYH9q0yOFUp
+suNgCKOhMH77wxGMRiMOCI7GDgRJ2WlsAv493sOjldSX+RIsuw/9Pv3aMkcC
+G8lH6Z86Ejlh2qlLSrEM3Lib7aBht4RfO/cTMessrU8Au7cEWxy/FxnHlOC8
+6lkuqw/R9qJdj3+ncdXJOFdpE+qqdUUbQKyuoX9P1d3sfUrbnDKiIWfL5FC2
+u2A13gWlO3qqVYa1JuPDunMe8WwIPdPkRCKWzqhho8zpRpImQUgNWSpEYRon
+nL8nCyZqVuyxD/IAh3FvafaWXbhEZRdzXJ2CxRBJQo5A754QrdYUUu4TOSuP
++YiGOXJhJrO/oWJ4diNqt3VGHtYlMhOPE1W7/GFpU1WJOF/j5TXEjsixlcRT
+ZlcGWEfqWMs6JNTGf8JX8EfomkU6FVCXSILESiyqAZCzpdJaVYmjMzApf8Zr
+SNN2vBVWlKCEjkDYE4cvXR2JFWkQyvdkz2KZc8AGdzpmWs3jECaWTjV0V2Gw
+xkVXexpl5OqV74RFF8RuSVAk4IbDGXr6CZkqTdiqkTl3FEZrHHiFkUitpBP+
+dcFI55khV7HIhW1elGybU/WgbOePaZz3JutiCVle6Ak8xlVKY5EP5ziRX0Aq
+cvw16oRlSnYk7DvCVUIeCmLkpyiCKMK/C8EUHV0AhbZwjwzNB6dwYBq0BWx3
+geSV4r3OA6V1d3kKTao0nVHN0FmMKp047igURYYQG/w4F/k6ywqVn3+Mc6XQ
+poxW1hXK2kdRtknOVCLTIhPQb5JAEk4VM3RiNLGo0C5AxU8wI1SAlKg0F8zb
+BaQyNRJPB8faurq7UX1Hq6JefwIhYpiEaIj2RMK8rBu2S7wmwLRiYkIiHWtw
+ipxWw+VAWBXpI4LHwE69IS/bIK+bHCihMBX8fLdXrkibz5t0SjN2rFKRStSc
+0D3R7iheooKboStCrscEgpRAZ+CgSxJkdSc35OkGEm5iYRt6+crGwraslo1x
+rxP4Pt0Fo9ie2uG7HKMsRbxro+9xdFBqs0fxTU2okm9v5EXVacem3d0WV2Gz
+e34bVm9rlMh+VuO9952Fuu+vjZUuGMbSMNnqNuxzXSPlxJIUNkvQyg5kxmrK
+idrFHdXCsIx1Qt91ZqNykdd58IqqE0XGOlrJCvvkPInNtx9U9lbQN0fweyd8
+1nkW+/RP5c5sKpPRWoDotG5fcBd7bVYrf1/DNS2xp2X2kY06OWubN61pTcac
+ONtyQi3QDoG9bZNa+ecp53EWaVMznNqqrjs5fds2p9UhxsSf6EyzhnH8kYqr
+zuu5kGNpig5jTsmou4C/zgdnrsuBJB0roBySMkflCx3gqPnJwjkMRbRbSz2r
+PwY/Ei+f6KJcVYi3iOciKX+vD1M/4kMJ6lldFRAHM+nk0CrOjb/s0JcYCNCm
+hDdCtJNCLdgce584bCYYf9EB8jE7dHzXq8f+BR9hJSObdo2s4484VC0Fftro
+xplOAj4NKPd8FEXk4nFAvLvNvmQOGehXFMi06nUkqOoXQUSqfd/ISeaP1g5/
+cYLgTjLtMyzKgU4mWcaHU44yxZed8D4skgwpS5Y+2fspxCcI05XRVEn3FknM
+o0jSGCByE1G+6IUCSabUZF1wflqiVx1OoTyqtgVjL+Sdnvaht2g+AVtkIusi
+HoQgew7VXqLTrg4dDyLK8UTJfcsCmScCzxny7NBpp6Sou8g4vfSLBMGNKOs6
+dt/r9bCMMrOPp3NyI6/NOYWn1eYF+aguxQX4vOzmQm0+FHsBq75R6A70IrMn
+jRP6JE/Gqku4fSeAoiohnI1OYsZt82QCHYyOtt5S3revdV5CxaY3nW+LxAt4
+Au1Fnawv9bYCf9CO15L3yCu/uzNyKSJlDGoM88CX7wsSActTH6Mt5R5poK+z
+Cwezq0O31yXqXLwCaDANgV4FFsszoV0d7b2O0dLLD4RDr+MP9M4olU+3yzLb
+dqG6LuV52Y7Rl+ssHq+Ly3LT5g+gzc2cf/3afI3m/AX5aFeupF1w9GuCaqn7
+DeVz3VVv7dM/+yY92q/PPwLxwjR5PKzvgI82B+9VtF4vsCWXUXeVTflwE3kM
+2KJTr1ynrmp16fTQREW7uhVvGqKWmdghwCqzuOqafmhXd9/S3aXyXWS8/6VG
+t18qIX5yxX78tuwVOPhjLL1i8dCEQPtN1n2o8hSytsuy+n6UA3P67NvvYiRC
+efTaUP2+zv6s9eqcJ5GU5zaak3P9vlDxa4OfVupU56ny8jRMWUNOyZzFC6X2
+Tc2j3mW07YL27/eo89PNGK4TjOI9Inf3SnHz6QF1f3IYGrYsu5rvZX26u131
+Xu3W/aYEMKvJxnbVe7Cmjz2635QSZDUd2656u7rnJ6rTTclUVpPT7ar3ioa8
+xUZ42iPdMs/rkpWsm+dt9Tp2fzUv73K6Dn/PegdyeXut70rX8ekBdX9yGBpf
+kqTjz2tgat6Y4zdt9m5zM+cHt3lCrxTZ7NmdL3l2B2TGeKKY7ucPbkmqsc7k
+vk5vnrkpO8wNPyiryXUa5E3ZrsDHxnwy1GbpJXgbQhkaQCtpDDf/tWi2LkzR
+XIxaShDDP65oJvjy3s6Ig0wCo46Bt3PAXAW3O5CwLb/LVXgbAwTNqfTtqVv4
+88PVCVobBGinX+Fm/yOa8f/y5YrGM/8PSct51w==\
+\>"]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Circuito Convencional 500kV", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"xy3", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "11.000"}], ",", "10.736"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "10.771"}], ",", "11.132"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "11.229"}], ",", "11.132"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.000", ",", "10.736"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.229", ",", "11.132"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "0.229"}], ",", "11.132"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"11.000", ",", "10.736"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"10.771", ",", "11.132"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"11.229", ",", "11.132"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "6.000"}], ",", "22.000"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"6.000", ",", "22.000"}], "}"}]}], "}"}]}], ";"}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[30]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mostra3", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Circle", "[", 
+       RowBox[{"#", ",", ".25"}], "]"}], "}"}], "&"}], "/@", "xy3"}]}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[31]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"t3", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra3", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "12.1`"}], ",", "12.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "25"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.486669317237925*^9, 3.486669349531864*^9}, {
+  3.4866695098617687`*^9, 3.486669549666402*^9}},
+ FontSize->12,
+ CellLabel->"In[70]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-11., 10.736}, 0.25], 
+   CircleBox[{-10.771, 11.132}, 0.25], CircleBox[{-11.229, 11.132}, 0.25], 
+   CircleBox[{0., 10.736}, 0.25], CircleBox[{0.229, 11.132}, 0.25], 
+   CircleBox[{-0.229, 11.132}, 0.25], CircleBox[{11., 10.736}, 0.25], 
+   CircleBox[{10.771, 11.132}, 0.25], CircleBox[{11.229, 11.132}, 0.25], 
+   CircleBox[{-6., 22.}, 0.25], CircleBox[{6., 22.}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  PlotRange->{{-12.1, 12.1}, {8, 25}}]], "Output",
+ CellChangeTimes->{{3.486669323030891*^9, 3.486669350487162*^9}, {
+  3.4866695109233427`*^9, 3.486669550382778*^9}},
+ CellLabel->"Out[70]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Circuito Compacto 500kV", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xy4", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.271"}], ",", " ", "10.771"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.271"}], ",", " ", "11.229"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.729"}], ",", " ", "11.229"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.729"}], ",", " ", "10.771"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"0.229", ",", " ", "15.271"}], "}"}], ",", "\n", 
+     RowBox[{"{", 
+      RowBox[{"0.229", ",", " ", "15.729"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.229"}], ",", " ", "15.729"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.229"}], ",", " ", "15.271"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"4.271", ",", " ", "10.771"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"4.271", ",", " ", "11.229"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.729", ",", " ", "11.229"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.729", ",", " ", "10.771"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "3.500"}], ",", " ", "26.000"}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"3.500", ",", " ", "26.000"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[34]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mostra4", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Circle", "[", 
+       RowBox[{"#", ",", ".25"}], "]"}], "}"}], "&"}], "/@", "xy4"}]}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[35]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"t4", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra4", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "12.1`"}], ",", "12.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "28"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.486669365516519*^9, {3.486669498607327*^9, 3.486669532410943*^9}},
+ FontSize->12,
+ CellLabel->"In[67]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-4.271, 10.771}, 0.25], 
+   CircleBox[{-4.271, 11.229}, 0.25], CircleBox[{-4.729, 11.229}, 0.25], 
+   CircleBox[{-4.729, 10.771}, 0.25], CircleBox[{0.229, 15.271}, 0.25], 
+   CircleBox[{0.229, 15.729}, 0.25], CircleBox[{-0.229, 15.729}, 0.25], 
+   CircleBox[{-0.229, 15.271}, 0.25], CircleBox[{4.271, 10.771}, 0.25], 
+   CircleBox[{4.271, 11.229}, 0.25], CircleBox[{4.729, 11.229}, 0.25], 
+   CircleBox[{4.729, 10.771}, 0.25], CircleBox[{-3.5, 26.}, 0.25], 
+   CircleBox[{3.5, 26.}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  PlotRange->{{-12.1, 12.1}, {8, 28}}]], "Output",
+ CellChangeTimes->{{3.4866693593097057`*^9, 3.4866693682522497`*^9}, {
+  3.486669500262163*^9, 3.4866695333558197`*^9}},
+ CellLabel->"Out[67]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Linha em delta com feixes circulares sim\[EAcute]tricos 500kV\
+\>", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xy5", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.754"}], ",", "9.543"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.496"}], ",", "10.314"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.977"}], ",", "11.562"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.529"}], ",", "11.562"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "7.009"}], ",", "10.314"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.000", ",", "13.845"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.866", ",", "14.409"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.535", ",", "15.317"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.535"}], ",", "15.317"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.866"}], ",", "14.409"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.754", ",", "9.543"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.496", ",", "10.314"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.977", ",", "11.562"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6.529", ",", "11.562"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7.009", ",", "10.314"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.000"}], ",", "23.961"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.000", ",", "23.961"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[38]:="],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mostra5", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Circle", "[", 
+       RowBox[{"#", ",", ".25"}], "]"}], "}"}], "&"}], "/@", "xy5"}]}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[39]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"t5", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra5", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "12.1`"}], ",", "12.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "25"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.486669395962558*^9, {3.486669479615695*^9, 3.486669479797655*^9}},
+ FontSize->12,
+ CellLabel->"In[62]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-5.754, 9.543}, 0.25], 
+   CircleBox[{-4.496, 10.314}, 0.25], CircleBox[{-4.977, 11.562}, 0.25], 
+   CircleBox[{-6.529, 11.562}, 0.25], CircleBox[{-7.009, 10.314}, 0.25], 
+   CircleBox[{0., 13.845}, 0.25], CircleBox[{0.866, 14.409}, 0.25], 
+   CircleBox[{0.535, 15.317}, 0.25], CircleBox[{-0.535, 15.317}, 0.25], 
+   CircleBox[{-0.866, 14.409}, 0.25], CircleBox[{5.754, 9.543}, 0.25], 
+   CircleBox[{4.496, 10.314}, 0.25], CircleBox[{4.977, 11.562}, 0.25], 
+   CircleBox[{6.529, 11.562}, 0.25], CircleBox[{7.009, 10.314}, 0.25], 
+   CircleBox[{-4., 23.961}, 0.25], CircleBox[{4., 23.961}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  PlotRange->{{-12.1, 12.1}, {8, 25}}]], "Output",
+ CellChangeTimes->{3.486669397145875*^9, 3.4866694809415827`*^9},
+ CellLabel->"Out[62]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Linha com feixes elipticos sim\[EAcute]tricos 500kV\
+\>", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xy6", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.722"}], ",", "9.543"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.739"}], ",", "10.918"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.115"}], ",", "13.139"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "7.330"}], ",", "13.139"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "7.706"}], ",", "10.918"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.000", ",", "10.622"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.750", ",", "11.250"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.465", ",", "12.267"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.465"}], ",", "12.267"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.750"}], ",", "11.250"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6.722", ",", "9.543"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.739", ",", "10.918"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6.115", ",", "13.139"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7.330", ",", "13.139"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7.706", ",", "10.918"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.000", ",", "23.941"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.000"}], ",", "23.941"}], "}"}]}], "}"}]}], 
+  ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[41]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mostra6", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"#1", ",", "0.25`"}], "]"}], "}"}], "&"}], ")"}], "/@", 
+    "xy6"}]}], ";"}], "\n", 
+ RowBox[{"t6", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra6", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "12.1`"}], ",", "12.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "25"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{
+  3.4866694103545113`*^9, {3.48666947258374*^9, 3.486669472809993*^9}},
+ FontSize->12,
+ CellLabel->"In[60]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-6.722, 9.543}, 0.25], 
+   CircleBox[{-5.739, 10.918}, 0.25], CircleBox[{-6.115, 13.139}, 0.25], 
+   CircleBox[{-7.33, 13.139}, 0.25], CircleBox[{-7.706, 10.918}, 0.25], 
+   CircleBox[{0., 10.622}, 0.25], CircleBox[{0.75, 11.25}, 0.25], 
+   CircleBox[{0.465, 12.267}, 0.25], CircleBox[{-0.465, 12.267}, 0.25], 
+   CircleBox[{-0.75, 11.25}, 0.25], CircleBox[{6.722, 9.543}, 0.25], 
+   CircleBox[{5.739, 10.918}, 0.25], CircleBox[{6.115, 13.139}, 0.25], 
+   CircleBox[{7.33, 13.139}, 0.25], CircleBox[{7.706, 10.918}, 0.25], 
+   CircleBox[{5., 23.941}, 0.25], CircleBox[{-5., 23.941}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  PlotRange->{{-12.1, 12.1}, {8, 25}}]], "Output",
+ CellChangeTimes->{{3.486669404632739*^9, 3.486669411497033*^9}, 
+   3.486669473957183*^9},
+ CellLabel->"Out[61]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Linha com distribui\[CCedilla]\[ATilde]o horizontal gen\[EAcute]rica 500kV\
+\>", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xy7", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.000"}], ",", "9.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.253"}], ",", "9.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.642"}], ",", "10.400"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.628"}], ",", "11.752"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.275"}], ",", "13.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "6.000"}], ",", "13.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.342"}], ",", "9.942"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.681"}], ",", "11.025"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "0.342"}], ",", "12.108"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.342", ",", "12.108"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.681", ",", "11.025"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.342", ",", "9.942"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6.000", ",", "9.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.253", ",", "9.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.642", ",", "10.400"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.628", ",", "11.752"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.275", ",", "13.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6.000", ",", "13.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.000"}], ",", "23.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.000", ",", "23.000"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[46]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mostra7", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"#1", ",", "0.25`"}], "]"}], "}"}], "&"}], ")"}], "/@", 
+    "xy7"}]}], ";"}], "\n", 
+ RowBox[{"t7", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra7", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "12.1`"}], ",", "12.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "25"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{
+  3.486669426099537*^9, {3.486669465003469*^9, 3.486669465238618*^9}},
+ FontSize->12,
+ CellLabel->"In[58]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{-6., 9.}, 0.25], CircleBox[{-5.253, 9.}, 0.25], 
+   CircleBox[{-5.642, 10.4}, 0.25], CircleBox[{-5.628, 11.752}, 0.25], 
+   CircleBox[{-5.275, 13.}, 0.25], CircleBox[{-6., 13.}, 0.25], 
+   CircleBox[{-0.342, 9.942}, 0.25], CircleBox[{-0.681, 11.025}, 0.25], 
+   CircleBox[{-0.342, 12.108}, 0.25], CircleBox[{0.342, 12.108}, 0.25], 
+   CircleBox[{0.681, 11.025}, 0.25], CircleBox[{0.342, 9.942}, 0.25], 
+   CircleBox[{6., 9.}, 0.25], CircleBox[{5.253, 9.}, 0.25], 
+   CircleBox[{5.642, 10.4}, 0.25], CircleBox[{5.628, 11.752}, 0.25], 
+   CircleBox[{5.275, 13.}, 0.25], CircleBox[{6., 13.}, 0.25], 
+   CircleBox[{-4., 23.}, 0.25], CircleBox[{4., 23.}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  PlotRange->{{-12.1, 12.1}, {8, 25}}]], "Output",
+ CellChangeTimes->{{3.486669421203413*^9, 3.486669427215507*^9}, 
+   3.486669466346184*^9},
+ CellLabel->"Out[59]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Linha com distribui\[CCedilla]\[ATilde]o vertical de forma gen\[EAcute]rica \
+500kV\
+\>", "Section",
+ FontSize->12],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xy8", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0.000", ",", "10.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.165"}], ",", "10.122"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.000"}], ",", "10.566"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "4.000"}], ",", "10.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.000", ",", "10.000"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4.000", ",", "10.566"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2.165", ",", "10.122"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.000", ",", "16.315"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.691"}], ",", "16.103"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.751"}], ",", "16.754"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.852"}], ",", "16.455"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2.852", ",", "16.455"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2.751", ",", "16.754"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1.691", ",", "16.103"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0.000", ",", "23.500"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.399"}], ",", "22.599"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "3.500"}], ",", "22.707"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "3.500"}], ",", "23.500"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3.500", ",", "23.500"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3.500", ",", "22.707"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1.399", ",", "22.599"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "5.000"}], ",", "33.500"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5.000", ",", "33.500"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ FontSize->12,
+ CellLabel->"In[51]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mostra8", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Circle", "[", 
+        RowBox[{"#1", ",", "0.25`"}], "]"}], "}"}], "&"}], ")"}], "/@", 
+    "xy8"}]}], ";"}], "\n", 
+ RowBox[{"t8", "=", 
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", "mostra8", "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+    RowBox[{"Frame", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "12.1`"}], ",", "12.1`"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"8", ",", "25"}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<dist\[AHat]ncia (m)\>\"", ",", "\"\<dist\[AHat]ncia (m)\>\""}], 
+      "}"}]}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.486669448944775*^9, 3.486669455431117*^9}},
+ FontSize->12,
+ CellLabel->"In[56]:="],
+
+Cell[BoxData[
+ GraphicsBox[{CircleBox[{0., 10.}, 0.25], CircleBox[{-2.165, 10.122}, 0.25], 
+   CircleBox[{-4., 10.566}, 0.25], CircleBox[{-4., 10.}, 0.25], 
+   CircleBox[{4., 10.}, 0.25], CircleBox[{4., 10.566}, 0.25], 
+   CircleBox[{2.165, 10.122}, 0.25], CircleBox[{0., 16.315}, 0.25], 
+   CircleBox[{-1.691, 16.103}, 0.25], CircleBox[{-2.751, 16.754}, 0.25], 
+   CircleBox[{-2.852, 16.455}, 0.25], CircleBox[{2.852, 16.455}, 0.25], 
+   CircleBox[{2.751, 16.754}, 0.25], CircleBox[{1.691, 16.103}, 0.25], 
+   CircleBox[{0., 23.5}, 0.25], CircleBox[{-1.399, 22.599}, 0.25], 
+   CircleBox[{-3.5, 22.707}, 0.25], CircleBox[{-3.5, 23.5}, 0.25], 
+   CircleBox[{3.5, 23.5}, 0.25], CircleBox[{3.5, 22.707}, 0.25], 
+   CircleBox[{1.399, 22.599}, 0.25], CircleBox[{-5., 33.5}, 0.25], 
+   CircleBox[{5., 33.5}, 0.25]},
+  AspectRatio->Automatic,
+  Axes->False,
+  Frame->Automatic,
+  FrameLabel->{
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm], 
+    FormBox["\"dist\[AHat]ncia (m)\"", TraditionalForm]},
+  PlotRange->{{-12.1, 12.1}, {8, 25}}]], "Output",
+ CellChangeTimes->{{3.486669443872732*^9, 3.4866694564482737`*^9}},
+ CellLabel->"Out[57]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{878, 697},
+WindowMargins->{{41, Automatic}, {Automatic, 19}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"TutorialBook.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 108, 3, 54, "Title"],
+Cell[CellGroupData[{
+Cell[700, 29, 70, 1, 81, "Section"],
+Cell[773, 32, 849, 24, 69, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1659, 61, 61, 1, 81, "Section"],
+Cell[1723, 64, 925, 28, 39, "Input"],
+Cell[2651, 94, 254, 10, 23, "Input"],
+Cell[CellGroupData[{
+Cell[2930, 108, 896, 24, 39, "Input"],
+Cell[3829, 134, 718, 16, 315, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4584, 155, 232, 6, 23, "Input"],
+Cell[4819, 163, 135, 2, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5003, 171, 61, 1, 81, "Section"],
+Cell[5067, 174, 1437, 41, 54, "Input"],
+Cell[6507, 217, 255, 10, 23, "Input"],
+Cell[CellGroupData[{
+Cell[6787, 231, 912, 25, 39, "Input"],
+Cell[7702, 258, 8910, 151, 338, 771, 16, "CachedBoxData", "BoxData", "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16661, 415, 61, 1, 81, "Section"],
+Cell[16725, 418, 1101, 35, 54, "Input"],
+Cell[17829, 455, 255, 10, 23, "Input"],
+Cell[CellGroupData[{
+Cell[18109, 469, 873, 24, 39, "Input"],
+Cell[18985, 495, 797, 16, 280, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19831, 517, 57, 1, 81, "Section"],
+Cell[19891, 520, 1437, 41, 54, "Input"],
+Cell[21331, 563, 255, 10, 23, "Input"],
+Cell[CellGroupData[{
+Cell[21611, 577, 847, 24, 39, "Input"],
+Cell[22461, 603, 918, 18, 313, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23428, 627, 103, 3, 81, "Section"],
+Cell[23534, 632, 1543, 48, 69, "Input"],
+Cell[25080, 682, 255, 10, 23, "Input"],
+Cell[CellGroupData[{
+Cell[25360, 696, 847, 24, 39, "Input"],
+Cell[26210, 722, 969, 18, 280, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27228, 746, 93, 3, 81, "Section"],
+Cell[27324, 751, 1546, 49, 69, "Input"],
+Cell[CellGroupData[{
+Cell[28895, 804, 1084, 33, 54, "Input"],
+Cell[29982, 839, 989, 19, 280, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31020, 864, 116, 3, 81, "Section"],
+Cell[31139, 869, 1801, 56, 69, "Input"],
+Cell[CellGroupData[{
+Cell[32965, 929, 1083, 33, 54, "Input"],
+Cell[34051, 964, 1056, 20, 280, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35156, 990, 125, 4, 81, "Section"],
+Cell[35284, 996, 2023, 62, 84, "Input"],
+Cell[CellGroupData[{
+Cell[37332, 1062, 1058, 32, 54, "Input"],
+Cell[38393, 1096, 1146, 21, 280, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

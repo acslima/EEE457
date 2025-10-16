@@ -1,0 +1,153 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      3803,        144]
+NotebookOptionsPosition[      3121,        115]
+NotebookOutlinePosition[      3460,        130]
+CellTagsIndexPosition[      3417,        127]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Series", "[", 
+  RowBox[{
+   RowBox[{"a", " ", 
+    RowBox[{"Cosh", "[", 
+     RowBox[{"x", "/", "a"}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "2"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.486506245537366*^9, 3.486506261713996*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"a", "+", 
+   FractionBox[
+    SuperscriptBox["x", "2"], 
+    RowBox[{"2", " ", "a"}]], "+", 
+   InterpretationBox[
+    SuperscriptBox[
+     RowBox[{"O", "[", "x", "]"}], "3"],
+    SeriesData[$CellContext`x, 0, {}, 0, 3, 1],
+    Editable->False]}],
+  SeriesData[$CellContext`x, 
+   0, {$CellContext`a, 0, Rational[1, 2]/$CellContext`a}, 0, 3, 1],
+  Editable->False]], "Output",
+ CellChangeTimes->{3.486506262831987*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{
+    RowBox[{"A", "^", "2"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"8", "F"}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"H", "=", 
+   RowBox[{"A", "/", "2"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.4865067512649603`*^9, 3.48650676577689*^9}, {
+  3.486507061412134*^9, 3.4865070658654423`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"2", "/", "A"}], " ", 
+   RowBox[{"Integrate", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"x", "^", "2"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"2", "c"}], ")"}]}], " ", "-", 
+      RowBox[{"H", " ", 
+       RowBox[{"x", "/", "c"}]}], "+", "h"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", 
+       RowBox[{"A", "/", "2"}]}], "}"}]}], "]"}]}], "//", 
+  "FullSimplify"}]], "Input",
+ CellChangeTimes->{{3.486506719140176*^9, 3.486506748218519*^9}, {
+  3.486506788186936*^9, 3.4865067931762543`*^9}, {3.486507117673986*^9, 
+  3.486507121983276*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   FractionBox[
+    RowBox[{"2", " ", "F"}], "3"]}], "+", "h"}]], "Output",
+ CellChangeTimes->{{3.4865067683426*^9, 3.486506794012397*^9}, 
+   3.486507069452697*^9, 3.48650712289275*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"3592.52", "/", "4000"}]], "Input",
+ CellChangeTimes->{{3.486658187039008*^9, 3.486658196897993*^9}}],
+
+Cell[BoxData["0.89813`"], "Output",
+ CellChangeTimes->{3.48665819881293*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"3592.52", " ", "-", "4000"}]], "Input",
+ CellChangeTimes->{{3.4866582208008747`*^9, 3.486658222352756*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", "407.48`"}]], "Output",
+ CellChangeTimes->{3.4866582232535563`*^9}]
+}, Open  ]]
+},
+WindowSize->{640, 707},
+WindowMargins->{{Automatic, 13}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 290, 8, 27, "Input"],
+Cell[860, 32, 463, 14, 50, "Output"]
+}, Open  ]],
+Cell[1338, 49, 374, 11, 43, "Input"],
+Cell[CellGroupData[{
+Cell[1737, 64, 633, 19, 27, "Input"],
+Cell[2373, 85, 226, 6, 47, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2636, 96, 124, 2, 27, "Input"],
+Cell[2763, 100, 76, 1, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2876, 106, 131, 2, 27, "Input"],
+Cell[3010, 110, 95, 2, 27, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,649 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     23713,        639]
+NotebookOptionsPosition[     22654,        600]
+NotebookOutlinePosition[     23278,        624]
+CellTagsIndexPosition[     23235,        621]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lines of Force for Two Point Charges", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{
+     RowBox[{"ContourPlot", "[", 
+      RowBox[{
+       RowBox[{"\[Phi]", "[", 
+        RowBox[{"q1", ",", "q2", ",", 
+         RowBox[{"r1", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{"r1", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", 
+         RowBox[{"r2", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{"r2", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", "x", ",", "y"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "1.5"}], ",", "1.5"}], "}"}], ",", 
+       RowBox[{"Contours", "\[Rule]", "10"}], ",", 
+       RowBox[{"ContourShading", "\[Rule]", "False"}], ",", 
+       RowBox[{"Epilog", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Graphics", "[", 
+             RowBox[{"Text", "[", 
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<q\>\"", ",", "Italic"}], "]"}], ",", "1"}], 
+                 "]"}], ",", "24", ",", "Bold", ",", "Black"}], "]"}], "]"}], 
+             "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"r1", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", 
+              RowBox[{
+               RowBox[{"r1", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "-", ".2"}]}], "}"}]}], "]"}],
+           ",", 
+          RowBox[{"Inset", "[", 
+           RowBox[{
+            RowBox[{"Graphics", "[", 
+             RowBox[{"Text", "[", 
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<q\>\"", ",", "Italic"}], "]"}], ",", "2"}], 
+                 "]"}], ",", "24", ",", "Bold", ",", "Black"}], "]"}], "]"}], 
+             "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"r2", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", 
+              RowBox[{
+               RowBox[{"r2", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "-", ".2"}]}], "}"}]}], 
+           "]"}]}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"ContourPlot", "[", 
+      RowBox[{
+       RowBox[{"\[Psi]", "[", 
+        RowBox[{"q1", ",", "q2", ",", 
+         RowBox[{"r1", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{"r1", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", 
+         RowBox[{"r2", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{"r2", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", "x", ",", "y"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "1.5"}], ",", "1.5"}], "}"}], ",", 
+       RowBox[{"Contours", "\[Rule]", "12"}], ",", 
+       RowBox[{"ContourStyle", "\[Rule]", "Red"}], ",", 
+       RowBox[{"ContourShading", "\[Rule]", "False"}]}], "]"}], ",", 
+     RowBox[{"AspectRatio", "\[Rule]", 
+      RowBox[{"2", "/", "3"}]}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"575", ",", "350"}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"q1", ",", "1", ",", 
+       RowBox[{"\"\<charge \>\"", " ", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{"q", ",", "1"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"-", "2"}], ",", "2", ",", ".1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"q2", ",", 
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"\"\<charge \>\"", " ", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{"q", ",", "2"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"-", "2"}], ",", "2", ",", ".1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r1", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", "0"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "1.5"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1.5"}], "}"}], ",", "Locator"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r2", ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "1.5"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1.5"}], "}"}], ",", "Locator"}], "}"}], ",", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{"q1", ",", "q2", ",", "r1", ",", "r2"}], "}"}]}], ",", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Phi]", "[", 
+        RowBox[{
+        "q1_", ",", "q2_", ",", "x1_", ",", "y1_", ",", "x2_", ",", "y2_", 
+         ",", "x_", ",", "y_"}], "]"}], ":=", 
+       RowBox[{
+        FractionBox["q1", 
+         RowBox[{" ", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x1"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y1"}], ")"}], "2"]}]], "+", ".0001", 
+           " "}]}]], "+", 
+        FractionBox["q2", 
+         RowBox[{" ", 
+          RowBox[{
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x2"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y2"}], ")"}], "2"]}]], "+", 
+           ".0001"}]}]]}]}], ";", 
+      RowBox[{
+       RowBox[{"\[Psi]", "[", 
+        RowBox[{
+        "q1_", ",", "q2_", ",", "x1_", ",", "y1_", ",", "x2_", ",", "y2_", 
+         ",", "x_", ",", "y_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"q1", " ", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x2"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y2"}], ")"}], "2"]}]], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", 
+               RowBox[{"(", 
+                RowBox[{"x", "-", "x1"}], ")"}]}], " ", 
+              RowBox[{"(", 
+               RowBox[{"x1", "-", "x2"}], ")"}]}], "-", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y1"}], ")"}], " ", 
+              RowBox[{"(", 
+               RowBox[{"y1", "-", "y2"}], ")"}]}]}], ")"}]}], "-", 
+          RowBox[{"q2", " ", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x1"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y1"}], ")"}], "2"]}]], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x2"}], ")"}], " ", 
+              RowBox[{"(", 
+               RowBox[{"x1", "-", "x2"}], ")"}]}], "+", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y2"}], ")"}], " ", 
+              RowBox[{"(", 
+               RowBox[{"y1", "-", "y2"}], ")"}]}]}], ")"}]}]}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x1"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y1"}], ")"}], "2"]}]], " ", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x", "-", "x2"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y", "-", "y2"}], ")"}], "2"]}]], " ", 
+           SqrtBox[
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"x1", "-", "x2"}], ")"}], "2"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"y1", "-", "y2"}], ")"}], "2"]}]]}], "+", ".0001"}], 
+         ")"}]}]}]}], ")"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.433102579257145*^9, 3.433102585752448*^9}, {
+   3.433102617930541*^9, 3.433102782825829*^9}, {3.433102838527375*^9, 
+   3.43310319045093*^9}, 3.43310324995016*^9, {3.433103293383884*^9, 
+   3.4331032996986437`*^9}, {3.43310340209825*^9, 3.433103404570862*^9}, {
+   3.4331034629876347`*^9, 3.433103516402327*^9}, {3.433103613753248*^9, 
+   3.433103662442219*^9}, {3.433103699341316*^9, 3.433103714237239*^9}, 
+   3.4331038893970423`*^9, {3.43310405719703*^9, 3.433104059678195*^9}, {
+   3.43310411107862*^9, 3.4331041371247997`*^9}, {3.43310421256522*^9, 
+   3.433104227050746*^9}, 3.433104260823496*^9, {3.433104299389965*^9, 
+   3.433104324265463*^9}, {3.433104364338873*^9, 3.433104405945074*^9}, {
+   3.433104562162129*^9, 3.433104572078867*^9}, 3.43310471347886*^9, {
+   3.433104881661996*^9, 3.433104942763987*^9}, {3.433105099071784*^9, 
+   3.4331051070206213`*^9}, {3.433105210139825*^9, 3.433105232176697*^9}, 
+   3.433105281633582*^9, 3.433105328317047*^9, {3.433105385634769*^9, 
+   3.4331053962053547`*^9}, 3.433105456432909*^9, {3.433105648276672*^9, 
+   3.433105738062509*^9}, {3.4331057747860317`*^9, 3.433105786794388*^9}, {
+   3.433105836438846*^9, 3.433105858035386*^9}, {3.433105890793025*^9, 
+   3.433105892051532*^9}, {3.433105938119369*^9, 3.4331059548149548`*^9}, 
+   3.433118795891281*^9, {3.4331188719061604`*^9, 3.4331189111797543`*^9}, {
+   3.43311898087958*^9, 3.43311902102033*^9}, {3.433119061713957*^9, 
+   3.433119139059609*^9}, {3.4331192007613983`*^9, 3.433119209096271*^9}, {
+   3.433119320723836*^9, 3.433119329424979*^9}, 3.433119404801263*^9, {
+   3.433119740546432*^9, 3.433119789245351*^9}, {3.433119848286716*^9, 
+   3.4331199193637247`*^9}, {3.4331199678820553`*^9, 
+   3.4331199684789762`*^9}, {3.433120053451261*^9, 3.433120053793432*^9}, {
+   3.433120114492704*^9, 3.4331201434720507`*^9}, {3.433169608385873*^9, 
+   3.4331698906716633`*^9}, 3.43316995703928*^9, {3.4331720112621117`*^9, 
+   3.4331720540493603`*^9}, 3.433172101497394*^9, {3.433172187530774*^9, 
+   3.4331722669032497`*^9}, {3.433174204643162*^9, 3.433174219744672*^9}, {
+   3.433189028696356*^9, 3.43318904363885*^9}, {3.433614648939641*^9, 
+   3.4336147496106577`*^9}, {3.433614825825346*^9, 3.4336148354002247`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`q1$$ = 
+    1, $CellContext`q2$$ = -1, $CellContext`r1$$ = {-1, 
+    0}, $CellContext`r2$$ = {1, 0}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`q1$$], 1, "charge " 
+       Subscript[$CellContext`q, 1]}, -2, 2, 0.1}, {{
+       Hold[$CellContext`q2$$], -1, "charge " 
+       Subscript[$CellContext`q, 2]}, -2, 2, 0.1}, {{
+       Hold[$CellContext`r1$$], {-1, 0}}, {-2, -1.5}, {2, 1.5}}, {{
+       Hold[$CellContext`r2$$], {1, 0}}, {-2, -1.5}, {2, 1.5}}}, 
+    Typeset`size$$ = {575., {173., 177.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`q1$13470$$ = 0, $CellContext`q2$13471$$ = 
+    0, $CellContext`r1$13472$$ = {0, 0}, $CellContext`r2$13473$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`q1$$ = 
+        1, $CellContext`q2$$ = -1, $CellContext`r1$$ = {-1, 
+         0}, $CellContext`r2$$ = {1, 0}}, "ControllerVariables" :> {
+        Hold[$CellContext`q1$$, $CellContext`q1$13470$$, 0], 
+        Hold[$CellContext`q2$$, $CellContext`q2$13471$$, 0], 
+        Hold[$CellContext`r1$$, $CellContext`r1$13472$$, {0, 0}], 
+        Hold[$CellContext`r2$$, $CellContext`r2$13473$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        ContourPlot[
+         $CellContext`\[Phi][$CellContext`q1$$, $CellContext`q2$$, 
+          Part[$CellContext`r1$$, 1], 
+          Part[$CellContext`r1$$, 2], 
+          Part[$CellContext`r2$$, 1], 
+          
+          Part[$CellContext`r2$$, 
+           2], $CellContext`x, $CellContext`y], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -1.5, 1.5}, Contours -> 10, ContourShading -> 
+         False, Epilog -> {
+           Inset[
+            Graphics[
+             Text[
+              Style[
+               Subscript[
+                Style["q", Italic], 1], 24, Bold, Black]]], {
+             Part[$CellContext`r1$$, 1], Part[$CellContext`r1$$, 2] - 0.2}], 
+           Inset[
+            Graphics[
+             Text[
+              Style[
+               Subscript[
+                Style["q", Italic], 2], 24, Bold, Black]]], {
+             Part[$CellContext`r2$$, 1], Part[$CellContext`r2$$, 2] - 0.2}]}],
+         
+        ContourPlot[
+         $CellContext`\[Psi][$CellContext`q1$$, $CellContext`q2$$, 
+          Part[$CellContext`r1$$, 1], 
+          Part[$CellContext`r1$$, 2], 
+          Part[$CellContext`r2$$, 1], 
+          
+          Part[$CellContext`r2$$, 
+           2], $CellContext`x, $CellContext`y], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -1.5, 1.5}, Contours -> 12, ContourStyle -> 
+         Red, ContourShading -> False], AspectRatio -> 2/3, 
+        ImageSize -> {575, 350}], 
+      "Specifications" :> {{{$CellContext`q1$$, 1, "charge " 
+          Subscript[$CellContext`q, 1]}, -2, 2, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`q2$$, -1, "charge " 
+          Subscript[$CellContext`q, 2]}, -2, 2, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`r1$$, {-1, 0}}, {-2, -1.5}, {2, 1.5}, 
+         ControlType -> Locator}, {{$CellContext`r2$$, {1, 0}}, {-2, -1.5}, {
+         2, 1.5}, ControlType -> Locator}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`q1$$, $CellContext`q2$$, \
+$CellContext`r1$$, $CellContext`r2$$}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{619., {230., 235.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`\[Phi][
+         Pattern[$CellContext`q1, 
+          Blank[]], 
+         Pattern[$CellContext`q2, 
+          Blank[]], 
+         Pattern[$CellContext`x1, 
+          Blank[]], 
+         Pattern[$CellContext`y1, 
+          Blank[]], 
+         Pattern[$CellContext`x2, 
+          Blank[]], 
+         Pattern[$CellContext`y2, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          
+          Blank[]]] := $CellContext`q1/((($CellContext`x - $CellContext`x1)^2 + \
+($CellContext`y - $CellContext`y1)^2)^Rational[1, 2] + 
+         0.0001) + $CellContext`q2/((($CellContext`x - $CellContext`x2)^2 + \
+($CellContext`y - $CellContext`y2)^2)^Rational[1, 2] + 
+         0.0001); $CellContext`\[Psi][
+         Pattern[$CellContext`q1, 
+          Blank[]], 
+         Pattern[$CellContext`q2, 
+          Blank[]], 
+         Pattern[$CellContext`x1, 
+          Blank[]], 
+         Pattern[$CellContext`y1, 
+          Blank[]], 
+         Pattern[$CellContext`x2, 
+          Blank[]], 
+         Pattern[$CellContext`y2, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          
+          Blank[]]] := ($CellContext`q1 (($CellContext`x - $CellContext`x2)^2 + \
+($CellContext`y - $CellContext`y2)^2)^
+           Rational[
+            1, 2] ((-($CellContext`x - $CellContext`x1)) ($CellContext`x1 - \
+$CellContext`x2) - ($CellContext`y - $CellContext`y1) ($CellContext`y1 - \
+$CellContext`y2)) - $CellContext`q2 (($CellContext`x - $CellContext`x1)^2 + \
+($CellContext`y - $CellContext`y1)^2)^
+          Rational[
+           1, 2] (($CellContext`x - $CellContext`x2) ($CellContext`x1 - \
+$CellContext`x2) + ($CellContext`y - $CellContext`y2) ($CellContext`y1 - \
+$CellContext`y2)))/((($CellContext`x - $CellContext`x1)^2 + ($CellContext`y - \
+$CellContext`y1)^2)^
+          Rational[
+           1, 2] (($CellContext`x - $CellContext`x2)^2 + ($CellContext`y - \
+$CellContext`y2)^2)^
+          Rational[
+           1, 2] (($CellContext`x1 - $CellContext`x2)^2 + ($CellContext`y1 - \
+$CellContext`y2)^2)^Rational[1, 2] + 0.0001)); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->868793177],
+
+Cell[CellGroupData[{
+
+Cell["THIS NOTEBOOK IS THE SOURCE CODE FROM", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "\"",
+ ButtonBox["Lines of Force for Two Point Charges",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/LinesOfForceForTwoPointCharges/"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/LinesOfForceForTwoPointCharges/"],
+ "\"",
+ " from ",
+ ButtonBox["The Wolfram Demonstrations Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+ "\[ParagraphSeparator]\[NonBreakingSpace]",
+ ButtonBox["http://demonstrations.wolfram.com/LinesOfForceForTwoPointCharges/\
+",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/LinesOfForceForTwoPointCharges/"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/LinesOfForceForTwoPointCharges/"]
+}], "Text",
+ CellMargins->{{48, Inherited}, {0, Inherited}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.5]],
+
+Cell[" ", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["S. M. Blinder",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=S.+M.+Blinder"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=S.+M.+Blinder"]
+}], "Text",
+ CellDingbat->"\[FilledSmallSquare]",
+ CellMargins->{{66, 48}, {2, 4}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.6]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "A full-function Wolfram ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " 6 system is required to edit this notebook.\n",
+ StyleBox[ButtonBox["GET WOLFRAM MATHEMATICA 6 \[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.wolfram.com/products/mathematica/"], None},
+  ButtonNote->"http://www.wolfram.com/products/mathematica/"],
+  FontFamily->"Helvetica",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->RGBColor[1, 0.42, 0]]
+}], "Text",
+ CellFrame->True,
+ CellMargins->{{48, 68}, {8, 28}},
+ CellFrameMargins->12,
+ CellFrameColor->RGBColor[0.865507, 0.90634, 0.680751],
+ CellChangeTimes->{3.3750111182355957`*^9},
+ ParagraphSpacing->{1., 1.},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.411765],
+ Background->RGBColor[0.986023, 0.991363, 0.969818]],
+
+Cell[TextData[{
+ "\[Copyright] ",
+ StyleBox[ButtonBox["The Wolfram Demonstrations Project & Contributors",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Terms of Use",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/termsofuse.html"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/termsofuse.html"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Make a new version of this Demonstration \
+\[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/participate/upload.jsp?id=\
+LinesOfForceForTwoPointCharges"], None},
+  ButtonNote->None],
+  FontColor->GrayLevel[0.6]]
+}], "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellMargins->{{48, 10}, {20, 50}},
+ CellFrameMargins->{{6, 0}, {6, 6}},
+ CellFrameColor->GrayLevel[0.6],
+ FontFamily->"Verdana",
+ FontSize->9,
+ FontColor->GrayLevel[0.6]]
+}, Open  ]]
+}, Open  ]]
+},
+Editable->True,
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{780, 650},
+WindowMargins->{{Inherited, Inherited}, {Inherited, 0}},
+WindowElements->{
+ "StatusArea", "MemoryMonitor", "MagnificationPopUp", "VerticalScrollBar", 
+  "MenuBar"},
+WindowTitle->"Lines of Force for Two Point Charges - Source",
+DockedCells->{},
+CellContext->Notebook,
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (May 21, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 228, 4, 70, "Section"],
+Cell[821, 29, 11168, 284, 70, "Input"]
+}, Open  ]],
+Cell[12004, 316, 6396, 146, 70, "Output",
+ CellID->868793177],
+Cell[CellGroupData[{
+Cell[18425, 466, 373, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[18801, 477, 983, 29, 70, "Text"],
+Cell[19787, 508, 337, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[20127, 519, 436, 14, 70, "Text"],
+Cell[CellGroupData[{
+Cell[20588, 537, 829, 24, 70, "Text"],
+Cell[21420, 563, 1206, 33, 70, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature IRNrGTwOQWvEMBp8O1DDDUJu *)

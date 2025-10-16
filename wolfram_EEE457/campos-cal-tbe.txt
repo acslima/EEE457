@@ -1,0 +1,5 @@
+Bitola (MCM)
+Diâmetro do cond. (mm)
+Massa (aprox.) (kg/km)
+Resistência elétrica máxima CC a 20ºC (Ohm/km)
+Carga de ruptura  (kgf)

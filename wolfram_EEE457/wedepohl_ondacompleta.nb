@@ -1,0 +1,385 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     12002,        288]*)
+(*NotebookOutlinePosition[     12646,        310]*)
+(*  CellTagsIndexPosition[     12602,        306]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+    \(\[Lambda]\_1 = \@\(\[Gamma]\^2 - \[ImaginaryJ]\ \[Omega]\ \(\[Mu]\_1\) \
+\((\[Sigma]\_1 + \[ImaginaryJ]\ \[Omega]\ \[Epsilon]\_1)\)\)\), "\
+\[IndentingNewLine]", 
+    \(\[Lambda]\_2 = \@\(\[Gamma]\^2 - \[ImaginaryJ]\ \[Omega]\ \[Mu]\_2\ \((\
+\[Sigma]\_2 + \[ImaginaryJ]\ \[Omega]\ \[Epsilon]\_2)\)\)\), "\
+\[IndentingNewLine]", 
+    \(k\_1 = \@\(\[Alpha]\^2 - \[Lambda]\_1\^2\)\), "\[IndentingNewLine]", 
+    \(k\_2 = \@\(\[Alpha]\^2 - \[Lambda]\_2\^2\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\@\(\[Gamma]\^2 - \[ImaginaryI]\ \[Omega]\ \[Mu]\_1\ \((\[ImaginaryI]\ \
+\[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\)\)], "Output"],
+
+Cell[BoxData[
+    \(\@\(\[Gamma]\^2 - \[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \
+\[Omega]\ \[Epsilon]\_2 + \[Sigma]\_2)\)\)\)], "Output"],
+
+Cell[BoxData[
+    \(\@\(\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\ \[Mu]\_1\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\)\)], "Output"],
+
+Cell[BoxData[
+    \(\@\(\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \[Sigma]\_2)\)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(g[\[Alpha]_, \[Gamma]_] = \(k\_1\ \ \(\[Mu]\_1\) \((\[Sigma]\_1 + \
+\[ImaginaryJ]\ \[Omega]\ \[Epsilon]\_1)\) + k\_2\ \ \(\[Mu]\_2\) \
+\((\[Sigma]\_2 + \[ImaginaryJ]\ \[Omega]\ \[Epsilon]\_2)\)\)\/\(\[Lambda]\_1\
+\ \ \(\[Mu]\_1\) \((\[Sigma]\_1 + \[ImaginaryJ]\ \[Omega]\ \[Epsilon]\_1)\)\) \
+- \(\[Gamma]\^2\/\(\(\ \)\(\[Omega]\ \(\[Mu]\_1\) \((\[Sigma]\_1 + \
+\[ImaginaryJ]\ \[Omega]\ \[Epsilon]\_1)\)\)\)\) \(\((\(\[Lambda]\_1\^2 - \
+\[Lambda]\_2\^2\)\/\[Lambda]\_2\^2)\)\^2\) 
+          1\/\(k\_1\ \ \(\[Mu]\_1\) \(\[Lambda]\_2\^2\) \
+\(+k\_2\)\ \ \(\[Mu]\_2\) \[Lambda]\_1\^2\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(-\(\(\[Gamma]\^2\ \((\(-\[ImaginaryI]\)\ \[Omega]\ \[Mu]\_1\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\) + \[ImaginaryI]\ \
+\[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \
+\[Sigma]\_2)\))\)\^2\)\/\(\[Omega]\ \[Mu]\_1\%2\ \[Mu]\_2\ \((\[ImaginaryI]\ \
+\[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\ \((\[Gamma]\^2 - \[ImaginaryI]\ \
+\[Omega]\ \[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \
+\[Sigma]\_1)\))\)\ \@\(\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\ \
+\[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\)\ \((\
+\[Gamma]\^2 - \[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \
+\[Epsilon]\_2 + \[Sigma]\_2)\))\)\^3\ \@\(\[Alpha]\^2 - \[Gamma]\^2 + \
+\[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 \
++ \[Sigma]\_2)\)\)\)\)\) + \(\[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\
+\_1 + \[Sigma]\_1)\)\ \@\(\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\
+\ \[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\) + \
+\[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \[Sigma]\_2)\)\ \@\(\
+\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \[Sigma]\_2)\)\)\)\/\(\[Mu]\_1\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\ \@\(\[Gamma]\^2 - \
+\[ImaginaryI]\ \[Omega]\ \[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 \
++ \[Sigma]\_1)\)\)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[\[Alpha]_, \[Gamma]_] = 1/g[\[Alpha], \[Gamma]]\)], "Input"],
+
+Cell[BoxData[
+    \(1/\((\(-\(\(\[Gamma]\^2\ \((\(-\[ImaginaryI]\)\ \[Omega]\ \[Mu]\_1\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\) + \[ImaginaryI]\ \
+\[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \
+\[Sigma]\_2)\))\)\^2\)\/\(\[Omega]\ \[Mu]\_1\%2\ \[Mu]\_2\ \((\[ImaginaryI]\ \
+\[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\ \((\[Gamma]\^2 - \[ImaginaryI]\ \
+\[Omega]\ \[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \
+\[Sigma]\_1)\))\)\ \@\(\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\ \
+\[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\)\ \((\
+\[Gamma]\^2 - \[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \
+\[Epsilon]\_2 + \[Sigma]\_2)\))\)\^3\ \@\(\[Alpha]\^2 - \[Gamma]\^2 + \
+\[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 \
++ \[Sigma]\_2)\)\)\)\)\) + \(\[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\
+\_1 + \[Sigma]\_1)\)\ \@\(\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\
+\ \[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\) + \
+\[Mu]\_2\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \[Sigma]\_2)\)\ \@\(\
+\[Alpha]\^2 - \[Gamma]\^2 + \[ImaginaryI]\ \[Omega]\ \[Mu]\_2\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_2 + \[Sigma]\_2)\)\)\)\/\(\[Mu]\_1\ \((\
+\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\ \@\(\[Gamma]\^2 - \
+\[ImaginaryI]\ \[Omega]\ \[Mu]\_1\ \((\[ImaginaryI]\ \[Omega]\ \[Epsilon]\_1 \
++ \[Sigma]\_1)\)\)\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Aplicando-se valores", "Section"],
+
+Cell[BoxData[
+    \(\(\(\ \)\(\(\[Mu]\_1 = 4\ \[Pi]\ 10^\(-7\);\)\[IndentingNewLine]
+    \(\[Sigma]\_1 = 0;\)\)\)\)], "Input"],
+
+Cell[BoxData[{
+    \(\(\[Epsilon]\_1 = 8.854\ 10^\(-12\);\)\), "\[IndentingNewLine]", 
+    \(\(\[Epsilon]\_2 = 5  \[Epsilon]\_1;\)\), "\[IndentingNewLine]", 
+    \(\(\[Mu]\_2\  = \ 4\ \[Pi]\ 10^\(-7\);\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(\[Sigma]\_2 = 100;\)\), "\[IndentingNewLine]", 
+    \(\(\[Omega] = \ 2\ \[Pi]\ 10^6;\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Gamma]0 = \@\(\[ImaginaryI]\ \[Omega]\ \[Mu]\_1\ \((\[ImaginaryI]\ \
+\[Omega]\ \[Epsilon]\_1 + \[Sigma]\_1)\)\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(0.`\)\(\[InvisibleSpace]\)\) + 
+      0.0209582279299515`\ \[ImaginaryI]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(rc = 5\ 10^\(-2\)\)], "Input"],
+
+Cell[BoxData[
+    \(1\/20\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(eq1 = 1 - \ Exp[\(-k\_1\)\ rc] - f[\[Alpha], \[Gamma]]\)], "Input"],
+
+Cell[BoxData[
+    \(1 - \[ExponentialE]\^\(\(-\(1\/20\)\)\ \@\(\(-0.0004392473179637992`\) \
++ \[Alpha]\^2 - \[Gamma]\^2\)\) - 
+      1/\((\(\((3.9999999999999995`*^15 - 8.987742437943712`*^20\ \
+\[ImaginaryI])\)\ \[Gamma]\^2\)\/\(\@\(\((\(-0.0021962365898189964`\) + \
+789.5683520871486`\ \[ImaginaryI])\) + \[Alpha]\^2 - \[Gamma]\^2\)\ \
+\@\(\(-0.0004392473179637992`\) + \[Alpha]\^2 - \[Gamma]\^2\)\ \
+\((\(\(0.0004392473179637993`\)\(\[InvisibleSpace]\)\) + \[Gamma]\^2)\)\ \
+\((\((\(\(0.0021962365898189964`\)\(\[InvisibleSpace]\)\) - \
+789.5683520871486`\ \[ImaginaryI])\) + \[Gamma]\^2)\)\^3\) - \
+\(1.4304436362426275`*^10\ \[ImaginaryI]\ \((\((\(\(0.00012566370614359174`\)\
+\(\[InvisibleSpace]\)\) + 3.4954190946898065`*^-10\ \[ImaginaryI])\)\ \@\(\((\
+\(-0.0021962365898189964`\) + 789.5683520871486`\ \[ImaginaryI])\) + \[Alpha]\
+\^2 - \[Gamma]\^2\) + 6.990838189379613`*^-11\ \[ImaginaryI]\ \
+\@\(\(-0.0004392473179637992`\) + \[Alpha]\^2 - \
+\[Gamma]\^2\))\)\)\/\@\(\(\(0.0004392473179637993`\)\(\[InvisibleSpace]\)\) + \
+\[Gamma]\^2\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(eq2 = \((eq1 /. {\[Gamma] \[Rule] \[Gamma]0})\)\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(Power::"infy"\), \(\(:\)\(\ \)\), "\<\"Infinite expression \
+\\!\\(1\\/0.`\\) encountered. \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"Power::infy\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(Power::"infy"\), \(\(:\)\(\ \)\), "\<\"Infinite expression \
+\\!\\(1\\/\\@0.`\\) encountered. \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"Power::infy\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(\[Infinity]::"indet"\), \(\(:\)\(\ \)\), "\<\"Indeterminate \
+expression \\!\\(ComplexInfinity + ComplexInfinity\\) encountered. \
+\\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\
+\\\", ButtonFrame->None, ButtonData:>\\\"General::indet\\\"]\\)\"\>"}]], \
+"Message"],
+
+Cell[BoxData[
+    \(Indeterminate\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FindRoot[eq2 \[Equal] 0, {\[Alpha], \[Gamma]0}]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(FindRoot::"nlnum"\), \(\(:\)\(\ \)\), "\<\"The function value \
+\\!\\({Indeterminate}\\) is not a list of numbers with dimensions \
+\\!\\({1}\\) at \\!\\({\[Alpha]}\\) = \\!\\({\\(\\(0.`\[InvisibleSpace]\\)\\) \
++ \\(\\(0.020958227929951504`\\\\ \[ImaginaryI]\\)\\)}\\). \
+\\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\
+\\\", ButtonFrame->None, ButtonData:>\\\"General::nlnum\\\"]\\)\"\>"}]], \
+"Message"],
+
+Cell[BoxData[
+    \(FindRoot[eq2 \[Equal] 0, {\[Alpha], \[Gamma]0}]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(eq3 = 
+      eq1 /. {\[Omega] \[Rule] \ \ 2\ \[Pi]\ 10^6, \[Alpha] \[Rule] \ 
+            0}\)], "Input"],
+
+Cell[BoxData[
+    \(1 - \[ExponentialE]\^\(\(-\(1\/20\)\)\ \@\(\(-0.0004392473179637992`\) \
+- \[Gamma]\^2\)\) - 
+      1/\((\(\((3.9999999999999995`*^15 - 8.987742437943712`*^20\ \
+\[ImaginaryI])\)\ \[Gamma]\^2\)\/\(\@\(\((\(-0.0021962365898189964`\) + \
+789.5683520871486`\ \[ImaginaryI])\) - \[Gamma]\^2\)\ \
+\@\(\(-0.0004392473179637992`\) - \[Gamma]\^2\)\ \
+\((\(\(0.0004392473179637993`\)\(\[InvisibleSpace]\)\) + \[Gamma]\^2)\)\ \
+\((\((\(\(0.0021962365898189964`\)\(\[InvisibleSpace]\)\) - \
+789.5683520871486`\ \[ImaginaryI])\) + \[Gamma]\^2)\)\^3\) - \
+\(1.4304436362426275`*^10\ \[ImaginaryI]\ \((\((\(\(0.00012566370614359174`\)\
+\(\[InvisibleSpace]\)\) + 3.4954190946898065`*^-10\ \[ImaginaryI])\)\ \@\(\((\
+\(-0.0021962365898189964`\) + 789.5683520871486`\ \[ImaginaryI])\) - \[Gamma]\
+\^2\) + 6.990838189379613`*^-11\ \[ImaginaryI]\ \@\(\(-0.0004392473179637992`\
+\) - \[Gamma]\^2\))\)\)\/\@\(\(\(0.0004392473179637993`\)\(\[InvisibleSpace]\)\
+\) + \[Gamma]\^2\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FindRoot[
+      eq3 \[Equal] 0, {\[Gamma], \[Gamma]0 + \[ImaginaryJ]\ 0.03}]\)], "Input"],
+
+Cell[BoxData[
+    \({\[Gamma] \[Rule] \(-8.845987625597373`*^-20\) + 
+          0.0209582279299515`\ \[ImaginaryI]}\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 926}},
+WindowSize->{1024, 771},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 488, 8, 102, "Input"],
+Cell[2267, 63, 149, 2, 35, "Output"],
+Cell[2419, 67, 149, 2, 35, "Output"],
+Cell[2571, 71, 163, 2, 35, "Output"],
+Cell[2737, 75, 163, 2, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2937, 82, 615, 9, 48, "Input"],
+Cell[3555, 93, 1482, 20, 97, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5074, 118, 82, 1, 30, "Input"],
+Cell[5159, 121, 1490, 20, 99, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6686, 146, 39, 0, 73, "Section"],
+Cell[6728, 148, 126, 2, 50, "Input"],
+Cell[6857, 152, 217, 3, 70, "Input"],
+Cell[7077, 157, 123, 2, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[7225, 163, 146, 2, 33, "Input"],
+Cell[7374, 167, 110, 2, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7521, 174, 50, 1, 30, "Input"],
+Cell[7574, 177, 39, 1, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7650, 183, 87, 1, 30, "Input"],
+Cell[7740, 186, 1066, 16, 137, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8843, 207, 80, 1, 30, "Input"],
+Cell[8926, 210, 280, 4, 35, "Message"],
+Cell[9209, 216, 283, 4, 38, "Message"],
+Cell[9495, 222, 323, 5, 22, "Message"],
+Cell[9821, 229, 47, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9905, 235, 80, 1, 30, "Input"],
+Cell[9988, 238, 465, 7, 22, "Message"],
+Cell[10456, 247, 81, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10574, 253, 125, 3, 30, "Input"],
+Cell[10702, 258, 994, 15, 104, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11733, 278, 109, 2, 30, "Input"],
+Cell[11845, 282, 129, 2, 29, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

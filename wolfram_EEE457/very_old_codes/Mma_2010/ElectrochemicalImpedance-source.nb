@@ -1,0 +1,665 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     26527,        655]
+NotebookOptionsPosition[     25167,        605]
+NotebookOutlinePosition[     25785,        629]
+CellTagsIndexPosition[     25742,        626]
+WindowTitle->Electrochemical Impedance - Source
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Electrochemical Impedance", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"model", "[", 
+    RowBox[{"r1_", ",", "r2_", ",", "c_", ",", "w_"}], "]"}], ":=", 
+   RowBox[{"r1", "+", 
+    RowBox[{"1", " ", "/", 
+     RowBox[{"(", " ", 
+      RowBox[{
+       RowBox[{"1", "/", "r2"}], " ", "+", " ", 
+       RowBox[{"\[ImaginaryI]", " ", "w", " ", "c"}]}], ")"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"frequencyMin", "=", "0.01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"frequencyMax", "=", "100000"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logmin", "=", 
+   RowBox[{"Log10", "[", "frequencyMin", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logmax", "=", 
+   RowBox[{"Log10", "[", "frequencyMax", "]"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.47793890796875*^9, {3.477939546703125*^9, 
+   3.47793967703125*^9}, {3.477939899453125*^9, 3.477939912578125*^9}, {
+   3.477947165625*^9, 3.47794718296875*^9}, 3.47835238045537*^9},
+ CellID->777130231],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"step", "=", 
+     RowBox[{"1", "/", "point"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"frequency", "=", 
+     RowBox[{"10", "^", 
+      RowBox[{"Range", "[", 
+       RowBox[{"logmin", ",", "logmax", ",", "step"}], "]"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"data", "=", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Re", "[", 
+         RowBox[{"model", "[", 
+          RowBox[{"r1", ",", "r2", ",", "c", ",", "i"}], "]"}], "]"}], ",", 
+        RowBox[{"-", 
+         RowBox[{"Im", "[", 
+          RowBox[{"model", "[", 
+           RowBox[{"r1", ",", "r2", ",", "c", ",", "i"}], "]"}], "]"}]}]}], 
+       "}"}], "/.", 
+      RowBox[{"i", "->", "frequency"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"phase", "=", 
+     RowBox[{
+      RowBox[{"ArcTan", "[", 
+       RowBox[{
+        RowBox[{"Im", "[", 
+         RowBox[{"model", "[", 
+          RowBox[{"r1", ",", "r2", ",", "c", ",", "i"}], "]"}], "]"}], "/", 
+        RowBox[{"Re", "[", 
+         RowBox[{"model", "[", 
+          RowBox[{"r1", ",", "r2", ",", "c", ",", "i"}], "]"}], "]"}]}], 
+       "]"}], "/.", 
+      RowBox[{"i", "\[Rule]", "frequency"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"GraphicsGrid", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"ListLinePlot", "[", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "data", "]"}], ",", 
+           RowBox[{"PlotRange", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "200"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "200"}], "}"}]}], "}"}]}], ",", 
+           RowBox[{"AxesOrigin", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+           RowBox[{"AspectRatio", "\[Rule]", "1"}], " ", ",", 
+           RowBox[{"Mesh", "\[Rule]", "All"}], ",", 
+           RowBox[{"PlotStyle", "\[Rule]", 
+            RowBox[{"Directive", "[", 
+             RowBox[{
+              RowBox[{"PointSize", "[", "Medium", "]"}], ",", "Red"}], 
+             "]"}]}], ",", 
+           RowBox[{"PlotLabel", "\[Rule]", "\"\<Nyquist Diagram\>\""}], ",", 
+           RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+           RowBox[{"FrameLabel", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{"\"\<Re \>\"", ",", 
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<Z\>\"", ",", "Italic"}], "]"}]}], "}"}], "]"}],
+               ",", 
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{"\"\<-Im \>\"", ",", 
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<Z\>\"", ",", "Italic"}], "]"}]}], "}"}], 
+               "]"}]}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"ListPlot", "[", 
+          RowBox[{
+           RowBox[{"Transpose", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Log", "[", 
+               RowBox[{"10", ",", "frequency"}], "]"}], ",", "phase"}], "}"}],
+             "]"}], ",", 
+           RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+           RowBox[{"GridLines", "\[Rule]", "Automatic"}], ",", 
+           RowBox[{"PlotStyle", "\[Rule]", 
+            RowBox[{"Directive", "[", 
+             RowBox[{
+              RowBox[{"PointSize", "[", "Medium", "]"}], ",", "Blue"}], 
+             "]"}]}], ",", 
+           RowBox[{"PlotLabel", "\[Rule]", "\"\<Bode Diagram\>\""}], ",", 
+           RowBox[{"FrameLabel", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<Frequency (Hz)\>\"", ",", "\"\<Phase (Radians)\>\""}], 
+             "}"}]}], ",", 
+           RowBox[{"Frame", "\[Rule]", "True"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "}"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"ImageSize", "\[Rule]", "600"}], ",", 
+      RowBox[{"Spacings", "\[Rule]", "0"}]}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "r1", ",", "10", ",", 
+       "\"\<electrolyte resistance \!\(\*SubscriptBox[\(R\), \(1\)]\)\>\""}], 
+      "}"}], ",", "10", ",", "50", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "r2", ",", "100", ",", 
+       "\"\<charge transfer resistance \!\(\*SubscriptBox[\(R\), \
+\(2\)]\)\>\""}], "}"}], ",", "100", ",", "150", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"c", ",", "0.0001", ",", "\"\<double layer capacitance C\>\""}],
+       "}"}], ",", "0.0001", ",", "0.0002", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"point", ",", "5", ",", "\"\<frequency/decades\>\""}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}]}], "}"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.477939712*^9, 3.477939988140625*^9}, {
+   3.477940032734375*^9, 3.477940072390625*^9}, {3.477940109046875*^9, 
+   3.4779401195625*^9}, {3.477940214484375*^9, 3.4779402336875*^9}, {
+   3.477940614046875*^9, 3.477940628171875*^9}, {3.47794076565625*^9, 
+   3.477940791265625*^9}, {3.477940866765625*^9, 3.47794087171875*^9}, {
+   3.477940918546875*^9, 3.4779409285625*^9}, {3.4779409751875*^9, 
+   3.4779409853125*^9}, {3.477941261671875*^9, 3.47794138621875*^9}, {
+   3.477941488109375*^9, 3.477941488671875*^9}, {3.47794158096875*^9, 
+   3.47794159015625*^9}, {3.477942118703125*^9, 3.477942118984375*^9}, {
+   3.477946087453125*^9, 3.47794612790625*^9}, {3.477946175359375*^9, 
+   3.47794618534375*^9}, {3.477946216328125*^9, 3.47794627234375*^9}, {
+   3.47794631434375*^9, 3.47794634084375*^9}, {3.47794642234375*^9, 
+   3.477946435890625*^9}, {3.477946501890625*^9, 3.477946528125*^9}, 
+   3.47794658715625*^9, {3.47794661909375*^9, 3.47794679496875*^9}, {
+   3.477946840390625*^9, 3.477946939171875*^9}, {3.477946987015625*^9, 
+   3.477946991109375*^9}, {3.477947024046875*^9, 3.47794710534375*^9}, {
+   3.477947192390625*^9, 3.477947222390625*^9}, {3.47794728096875*^9, 
+   3.47794735640625*^9}, {3.4779473943125*^9, 3.47794743653125*^9}, {
+   3.477947485578125*^9, 3.477947488640625*^9}, {3.477947565203125*^9, 
+   3.47794757084375*^9}, {3.47794769925*^9, 3.4779477294375*^9}, {
+   3.47794776028125*^9, 3.477947865359375*^9}, {3.477947927625*^9, 
+   3.4779479441875*^9}, {3.477948078390625*^9, 3.477948198390625*^9}, {
+   3.478352436821497*^9, 3.4783524661470833`*^9}, {3.478354991227476*^9, 
+   3.478355067603454*^9}, {3.478356460909452*^9, 3.478356461670437*^9}, 
+   3.4783566098942432`*^9, {3.4783566737076693`*^9, 3.478356682406702*^9}, 
+   3.4783567177417517`*^9, {3.49404962484375*^9, 3.49404965596875*^9}, {
+   3.4940496944375*^9, 3.494049695859375*^9}, {3.4940680184110937`*^9, 
+   3.4940680289041433`*^9}, {3.4940697933143425`*^9, 3.494069802704908*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`c$$ = 0.0001, $CellContext`point$$ = 
+    5, $CellContext`r1$$ = 10, $CellContext`r2$$ = 100, Typeset`show$$ = True,
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`r1$$], 10, 
+       "electrolyte resistance \!\(\*SubscriptBox[\(R\), \(1\)]\)"}, 10, 
+      50}, {{
+       Hold[$CellContext`r2$$], 100, 
+       "charge transfer resistance \!\(\*SubscriptBox[\(R\), \(2\)]\)"}, 100, 
+      150}, {{
+       Hold[$CellContext`c$$], 0.0001, "double layer capacitance C"}, 0.0001, 
+      0.0002}, {{
+       Hold[$CellContext`point$$], 5, "frequency/decades"}, {4, 5, 6, 7, 8}}},
+     Typeset`size$$ = {600., {124., 128.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`r1$1910$$ = 0, $CellContext`r2$1911$$ = 
+    0, $CellContext`c$1912$$ = 0, $CellContext`point$1913$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`c$$ = 0.0001, $CellContext`point$$ = 
+        5, $CellContext`r1$$ = 10, $CellContext`r2$$ = 100}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`r1$$, $CellContext`r1$1910$$, 0], 
+        Hold[$CellContext`r2$$, $CellContext`r2$1911$$, 0], 
+        Hold[$CellContext`c$$, $CellContext`c$1912$$, 0], 
+        Hold[$CellContext`point$$, $CellContext`point$1913$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`step = 
+        1/$CellContext`point$$; $CellContext`frequency = 
+        10^Range[$CellContext`logmin, $CellContext`logmax, $CellContext`step]; \
+$CellContext`data = ReplaceAll[{
+           Re[
+            $CellContext`model[$CellContext`r1$$, $CellContext`r2$$, \
+$CellContext`c$$, $CellContext`i]], -Im[
+             $CellContext`model[$CellContext`r1$$, $CellContext`r2$$, \
+$CellContext`c$$, $CellContext`i]]}, $CellContext`i -> \
+$CellContext`frequency]; $CellContext`phase = ReplaceAll[
+          ArcTan[Im[
+             $CellContext`model[$CellContext`r1$$, $CellContext`r2$$, \
+$CellContext`c$$, $CellContext`i]]/Re[
+            $CellContext`model[$CellContext`r1$$, $CellContext`r2$$, \
+$CellContext`c$$, $CellContext`i]]], $CellContext`i -> \
+$CellContext`frequency]; GraphicsGrid[{{
+           ListLinePlot[
+            Transpose[$CellContext`data], PlotRange -> {{0, 200}, {0, 200}}, 
+            AxesOrigin -> {0, 0}, AspectRatio -> 1, Mesh -> All, PlotStyle -> 
+            Directive[
+              PointSize[Medium], Red], PlotLabel -> "Nyquist Diagram", Frame -> 
+            True, FrameLabel -> {
+              Row[{"Re ", 
+                Style["Z", Italic]}], 
+              Row[{"-Im ", 
+                Style["Z", Italic]}]}], 
+           ListPlot[
+            Transpose[{
+              Log[10, $CellContext`frequency], $CellContext`phase}], 
+            PlotRange -> Full, GridLines -> Automatic, PlotStyle -> 
+            Directive[
+              PointSize[Medium], Blue], PlotLabel -> "Bode Diagram", 
+            FrameLabel -> {"Frequency (Hz)", "Phase (Radians)"}, Frame -> 
+            True]}}, ImageSize -> 600, Spacings -> 0]), 
+      "Specifications" :> {{{$CellContext`r1$$, 10, 
+          "electrolyte resistance \!\(\*SubscriptBox[\(R\), \(1\)]\)"}, 10, 
+         50, Appearance -> 
+         "Labeled"}, {{$CellContext`r2$$, 100, 
+          "charge transfer resistance \!\(\*SubscriptBox[\(R\), \(2\)]\)"}, 
+         100, 150, Appearance -> 
+         "Labeled"}, {{$CellContext`c$$, 0.0001, 
+          "double layer capacitance C"}, 0.0001, 0.0002, Appearance -> 
+         "Labeled"}, {{$CellContext`point$$, 5, "frequency/decades"}, {4, 5, 
+         6, 7, 8}}}, "Options" :> {TrackedSymbols -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{645., {208., 213.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(({$CellContext`step = 
+        1/5, $CellContext`frequency = {0.01, 0.015848931924611134`, 
+         0.025118864315095794`, 0.039810717055349734`, 0.06309573444801933, 
+         0.1, 0.15848931924611137`, 0.25118864315095807`, 0.3981071705534973, 
+         0.6309573444801934, 1.0000000000000002`, 1.5848931924611138`, 
+         2.511886431509581, 3.981071705534973, 6.309573444801935, 
+         10.000000000000005`, 15.848931924611142`, 25.11886431509581, 
+         39.810717055349734`, 63.095734448019364`, 100., 158.48931924611142`, 
+         251.18864315095823`, 398.1071705534973, 630.9573444801937, 
+         1000.000000000001, 1584.893192461114, 2511.886431509582, 
+         3981.0717055349774`, 6309.573444801937, 10000., 15848.93192461114, 
+         25118.864315095823`, 39810.71705534977, 63095.73444801943, 
+         100000.}, $CellContext`logmin = -2., $CellContext`logmax = 
+        5, $CellContext`data = CompressedData["
+1:eJxTTMoPSmViYGAAYRUglnQ69/t/fbTD+4dlX0H0UdXOpyC6NLxtL4g+MZU1
+EkSffjMx5h+Q/vqm4NFvIC3yZ9rKr0Ca8+4UjmdAetXPa8f2Aek/Keq6MUCa
+77tvX0pdtINqjd6Tb9XRDjnWTdn3S6MdrFaucpufFu0grn3YfJFDtEOmzf51
+uo+jHB6uNsxSZ4lyuNf1d3q+SISDhlOl9LzEEAcGMPBzWFPNe/KwjbND0xXO
+BY7rzB0+LShad+SevsMWGbauSc80HDyWP3N890vVQXPbqlOsp1Uc5qm8W8wS
+qOJwXa7nnoeCikOf+4Te2zwqDqo3jkyTY1VxWG3kcZKTScVhk3jk7vMMKg4x
+8h6bg4B06IyKNwpAevnMAmleIN1YYefysKrF/vPdkFObrSbYPy4/GH5ox0z7
+5SxxJwWTlthzG4pFcKlvsBfpkXozfeZO+9ctnXmxnkfsEwRkHhUJX7C/47mN
+o6bqpv27ay+PzzB4Yr/muZuf3v/39urq0+aLR/20P5VvXC8pyuIgHno4KPQM
+v8M+TQ6dJGVJh8cdTJP9zio7fK9+IXXxtZ7D1xipH8cWmDu83/th6iI9Rwex
+YGmpCRPcoOHj6SAC5b+Cyn+Eqn8H1X8Tat5uqPm8UPsOQu1XhLpnBdR9r6Hu
+vQJ1fyTUPw+h/oP5FwBELv8f
+         "], $CellContext`model[
+          Pattern[$CellContext`r, 
+           Blank[]], 
+          Pattern[$CellContext`c, 
+           Blank[]], 
+          Pattern[$CellContext`w, 
+           Blank[]]] := 
+        1/(
+         1/$CellContext`r + (
+           I $CellContext`w) $CellContext`c), $CellContext`model[
+          Pattern[$CellContext`r1, 
+           Blank[]], 
+          Pattern[$CellContext`r2, 
+           Blank[]], 
+          Pattern[$CellContext`c, 
+           Blank[]], 
+          Pattern[$CellContext`w, 
+           Blank[]]] := $CellContext`r1 + 
+         1/(1/$CellContext`r2 + (
+            I $CellContext`w) $CellContext`c), $CellContext`phase = \
+{-0.00009090909057600802, -0.0001440811979886198, -0.00022835330667640843`, \
+-0.0003619155885779806, -0.0005735975022244643, -0.0009090905760082141, \
+-0.0014408106671215779`, -0.0022835278405660352`, -0.003619135080030985, \
+-0.005735892194270311, -0.009090576028012476, -0.014406794104538405`, \
+-0.02283005418649914, -0.03617056482677493, -0.05727629138042892, \
+-0.09057799382610228, -0.14277482032996883`, -0.22326570957049188`, \
+-0.342697791522541, -0.5055748077991861, -0.6947382761967033, \
+-0.8648281199379738, -0.967418891828028, -0.9774488796549314, \
+-0.8928346937422666, -0.7333126141832693, -0.5437113770921514, \
+-0.37297143421261986`, -0.2444678000404041, -0.15675590430719477`, \
+-0.09955986008727911, -0.06298469514540857, -0.039782776779021894`, \
+-0.02511184117452039, -0.015847167304851743`, -0.009999556698873884}, 
+        Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True); 
+     ReleaseHold[{{
+         HoldComplete[$CellContext`model[
+             Pattern[$CellContext`r1, 
+              Blank[]], 
+             Pattern[$CellContext`r2, 
+              Blank[]], 
+             Pattern[$CellContext`c, 
+              Blank[]], 
+             Pattern[$CellContext`w, 
+              Blank[]]] := $CellContext`r1 + 
+            1/(1/$CellContext`r2 + I $CellContext`w $CellContext`c); Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`frequencyMin = 0.01; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`frequencyMax = 100000; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`logmin = Log10[$CellContext`frequencyMin]; 
+          Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`logmax = Log10[$CellContext`frequencyMax]; 
+          Null]}}]; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->259431839],
+
+Cell[CellGroupData[{
+
+Cell["Caption", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell["\<\
+Electrochemical impedance spectroscopy (EIS) is one of the most powerful \
+techniques in electrochemical research. The schematic diagram corresponding \
+to this Demonstration is\
+\>", "Text"]
+}, Close]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  GraphicsBox[RasterBox[CompressedData["
+1:eJztmW1TGlcUx53JJ+mX6AfJq77O+zQzznSmaV+YdqYJNZOCSSjaBMkMCfKw
+ulCpIiBIUiQDyCrBUFEReZAnKe5CRJ6kx+5kg8KyrJBcd9zfDMxlL+fOuf+5
+955z7n51687NWzdGRka+hs838Dlrt0RERFjIZDKJRAK1F+gpFouHh4eovRAR
+ERHhJpvY8Xg8h1QVtSMoSf7je6JQOJdtUqni4KiC2h1kmF88fRtKQ4P8N0d+
+uL5LwqZ7ZvFEoHEQT1QaTdTuIKOUT2pfajDDzLQaL9eurw5n1CvpdBq1EyIi
+V4LT09Nq9VOA2N/fR+gMQiqVCo7jdBs0UavV8I3WJSSADlqtlm6DAjqd7trq
+oNfr6baoA92+zjrAIdmuw+zsLFp/hk6z2czn8xkucrkchmG0Ceggl8tdLtfr
+vgmHw2inyYnD4VCpVH9y4fP5jEYjbQI6TE1NEQSx3h9+v1+hUKCdJicWiyWV
+SnH+DZYNnAl0G3Rg1kafGAyGyzj3BbFarbu7u5x/G+ScrNfrjIZXlsvpALkE
+Qh1IkrTZbHN8gAW8sbHRY8w+dTg+PoYckm6DAhqNBpUOIILJZAqFQnk+wFG/
+srLi8XjYhu1TB5hLu568XqkMV4fFxcW9vb3L2ZrNZjbbPnUYhOHqAEOdnJww
+P6lC6l3kzH+f25WmquV8JhLLsNlC1AsEAl27nE7nzs7OsJzsyuA61Gq16kdm
+ZmYoimK6okH7Yw0WfecZuy8r1ZpbfztfzLnZxvF6vXDKve8GJA+xWGwQJzkZ
+UAcQARIY3UdGR0chJ2F60xH3dz/elUruPX5larZasYBXt+BlGwp0mJycdHZD
+JpN97ssE0AHiS70/Go1G79EgFWnfF7AeflOfBbJfZQ/2DuJj397+Q7/KZgv7
+IhgMdu2CpPdz7wuY2vj4uKE/FhYWekciSGshyWd+Utntp08mdNpXc1YXhDK/
+3fpmdYvN1m63wxbo2iW4cxKyX9gmEAp5WYG2EGoheWZbb4LTAYADDQrePhcY
+DZyuy8vLPTadEHWgafAB6qPeowlXh+Ei6kAj6kDTW4csT9rfcTAIWodisQjl
+Ko7jnFdV7cB8ITxdGEq4OpTLZUhX+Mbo1v85MNSD0Wi0/aFwdYD8s6NUr771
+rUL0zUZD+Bw2rVT+ZZ4PR7tUdqDehdtsQegAKVYymbzw0O/3EwRx/ll5XHZ/
+azfyy88/BQhC+uAH4+u1Zrf89+joiHkDyHD17yeh1FIqlfh5JBJJxy1W5aHk
+++eq6btj91JktdWkHkkfejbjnQNCUSyXywNtwOq6+vfVkHgXCoXceaDY6VgP
+JVgPJOwj47PnBjxIhN6YdY+mzZ0DlkqliYmJ1fNsb29/mekMF/C8Q4eGxfhS
+j2EazJjLphd1qt9V6niB6rQlSbJzXwiURCJhMpkuZ7u2tuZ2s94ICY5gMDg/
+P7+5uRnmg8PhWFpaggCB2v1hEo/HHTxZX1/nrOxEREQG5z+fJScM
+    "], {{0, 0}, {88, 
+    54}}, {0, 255},
+    ColorFunction->RGBColor],
+   ImageSize->{170., 86.},
+   PlotRange->{{0, 88}, {0, 54}}], "."}]], "Text"],
+
+Cell[TextData[{
+ "The impedance corresponds to the reaction on the surface of the electrode: ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["R", "1"], TraditionalForm]], "InlineMath"],
+ " is the resistance of the solution, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["R", "2"], TraditionalForm]], "InlineMath"],
+ " is the charge transfer resistance, and ",
+ Cell[BoxData[
+  FormBox["C", TraditionalForm]], "InlineMath"],
+ " is the double layer capacitance. The frequency in electrochemical \
+impedance spectroscopy is normally calculated by the number of frequencies \
+per decade. The Nyquist diagram plots the real versus the imaginary parts of \
+the impedance."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["THIS NOTEBOOK IS THE SOURCE CODE FROM", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "\"",
+ ButtonBox["Electrochemical Impedance",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/ElectrochemicalImpedance/"], None},
+  
+  ButtonNote->"http://demonstrations.wolfram.com/ElectrochemicalImpedance/"],
+ "\"",
+ " from ",
+ ButtonBox["The Wolfram Demonstrations Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+ "\[ParagraphSeparator]\[NonBreakingSpace]",
+ ButtonBox["http://demonstrations.wolfram.com/ElectrochemicalImpedance/",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/ElectrochemicalImpedance/"], None},
+  
+  ButtonNote->"http://demonstrations.wolfram.com/ElectrochemicalImpedance/"]
+}], "Text",
+ CellMargins->{{48, Inherited}, {0, Inherited}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.5]],
+
+Cell[" ", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Quang-Dao Trinh",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Quang-Dao+\
+Trinh"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Quang-Dao+Trinh"]
+}], "Text",
+ CellDingbat->"\[FilledSmallSquare]",
+ CellMargins->{{66, 48}, {2, 4}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.6]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "A full-function Wolfram ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " system (Version 6 or higher) is required to edit this notebook.\n",
+ StyleBox[ButtonBox["GET WOLFRAM MATHEMATICA \[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.wolfram.com/products/mathematica/"], None},
+  ButtonNote->"http://www.wolfram.com/products/mathematica/"],
+  FontFamily->"Helvetica",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->RGBColor[1, 0.42, 0]]
+}], "Text",
+ CellFrame->True,
+ CellMargins->{{48, 68}, {8, 28}},
+ CellFrameMargins->12,
+ CellFrameColor->RGBColor[0.865507, 0.90634, 0.680751],
+ CellChangeTimes->{3.3750111182355957`*^9},
+ ParagraphSpacing->{1., 1.},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.411765],
+ Background->RGBColor[0.986023, 0.991363, 0.969818]],
+
+Cell[TextData[{
+ "\[Copyright] ",
+ StyleBox[ButtonBox["The Wolfram Demonstrations Project & Contributors",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Terms of Use",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/termsofuse.html"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/termsofuse.html"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Make a new version of this Demonstration \
+\[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/participate/upload.jsp?id=\
+ElectrochemicalImpedance"], None},
+  ButtonNote->None],
+  FontColor->GrayLevel[0.6]]
+}], "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellMargins->{{48, 10}, {20, 50}},
+ CellFrameMargins->{{6, 0}, {6, 6}},
+ CellFrameColor->GrayLevel[0.6],
+ FontFamily->"Verdana",
+ FontSize->9,
+ FontColor->GrayLevel[0.6]]
+}, Open  ]]
+}, Open  ]]
+},
+Editable->True,
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{780, 650},
+WindowMargins->{{Inherited, Inherited}, {Inherited, 0}},
+WindowElements->{
+ "StatusArea", "MemoryMonitor", "MagnificationPopUp", "VerticalScrollBar", 
+  "MenuBar"},
+WindowTitle->"Electrochemical Impedance - Source",
+DockedCells->{},
+CellContext->Notebook,
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[615, 23, 217, 4, 70, "Section"],
+Cell[835, 29, 1036, 28, 70, "Input",
+ InitializationCell->True,
+ CellID->777130231],
+Cell[1874, 59, 7538, 168, 70, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9449, 232, 8639, 170, 70, "Output",
+ CellID->259431839],
+Cell[CellGroupData[{
+Cell[18113, 406, 199, 4, 70, "Section"],
+Cell[18315, 412, 201, 4, 70, "Text"]
+}, Close]]
+}, Open  ]],
+Cell[18542, 420, 1734, 32, 70, "Text"],
+Cell[20279, 454, 674, 16, 70, "Text"],
+Cell[CellGroupData[{
+Cell[20978, 474, 373, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[21354, 485, 928, 26, 70, "Text"],
+Cell[22285, 513, 337, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[22625, 524, 439, 14, 70, "Text"],
+Cell[CellGroupData[{
+Cell[23089, 542, 847, 24, 70, "Text"],
+Cell[23939, 568, 1200, 33, 70, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature 1Tjz7laePmK9xApYOH7jJIQT *)

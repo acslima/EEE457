@@ -1,0 +1,4332 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    187472,       4323]
+NotebookOptionsPosition[    183143,       4192]
+NotebookOutlinePosition[    184763,       4242]
+CellTagsIndexPosition[    184427,       4230]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Wireless Power Transmission", "DemoTitle",
+ CellChangeTimes->{{3.625386162528199*^9, 3.625386193541054*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Mu]o", "=", 
+        RowBox[{"4", " ", "\[Pi]", "*", 
+         SuperscriptBox["10", 
+          RowBox[{"-", "7"}]]}]}], ",", " ", 
+       RowBox[{"Vi", "=", "100"}], ",", " ", 
+       RowBox[{"ri", "=", "10"}], ",", " ", 
+       RowBox[{"a", "=", "0.5"}], ",", " ", 
+       RowBox[{"b", "=", "0.5"}], ",", " ", 
+       RowBox[{"R", "=", "0.05"}], ",", " ", 
+       RowBox[{"N1", "=", "100"}], ",", " ", 
+       RowBox[{"N2", "=", "100"}], ",", " ", "L11", ",", " ", "L22", ",", " ",
+        "L12", ",", " ", "I1", ",", " ", "I2", ",", " ", "frv", ",", " ", 
+       "fmin", ",", " ", "fmax"}], "}"}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"L11", "=", 
+       RowBox[{"L22", "=", 
+        RowBox[{
+         SuperscriptBox["N1", "2"], " ", "a", " ", "\[Mu]o", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Log", "[", 
+            FractionBox[
+             RowBox[{"8", " ", "a"}], "R"], "]"}], "-", 
+           RowBox[{"7", "/", "4"}]}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"L12", "[", "d_", "]"}], "=", 
+       RowBox[{"N1", " ", "N2", " ", 
+        RowBox[{"Block", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k", "=", 
+            SqrtBox[
+             FractionBox[
+              RowBox[{"4", " ", "a", " ", "b"}], 
+              RowBox[{
+               SuperscriptBox[
+                RowBox[{"(", 
+                 RowBox[{"a", " ", "+", "b"}], ")"}], "2"], "+", 
+               SuperscriptBox["d", "2"]}]]]}], "}"}], ",", " ", 
+          RowBox[{"\[Mu]o", " ", 
+           SqrtBox[
+            RowBox[{"a", " ", "b"}]], " ", 
+           FractionBox["2", "k"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"1", "-", 
+                FractionBox[
+                 SuperscriptBox["k", "2"], "2"]}], ")"}], " ", 
+              RowBox[{"EllipticK", "[", 
+               SuperscriptBox["k", "2"], "]"}]}], "-", 
+             RowBox[{"EllipticE", "[", 
+              SuperscriptBox["k", "2"], "]"}]}], ")"}]}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"I1", "[", "f_", "]"}], ":=", 
+       RowBox[{"Vi", "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           FractionBox["\[ImaginaryI]", 
+            RowBox[{"2", " ", "C1", " ", 
+             SuperscriptBox["10", 
+              RowBox[{"-", "12"}]], " ", "f", " ", "\[Pi]"}]]}], "+", 
+          RowBox[{
+          "2", " ", "\[ImaginaryI]", " ", "f", " ", "L11", " ", "\[Pi]"}], 
+          "+", "ri", "+", 
+          FractionBox[
+           RowBox[{"8", " ", "C2", " ", 
+            SuperscriptBox["10", 
+             RowBox[{"-", "12"}]], " ", 
+            SuperscriptBox["f", "3"], " ", 
+            SuperscriptBox[
+             RowBox[{"L12", "[", "d", "]"}], "2"], " ", 
+            SuperscriptBox["\[Pi]", "3"]}], 
+           RowBox[{
+            RowBox[{"-", "\[ImaginaryI]"}], "+", 
+            RowBox[{"2", " ", "C2", " ", 
+             SuperscriptBox["10", 
+              RowBox[{"-", "12"}]], " ", "f", " ", "\[Pi]", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+               "2", " ", "\[ImaginaryI]", " ", "f", " ", "L22", " ", 
+                "\[Pi]"}], "+", "ro"}], ")"}]}]}]]}], ")"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"I2", "[", "f_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"8", " ", "\[ImaginaryI]", " ", "C1", " ", "C2", " ", 
+          SuperscriptBox["10", 
+           RowBox[{"-", "24"}]], " ", 
+          SuperscriptBox["f", "3"], " ", 
+          RowBox[{"L12", "[", "d", "]"}], " ", 
+          SuperscriptBox["\[Pi]", "3"], " ", "Vi"}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", 
+          RowBox[{"2", " ", "f", " ", "\[Pi]", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"C2", " ", 
+              SuperscriptBox["10", 
+               RowBox[{"-", "12"}]], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"2", " ", "f", " ", "L22", " ", "\[Pi]"}], "-", 
+                RowBox[{"\[ImaginaryI]", " ", "ro"}]}], ")"}]}], "+", 
+             RowBox[{"C1", " ", 
+              SuperscriptBox["10", 
+               RowBox[{"-", "12"}]], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"8", " ", "C2", " ", 
+                 SuperscriptBox["10", 
+                  RowBox[{"-", "12"}]], " ", 
+                 SuperscriptBox["f", "3"], " ", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   SuperscriptBox[
+                    RowBox[{"L12", "[", "d", "]"}], "2"], "-", 
+                   RowBox[{"L11", " ", "L22"}]}], ")"}], " ", 
+                 SuperscriptBox["\[Pi]", "3"]}], "-", 
+                RowBox[{"\[ImaginaryI]", " ", "ri"}], "+", 
+                RowBox[{"4", " ", "\[ImaginaryI]", " ", "C2", " ", 
+                 SuperscriptBox["10", 
+                  RowBox[{"-", "12"}]], " ", 
+                 SuperscriptBox["f", "2"], " ", 
+                 SuperscriptBox["\[Pi]", "2"], " ", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"L22", " ", "ri"}], "+", 
+                   RowBox[{"L11", " ", "ro"}]}], ")"}]}], "+", 
+                RowBox[{"2", " ", "f", " ", "\[Pi]", " ", 
+                 RowBox[{"(", 
+                  RowBox[{"L11", "+", 
+                   RowBox[{"C2", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "12"}]], " ", "ri", " ", "ro"}]}], ")"}]}]}],
+                ")"}]}]}], ")"}]}]}], ")"}]}]}], " ", ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"frv", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         FractionBox["1", 
+          RowBox[{"2", " ", "\[Pi]", " ", 
+           SqrtBox[
+            RowBox[{"C1", " ", 
+             SuperscriptBox["10", 
+              RowBox[{"-", "12"}]], " ", "L11"}]], " "}]], ",", " ", 
+         FractionBox["1", 
+          RowBox[{"2", " ", "\[Pi]", " ", 
+           SqrtBox[
+            RowBox[{"C2", " ", 
+             SuperscriptBox["10", 
+              RowBox[{"-", "12"}]], " ", "L22"}]], " "}]], ",", " ", 
+         RowBox[{"1", "/", 
+          RowBox[{"(", 
+           RowBox[{"2", " ", "\[Pi]", " ", 
+            RowBox[{"\[Sqrt]", 
+             RowBox[{"(", 
+              RowBox[{"C1", " ", "C2", " ", 
+               RowBox[{
+                SuperscriptBox["10", 
+                 RowBox[{"-", "12"}]], "/", 
+                RowBox[{"(", 
+                 RowBox[{"C1", "+", "C2"}], ")"}]}], " ", 
+               RowBox[{"(", 
+                RowBox[{"L11", "+", "L22", "-", 
+                 RowBox[{"2", " ", 
+                  RowBox[{"L12", "[", "d", "]"}]}]}], ")"}]}], ")"}]}]}], " ",
+            ")"}]}], ",", "  ", 
+         FractionBox["1", 
+          RowBox[{"2", " ", "\[Pi]", " ", 
+           SqrtBox[
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"C1", "+", "C2"}], ")"}], " ", 
+             SuperscriptBox["10", 
+              RowBox[{"-", "12"}]], " ", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"L11", "+", "L22"}], ")"}], "/", "2"}]}]], " "}]]}], 
+        "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"fmin", ",", " ", "fmax"}], "}"}], "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"0.8", " ", 
+          RowBox[{"Min", "[", "frv", "]"}]}], ",", " ", 
+         RowBox[{"1.3", " ", 
+          RowBox[{"Max", "[", "frv", "]"}]}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"Pane", "[", 
+       RowBox[{
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Column", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"g0", ",", " ", 
+               RowBox[{"Text", "[", 
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  RowBox[{"Column", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<voltage source\>\"", ",", " ", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<   \>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<V\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<i\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "\"\<=\>\"", ",", " ", "Vi", ",", " ", 
+                    "\"\< V (rms)\>\""}], "}"}], "]"}], ",", " ", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<   \>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<i\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "\"\<=\>\"", ",", " ", "ri", ",", " ", 
+                    "\"\< \[CapitalOmega]\>\""}], "}"}], "]"}], ",", " ", 
+                    "\"\<coil inductances\>\"", ",", " ", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<   \>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<L\>\"", ",", "Italic"}], "]"}], "1"], ",", 
+                    " ", "\"\<=\>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<L\>\"", ",", "Italic"}], "]"}], "2"], ",", 
+                    " ", "\"\< =\>\"", ",", " ", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"L11", " ", 
+                    SuperscriptBox["10", "3"]}], ",", " ", "0.01"}], "]"}], 
+                    ",", " ", "\"\< mH\>\""}], "}"}], "]"}], ",", " ", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<   \>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<L\>\"", ",", "Italic"}], "]"}], "12"], ",", 
+                    " ", "\"\<= \>\"", ",", "   ", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"L12", "[", "d", "]"}], " ", 
+                    SuperscriptBox["10", "3"]}], ",", " ", "0.01"}], "]"}], 
+                    ",", " ", "\"\< mH\>\""}], "}"}], "]"}]}], "}"}], ",", 
+                    RowBox[{"Frame", "\[Rule]", "True"}], ",", " ", 
+                    RowBox[{"Spacings", "\[Rule]", " ", "0.2"}]}], "]"}], ",",
+                   "  ", "14"}], "]"}], "]"}], ",", " ", 
+               RowBox[{"Text", "[", 
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  RowBox[{"Column", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<radii: \>\"", ",", " ", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<a\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "\"\<=\>\"", ",", " ", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<b\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "\"\<= \>\"", ",", "  ", "a", ",", "  ", "\"\< m\>\""}], 
+                    "}"}], "]"}], ",", " ", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<(section radius: \>\"", ",", " ", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<R\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "\"\<= 5 mm)\>\""}], "}"}], "]"}], ",", " ", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<turns: \>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<N\>\"", ",", "Italic"}], "]"}], "1"], ",", 
+                    " ", "\"\<=\>\"", ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<N\>\"", ",", "Italic"}], "]"}], "2"], ",", 
+                    " ", "\"\<=\>\"", ",", " ", "N1"}], "}"}], "]"}]}], "}"}],
+                     ",", " ", 
+                    RowBox[{"Spacings", "\[Rule]", " ", "0.2"}]}], "]"}], ",",
+                   " ", "14"}], "]"}], "]"}]}], "}"}], ",", " ", "Center"}], 
+            "]"}], ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"Column", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Plot", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Abs", "[", 
+                    RowBox[{"I1", "[", 
+                    RowBox[{"f", "  ", 
+                    SuperscriptBox["10", "3"]}], "]"}], "]"}], ",", " ", 
+                   RowBox[{"Abs", "[", 
+                    RowBox[{"I2", "[", 
+                    RowBox[{"f", "  ", 
+                    SuperscriptBox["10", "3"]}], "]"}], "]"}]}], "}"}], ",", 
+                 " ", 
+                 RowBox[{"{", 
+                  RowBox[{"f", ",", " ", 
+                   RowBox[{"fmin", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                   RowBox[{"fmax", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}]}], "}"}], ",", " ", 
+                 RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", "  ", 
+                 RowBox[{"PlotStyle", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Black", ",", " ", "Thick", ",", " ", "Dashed"}], 
+                    "]"}], ",", " ", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Black", ",", " ", "Thick"}], "]"}]}], "}"}]}], 
+                 ",", "  ", 
+                 RowBox[{"PlotRange", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"fmin", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    RowBox[{"fmax", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}]}], "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "1"}], "}"}]}], "}"}]}], ",", " ", 
+                 RowBox[{"AspectRatio", "\[Rule]", " ", "0.5"}], ",", " ", 
+                 RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", " ", 
+                 RowBox[{"Axes", "\[Rule]", " ", "None"}], ",", " ", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"FrameLabel", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<current (A)\>\"", ",", " ", "None"}], "}"}], 
+                    ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"None", ",", " ", "None"}], "}"}]}], "}"}]}], ",", 
+                 RowBox[{"LabelStyle", "\[Rule]", " ", "14"}], ",", " ", 
+                 RowBox[{"GridLines", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"frv", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "None"}], "}"}]}], ",", 
+                 " ", 
+                 RowBox[{"GridLinesStyle", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Blue", ",", " ", 
+                    RowBox[{"Thickness", "[", "0.002", "]"}]}], "]"}], ",", 
+                    " ", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Gray", ",", " ", 
+                    RowBox[{"Thickness", "[", "0.003", "]"}]}], "]"}]}], 
+                   "}"}]}], ",", 
+                 RowBox[{"FrameStyle", "\[Rule]", 
+                  RowBox[{"Directive", "[", 
+                   RowBox[{"Black", ",", 
+                    RowBox[{"Thickness", "[", "0.003", "]"}]}], "]"}]}], ",", 
+                 "  ", 
+                 RowBox[{"Epilog", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "1"}], "}"}], "]"}]], ",", " ", "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "0.65"}], "}"}]}], "]"}],
+                     ",", " ", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "2"}], "}"}], "]"}]], ",", " ", "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "0.5"}], "}"}]}], "]"}], 
+                    ",", " ", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<rs\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "3", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "0.35"}], "}"}]}], "]"}],
+                     ",", " ", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<rp\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "4", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "0.35"}], "}"}]}], "]"}],
+                     ",", 
+                    RowBox[{"Inset", "[", 
+                    RowBox[{"g1", ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"fmin", "+", 
+                    RowBox[{"0.9", 
+                    RowBox[{"(", 
+                    RowBox[{"fmax", "-", "fmin"}], ")"}]}]}], ")"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "0.8"}], "}"}], ",", " ", 
+                    RowBox[{"Background", "\[Rule]", " ", "LightYellow"}]}], 
+                    "]"}]}], "}"}]}], ",", " ", "\[IndentingNewLine]", " ", 
+                 RowBox[{"ImagePadding", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"60", ",", "Automatic"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"30", ",", "Automatic"}], "}"}]}], "}"}]}], ",", 
+                 " ", 
+                 RowBox[{"ImageSize", "\[Rule]", " ", "360"}]}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"LogPlot", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"ro", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"Abs", "[", 
+                    RowBox[{"I2", "[", 
+                    RowBox[{"f", "  ", 
+                    SuperscriptBox["10", "3"]}], "]"}], "]"}], ")"}], "2"]}], 
+                   ",", " ", 
+                   RowBox[{"Vi", " ", 
+                    RowBox[{"Re", "[", 
+                    RowBox[{"I1", "[", 
+                    RowBox[{"f", "  ", 
+                    SuperscriptBox["10", "3"]}], "]"}], "]"}]}]}], "}"}], ",",
+                  " ", 
+                 RowBox[{"{", 
+                  RowBox[{"f", ",", " ", 
+                   RowBox[{"fmin", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                   RowBox[{"fmax", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}]}], "}"}], ",", " ", 
+                 RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", "  ", 
+                 RowBox[{"PlotStyle", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Red", ",", " ", "Thick"}], "]"}], ",", " ", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Red", ",", " ", "Thick", ",", " ", "Dashed"}], 
+                    "]"}]}], "}"}]}], ",", " ", 
+                 RowBox[{"PlotRange", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"fmin", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    RowBox[{"fmax", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}]}], "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "4"}]], ",", " ", "100"}], "}"}]}], "}"}]}], 
+                 ",", " ", 
+                 RowBox[{"AspectRatio", "\[Rule]", " ", "0.5"}], ",", " ", 
+                 RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", " ", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"FrameLabel", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<power (W)\>\"", ",", " ", "None"}], "}"}], 
+                    ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"\"\<frequency (kHz)\>\"", ",", " ", "None"}], 
+                    "}"}]}], "}"}]}], ",", 
+                 RowBox[{"LabelStyle", "\[Rule]", " ", "14"}], ",", " ", 
+                 RowBox[{"GridLines", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"frv", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{
+                    RowBox[{"-", "4"}], ",", " ", "2"}], "]"}]]}], "}"}]}], 
+                 ",", " ", 
+                 RowBox[{"GridLinesStyle", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Blue", ",", " ", 
+                    RowBox[{"Thickness", "[", "0.002", "]"}]}], "]"}], ",", 
+                    " ", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{"Gray", ",", " ", 
+                    RowBox[{"Thickness", "[", "0.003", "]"}]}], "]"}]}], 
+                   "}"}]}], ",", 
+                 RowBox[{"FrameStyle", "\[Rule]", 
+                  RowBox[{"Directive", "[", 
+                   RowBox[{"Black", ",", 
+                    RowBox[{"Thickness", "[", "0.003", "]"}]}], "]"}]}], ",", 
+                 "  ", 
+                 RowBox[{"Epilog", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "1"}], "}"}], "]"}]], ",", " ", "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    RowBox[{"-", "1"}]}], "}"}]}], "]"}], ",", " ", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "2"}], "}"}], "]"}]], ",", " ", "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    RowBox[{"-", "3"}]}], "}"}]}], "]"}], ",", " ", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<rs\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "3", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    RowBox[{"-", "5"}]}], "}"}]}], "]"}], ",", " ", 
+                    RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<rp\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "14"}], "]"}], ",", "  ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    "frv", "\[LeftDoubleBracket]", "4", 
+                    "\[RightDoubleBracket]"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", 
+                    RowBox[{"-", "5"}]}], "}"}]}], "]"}], ",", " ", 
+                    RowBox[{"Inset", "[", 
+                    RowBox[{"g2", ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"fmin", "+", 
+                    RowBox[{"0.85", 
+                    RowBox[{"(", 
+                    RowBox[{"fmax", "-", "fmin"}], ")"}]}]}], ")"}], " ", 
+                    SuperscriptBox["10", 
+                    RowBox[{"-", "3"}]]}], ",", " ", "1.8"}], "}"}], ",", " ", 
+                    RowBox[{"Background", "\[Rule]", " ", "LightYellow"}]}], 
+                    "]"}]}], "}"}]}], ",", " ", "\[IndentingNewLine]", " ", 
+                 RowBox[{"ImagePadding", "\[Rule]", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"60", ",", "Automatic"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"40", ",", "Automatic"}], "}"}]}], "}"}]}], ",", 
+                 " ", 
+                 RowBox[{"ImageSize", "\[Rule]", " ", "360"}]}], "]"}]}], 
+              "}"}], ",", " ", 
+             RowBox[{"Spacings", "\[Rule]", " ", "0"}], ",", " ", 
+             RowBox[{"Alignment", "\[Rule]", " ", "Right"}]}], "]"}]}], "}"}],
+          "]"}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"{", 
+          RowBox[{"570", ",", "400"}], "}"}]}]}], "]"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Grid", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<distance (m)\>\"", ",", " ", "\"\<capacitances (pF)\>\"", ",", 
+         " ", "\"\<output resistance (\[CapitalOmega])\>\""}], "}"}], ",", 
+       " ", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Control", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"d", ",", " ", "1", ",", 
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\<d\>\"", ",", "Italic"}], "]"}], ",", 
+                 "\"\< (m)\>\""}], "}"}], "]"}]}], "}"}], ",", " ", "0.1", 
+            ",", " ", "2", ",", " ", "0.1", ",", 
+            RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", " ", 
+            RowBox[{"ImageSize", "\[Rule]", " ", "Tiny"}]}], "}"}], "]"}], 
+         ",", " ", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Control", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"C1", ",", "200", ",", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<C\>\"", ",", " ", "Italic"}], "]"}], ",", 
+                    "1"}], "]"}], "}"}], "]"}]}], "}"}], ",", 
+               RowBox[{"Range", "[", 
+                RowBox[{"50", ",", " ", "500", ",", " ", "50"}], "]"}]}], 
+              "}"}], "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Spacer", "[", "10", "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Control", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"C2", ",", "200", ",", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"Subscript", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<C\>\"", ",", " ", "Italic"}], "]"}], ",", 
+                    "2"}], "]"}], "}"}], "]"}]}], "}"}], ",", 
+               RowBox[{"Range", "[", 
+                RowBox[{"50", ",", " ", "500", ",", " ", "50"}], "]"}]}], 
+              "}"}], "]"}]}], "}"}], "]"}], ",", " ", 
+         RowBox[{"Control", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"ro", ",", "1000", ",", 
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Subscript", "[", 
+                 RowBox[{"\"\<r\>\"", ",", " ", "\"\<o\>\""}], "]"}], ",", 
+                " ", "Italic"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+             "10", ",", " ", "30", ",", " ", "100", ",", " ", "300", ",", " ",
+               "1000", ",", " ", "3000"}], "}"}]}], "}"}], "]"}]}], "}"}]}], 
+      "}"}], ",", 
+     RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}], ",", " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{"d", ",", " ", "ro", ",", "C1", ",", " ", "C2"}], "}"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SynchronousUpdating", "\[Rule]", " ", "False"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SynchronousInitialization", " ", "\[Rule]", " ", "False"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Block", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"a", "=", "0.7"}], ",", "  ", 
+          RowBox[{"h", "=", "0.7"}], ",", "  ", 
+          RowBox[{"r", "=", "0.07"}]}], "}"}], ",", 
+        RowBox[{"g0", "=", 
+         RowBox[{"Show", "[", 
+          RowBox[{
+           RowBox[{"RevolutionPlot3D", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"a", "+", 
+                  RowBox[{"r", " ", 
+                   RowBox[{"Sin", "[", "t", "]"}]}]}], ",", 
+                 RowBox[{
+                  RowBox[{"r", " ", 
+                   RowBox[{"Cos", "[", "t", "]"}]}], "+", 
+                  RowBox[{"h", "/", "2"}]}]}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"a", "+", 
+                  RowBox[{"r", " ", 
+                   RowBox[{"Sin", "[", "t", "]"}]}]}], ",", 
+                 RowBox[{
+                  RowBox[{"r", " ", 
+                   RowBox[{"Cos", "[", "t", "]"}]}], "-", 
+                  RowBox[{"h", "/", "2"}]}]}], "}"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"t", ",", "0", ",", 
+               RowBox[{"2", "Pi"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"\[Theta]", ",", "0", ",", 
+               RowBox[{"2", " ", "\[Pi]"}]}], "}"}], ",", " ", 
+             RowBox[{"MeshStyle", "\[Rule]", " ", "None"}], ",", " ", 
+             RowBox[{"PlotStyle", "\[Rule]", " ", 
+              RowBox[{"{", 
+               RowBox[{"{", 
+                RowBox[{"Gray", ",", " ", 
+                 RowBox[{"Opacity", "[", "0.5", "]"}]}], "}"}], "}"}]}]}], 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"ParametricPlot3D", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"a", " ", 
+                  RowBox[{"Cos", "[", 
+                   RowBox[{"t", "+", "\[Pi]"}], "]"}]}], ",", " ", 
+                 RowBox[{
+                  RowBox[{"-", "a"}], " ", 
+                  RowBox[{"Sin", "[", 
+                   RowBox[{"t", "+", "\[Pi]"}], "]"}]}], ",", " ", 
+                 RowBox[{
+                  RowBox[{"0.08", " ", "r", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"t", "-", 
+                    RowBox[{"3.5", " ", "\[Pi]"}]}], ")"}]}], "+", 
+                  RowBox[{"h", "/", "2"}]}]}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"a", " ", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ",", " ", 
+                 RowBox[{
+                  RowBox[{"-", "a"}], " ", 
+                  RowBox[{"Sin", "[", "t", "]"}]}], ",", " ", 
+                 RowBox[{
+                  RowBox[{"0.08", " ", "r", " ", 
+                   RowBox[{"(", 
+                    RowBox[{"t", "-", 
+                    RowBox[{"3.5", " ", "\[Pi]"}]}], ")"}]}], "-", 
+                  RowBox[{"h", "/", "2"}]}]}], "}"}]}], "}"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"t", ",", 
+               RowBox[{"0", " ", "\[Pi]"}], ",", " ", 
+               RowBox[{"8", "\[Pi]"}]}], "}"}], ",", " ", 
+             RowBox[{"PlotStyle", "\[Rule]", " ", 
+              RowBox[{"{", 
+               RowBox[{"{", 
+                RowBox[{"Black", ",", " ", 
+                 RowBox[{"Thickness", "[", "0.007", "]"}]}], "}"}], "}"}]}]}],
+             "]"}], ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"Graphics3D", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Black", ",", " ", 
+                RowBox[{"Thickness", "[", "0.01", "]"}], ",", " ", 
+                RowBox[{"Line", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1.5"}], ",", " ", "0", ",", " ", "0"}], 
+                    "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], ",", "0", ",", "  ", "0"}], "}"}], 
+                    ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.7"}], ",", "0", ",", "  ", "0.28"}], 
+                    "}"}]}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1.5"}], ",", "0", ",", "  ", "0.7"}], "}"}],
+                     ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], ",", "0", ",", "  ", "0.7"}], "}"}], 
+                    ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.7"}], ",", "0", ",", " ", "0.42"}], 
+                    "}"}]}], "}"}]}], "}"}], "]"}], ",", " ", 
+                RowBox[{"Line", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1.5", ",", " ", "0", ",", " ", "0"}], "}"}], ",",
+                     " ", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "0", ",", "  ", "0"}], "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"0.7", ",", "0", ",", "  ", 
+                    RowBox[{"-", "0.28"}]}], "}"}]}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1.5", ",", " ", "0", ",", " ", "0"}], "}"}], ",",
+                     " ", 
+                    RowBox[{"{", 
+                    RowBox[{"1.5", ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.7"}]}], "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "0", ",", "  ", 
+                    RowBox[{"-", "0.7"}]}], "}"}], ",", " ", 
+                    RowBox[{"{", 
+                    RowBox[{"0.7", ",", "0", ",", "  ", 
+                    RowBox[{"-", "0.42"}]}], "}"}]}], "}"}]}], "}"}], "]"}]}],
+                "}"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{"Black", ",", " ", 
+                RowBox[{"PointSize", "[", "0.03", "]"}], ",", " ", 
+                RowBox[{"Point", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1.5"}], ",", " ", "0", ",", " ", "0"}], 
+                    "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1.5"}], ",", " ", "0", ",", " ", "0.7"}], 
+                    "}"}]}], " ", "}"}], "]"}]}], "}"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{"White", ",", " ", 
+                RowBox[{"Cuboid", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "1.3"}], ",", " ", 
+                    RowBox[{"-", "0.15"}], ",", " ", "0.55"}], "}"}], ",", 
+                  " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "1.2"}], ",", " ", "0.15", ",", " ", 
+                    "0.85"}], "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Cuboid", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"1.2", ",", " ", 
+                    RowBox[{"-", "0.15"}], ",", " ", 
+                    RowBox[{"-", "0.15"}]}], "}"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"1.3", ",", " ", "0.15", ",", " ", "0.15"}], 
+                   "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Cuboid", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"1.45", ",", " ", 
+                    RowBox[{"-", "0.05"}], ",", " ", 
+                    RowBox[{"-", "0.6"}]}], "}"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"1.55", ",", " ", "0.05", ",", " ", 
+                    RowBox[{"-", "0.1"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"Black", ",", " ", 
+                RowBox[{"Thickness", "[", "0.01", "]"}], ",", " ", 
+                RowBox[{"Arrow", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1.2"}], ",", " ", "0", ",", " ", "0.75"}], 
+                    "}"}], ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.9"}], ",", " ", "0", ",", " ", "0.75"}], 
+                    "}"}]}], "}"}], "]"}], ",", " ", 
+                RowBox[{"Arrow", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"0.9", ",", " ", "0", ",", " ", "0.05"}], "}"}], 
+                   ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"1.2", ",", " ", "0", ",", " ", "0.05"}], "}"}]}],
+                   "}"}], "]"}], ",", " ", "Blue", ",", 
+                RowBox[{"Arrowheads", "[", "0.03", "]"}], ",", "  ", 
+                RowBox[{"Thickness", "[", "0.002", "]"}], ",", " ", 
+                RowBox[{"Arrow", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "0.35"}], "}"}], 
+                   ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"0.7", ",", " ", "0", ",", " ", "0.35"}], "}"}]}],
+                   "}"}], "]"}], ",", " ", 
+                RowBox[{"Arrow", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.35"}]}], "}"}], ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"0.7", ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.35"}]}], "}"}]}], "}"}], "]"}], ",", " ", 
+                RowBox[{"Arrowheads", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", ".03"}], ",", ".03"}], "}"}], "]"}], ",", " ", 
+                RowBox[{"Arrow", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.35"}]}], "}"}], ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0", ",", " ", "0.35"}], "}"}]}], 
+                  "}"}], "]"}], ",", " ", 
+                RowBox[{"Arrow", "[", 
+                 RowBox[{"BezierCurve", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.6"}], ",", "0", ",", " ", "0.25"}], "}"}],
+                     ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.75"}], ",", "0", ",", " ", "0"}], "}"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.6"}], ",", "0", ",", " ", 
+                    RowBox[{"-", "0.25"}]}], "}"}]}], "}"}], "]"}], "]"}]}], 
+               "}"}], ",", " ", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{"Black", ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Column", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<V\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<i\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "14"}], "]"}], ",", " ", "\"\<, \>\"", ",", " ", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<f\>\"", ",", "Italic"}], "]"}]}], "}"}], 
+                    "]"}], ",", " ", 
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<i\>\"", ",", "Italic"}], "]"}]]}], "}"}], 
+                    ",", " ", "Center", ",", " ", 
+                    RowBox[{"Spacings", "\[Rule]", " ", "0"}]}], "]"}], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "1.4"}], ",", " ", "0", ",", " ", "0.31"}], 
+                   "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<Coil 1\>\"", ",", " ", "14"}], "]"}], ",", 
+                  " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "0.3"}], ",", " ", "0", ",", " ", "0.69"}], 
+                   "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<Coil 2\>\"", ",", " ", "14"}], "]"}], ",", 
+                  " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "0.3"}], ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.7"}]}], "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<C\>\"", ",", "Italic"}], "]"}], "1"], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "1.2"}], ",", " ", "0", ",", " ", "1"}], 
+                   "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<I\>\"", ",", "Italic"}], "]"}], "1"], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "0.8"}], ",", " ", "0", ",", " ", "0.9"}], 
+                   "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<C\>\"", ",", "Italic"}], "]"}], "2"], ",", 
+                    " ", "14"}], "]"}], ",", " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"1.35", ",", " ", "0", ",", " ", "0.3"}], "}"}]}], 
+                 "]"}], ",", "  ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<I\>\"", ",", "Italic"}], "]"}], "2"], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"0.8", ",", " ", "0", ",", " ", "0.07"}], "}"}]}], 
+                 "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<r\>\"", ",", "Italic"}], "]"}], 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<o\>\"", ",", "Italic"}], "]"}]], ",", " ", 
+                    "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"1.7", ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.35"}]}], "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<a\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"0.3", ",", " ", "0", ",", " ", "0.35"}], "}"}]}], 
+                 "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<b\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"0.3", ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.35"}]}], "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<d\>\"", ",", "Italic"}], "]"}], ",", " ", 
+                    "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{"0.1", ",", " ", "0", ",", "0"}], "}"}]}], "]"}], 
+                ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<L\>\"", ",", "Italic"}], "]"}], "1"], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "0.92"}], ",", " ", "0", ",", " ", "0.35"}], 
+                   "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<L\>\"", ",", "Italic"}], "]"}], "2"], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "0.92"}], ",", " ", "0", ",", " ", 
+                    RowBox[{"-", "0.35"}]}], "}"}]}], "]"}], ",", " ", 
+                RowBox[{"Text", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{
+                    SubscriptBox[
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<L\>\"", ",", "Italic"}], "]"}], "12"], ",", 
+                    " ", "14"}], "]"}], ",", " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "0.8"}], ",", " ", "0", ",", " ", "0"}], 
+                   "}"}]}], "]"}]}], "}"}]}], "}"}], "]"}], ",", " ", 
+           RowBox[{"PlotRange", "\[Rule]", " ", "All"}], ",", " ", 
+           RowBox[{"Axes", "\[Rule]", " ", "None"}], ",", " ", 
+           RowBox[{"Boxed", "\[Rule]", " ", "False"}], ",", " ", 
+           RowBox[{"ViewPoint", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{"2", ",", " ", 
+              RowBox[{"-", "12"}], ",", "3"}], "}"}]}], ",", " ", 
+           RowBox[{"ImageSize", "\[Rule]", "200"}]}], "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g1", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Black", ",", " ", "Thick", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", " ", "0"}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"0.2", ",", " ", "0"}], "}"}]}], "}"}], "]"}], ",", 
+           "  ", "Dashed", ",", " ", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", " ", "0.1"}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"0.2", ",", " ", "0.1"}], "}"}]}], "}"}], "]"}], ",", 
+           " ", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               SubscriptBox[
+                RowBox[{"Style", "[", 
+                 RowBox[{"\"\<I\>\"", ",", "Italic"}], "]"}], "2"], ",", " ", 
+               "14"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0.27", ",", " ", "0"}], "}"}]}], "]"}], ",", " ", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{
+               SubscriptBox[
+                RowBox[{"Style", "[", 
+                 RowBox[{"\"\<I\>\"", ",", "Italic"}], "]"}], "21"], ",", " ",
+                "14"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0.27", ",", " ", "0.1"}], "}"}]}], "]"}]}], "}"}], ",",
+          " ", 
+         RowBox[{"ImageSize", "\[Rule]", "50"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g2", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Red", ",", " ", "Thick", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", " ", "0"}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"0.2", ",", " ", "0"}], "}"}]}], "}"}], "]"}], ",", 
+           "  ", "Dashed", ",", " ", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", " ", "0.1"}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"0.2", ",", " ", "0.1"}], "}"}]}], "}"}], "]"}], ",", 
+           " ", "Black", ",", " ", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\< output\>\"", ",", " ", "14"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0.32", ",", " ", "0"}], "}"}]}], "]"}], ",", " ", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<input\>\"", ",", " ", "14"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0.32", ",", " ", "0.1"}], "}"}]}], "]"}]}], "}"}], ",",
+          " ", 
+         RowBox[{"ImageSize", "\[Rule]", "70"}]}], "]"}]}]}], ")"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6253835985304775`*^9, 3.6253836220085187`*^9}, 
+   3.625383690445839*^9, {3.6253837783363934`*^9, 3.6253837858244066`*^9}, {
+   3.6253841099305754`*^9, 3.625384121895797*^9}, {3.62538416368827*^9, 
+   3.6253841749514894`*^9}, {3.6253842175395646`*^9, 
+   3.6253842457600145`*^9}, {3.625384320172145*^9, 3.6253843346645703`*^9}, {
+   3.625384366223426*^9, 3.6253843688286304`*^9}, 3.6253844975600567`*^9, 
+   3.6253847655603456`*^9, {3.6253848430144815`*^9, 3.6253848575225067`*^9}, {
+   3.625384891140566*^9, 3.6253849187994146`*^9}, {3.6253849774087176`*^9, 
+   3.625385045924038*^9}, {3.625385134002793*^9, 3.6253851535028267`*^9}, {
+   3.625385256650208*^9, 3.6253853268503313`*^9}, {3.625385368939205*^9, 
+   3.6253853793756237`*^9}, {3.6253854622429695`*^9, 
+   3.6253854776089964`*^9}, {3.625385611550832*^9, 3.6253856395060806`*^9}, {
+   3.625385679816551*^9, 3.625385727911436*^9}, {3.62538578134153*^9, 
+   3.6253858032751684`*^9}, {3.625385862321272*^9, 3.625385877156898*^9}, {
+   3.62538592955739*^9, 3.625385931460593*^9}, {3.625386110080907*^9, 
+   3.6253861233721304`*^9}, {3.625535883437532*^9, 3.62553588863783*^9}, {
+   3.625535999477169*^9, 3.6255360112998457`*^9}, 3.6255361358699703`*^9, {
+   3.6255362859165525`*^9, 3.625536314778203*^9}, {3.6255364908432736`*^9, 
+   3.6255365149966555`*^9}, {3.6255365704948297`*^9, 3.625536611173156*^9}, {
+   3.625536656418744*^9, 3.625536680211105*^9}, 3.6255367711013036`*^9, {
+   3.625536802304088*^9, 3.625536835726*^9}, {3.625536886032877*^9, 
+   3.6255369365847683`*^9}, 3.625536994438078*^9, {3.6255370299781103`*^9, 
+   3.6255370584757404`*^9}, 3.6255371467097874`*^9, {3.62553730183666*^9, 
+   3.62553730987912*^9}, 3.6255373624641275`*^9, {3.626739270500222*^9, 
+   3.6267392707498226`*^9}, {3.626739302698679*^9, 3.6267393029014797`*^9}, 
+   3.6267393407471457`*^9, 3.6267395847471743`*^9, {3.626739709673194*^9, 
+   3.6267397490944633`*^9}, {3.626739934672389*^9, 3.62674001491893*^9}, 
+   3.6267401169587092`*^9, {3.6267402878258095`*^9, 3.6267403112414503`*^9}, {
+   3.626740405216016*^9, 3.62674040771202*^9}, {3.626740508971798*^9, 
+   3.626740609248774*^9}, {3.626740639965228*^9, 3.6267407295561852`*^9}, {
+   3.6267407609746404`*^9, 3.6267407738914633`*^9}, {3.626740870207032*^9, 
+   3.6267409917780457`*^9}, 3.626741036784125*^9, {3.6267410684209805`*^9, 
+   3.6267411056270456`*^9}, {3.6267412253104563`*^9, 3.626741350999877*^9}, {
+   3.6267413835571337`*^9, 3.626741420778799*^9}, {3.626741505424548*^9, 
+   3.626741510042156*^9}, {3.6267415408366103`*^9, 3.62674156323825*^9}, {
+   3.6267416156231413`*^9, 3.6267416296163664`*^9}, {3.6267417853514395`*^9, 
+   3.626741796021858*^9}, {3.626741829234317*^9, 3.6267418852072153`*^9}, {
+   3.6267420374800825`*^9, 3.626742283476915*^9}, 3.6267423527722363`*^9, {
+   3.626742392380706*^9, 3.6267424655604343`*^9}, {3.6267427159720745`*^9, 
+   3.6267427603541527`*^9}, 3.6267428460763025`*^9, {3.6267428812543645`*^9, 
+   3.626743034758634*^9}, 3.6267431236641903`*^9, {3.62674316310106*^9, 
+   3.626743249821612*^9}, 3.6267432855612745`*^9, {3.6267433813922434`*^9, 
+   3.62674350496006*^9}, {3.62674356746937*^9, 3.626743581228594*^9}, {
+   3.6267436138794518`*^9, 3.6267437209424396`*^9}, {3.626743752423295*^9, 
+   3.626743787148956*^9}, 3.626743839112647*^9, {3.6267439129631767`*^9, 
+   3.626743951557645*^9}, 3.626743999153328*^9, {3.626744047965814*^9, 
+   3.626744054361825*^9}, 3.626744279612421*^9, 3.6267443177076883`*^9, {
+   3.6267444287762833`*^9, 3.6267444365450974`*^9}, {3.626744469913556*^9, 
+   3.6267445596917133`*^9}, 3.6267446202666197`*^9, {3.6267446620434933`*^9, 
+   3.6267446752411165`*^9}, {3.626744708749975*^9, 3.6267448107897544`*^9}, {
+   3.6267448436278124`*^9, 3.6267450731822157`*^9}, 3.626745114506688*^9, {
+   3.6267451466583443`*^9, 3.6267451605267687`*^9}, {3.626746380463112*^9, 
+   3.6267463865315228`*^9}, {3.6267466587842007`*^9, 
+   3.6267467075498867`*^9}, {3.626972121945018*^9, 3.626972162687998*^9}, {
+   3.626972196631459*^9, 3.626972211366667*^9}, {3.6269722985376987`*^9, 
+   3.626972361749589*^9}, 3.627047444275476*^9, 3.6270475039218893`*^9, {
+   3.627047655650663*^9, 3.627047712038957*^9}, 3.6270477865669527`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+    200, $CellContext`d$$ = 1, $CellContext`ro$$ = 1000, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`d$$], 1, 
+       Row[{
+         Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1}, {{
+       Hold[$CellContext`C1$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`C2$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`ro$$], 1000, 
+       Style[
+        Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}}, {
+      Hold[
+       Grid[{{
+         "distance (m)", "capacitances (pF)", 
+          "output resistance (\[CapitalOmega])"}, {
+          Manipulate`Place[1], 
+          Row[{
+            Manipulate`Place[2], 
+            Spacer[10], 
+            Manipulate`Place[3]}], 
+          Manipulate`Place[4]}}, Frame -> All]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    570., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`d$7210$$ = 
+    0, $CellContext`C1$7211$$ = 0, $CellContext`C2$7212$$ = 
+    0, $CellContext`ro$7213$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+        200, $CellContext`d$$ = 1, $CellContext`ro$$ = 1000}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`d$$, $CellContext`d$7210$$, 0], 
+        Hold[$CellContext`C1$$, $CellContext`C1$7211$$, 0], 
+        Hold[$CellContext`C2$$, $CellContext`C2$7212$$, 0], 
+        Hold[$CellContext`ro$$, $CellContext`ro$7213$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`\[Mu]o$ = (4 Pi) 10^(-7), $CellContext`Vi$ = 
+         100, $CellContext`ri$ = 10, $CellContext`a$ = 0.5, $CellContext`b$ = 
+         0.5, $CellContext`R$ = 0.05, $CellContext`N1$ = 
+         100, $CellContext`N2$ = 
+         100, $CellContext`L11$, $CellContext`L22$, $CellContext`L12$, \
+$CellContext`I1$, $CellContext`I2$, $CellContext`frv$, $CellContext`fmin$, \
+$CellContext`fmax$}, $CellContext`L11$ = ($CellContext`L22$ = \
+(($CellContext`N1$^2 $CellContext`a$) $CellContext`\[Mu]o$) (
+            Log[8 ($CellContext`a$/$CellContext`R$)] - 7/
+            4)); $CellContext`L12$[
+           Pattern[$CellContext`d$, 
+            Blank[]]] = ($CellContext`N1$ $CellContext`N2$) 
+          Block[{$CellContext`k = ((
+                4 $CellContext`a$) ($CellContext`b$/(($CellContext`a$ + \
+$CellContext`b$)^2 + $CellContext`d$^2)))^
+              Rational[
+               1, 2]}, (($CellContext`\[Mu]o$ ($CellContext`a$ \
+$CellContext`b$)^Rational[1, 2]) (
+              2/$CellContext`k)) ((1 - $CellContext`k^2/2) 
+              EllipticK[$CellContext`k^2] - 
+             EllipticE[$CellContext`k^2])]; $CellContext`I1$[
+           Pattern[$CellContext`f$, 
+            Blank[]]] := $CellContext`Vi$/(-(
+            I/((((2 $CellContext`C1$$) 10^(-12)) $CellContext`f$) 
+            Pi)) + (((2 I) $CellContext`f$) $CellContext`L11$) 
+           Pi + $CellContext`ri$ + ((((8 $CellContext`C2$$) 
+              10^(-12)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]^2) (
+            Pi^3/(-I + ((((2 $CellContext`C2$$) 10^(-12)) $CellContext`f$) 
+              Pi) ((((2 I) $CellContext`f$) $CellContext`L22$) 
+               Pi + $CellContext`ro$$)))); $CellContext`I2$[
+           Pattern[$CellContext`f$, 
+            
+            Blank[]]] := ((((((((8 I) $CellContext`C1$$) $CellContext`C2$$) 
+               10^(-24)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]) 
+            Pi^3) $CellContext`Vi$)/(-1 + ((2 $CellContext`f$) 
+            Pi) (($CellContext`C2$$ 
+              10^(-12)) (((2 $CellContext`f$) $CellContext`L22$) Pi - 
+              I $CellContext`ro$$) + ($CellContext`C1$$ 
+              10^(-12)) (((((8 $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^3) \
+($CellContext`L12$[$CellContext`d$$]^2 - $CellContext`L11$ $CellContext`L22$))
+                 Pi^3 - I $CellContext`ri$ + (((((4 I) $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^2) 
+                Pi^2) ($CellContext`L22$ $CellContext`ri$ + $CellContext`L11$ \
+$CellContext`ro$$) + ((2 $CellContext`f$) 
+                Pi) ($CellContext`L11$ + (($CellContext`C2$$ 
+                   10^(-12)) $CellContext`ri$) $CellContext`ro$$)))); \
+$CellContext`frv$ = {
+          1/((2 Pi) (($CellContext`C1$$ 10^(-12)) $CellContext`L11$)^
+            Rational[1, 2]), 
+           1/((2 Pi) (($CellContext`C2$$ 10^(-12)) $CellContext`L22$)^
+            Rational[1, 2]), 1/((2 Pi) 
+           Sqrt[(($CellContext`C1$$ $CellContext`C2$$) (
+               10^(-12)/($CellContext`C1$$ + $CellContext`C2$$))) \
+($CellContext`L11$ + $CellContext`L22$ - 
+              2 $CellContext`L12$[$CellContext`d$$])]), 
+           1/((2 Pi) ((($CellContext`C1$$ + $CellContext`C2$$) 
+              10^(-12)) (($CellContext`L11$ + $CellContext`L22$)/2))^
+            Rational[1, 2])}; {$CellContext`fmin$, $CellContext`fmax$} = {
+          0.8 Min[$CellContext`frv$], 1.3 Max[$CellContext`frv$]}; Pane[
+          Row[{
+            Column[{$CellContext`g0, 
+              Text[
+               Style[
+                Column[{"voltage source", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], "=", $CellContext`Vi$, " V (rms)"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["r", Italic], 
+                    Style["i", Italic]], "=", $CellContext`ri$, 
+                    " \[CapitalOmega]"}], "coil inductances", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 1], "=", 
+                    Subscript[
+                    Style["L", Italic], 2], " =", 
+                    Round[$CellContext`L11$ 10^3, 0.01], " mH"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 12], "= ", 
+                    Round[$CellContext`L12$[$CellContext`d$$] 10^3, 0.01], 
+                    " mH"}]}, Frame -> True, Spacings -> 0.2], 14]], 
+              Text[
+               Style[
+                Column[{
+                  Row[{"radii: ", 
+                    Style["a", Italic], "=", 
+                    Style["b", Italic], "= ", $CellContext`a$, " m"}], 
+                  Row[{"(section radius: ", 
+                    Style["R", Italic], "= 5 mm)"}], 
+                  Row[{"turns: ", 
+                    Subscript[
+                    Style["N", Italic], 1], "=", 
+                    Subscript[
+                    Style["N", Italic], 2], "=", $CellContext`N1$}]}, 
+                 Spacings -> 0.2], 14]]}, Center], 
+            Column[{
+              Plot[{
+                Abs[
+                 $CellContext`I1$[$CellContext`f 10^3]], 
+                Abs[
+                 $CellContext`I2$[$CellContext`f 
+                  10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Black, Thick, Dashed], 
+                 Directive[Black, Thick]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {0, 1}}, AspectRatio -> 0.5, Frame -> True, Axes -> 
+               None, FrameLabel -> {{"current (A)", None}, {None, None}}, 
+               LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), None}, GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), 0.65}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), 0.5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), 0.35}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), 0.35}], 
+                 
+                 Inset[$CellContext`g1, {($CellContext`fmin$ + 
+                    0.9 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   0.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {30, Automatic}}, ImageSize -> 
+               360], 
+              LogPlot[{$CellContext`ro$$ Abs[
+                   $CellContext`I2$[$CellContext`f 10^3]]^2, $CellContext`Vi$ 
+                Re[
+                  $CellContext`I1$[$CellContext`f 
+                   10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Red, Thick], 
+                 Directive[Red, Thick, Dashed]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {10^(-4), 100}}, AspectRatio -> 0.5, Frame -> 
+               True, FrameLabel -> {{"power (W)", None}, {
+                 "frequency (kHz)", None}}, LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), 10^Range[-4, 2]}, 
+               GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), -1}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), -3}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), -5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), -5}], 
+                 
+                 Inset[$CellContext`g2, {($CellContext`fmin$ + 
+                    0.85 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   1.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {40, Automatic}}, ImageSize -> 
+               360]}, Spacings -> 0, Alignment -> Right]}], 
+          ImageSize -> {570, 400}]], 
+      "Specifications" :> {{{$CellContext`d$$, 1, 
+          Row[{
+            Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1, Appearance -> 
+         "Labeled", ImageSize -> Tiny, ControlPlacement -> 
+         1}, {{$CellContext`C1$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 2}, {{$CellContext`C2$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 3}, {{$CellContext`ro$$, 1000, 
+          Style[
+           Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}, 
+         ControlPlacement -> 4}, 
+        Grid[{{
+          "distance (m)", "capacitances (pF)", 
+           "output resistance (\[CapitalOmega])"}, {
+           Manipulate`Place[1], 
+           Row[{
+             Manipulate`Place[2], 
+             Spacer[10], 
+             Manipulate`Place[3]}], 
+           Manipulate`Place[4]}}, Frame -> All]}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`d$$, $CellContext`ro$$, \
+$CellContext`C1$$, $CellContext`C2$$}, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{615., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      Block[{$CellContext`a = 0.7, $CellContext`h = 0.7, $CellContext`r = 
+         0.07}, $CellContext`g0 = Show[
+          
+          RevolutionPlot3D[{{$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] + $CellContext`h/
+              2}, {$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] - $CellContext`h/2}}, {$CellContext`t, 0, 2 
+            Pi}, {$CellContext`\[Theta], 0, 2 Pi}, MeshStyle -> None, 
+           PlotStyle -> {{Gray, 
+              Opacity[0.5]}}], 
+          
+          ParametricPlot3D[{{$CellContext`a 
+             Cos[$CellContext`t + Pi], (-$CellContext`a) 
+             Sin[$CellContext`t + Pi], (0.08 $CellContext`r) ($CellContext`t - 
+               3.5 Pi) + $CellContext`h/2}, {$CellContext`a 
+             Cos[$CellContext`t], (-$CellContext`a) 
+             Sin[$CellContext`t], (0.08 $CellContext`r) ($CellContext`t - 3.5 
+               Pi) - $CellContext`h/2}}, {$CellContext`t, 0 Pi, 8 Pi}, 
+           PlotStyle -> {{Black, 
+              Thickness[0.007]}}], 
+          Graphics3D[{{Black, 
+             Thickness[0.01], 
+             
+             Line[{{{-1.5, 0, 0}, {-1, 0, 
+                0}, {-0.7, 0, 0.28}}, {{-1.5, 0, 0.7}, {-1, 0, 0.7}, {-0.7, 0,
+                  0.42}}}], 
+             
+             Line[{{{1.5, 0, 0}, {1, 0, 0}, {0.7, 0, -0.28}}, {{1.5, 0, 0}, {
+                1.5, 0, -0.7}, {1, 0, -0.7}, {0.7, 0, -0.42}}}]}, {Black, 
+             PointSize[0.03], 
+             Point[{{-1.5, 0, 0}, {-1.5, 0, 0.7}}]}, {White, 
+             Cuboid[{-1.3, -0.15, 0.55}, {-1.2, 0.15, 0.85}], 
+             Cuboid[{1.2, -0.15, -0.15}, {1.3, 0.15, 0.15}], 
+             Cuboid[{1.45, -0.05, -0.6}, {1.55, 0.05, -0.1}]}, {Black, 
+             Thickness[0.01], 
+             Arrow[{{-1.2, 0, 0.75}, {-0.9, 0, 0.75}}], 
+             Arrow[{{0.9, 0, 0.05}, {1.2, 0, 0.05}}], Blue, 
+             Arrowheads[0.03], 
+             Thickness[0.002], 
+             Arrow[{{0, 0, 0.35}, {0.7, 0, 0.35}}], 
+             Arrow[{{0, 0, -0.35}, {0.7, 0, -0.35}}], 
+             Arrowheads[{-0.03, 0.03}], 
+             Arrow[{{0, 0, -0.35}, {0, 0, 0.35}}], 
+             Arrow[
+              
+              BezierCurve[{{-0.6, 0, 0.25}, {-0.75, 0, 0}, {-0.6, 
+                 0, -0.25}}]]}, {Black, 
+             Text[
+              Style[
+               Column[{
+                 Row[{
+                   Style[
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], 14], ", ", 
+                   Style["f", Italic]}], 
+                 Subscript[
+                  Style["r", Italic], 
+                  Style["i", Italic]]}, Center, Spacings -> 0], 14], {-1.4, 0,
+                0.31}], 
+             Text[
+              Style["Coil 1", 14], {-0.3, 0, 0.69}], 
+             Text[
+              Style["Coil 2", 14], {-0.3, 0, -0.7}], 
+             Text[
+              Style[
+               Subscript[
+                Style["C", Italic], 1], 14], {-1.2, 0, 1}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 1], 14], {-0.8, 0, 0.9}], 
+             Text[
+              Style[
+               Style[
+                Subscript[
+                 Style["C", Italic], 2], 14], 14], {1.35, 0, 0.3}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 2], 14], {0.8, 0, 0.07}], 
+             Text[
+              Style[
+               Subscript[
+                Style["r", Italic], 
+                Style["o", Italic]], 14], {1.7, 0, -0.35}], 
+             Text[
+              Style[
+               Style["a", Italic], 14], {0.3, 0, 0.35}], 
+             Text[
+              Style[
+               Style["b", Italic], 14], {0.3, 0, -0.35}], 
+             Text[
+              Style[
+               Style["d", Italic], 14], {0.1, 0, 0}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 1], 14], {-0.92, 0, 0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 2], 14], {-0.92, 0, -0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 12], 14], {-0.8, 0, 0}]}}], PlotRange -> 
+          All, Axes -> None, Boxed -> False, ViewPoint -> {2, -12, 3}, 
+          ImageSize -> 200]]; $CellContext`g1 = Graphics[{Black, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 2], 14], {0.27, 0}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 21], 14], {0.27, 0.1}]}, ImageSize -> 
+         50]; $CellContext`g2 = Graphics[{Red, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], Black, 
+          Text[
+           Style[" output", 14], {0.32, 0}], 
+          Text[
+           Style["input", 14], {0.32, 0.1}]}, ImageSize -> 70]); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1838973846]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Wireless power transmission uses a pair of magnetically-coupled coils, each \
+in series with a capacitor. The self-inductance and mutual inductance of \
+circular coils can be estimated from the geometry. For two identical coils at \
+axial distance ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]], "InlineMath"],
+ ", the mutual inductance ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["L", "12"], TraditionalForm]], "InlineMath"],
+ " is given by ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["L", "12"], "(", "d", ")"}], TraditionalForm]], "InlineMath"],
+ ", while their individual self-inductances are the same: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["L", "1"], "=", 
+    SubscriptBox["L", "2"]}], TraditionalForm]], "InlineMath"],
+ ". Applying these in the equivalent circuit, it is possible to analyze the \
+frequency characteristics of the system."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.6253887037707925`*^9, {3.6253887413399415`*^9, 3.625388796227081*^9}, {
+   3.6253888341792517`*^9, 3.625388850267172*^9}, 3.6253890077541795`*^9, {
+   3.6253890593851323`*^9, 3.6253890754570518`*^9}, {3.6253891145622883`*^9, 
+   3.625389146913139*^9}, {3.625389203472374*^9, 3.625389281439833*^9}, {
+   3.625389330175621*^9, 3.6253895166292853`*^9}, {3.6253895888624167`*^9, 
+   3.625389590813528*^9}, {3.6253897690927258`*^9, 3.6253898173144836`*^9}, {
+   3.625389993434557*^9, 3.625390115970566*^9}, {3.625390306544466*^9, 
+   3.62539039822571*^9}, {3.6253905324723883`*^9, 3.6253906339841948`*^9}, {
+   3.6253911032830367`*^9, 3.6253912481293216`*^9}, {3.6253915187447996`*^9, 
+   3.6253916690663977`*^9}, {3.6253917437346687`*^9, 3.625391873928115*^9}, {
+   3.6253919286542454`*^9, 3.625391953773682*^9}, {3.625392079651882*^9, 
+   3.6253923203226476`*^9}, {3.625392407857654*^9, 3.625392528400549*^9}, {
+   3.625392577272344*^9, 3.6253926589120135`*^9}, {3.6253927196484876`*^9, 
+   3.6253927832311244`*^9}, {3.625392953606869*^9, 3.6253930153814025`*^9}, 
+   3.6253930528285446`*^9, {3.625393370443711*^9, 3.625393550898032*^9}, {
+   3.6253936393210897`*^9, 3.625393680376438*^9}, {3.6253937421039686`*^9, 
+   3.6253938353283005`*^9}, {3.625537573603204*^9, 3.6255376003187323`*^9}, {
+   3.6255377012715063`*^9, 3.625537745870057*^9}, {3.625537776747823*^9, 
+   3.625537808638647*^9}, {3.62553783945741*^9, 3.6255378477798862`*^9}, {
+   3.6255378840549607`*^9, 3.6255379157267723`*^9}, {3.625537954303979*^9, 
+   3.625537956583109*^9}, {3.6257152087804527`*^9, 3.625715214661663*^9}, {
+   3.6257152478585215`*^9, 3.6257152722257643`*^9}, 3.625717779713768*^9, {
+   3.625719899881092*^9, 3.6257199267755394`*^9}, {3.6258464322993813`*^9, 
+   3.625846432985794*^9}, {3.626972458822947*^9, 3.6269725047396307`*^9}, {
+   3.626972542730448*^9, 3.626972560784988*^9}, 3.6269726975663557`*^9, {
+   3.626978634689837*^9, 3.626978688054739*^9}, {3.62697873568042*^9, 
+   3.626978760229782*^9}, {3.626978790718206*^9, 3.626978798493292*^9}, 
+   3.62697891732627*^9, {3.626978948971937*^9, 3.626978949755447*^9}},
+ CellID->161053412],
+
+Cell[TextData[{
+ "Assuming a constant voltage source ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["V", "i"], "=", 
+    RowBox[{"100", " ", 
+     SubscriptBox[
+      StyleBox["V",
+       FontSlant->"Plain"], "rms"]}]}], TraditionalForm]], "InlineMath"],
+ " with impedance ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["r", "i"], "=", 
+    RowBox[{"10", " ", "\[CapitalOmega]"}]}], TraditionalForm]], "InlineMath"],
+ ", the frequency characteristic of currents in two coils ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", "1"], ",", " ", 
+    SubscriptBox["I", "2"], " "}], TraditionalForm]], "InlineMath"],
+ " can be obtained by applying harmonic analysis. The coil distance ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]], "InlineMath"],
+ ", capacitances ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "1"], TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "2"], TraditionalForm]], "InlineMath"],
+ ", and output resistance ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["r", "o"], TraditionalForm]], "InlineMath"],
+ " are variable parameters. The frequency characteristics of input and output \
+powers determine ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["I", "1"], " "}], TraditionalForm]], "InlineMath"],
+ "and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SubscriptBox["I", "2"]}], TraditionalForm]], "InlineMath"],
+ ". As you can see by changing the parameters, the frequency characteristics \
+are sensitive to these parameters."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.6253887037707925`*^9, {3.6253887413399415`*^9, 3.625388796227081*^9}, {
+   3.6253888341792517`*^9, 3.625388850267172*^9}, 3.6253890077541795`*^9, {
+   3.6253890593851323`*^9, 3.6253890754570518`*^9}, {3.6253891145622883`*^9, 
+   3.625389146913139*^9}, {3.625389203472374*^9, 3.625389281439833*^9}, {
+   3.625389330175621*^9, 3.6253895166292853`*^9}, {3.6253895888624167`*^9, 
+   3.625389590813528*^9}, {3.6253897690927258`*^9, 3.6253898173144836`*^9}, {
+   3.625389993434557*^9, 3.625390115970566*^9}, {3.625390306544466*^9, 
+   3.62539039822571*^9}, {3.6253905324723883`*^9, 3.6253906339841948`*^9}, {
+   3.6253911032830367`*^9, 3.6253912481293216`*^9}, {3.6253915187447996`*^9, 
+   3.6253916690663977`*^9}, {3.6253917437346687`*^9, 3.625391873928115*^9}, {
+   3.6253919286542454`*^9, 3.625391953773682*^9}, {3.625392079651882*^9, 
+   3.6253923203226476`*^9}, {3.625392407857654*^9, 3.625392528400549*^9}, {
+   3.625392577272344*^9, 3.6253926589120135`*^9}, {3.6253927196484876`*^9, 
+   3.6253927832311244`*^9}, {3.625392953606869*^9, 3.6253930153814025`*^9}, 
+   3.6253930528285446`*^9, {3.625393370443711*^9, 3.625393550898032*^9}, {
+   3.6253936393210897`*^9, 3.625393680376438*^9}, {3.6253937421039686`*^9, 
+   3.6253938353283005`*^9}, {3.625537573603204*^9, 3.6255376003187323`*^9}, {
+   3.6255377012715063`*^9, 3.625537745870057*^9}, {3.625537776747823*^9, 
+   3.625537808638647*^9}, {3.62553783945741*^9, 3.6255378477798862`*^9}, {
+   3.6255378840549607`*^9, 3.6255379157267723`*^9}, {3.625537954303979*^9, 
+   3.625537956583109*^9}, {3.6257152087804527`*^9, 3.625715214661663*^9}, {
+   3.6257152478585215`*^9, 3.6257152722257643`*^9}, 3.625717779713768*^9, {
+   3.625719899881092*^9, 3.6257199267755394`*^9}, {3.6258464322993813`*^9, 
+   3.625846435216637*^9}, {3.625847043942055*^9, 3.6258470443008595`*^9}, 
+   3.626972505467211*^9, {3.62697271549139*^9, 3.626972808447659*^9}, {
+   3.626978870623146*^9, 3.6269789024924107`*^9}, {3.6269790103119164`*^9, 
+   3.626979024434661*^9}, {3.626979257618011*^9, 3.626979387748378*^9}, {
+   3.627047850541574*^9, 3.627047875368915*^9}, {3.630422576167221*^9, 
+   3.6304225764792233`*^9}},
+ CellID->368977363]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+    200, $CellContext`d$$ = 0.5, $CellContext`ro$$ = 100, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`d$$], 0.5, 
+       Row[{
+         Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1}, {{
+       Hold[$CellContext`C1$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`C2$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`ro$$], 100, 
+       Style[
+        Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}}, {
+      Hold[
+       Grid[{{
+         "distance (m)", "capacitances (pF)", 
+          "output resistance (\[CapitalOmega])"}, {
+          Manipulate`Place[1], 
+          Row[{
+            Manipulate`Place[2], 
+            Spacer[10], 
+            Manipulate`Place[3]}], 
+          Manipulate`Place[4]}}, Frame -> All]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    570., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`d$7279$$ = 
+    0, $CellContext`C1$7280$$ = 0, $CellContext`C2$7281$$ = 
+    0, $CellContext`ro$7282$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+        200, $CellContext`d$$ = 0.5, $CellContext`ro$$ = 100}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`d$$, $CellContext`d$7279$$, 0], 
+        Hold[$CellContext`C1$$, $CellContext`C1$7280$$, 0], 
+        Hold[$CellContext`C2$$, $CellContext`C2$7281$$, 0], 
+        Hold[$CellContext`ro$$, $CellContext`ro$7282$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`\[Mu]o$ = (4 Pi) 10^(-7), $CellContext`Vi$ = 
+         100, $CellContext`ri$ = 10, $CellContext`a$ = 0.5, $CellContext`b$ = 
+         0.5, $CellContext`R$ = 0.05, $CellContext`N1$ = 
+         100, $CellContext`N2$ = 
+         100, $CellContext`L11$, $CellContext`L22$, $CellContext`L12$, \
+$CellContext`I1$, $CellContext`I2$, $CellContext`frv$, $CellContext`fmin$, \
+$CellContext`fmax$}, $CellContext`L11$ = ($CellContext`L22$ = \
+(($CellContext`N1$^2 $CellContext`a$) $CellContext`\[Mu]o$) (
+            Log[8 ($CellContext`a$/$CellContext`R$)] - 7/
+            4)); $CellContext`L12$[
+           Pattern[$CellContext`d$, 
+            Blank[]]] = ($CellContext`N1$ $CellContext`N2$) 
+          Block[{$CellContext`k = ((
+                4 $CellContext`a$) ($CellContext`b$/(($CellContext`a$ + \
+$CellContext`b$)^2 + $CellContext`d$^2)))^
+              Rational[
+               1, 2]}, (($CellContext`\[Mu]o$ ($CellContext`a$ \
+$CellContext`b$)^Rational[1, 2]) (
+              2/$CellContext`k)) ((1 - $CellContext`k^2/2) 
+              EllipticK[$CellContext`k^2] - 
+             EllipticE[$CellContext`k^2])]; $CellContext`I1$[
+           Pattern[$CellContext`f$, 
+            Blank[]]] := $CellContext`Vi$/(-(
+            I/((((2 $CellContext`C1$$) 10^(-12)) $CellContext`f$) 
+            Pi)) + (((2 I) $CellContext`f$) $CellContext`L11$) 
+           Pi + $CellContext`ri$ + ((((8 $CellContext`C2$$) 
+              10^(-12)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]^2) (
+            Pi^3/(-I + ((((2 $CellContext`C2$$) 10^(-12)) $CellContext`f$) 
+              Pi) ((((2 I) $CellContext`f$) $CellContext`L22$) 
+               Pi + $CellContext`ro$$)))); $CellContext`I2$[
+           Pattern[$CellContext`f$, 
+            
+            Blank[]]] := ((((((((8 I) $CellContext`C1$$) $CellContext`C2$$) 
+               10^(-24)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]) 
+            Pi^3) $CellContext`Vi$)/(-1 + ((2 $CellContext`f$) 
+            Pi) (($CellContext`C2$$ 
+              10^(-12)) (((2 $CellContext`f$) $CellContext`L22$) Pi - 
+              I $CellContext`ro$$) + ($CellContext`C1$$ 
+              10^(-12)) (((((8 $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^3) \
+($CellContext`L12$[$CellContext`d$$]^2 - $CellContext`L11$ $CellContext`L22$))
+                 Pi^3 - I $CellContext`ri$ + (((((4 I) $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^2) 
+                Pi^2) ($CellContext`L22$ $CellContext`ri$ + $CellContext`L11$ \
+$CellContext`ro$$) + ((2 $CellContext`f$) 
+                Pi) ($CellContext`L11$ + (($CellContext`C2$$ 
+                   10^(-12)) $CellContext`ri$) $CellContext`ro$$)))); \
+$CellContext`frv$ = {
+          1/((2 Pi) (($CellContext`C1$$ 10^(-12)) $CellContext`L11$)^
+            Rational[1, 2]), 
+           1/((2 Pi) (($CellContext`C2$$ 10^(-12)) $CellContext`L22$)^
+            Rational[1, 2]), 1/((2 Pi) 
+           Sqrt[(($CellContext`C1$$ $CellContext`C2$$) (
+               10^(-12)/($CellContext`C1$$ + $CellContext`C2$$))) \
+($CellContext`L11$ + $CellContext`L22$ - 
+              2 $CellContext`L12$[$CellContext`d$$])]), 
+           1/((2 Pi) ((($CellContext`C1$$ + $CellContext`C2$$) 
+              10^(-12)) (($CellContext`L11$ + $CellContext`L22$)/2))^
+            Rational[1, 2])}; {$CellContext`fmin$, $CellContext`fmax$} = {
+          0.8 Min[$CellContext`frv$], 1.3 Max[$CellContext`frv$]}; Pane[
+          Row[{
+            Column[{$CellContext`g0, 
+              Text[
+               Style[
+                Column[{"voltage source", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], "=", $CellContext`Vi$, " V (rms)"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["r", Italic], 
+                    Style["i", Italic]], "=", $CellContext`ri$, 
+                    " \[CapitalOmega]"}], "coil inductances", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 1], "=", 
+                    Subscript[
+                    Style["L", Italic], 2], " =", 
+                    Round[$CellContext`L11$ 10^3, 0.01], " mH"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 12], "= ", 
+                    Round[$CellContext`L12$[$CellContext`d$$] 10^3, 0.01], 
+                    " mH"}]}, Frame -> True, Spacings -> 0.2], 14]], 
+              Text[
+               Style[
+                Column[{
+                  Row[{"radii: ", 
+                    Style["a", Italic], "=", 
+                    Style["b", Italic], "= ", $CellContext`a$, " m"}], 
+                  Row[{"(section radius: ", 
+                    Style["R", Italic], "= 5 mm)"}], 
+                  Row[{"turns: ", 
+                    Subscript[
+                    Style["N", Italic], 1], "=", 
+                    Subscript[
+                    Style["N", Italic], 2], "=", $CellContext`N1$}]}, 
+                 Spacings -> 0.2], 14]]}, Center], 
+            Column[{
+              Plot[{
+                Abs[
+                 $CellContext`I1$[$CellContext`f 10^3]], 
+                Abs[
+                 $CellContext`I2$[$CellContext`f 
+                  10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Black, Thick, Dashed], 
+                 Directive[Black, Thick]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {0, 1}}, AspectRatio -> 0.5, Frame -> True, Axes -> 
+               None, FrameLabel -> {{"current (A)", None}, {None, None}}, 
+               LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), None}, GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), 0.65}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), 0.5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), 0.35}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), 0.35}], 
+                 
+                 Inset[$CellContext`g1, {($CellContext`fmin$ + 
+                    0.9 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   0.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {30, Automatic}}, ImageSize -> 
+               360], 
+              LogPlot[{$CellContext`ro$$ Abs[
+                   $CellContext`I2$[$CellContext`f 10^3]]^2, $CellContext`Vi$ 
+                Re[
+                  $CellContext`I1$[$CellContext`f 
+                   10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Red, Thick], 
+                 Directive[Red, Thick, Dashed]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {10^(-4), 100}}, AspectRatio -> 0.5, Frame -> 
+               True, FrameLabel -> {{"power (W)", None}, {
+                 "frequency (kHz)", None}}, LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), 10^Range[-4, 2]}, 
+               GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), -1}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), -3}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), -5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), -5}], 
+                 
+                 Inset[$CellContext`g2, {($CellContext`fmin$ + 
+                    0.85 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   1.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {40, Automatic}}, ImageSize -> 
+               360]}, Spacings -> 0, Alignment -> Right]}], 
+          ImageSize -> {570, 400}]], 
+      "Specifications" :> {{{$CellContext`d$$, 0.5, 
+          Row[{
+            Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1, Appearance -> 
+         "Labeled", ImageSize -> Tiny, ControlPlacement -> 
+         1}, {{$CellContext`C1$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 2}, {{$CellContext`C2$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 3}, {{$CellContext`ro$$, 100, 
+          Style[
+           Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}, 
+         ControlPlacement -> 4}, 
+        Grid[{{
+          "distance (m)", "capacitances (pF)", 
+           "output resistance (\[CapitalOmega])"}, {
+           Manipulate`Place[1], 
+           Row[{
+             Manipulate`Place[2], 
+             Spacer[10], 
+             Manipulate`Place[3]}], 
+           Manipulate`Place[4]}}, Frame -> All]}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`d$$, $CellContext`ro$$, \
+$CellContext`C1$$, $CellContext`C2$$}, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{615., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      Block[{$CellContext`a = 0.7, $CellContext`h = 0.7, $CellContext`r = 
+         0.07}, $CellContext`g0 = Show[
+          
+          RevolutionPlot3D[{{$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] + $CellContext`h/
+              2}, {$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] - $CellContext`h/2}}, {$CellContext`t, 0, 2 
+            Pi}, {$CellContext`\[Theta], 0, 2 Pi}, MeshStyle -> None, 
+           PlotStyle -> {{Gray, 
+              Opacity[0.5]}}], 
+          
+          ParametricPlot3D[{{$CellContext`a 
+             Cos[$CellContext`t + Pi], (-$CellContext`a) 
+             Sin[$CellContext`t + Pi], (0.08 $CellContext`r) ($CellContext`t - 
+               3.5 Pi) + $CellContext`h/2}, {$CellContext`a 
+             Cos[$CellContext`t], (-$CellContext`a) 
+             Sin[$CellContext`t], (0.08 $CellContext`r) ($CellContext`t - 3.5 
+               Pi) - $CellContext`h/2}}, {$CellContext`t, 0 Pi, 8 Pi}, 
+           PlotStyle -> {{Black, 
+              Thickness[0.007]}}], 
+          Graphics3D[{{Black, 
+             Thickness[0.01], 
+             
+             Line[{{{-1.5, 0, 0}, {-1, 0, 
+                0}, {-0.7, 0, 0.28}}, {{-1.5, 0, 0.7}, {-1, 0, 0.7}, {-0.7, 0,
+                  0.42}}}], 
+             
+             Line[{{{1.5, 0, 0}, {1, 0, 0}, {0.7, 0, -0.28}}, {{1.5, 0, 0}, {
+                1.5, 0, -0.7}, {1, 0, -0.7}, {0.7, 0, -0.42}}}]}, {Black, 
+             PointSize[0.03], 
+             Point[{{-1.5, 0, 0}, {-1.5, 0, 0.7}}]}, {White, 
+             Cuboid[{-1.3, -0.15, 0.55}, {-1.2, 0.15, 0.85}], 
+             Cuboid[{1.2, -0.15, -0.15}, {1.3, 0.15, 0.15}], 
+             Cuboid[{1.45, -0.05, -0.6}, {1.55, 0.05, -0.1}]}, {Black, 
+             Thickness[0.01], 
+             Arrow[{{-1.2, 0, 0.75}, {-0.9, 0, 0.75}}], 
+             Arrow[{{0.9, 0, 0.05}, {1.2, 0, 0.05}}], Blue, 
+             Arrowheads[0.03], 
+             Thickness[0.002], 
+             Arrow[{{0, 0, 0.35}, {0.7, 0, 0.35}}], 
+             Arrow[{{0, 0, -0.35}, {0.7, 0, -0.35}}], 
+             Arrowheads[{-0.03, 0.03}], 
+             Arrow[{{0, 0, -0.35}, {0, 0, 0.35}}], 
+             Arrow[
+              
+              BezierCurve[{{-0.6, 0, 0.25}, {-0.75, 0, 0}, {-0.6, 
+                 0, -0.25}}]]}, {Black, 
+             Text[
+              Style[
+               Column[{
+                 Row[{
+                   Style[
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], 14], ", ", 
+                   Style["f", Italic]}], 
+                 Subscript[
+                  Style["r", Italic], 
+                  Style["i", Italic]]}, Center, Spacings -> 0], 14], {-1.4, 0,
+                0.31}], 
+             Text[
+              Style["Coil 1", 14], {-0.3, 0, 0.69}], 
+             Text[
+              Style["Coil 2", 14], {-0.3, 0, -0.7}], 
+             Text[
+              Style[
+               Subscript[
+                Style["C", Italic], 1], 14], {-1.2, 0, 1}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 1], 14], {-0.8, 0, 0.9}], 
+             Text[
+              Style[
+               Style[
+                Subscript[
+                 Style["C", Italic], 2], 14], 14], {1.35, 0, 0.3}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 2], 14], {0.8, 0, 0.07}], 
+             Text[
+              Style[
+               Subscript[
+                Style["r", Italic], 
+                Style["o", Italic]], 14], {1.7, 0, -0.35}], 
+             Text[
+              Style[
+               Style["a", Italic], 14], {0.3, 0, 0.35}], 
+             Text[
+              Style[
+               Style["b", Italic], 14], {0.3, 0, -0.35}], 
+             Text[
+              Style[
+               Style["d", Italic], 14], {0.1, 0, 0}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 1], 14], {-0.92, 0, 0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 2], 14], {-0.92, 0, -0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 12], 14], {-0.8, 0, 0}]}}], PlotRange -> 
+          All, Axes -> None, Boxed -> False, ViewPoint -> {2, -12, 3}, 
+          ImageSize -> 200]]; $CellContext`g1 = Graphics[{Black, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 2], 14], {0.27, 0}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 21], 14], {0.27, 0.1}]}, ImageSize -> 
+         50]; $CellContext`g2 = Graphics[{Red, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], Black, 
+          Text[
+           Style[" output", 14], {0.32, 0}], 
+          Text[
+           Style["input", 14], {0.32, 0.1}]}, ImageSize -> 70]); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1048782098]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`C1$$ = 300, $CellContext`C2$$ = 
+    200, $CellContext`d$$ = 0.2, $CellContext`ro$$ = 100, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`d$$], 0.2, 
+       Row[{
+         Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1}, {{
+       Hold[$CellContext`C1$$], 300, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`C2$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`ro$$], 100, 
+       Style[
+        Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}}, {
+      Hold[
+       Grid[{{
+         "distance (m)", "capacitances (pF)", 
+          "output resistance (\[CapitalOmega])"}, {
+          Manipulate`Place[1], 
+          Row[{
+            Manipulate`Place[2], 
+            Spacer[10], 
+            Manipulate`Place[3]}], 
+          Manipulate`Place[4]}}, Frame -> All]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    570., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`d$7348$$ = 
+    0, $CellContext`C1$7349$$ = 0, $CellContext`C2$7350$$ = 
+    0, $CellContext`ro$7351$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`C1$$ = 300, $CellContext`C2$$ = 
+        200, $CellContext`d$$ = 0.2, $CellContext`ro$$ = 100}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`d$$, $CellContext`d$7348$$, 0], 
+        Hold[$CellContext`C1$$, $CellContext`C1$7349$$, 0], 
+        Hold[$CellContext`C2$$, $CellContext`C2$7350$$, 0], 
+        Hold[$CellContext`ro$$, $CellContext`ro$7351$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`\[Mu]o$ = (4 Pi) 10^(-7), $CellContext`Vi$ = 
+         100, $CellContext`ri$ = 10, $CellContext`a$ = 0.5, $CellContext`b$ = 
+         0.5, $CellContext`R$ = 0.05, $CellContext`N1$ = 
+         100, $CellContext`N2$ = 
+         100, $CellContext`L11$, $CellContext`L22$, $CellContext`L12$, \
+$CellContext`I1$, $CellContext`I2$, $CellContext`frv$, $CellContext`fmin$, \
+$CellContext`fmax$}, $CellContext`L11$ = ($CellContext`L22$ = \
+(($CellContext`N1$^2 $CellContext`a$) $CellContext`\[Mu]o$) (
+            Log[8 ($CellContext`a$/$CellContext`R$)] - 7/
+            4)); $CellContext`L12$[
+           Pattern[$CellContext`d$, 
+            Blank[]]] = ($CellContext`N1$ $CellContext`N2$) 
+          Block[{$CellContext`k = ((
+                4 $CellContext`a$) ($CellContext`b$/(($CellContext`a$ + \
+$CellContext`b$)^2 + $CellContext`d$^2)))^
+              Rational[
+               1, 2]}, (($CellContext`\[Mu]o$ ($CellContext`a$ \
+$CellContext`b$)^Rational[1, 2]) (
+              2/$CellContext`k)) ((1 - $CellContext`k^2/2) 
+              EllipticK[$CellContext`k^2] - 
+             EllipticE[$CellContext`k^2])]; $CellContext`I1$[
+           Pattern[$CellContext`f$, 
+            Blank[]]] := $CellContext`Vi$/(-(
+            I/((((2 $CellContext`C1$$) 10^(-12)) $CellContext`f$) 
+            Pi)) + (((2 I) $CellContext`f$) $CellContext`L11$) 
+           Pi + $CellContext`ri$ + ((((8 $CellContext`C2$$) 
+              10^(-12)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]^2) (
+            Pi^3/(-I + ((((2 $CellContext`C2$$) 10^(-12)) $CellContext`f$) 
+              Pi) ((((2 I) $CellContext`f$) $CellContext`L22$) 
+               Pi + $CellContext`ro$$)))); $CellContext`I2$[
+           Pattern[$CellContext`f$, 
+            
+            Blank[]]] := ((((((((8 I) $CellContext`C1$$) $CellContext`C2$$) 
+               10^(-24)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]) 
+            Pi^3) $CellContext`Vi$)/(-1 + ((2 $CellContext`f$) 
+            Pi) (($CellContext`C2$$ 
+              10^(-12)) (((2 $CellContext`f$) $CellContext`L22$) Pi - 
+              I $CellContext`ro$$) + ($CellContext`C1$$ 
+              10^(-12)) (((((8 $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^3) \
+($CellContext`L12$[$CellContext`d$$]^2 - $CellContext`L11$ $CellContext`L22$))
+                 Pi^3 - I $CellContext`ri$ + (((((4 I) $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^2) 
+                Pi^2) ($CellContext`L22$ $CellContext`ri$ + $CellContext`L11$ \
+$CellContext`ro$$) + ((2 $CellContext`f$) 
+                Pi) ($CellContext`L11$ + (($CellContext`C2$$ 
+                   10^(-12)) $CellContext`ri$) $CellContext`ro$$)))); \
+$CellContext`frv$ = {
+          1/((2 Pi) (($CellContext`C1$$ 10^(-12)) $CellContext`L11$)^
+            Rational[1, 2]), 
+           1/((2 Pi) (($CellContext`C2$$ 10^(-12)) $CellContext`L22$)^
+            Rational[1, 2]), 1/((2 Pi) 
+           Sqrt[(($CellContext`C1$$ $CellContext`C2$$) (
+               10^(-12)/($CellContext`C1$$ + $CellContext`C2$$))) \
+($CellContext`L11$ + $CellContext`L22$ - 
+              2 $CellContext`L12$[$CellContext`d$$])]), 
+           1/((2 Pi) ((($CellContext`C1$$ + $CellContext`C2$$) 
+              10^(-12)) (($CellContext`L11$ + $CellContext`L22$)/2))^
+            Rational[1, 2])}; {$CellContext`fmin$, $CellContext`fmax$} = {
+          0.8 Min[$CellContext`frv$], 1.3 Max[$CellContext`frv$]}; Pane[
+          Row[{
+            Column[{$CellContext`g0, 
+              Text[
+               Style[
+                Column[{"voltage source", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], "=", $CellContext`Vi$, " V (rms)"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["r", Italic], 
+                    Style["i", Italic]], "=", $CellContext`ri$, 
+                    " \[CapitalOmega]"}], "coil inductances", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 1], "=", 
+                    Subscript[
+                    Style["L", Italic], 2], " =", 
+                    Round[$CellContext`L11$ 10^3, 0.01], " mH"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 12], "= ", 
+                    Round[$CellContext`L12$[$CellContext`d$$] 10^3, 0.01], 
+                    " mH"}]}, Frame -> True, Spacings -> 0.2], 14]], 
+              Text[
+               Style[
+                Column[{
+                  Row[{"radii: ", 
+                    Style["a", Italic], "=", 
+                    Style["b", Italic], "= ", $CellContext`a$, " m"}], 
+                  Row[{"(section radius: ", 
+                    Style["R", Italic], "= 5 mm)"}], 
+                  Row[{"turns: ", 
+                    Subscript[
+                    Style["N", Italic], 1], "=", 
+                    Subscript[
+                    Style["N", Italic], 2], "=", $CellContext`N1$}]}, 
+                 Spacings -> 0.2], 14]]}, Center], 
+            Column[{
+              Plot[{
+                Abs[
+                 $CellContext`I1$[$CellContext`f 10^3]], 
+                Abs[
+                 $CellContext`I2$[$CellContext`f 
+                  10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Black, Thick, Dashed], 
+                 Directive[Black, Thick]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {0, 1}}, AspectRatio -> 0.5, Frame -> True, Axes -> 
+               None, FrameLabel -> {{"current (A)", None}, {None, None}}, 
+               LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), None}, GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), 0.65}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), 0.5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), 0.35}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), 0.35}], 
+                 
+                 Inset[$CellContext`g1, {($CellContext`fmin$ + 
+                    0.9 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   0.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {30, Automatic}}, ImageSize -> 
+               360], 
+              LogPlot[{$CellContext`ro$$ Abs[
+                   $CellContext`I2$[$CellContext`f 10^3]]^2, $CellContext`Vi$ 
+                Re[
+                  $CellContext`I1$[$CellContext`f 
+                   10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Red, Thick], 
+                 Directive[Red, Thick, Dashed]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {10^(-4), 100}}, AspectRatio -> 0.5, Frame -> 
+               True, FrameLabel -> {{"power (W)", None}, {
+                 "frequency (kHz)", None}}, LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), 10^Range[-4, 2]}, 
+               GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), -1}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), -3}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), -5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), -5}], 
+                 
+                 Inset[$CellContext`g2, {($CellContext`fmin$ + 
+                    0.85 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   1.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {40, Automatic}}, ImageSize -> 
+               360]}, Spacings -> 0, Alignment -> Right]}], 
+          ImageSize -> {570, 400}]], 
+      "Specifications" :> {{{$CellContext`d$$, 0.2, 
+          Row[{
+            Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1, Appearance -> 
+         "Labeled", ImageSize -> Tiny, ControlPlacement -> 
+         1}, {{$CellContext`C1$$, 300, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 2}, {{$CellContext`C2$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 3}, {{$CellContext`ro$$, 100, 
+          Style[
+           Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}, 
+         ControlPlacement -> 4}, 
+        Grid[{{
+          "distance (m)", "capacitances (pF)", 
+           "output resistance (\[CapitalOmega])"}, {
+           Manipulate`Place[1], 
+           Row[{
+             Manipulate`Place[2], 
+             Spacer[10], 
+             Manipulate`Place[3]}], 
+           Manipulate`Place[4]}}, Frame -> All]}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`d$$, $CellContext`ro$$, \
+$CellContext`C1$$, $CellContext`C2$$}, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{615., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      Block[{$CellContext`a = 0.7, $CellContext`h = 0.7, $CellContext`r = 
+         0.07}, $CellContext`g0 = Show[
+          
+          RevolutionPlot3D[{{$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] + $CellContext`h/
+              2}, {$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] - $CellContext`h/2}}, {$CellContext`t, 0, 2 
+            Pi}, {$CellContext`\[Theta], 0, 2 Pi}, MeshStyle -> None, 
+           PlotStyle -> {{Gray, 
+              Opacity[0.5]}}], 
+          
+          ParametricPlot3D[{{$CellContext`a 
+             Cos[$CellContext`t + Pi], (-$CellContext`a) 
+             Sin[$CellContext`t + Pi], (0.08 $CellContext`r) ($CellContext`t - 
+               3.5 Pi) + $CellContext`h/2}, {$CellContext`a 
+             Cos[$CellContext`t], (-$CellContext`a) 
+             Sin[$CellContext`t], (0.08 $CellContext`r) ($CellContext`t - 3.5 
+               Pi) - $CellContext`h/2}}, {$CellContext`t, 0 Pi, 8 Pi}, 
+           PlotStyle -> {{Black, 
+              Thickness[0.007]}}], 
+          Graphics3D[{{Black, 
+             Thickness[0.01], 
+             
+             Line[{{{-1.5, 0, 0}, {-1, 0, 
+                0}, {-0.7, 0, 0.28}}, {{-1.5, 0, 0.7}, {-1, 0, 0.7}, {-0.7, 0,
+                  0.42}}}], 
+             
+             Line[{{{1.5, 0, 0}, {1, 0, 0}, {0.7, 0, -0.28}}, {{1.5, 0, 0}, {
+                1.5, 0, -0.7}, {1, 0, -0.7}, {0.7, 0, -0.42}}}]}, {Black, 
+             PointSize[0.03], 
+             Point[{{-1.5, 0, 0}, {-1.5, 0, 0.7}}]}, {White, 
+             Cuboid[{-1.3, -0.15, 0.55}, {-1.2, 0.15, 0.85}], 
+             Cuboid[{1.2, -0.15, -0.15}, {1.3, 0.15, 0.15}], 
+             Cuboid[{1.45, -0.05, -0.6}, {1.55, 0.05, -0.1}]}, {Black, 
+             Thickness[0.01], 
+             Arrow[{{-1.2, 0, 0.75}, {-0.9, 0, 0.75}}], 
+             Arrow[{{0.9, 0, 0.05}, {1.2, 0, 0.05}}], Blue, 
+             Arrowheads[0.03], 
+             Thickness[0.002], 
+             Arrow[{{0, 0, 0.35}, {0.7, 0, 0.35}}], 
+             Arrow[{{0, 0, -0.35}, {0.7, 0, -0.35}}], 
+             Arrowheads[{-0.03, 0.03}], 
+             Arrow[{{0, 0, -0.35}, {0, 0, 0.35}}], 
+             Arrow[
+              
+              BezierCurve[{{-0.6, 0, 0.25}, {-0.75, 0, 0}, {-0.6, 
+                 0, -0.25}}]]}, {Black, 
+             Text[
+              Style[
+               Column[{
+                 Row[{
+                   Style[
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], 14], ", ", 
+                   Style["f", Italic]}], 
+                 Subscript[
+                  Style["r", Italic], 
+                  Style["i", Italic]]}, Center, Spacings -> 0], 14], {-1.4, 0,
+                0.31}], 
+             Text[
+              Style["Coil 1", 14], {-0.3, 0, 0.69}], 
+             Text[
+              Style["Coil 2", 14], {-0.3, 0, -0.7}], 
+             Text[
+              Style[
+               Subscript[
+                Style["C", Italic], 1], 14], {-1.2, 0, 1}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 1], 14], {-0.8, 0, 0.9}], 
+             Text[
+              Style[
+               Style[
+                Subscript[
+                 Style["C", Italic], 2], 14], 14], {1.35, 0, 0.3}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 2], 14], {0.8, 0, 0.07}], 
+             Text[
+              Style[
+               Subscript[
+                Style["r", Italic], 
+                Style["o", Italic]], 14], {1.7, 0, -0.35}], 
+             Text[
+              Style[
+               Style["a", Italic], 14], {0.3, 0, 0.35}], 
+             Text[
+              Style[
+               Style["b", Italic], 14], {0.3, 0, -0.35}], 
+             Text[
+              Style[
+               Style["d", Italic], 14], {0.1, 0, 0}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 1], 14], {-0.92, 0, 0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 2], 14], {-0.92, 0, -0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 12], 14], {-0.8, 0, 0}]}}], PlotRange -> 
+          All, Axes -> None, Boxed -> False, ViewPoint -> {2, -12, 3}, 
+          ImageSize -> 200]]; $CellContext`g1 = Graphics[{Black, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 2], 14], {0.27, 0}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 21], 14], {0.27, 0.1}]}, ImageSize -> 
+         50]; $CellContext`g2 = Graphics[{Red, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], Black, 
+          Text[
+           Style[" output", 14], {0.32, 0}], 
+          Text[
+           Style["input", 14], {0.32, 0.1}]}, ImageSize -> 70]); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->334946510],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+    200, $CellContext`d$$ = 1, $CellContext`ro$$ = 100, Typeset`show$$ = True,
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`d$$], 1, 
+       Row[{
+         Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1}, {{
+       Hold[$CellContext`C1$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`C2$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`ro$$], 100, 
+       Style[
+        Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}}, {
+      Hold[
+       Grid[{{
+         "distance (m)", "capacitances (pF)", 
+          "output resistance (\[CapitalOmega])"}, {
+          Manipulate`Place[1], 
+          Row[{
+            Manipulate`Place[2], 
+            Spacer[10], 
+            Manipulate`Place[3]}], 
+          Manipulate`Place[4]}}, Frame -> All]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    570., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`d$7417$$ = 
+    0, $CellContext`C1$7418$$ = 0, $CellContext`C2$7419$$ = 
+    0, $CellContext`ro$7420$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+        200, $CellContext`d$$ = 1, $CellContext`ro$$ = 100}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`d$$, $CellContext`d$7417$$, 0], 
+        Hold[$CellContext`C1$$, $CellContext`C1$7418$$, 0], 
+        Hold[$CellContext`C2$$, $CellContext`C2$7419$$, 0], 
+        Hold[$CellContext`ro$$, $CellContext`ro$7420$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`\[Mu]o$ = (4 Pi) 10^(-7), $CellContext`Vi$ = 
+         100, $CellContext`ri$ = 10, $CellContext`a$ = 0.5, $CellContext`b$ = 
+         0.5, $CellContext`R$ = 0.05, $CellContext`N1$ = 
+         100, $CellContext`N2$ = 
+         100, $CellContext`L11$, $CellContext`L22$, $CellContext`L12$, \
+$CellContext`I1$, $CellContext`I2$, $CellContext`frv$, $CellContext`fmin$, \
+$CellContext`fmax$}, $CellContext`L11$ = ($CellContext`L22$ = \
+(($CellContext`N1$^2 $CellContext`a$) $CellContext`\[Mu]o$) (
+            Log[8 ($CellContext`a$/$CellContext`R$)] - 7/
+            4)); $CellContext`L12$[
+           Pattern[$CellContext`d$, 
+            Blank[]]] = ($CellContext`N1$ $CellContext`N2$) 
+          Block[{$CellContext`k = ((
+                4 $CellContext`a$) ($CellContext`b$/(($CellContext`a$ + \
+$CellContext`b$)^2 + $CellContext`d$^2)))^
+              Rational[
+               1, 2]}, (($CellContext`\[Mu]o$ ($CellContext`a$ \
+$CellContext`b$)^Rational[1, 2]) (
+              2/$CellContext`k)) ((1 - $CellContext`k^2/2) 
+              EllipticK[$CellContext`k^2] - 
+             EllipticE[$CellContext`k^2])]; $CellContext`I1$[
+           Pattern[$CellContext`f$, 
+            Blank[]]] := $CellContext`Vi$/(-(
+            I/((((2 $CellContext`C1$$) 10^(-12)) $CellContext`f$) 
+            Pi)) + (((2 I) $CellContext`f$) $CellContext`L11$) 
+           Pi + $CellContext`ri$ + ((((8 $CellContext`C2$$) 
+              10^(-12)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]^2) (
+            Pi^3/(-I + ((((2 $CellContext`C2$$) 10^(-12)) $CellContext`f$) 
+              Pi) ((((2 I) $CellContext`f$) $CellContext`L22$) 
+               Pi + $CellContext`ro$$)))); $CellContext`I2$[
+           Pattern[$CellContext`f$, 
+            
+            Blank[]]] := ((((((((8 I) $CellContext`C1$$) $CellContext`C2$$) 
+               10^(-24)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]) 
+            Pi^3) $CellContext`Vi$)/(-1 + ((2 $CellContext`f$) 
+            Pi) (($CellContext`C2$$ 
+              10^(-12)) (((2 $CellContext`f$) $CellContext`L22$) Pi - 
+              I $CellContext`ro$$) + ($CellContext`C1$$ 
+              10^(-12)) (((((8 $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^3) \
+($CellContext`L12$[$CellContext`d$$]^2 - $CellContext`L11$ $CellContext`L22$))
+                 Pi^3 - I $CellContext`ri$ + (((((4 I) $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^2) 
+                Pi^2) ($CellContext`L22$ $CellContext`ri$ + $CellContext`L11$ \
+$CellContext`ro$$) + ((2 $CellContext`f$) 
+                Pi) ($CellContext`L11$ + (($CellContext`C2$$ 
+                   10^(-12)) $CellContext`ri$) $CellContext`ro$$)))); \
+$CellContext`frv$ = {
+          1/((2 Pi) (($CellContext`C1$$ 10^(-12)) $CellContext`L11$)^
+            Rational[1, 2]), 
+           1/((2 Pi) (($CellContext`C2$$ 10^(-12)) $CellContext`L22$)^
+            Rational[1, 2]), 1/((2 Pi) 
+           Sqrt[(($CellContext`C1$$ $CellContext`C2$$) (
+               10^(-12)/($CellContext`C1$$ + $CellContext`C2$$))) \
+($CellContext`L11$ + $CellContext`L22$ - 
+              2 $CellContext`L12$[$CellContext`d$$])]), 
+           1/((2 Pi) ((($CellContext`C1$$ + $CellContext`C2$$) 
+              10^(-12)) (($CellContext`L11$ + $CellContext`L22$)/2))^
+            Rational[1, 2])}; {$CellContext`fmin$, $CellContext`fmax$} = {
+          0.8 Min[$CellContext`frv$], 1.3 Max[$CellContext`frv$]}; Pane[
+          Row[{
+            Column[{$CellContext`g0, 
+              Text[
+               Style[
+                Column[{"voltage source", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], "=", $CellContext`Vi$, " V (rms)"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["r", Italic], 
+                    Style["i", Italic]], "=", $CellContext`ri$, 
+                    " \[CapitalOmega]"}], "coil inductances", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 1], "=", 
+                    Subscript[
+                    Style["L", Italic], 2], " =", 
+                    Round[$CellContext`L11$ 10^3, 0.01], " mH"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 12], "= ", 
+                    Round[$CellContext`L12$[$CellContext`d$$] 10^3, 0.01], 
+                    " mH"}]}, Frame -> True, Spacings -> 0.2], 14]], 
+              Text[
+               Style[
+                Column[{
+                  Row[{"radii: ", 
+                    Style["a", Italic], "=", 
+                    Style["b", Italic], "= ", $CellContext`a$, " m"}], 
+                  Row[{"(section radius: ", 
+                    Style["R", Italic], "= 5 mm)"}], 
+                  Row[{"turns: ", 
+                    Subscript[
+                    Style["N", Italic], 1], "=", 
+                    Subscript[
+                    Style["N", Italic], 2], "=", $CellContext`N1$}]}, 
+                 Spacings -> 0.2], 14]]}, Center], 
+            Column[{
+              Plot[{
+                Abs[
+                 $CellContext`I1$[$CellContext`f 10^3]], 
+                Abs[
+                 $CellContext`I2$[$CellContext`f 
+                  10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Black, Thick, Dashed], 
+                 Directive[Black, Thick]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {0, 1}}, AspectRatio -> 0.5, Frame -> True, Axes -> 
+               None, FrameLabel -> {{"current (A)", None}, {None, None}}, 
+               LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), None}, GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), 0.65}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), 0.5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), 0.35}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), 0.35}], 
+                 
+                 Inset[$CellContext`g1, {($CellContext`fmin$ + 
+                    0.9 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   0.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {30, Automatic}}, ImageSize -> 
+               360], 
+              LogPlot[{$CellContext`ro$$ Abs[
+                   $CellContext`I2$[$CellContext`f 10^3]]^2, $CellContext`Vi$ 
+                Re[
+                  $CellContext`I1$[$CellContext`f 
+                   10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Red, Thick], 
+                 Directive[Red, Thick, Dashed]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {10^(-4), 100}}, AspectRatio -> 0.5, Frame -> 
+               True, FrameLabel -> {{"power (W)", None}, {
+                 "frequency (kHz)", None}}, LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), 10^Range[-4, 2]}, 
+               GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), -1}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), -3}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), -5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), -5}], 
+                 
+                 Inset[$CellContext`g2, {($CellContext`fmin$ + 
+                    0.85 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   1.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {40, Automatic}}, ImageSize -> 
+               360]}, Spacings -> 0, Alignment -> Right]}], 
+          ImageSize -> {570, 400}]], 
+      "Specifications" :> {{{$CellContext`d$$, 1, 
+          Row[{
+            Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1, Appearance -> 
+         "Labeled", ImageSize -> Tiny, ControlPlacement -> 
+         1}, {{$CellContext`C1$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 2}, {{$CellContext`C2$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 3}, {{$CellContext`ro$$, 100, 
+          Style[
+           Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}, 
+         ControlPlacement -> 4}, 
+        Grid[{{
+          "distance (m)", "capacitances (pF)", 
+           "output resistance (\[CapitalOmega])"}, {
+           Manipulate`Place[1], 
+           Row[{
+             Manipulate`Place[2], 
+             Spacer[10], 
+             Manipulate`Place[3]}], 
+           Manipulate`Place[4]}}, Frame -> All]}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`d$$, $CellContext`ro$$, \
+$CellContext`C1$$, $CellContext`C2$$}, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{615., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      Block[{$CellContext`a = 0.7, $CellContext`h = 0.7, $CellContext`r = 
+         0.07}, $CellContext`g0 = Show[
+          
+          RevolutionPlot3D[{{$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] + $CellContext`h/
+              2}, {$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] - $CellContext`h/2}}, {$CellContext`t, 0, 2 
+            Pi}, {$CellContext`\[Theta], 0, 2 Pi}, MeshStyle -> None, 
+           PlotStyle -> {{Gray, 
+              Opacity[0.5]}}], 
+          
+          ParametricPlot3D[{{$CellContext`a 
+             Cos[$CellContext`t + Pi], (-$CellContext`a) 
+             Sin[$CellContext`t + Pi], (0.08 $CellContext`r) ($CellContext`t - 
+               3.5 Pi) + $CellContext`h/2}, {$CellContext`a 
+             Cos[$CellContext`t], (-$CellContext`a) 
+             Sin[$CellContext`t], (0.08 $CellContext`r) ($CellContext`t - 3.5 
+               Pi) - $CellContext`h/2}}, {$CellContext`t, 0 Pi, 8 Pi}, 
+           PlotStyle -> {{Black, 
+              Thickness[0.007]}}], 
+          Graphics3D[{{Black, 
+             Thickness[0.01], 
+             
+             Line[{{{-1.5, 0, 0}, {-1, 0, 
+                0}, {-0.7, 0, 0.28}}, {{-1.5, 0, 0.7}, {-1, 0, 0.7}, {-0.7, 0,
+                  0.42}}}], 
+             
+             Line[{{{1.5, 0, 0}, {1, 0, 0}, {0.7, 0, -0.28}}, {{1.5, 0, 0}, {
+                1.5, 0, -0.7}, {1, 0, -0.7}, {0.7, 0, -0.42}}}]}, {Black, 
+             PointSize[0.03], 
+             Point[{{-1.5, 0, 0}, {-1.5, 0, 0.7}}]}, {White, 
+             Cuboid[{-1.3, -0.15, 0.55}, {-1.2, 0.15, 0.85}], 
+             Cuboid[{1.2, -0.15, -0.15}, {1.3, 0.15, 0.15}], 
+             Cuboid[{1.45, -0.05, -0.6}, {1.55, 0.05, -0.1}]}, {Black, 
+             Thickness[0.01], 
+             Arrow[{{-1.2, 0, 0.75}, {-0.9, 0, 0.75}}], 
+             Arrow[{{0.9, 0, 0.05}, {1.2, 0, 0.05}}], Blue, 
+             Arrowheads[0.03], 
+             Thickness[0.002], 
+             Arrow[{{0, 0, 0.35}, {0.7, 0, 0.35}}], 
+             Arrow[{{0, 0, -0.35}, {0.7, 0, -0.35}}], 
+             Arrowheads[{-0.03, 0.03}], 
+             Arrow[{{0, 0, -0.35}, {0, 0, 0.35}}], 
+             Arrow[
+              
+              BezierCurve[{{-0.6, 0, 0.25}, {-0.75, 0, 0}, {-0.6, 
+                 0, -0.25}}]]}, {Black, 
+             Text[
+              Style[
+               Column[{
+                 Row[{
+                   Style[
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], 14], ", ", 
+                   Style["f", Italic]}], 
+                 Subscript[
+                  Style["r", Italic], 
+                  Style["i", Italic]]}, Center, Spacings -> 0], 14], {-1.4, 0,
+                0.31}], 
+             Text[
+              Style["Coil 1", 14], {-0.3, 0, 0.69}], 
+             Text[
+              Style["Coil 2", 14], {-0.3, 0, -0.7}], 
+             Text[
+              Style[
+               Subscript[
+                Style["C", Italic], 1], 14], {-1.2, 0, 1}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 1], 14], {-0.8, 0, 0.9}], 
+             Text[
+              Style[
+               Style[
+                Subscript[
+                 Style["C", Italic], 2], 14], 14], {1.35, 0, 0.3}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 2], 14], {0.8, 0, 0.07}], 
+             Text[
+              Style[
+               Subscript[
+                Style["r", Italic], 
+                Style["o", Italic]], 14], {1.7, 0, -0.35}], 
+             Text[
+              Style[
+               Style["a", Italic], 14], {0.3, 0, 0.35}], 
+             Text[
+              Style[
+               Style["b", Italic], 14], {0.3, 0, -0.35}], 
+             Text[
+              Style[
+               Style["d", Italic], 14], {0.1, 0, 0}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 1], 14], {-0.92, 0, 0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 2], 14], {-0.92, 0, -0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 12], 14], {-0.8, 0, 0}]}}], PlotRange -> 
+          All, Axes -> None, Boxed -> False, ViewPoint -> {2, -12, 3}, 
+          ImageSize -> 200]]; $CellContext`g1 = Graphics[{Black, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 2], 14], {0.27, 0}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 21], 14], {0.27, 0.1}]}, ImageSize -> 
+         50]; $CellContext`g2 = Graphics[{Red, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], Black, 
+          Text[
+           Style[" output", 14], {0.32, 0}], 
+          Text[
+           Style["input", 14], {0.32, 0.1}]}, ImageSize -> 70]); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->891354783],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+    200, $CellContext`d$$ = 1, $CellContext`ro$$ = 1000, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`d$$], 1, 
+       Row[{
+         Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1}, {{
+       Hold[$CellContext`C1$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`C2$$], 200, 
+       Row[{
+         Subscript[
+          Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 400, 
+      450, 500}}, {{
+       Hold[$CellContext`ro$$], 1000, 
+       Style[
+        Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}}, {
+      Hold[
+       Grid[{{
+         "distance (m)", "capacitances (pF)", 
+          "output resistance (\[CapitalOmega])"}, {
+          Manipulate`Place[1], 
+          Row[{
+            Manipulate`Place[2], 
+            Spacer[10], 
+            Manipulate`Place[3]}], 
+          Manipulate`Place[4]}}, Frame -> All]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    570., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`d$7486$$ = 
+    0, $CellContext`C1$7487$$ = 0, $CellContext`C2$7488$$ = 
+    0, $CellContext`ro$7489$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`C1$$ = 200, $CellContext`C2$$ = 
+        200, $CellContext`d$$ = 1, $CellContext`ro$$ = 1000}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`d$$, $CellContext`d$7486$$, 0], 
+        Hold[$CellContext`C1$$, $CellContext`C1$7487$$, 0], 
+        Hold[$CellContext`C2$$, $CellContext`C2$7488$$, 0], 
+        Hold[$CellContext`ro$$, $CellContext`ro$7489$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`\[Mu]o$ = (4 Pi) 10^(-7), $CellContext`Vi$ = 
+         100, $CellContext`ri$ = 10, $CellContext`a$ = 0.5, $CellContext`b$ = 
+         0.5, $CellContext`R$ = 0.05, $CellContext`N1$ = 
+         100, $CellContext`N2$ = 
+         100, $CellContext`L11$, $CellContext`L22$, $CellContext`L12$, \
+$CellContext`I1$, $CellContext`I2$, $CellContext`frv$, $CellContext`fmin$, \
+$CellContext`fmax$}, $CellContext`L11$ = ($CellContext`L22$ = \
+(($CellContext`N1$^2 $CellContext`a$) $CellContext`\[Mu]o$) (
+            Log[8 ($CellContext`a$/$CellContext`R$)] - 7/
+            4)); $CellContext`L12$[
+           Pattern[$CellContext`d$, 
+            Blank[]]] = ($CellContext`N1$ $CellContext`N2$) 
+          Block[{$CellContext`k = ((
+                4 $CellContext`a$) ($CellContext`b$/(($CellContext`a$ + \
+$CellContext`b$)^2 + $CellContext`d$^2)))^
+              Rational[
+               1, 2]}, (($CellContext`\[Mu]o$ ($CellContext`a$ \
+$CellContext`b$)^Rational[1, 2]) (
+              2/$CellContext`k)) ((1 - $CellContext`k^2/2) 
+              EllipticK[$CellContext`k^2] - 
+             EllipticE[$CellContext`k^2])]; $CellContext`I1$[
+           Pattern[$CellContext`f$, 
+            Blank[]]] := $CellContext`Vi$/(-(
+            I/((((2 $CellContext`C1$$) 10^(-12)) $CellContext`f$) 
+            Pi)) + (((2 I) $CellContext`f$) $CellContext`L11$) 
+           Pi + $CellContext`ri$ + ((((8 $CellContext`C2$$) 
+              10^(-12)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]^2) (
+            Pi^3/(-I + ((((2 $CellContext`C2$$) 10^(-12)) $CellContext`f$) 
+              Pi) ((((2 I) $CellContext`f$) $CellContext`L22$) 
+               Pi + $CellContext`ro$$)))); $CellContext`I2$[
+           Pattern[$CellContext`f$, 
+            
+            Blank[]]] := ((((((((8 I) $CellContext`C1$$) $CellContext`C2$$) 
+               10^(-24)) $CellContext`f$^3) \
+$CellContext`L12$[$CellContext`d$$]) 
+            Pi^3) $CellContext`Vi$)/(-1 + ((2 $CellContext`f$) 
+            Pi) (($CellContext`C2$$ 
+              10^(-12)) (((2 $CellContext`f$) $CellContext`L22$) Pi - 
+              I $CellContext`ro$$) + ($CellContext`C1$$ 
+              10^(-12)) (((((8 $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^3) \
+($CellContext`L12$[$CellContext`d$$]^2 - $CellContext`L11$ $CellContext`L22$))
+                 Pi^3 - I $CellContext`ri$ + (((((4 I) $CellContext`C2$$) 
+                  10^(-12)) $CellContext`f$^2) 
+                Pi^2) ($CellContext`L22$ $CellContext`ri$ + $CellContext`L11$ \
+$CellContext`ro$$) + ((2 $CellContext`f$) 
+                Pi) ($CellContext`L11$ + (($CellContext`C2$$ 
+                   10^(-12)) $CellContext`ri$) $CellContext`ro$$)))); \
+$CellContext`frv$ = {
+          1/((2 Pi) (($CellContext`C1$$ 10^(-12)) $CellContext`L11$)^
+            Rational[1, 2]), 
+           1/((2 Pi) (($CellContext`C2$$ 10^(-12)) $CellContext`L22$)^
+            Rational[1, 2]), 1/((2 Pi) 
+           Sqrt[(($CellContext`C1$$ $CellContext`C2$$) (
+               10^(-12)/($CellContext`C1$$ + $CellContext`C2$$))) \
+($CellContext`L11$ + $CellContext`L22$ - 
+              2 $CellContext`L12$[$CellContext`d$$])]), 
+           1/((2 Pi) ((($CellContext`C1$$ + $CellContext`C2$$) 
+              10^(-12)) (($CellContext`L11$ + $CellContext`L22$)/2))^
+            Rational[1, 2])}; {$CellContext`fmin$, $CellContext`fmax$} = {
+          0.8 Min[$CellContext`frv$], 1.3 Max[$CellContext`frv$]}; Pane[
+          Row[{
+            Column[{$CellContext`g0, 
+              Text[
+               Style[
+                Column[{"voltage source", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], "=", $CellContext`Vi$, " V (rms)"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["r", Italic], 
+                    Style["i", Italic]], "=", $CellContext`ri$, 
+                    " \[CapitalOmega]"}], "coil inductances", 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 1], "=", 
+                    Subscript[
+                    Style["L", Italic], 2], " =", 
+                    Round[$CellContext`L11$ 10^3, 0.01], " mH"}], 
+                  Row[{"   ", 
+                    Subscript[
+                    Style["L", Italic], 12], "= ", 
+                    Round[$CellContext`L12$[$CellContext`d$$] 10^3, 0.01], 
+                    " mH"}]}, Frame -> True, Spacings -> 0.2], 14]], 
+              Text[
+               Style[
+                Column[{
+                  Row[{"radii: ", 
+                    Style["a", Italic], "=", 
+                    Style["b", Italic], "= ", $CellContext`a$, " m"}], 
+                  Row[{"(section radius: ", 
+                    Style["R", Italic], "= 5 mm)"}], 
+                  Row[{"turns: ", 
+                    Subscript[
+                    Style["N", Italic], 1], "=", 
+                    Subscript[
+                    Style["N", Italic], 2], "=", $CellContext`N1$}]}, 
+                 Spacings -> 0.2], 14]]}, Center], 
+            Column[{
+              Plot[{
+                Abs[
+                 $CellContext`I1$[$CellContext`f 10^3]], 
+                Abs[
+                 $CellContext`I2$[$CellContext`f 
+                  10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Black, Thick, Dashed], 
+                 Directive[Black, Thick]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {0, 1}}, AspectRatio -> 0.5, Frame -> True, Axes -> 
+               None, FrameLabel -> {{"current (A)", None}, {None, None}}, 
+               LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), None}, GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), 0.65}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), 0.5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), 0.35}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), 0.35}], 
+                 
+                 Inset[$CellContext`g1, {($CellContext`fmin$ + 
+                    0.9 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   0.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {30, Automatic}}, ImageSize -> 
+               360], 
+              LogPlot[{$CellContext`ro$$ Abs[
+                   $CellContext`I2$[$CellContext`f 10^3]]^2, $CellContext`Vi$ 
+                Re[
+                  $CellContext`I1$[$CellContext`f 
+                   10^3]]}, {$CellContext`f, $CellContext`fmin$ 
+                10^(-3), $CellContext`fmax$ 10^(-3)}, PlotPoints -> 100, 
+               PlotStyle -> {
+                 Directive[Red, Thick], 
+                 Directive[Red, Thick, Dashed]}, 
+               PlotRange -> {{$CellContext`fmin$ 10^(-3), $CellContext`fmax$ 
+                  10^(-3)}, {10^(-4), 100}}, AspectRatio -> 0.5, Frame -> 
+               True, FrameLabel -> {{"power (W)", None}, {
+                 "frequency (kHz)", None}}, LabelStyle -> 14, 
+               GridLines -> {$CellContext`frv$ 10^(-3), 10^Range[-4, 2]}, 
+               GridLinesStyle -> {
+                 Directive[Blue, 
+                  Thickness[0.002]], 
+                 Directive[Gray, 
+                  Thickness[0.003]]}, FrameStyle -> Directive[Black, 
+                 Thickness[0.003]], Epilog -> {
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 1}]], 14], {
+                  Part[$CellContext`frv$, 1] 10^(-3), -1}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Row[{
+                    Style["r", Italic], 2}]], 14], {
+                  Part[$CellContext`frv$, 2] 10^(-3), -3}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rs", Italic]], 14], {
+                  Part[$CellContext`frv$, 3] 10^(-3), -5}], 
+                 Text[
+                  Style[
+                   Subscript[
+                    Style["f", Italic], 
+                    Style["rp", Italic]], 14], {
+                  Part[$CellContext`frv$, 4] 10^(-3), -5}], 
+                 
+                 Inset[$CellContext`g2, {($CellContext`fmin$ + 
+                    0.85 ($CellContext`fmax$ - $CellContext`fmin$)) 10^(-3), 
+                   1.8}, Background -> LightYellow]}, 
+               ImagePadding -> {{60, Automatic}, {40, Automatic}}, ImageSize -> 
+               360]}, Spacings -> 0, Alignment -> Right]}], 
+          ImageSize -> {570, 400}]], 
+      "Specifications" :> {{{$CellContext`d$$, 1, 
+          Row[{
+            Style["d", Italic], " (m)"}]}, 0.1, 2, 0.1, Appearance -> 
+         "Labeled", ImageSize -> Tiny, ControlPlacement -> 
+         1}, {{$CellContext`C1$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 1]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 2}, {{$CellContext`C2$$, 200, 
+          Row[{
+            Subscript[
+             Style["C", Italic], 2]}]}, {50, 100, 150, 200, 250, 300, 350, 
+         400, 450, 500}, ControlPlacement -> 3}, {{$CellContext`ro$$, 1000, 
+          Style[
+           Subscript["r", "o"], Italic]}, {10, 30, 100, 300, 1000, 3000}, 
+         ControlPlacement -> 4}, 
+        Grid[{{
+          "distance (m)", "capacitances (pF)", 
+           "output resistance (\[CapitalOmega])"}, {
+           Manipulate`Place[1], 
+           Row[{
+             Manipulate`Place[2], 
+             Spacer[10], 
+             Manipulate`Place[3]}], 
+           Manipulate`Place[4]}}, Frame -> All]}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`d$$, $CellContext`ro$$, \
+$CellContext`C1$$, $CellContext`C2$$}, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{615., {253., 258.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((
+      Block[{$CellContext`a = 0.7, $CellContext`h = 0.7, $CellContext`r = 
+         0.07}, $CellContext`g0 = Show[
+          
+          RevolutionPlot3D[{{$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] + $CellContext`h/
+              2}, {$CellContext`a + $CellContext`r 
+              Sin[$CellContext`t], $CellContext`r 
+              Cos[$CellContext`t] - $CellContext`h/2}}, {$CellContext`t, 0, 2 
+            Pi}, {$CellContext`\[Theta], 0, 2 Pi}, MeshStyle -> None, 
+           PlotStyle -> {{Gray, 
+              Opacity[0.5]}}], 
+          
+          ParametricPlot3D[{{$CellContext`a 
+             Cos[$CellContext`t + Pi], (-$CellContext`a) 
+             Sin[$CellContext`t + Pi], (0.08 $CellContext`r) ($CellContext`t - 
+               3.5 Pi) + $CellContext`h/2}, {$CellContext`a 
+             Cos[$CellContext`t], (-$CellContext`a) 
+             Sin[$CellContext`t], (0.08 $CellContext`r) ($CellContext`t - 3.5 
+               Pi) - $CellContext`h/2}}, {$CellContext`t, 0 Pi, 8 Pi}, 
+           PlotStyle -> {{Black, 
+              Thickness[0.007]}}], 
+          Graphics3D[{{Black, 
+             Thickness[0.01], 
+             
+             Line[{{{-1.5, 0, 0}, {-1, 0, 
+                0}, {-0.7, 0, 0.28}}, {{-1.5, 0, 0.7}, {-1, 0, 0.7}, {-0.7, 0,
+                  0.42}}}], 
+             
+             Line[{{{1.5, 0, 0}, {1, 0, 0}, {0.7, 0, -0.28}}, {{1.5, 0, 0}, {
+                1.5, 0, -0.7}, {1, 0, -0.7}, {0.7, 0, -0.42}}}]}, {Black, 
+             PointSize[0.03], 
+             Point[{{-1.5, 0, 0}, {-1.5, 0, 0.7}}]}, {White, 
+             Cuboid[{-1.3, -0.15, 0.55}, {-1.2, 0.15, 0.85}], 
+             Cuboid[{1.2, -0.15, -0.15}, {1.3, 0.15, 0.15}], 
+             Cuboid[{1.45, -0.05, -0.6}, {1.55, 0.05, -0.1}]}, {Black, 
+             Thickness[0.01], 
+             Arrow[{{-1.2, 0, 0.75}, {-0.9, 0, 0.75}}], 
+             Arrow[{{0.9, 0, 0.05}, {1.2, 0, 0.05}}], Blue, 
+             Arrowheads[0.03], 
+             Thickness[0.002], 
+             Arrow[{{0, 0, 0.35}, {0.7, 0, 0.35}}], 
+             Arrow[{{0, 0, -0.35}, {0.7, 0, -0.35}}], 
+             Arrowheads[{-0.03, 0.03}], 
+             Arrow[{{0, 0, -0.35}, {0, 0, 0.35}}], 
+             Arrow[
+              
+              BezierCurve[{{-0.6, 0, 0.25}, {-0.75, 0, 0}, {-0.6, 
+                 0, -0.25}}]]}, {Black, 
+             Text[
+              Style[
+               Column[{
+                 Row[{
+                   Style[
+                    Subscript[
+                    Style["V", Italic], 
+                    Style["i", Italic]], 14], ", ", 
+                   Style["f", Italic]}], 
+                 Subscript[
+                  Style["r", Italic], 
+                  Style["i", Italic]]}, Center, Spacings -> 0], 14], {-1.4, 0,
+                0.31}], 
+             Text[
+              Style["Coil 1", 14], {-0.3, 0, 0.69}], 
+             Text[
+              Style["Coil 2", 14], {-0.3, 0, -0.7}], 
+             Text[
+              Style[
+               Subscript[
+                Style["C", Italic], 1], 14], {-1.2, 0, 1}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 1], 14], {-0.8, 0, 0.9}], 
+             Text[
+              Style[
+               Style[
+                Subscript[
+                 Style["C", Italic], 2], 14], 14], {1.35, 0, 0.3}], 
+             Text[
+              Style[
+               Subscript[
+                Style["I", Italic], 2], 14], {0.8, 0, 0.07}], 
+             Text[
+              Style[
+               Subscript[
+                Style["r", Italic], 
+                Style["o", Italic]], 14], {1.7, 0, -0.35}], 
+             Text[
+              Style[
+               Style["a", Italic], 14], {0.3, 0, 0.35}], 
+             Text[
+              Style[
+               Style["b", Italic], 14], {0.3, 0, -0.35}], 
+             Text[
+              Style[
+               Style["d", Italic], 14], {0.1, 0, 0}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 1], 14], {-0.92, 0, 0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 2], 14], {-0.92, 0, -0.35}], 
+             Text[
+              Style[
+               Subscript[
+                Style["L", Italic], 12], 14], {-0.8, 0, 0}]}}], PlotRange -> 
+          All, Axes -> None, Boxed -> False, ViewPoint -> {2, -12, 3}, 
+          ImageSize -> 200]]; $CellContext`g1 = Graphics[{Black, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 2], 14], {0.27, 0}], 
+          Text[
+           Style[
+            Subscript[
+             Style["I", Italic], 21], 14], {0.27, 0.1}]}, ImageSize -> 
+         50]; $CellContext`g2 = Graphics[{Red, Thick, 
+          Line[{{0, 0}, {0.2, 0}}], Dashed, 
+          Line[{{0, 0.1}, {0.2, 0.1}}], Black, 
+          Text[
+           Style[" output", 14], {0.32, 0}], 
+          Text[
+           Style["input", 14], {0.32, 0.1}]}, ImageSize -> 70]); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->153916409]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "There are four candidates for resonance frequencies:\[LineSeparator]   ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", 
+     SubscriptBox["r", "1"]], "=", 
+    FractionBox["1", 
+     RowBox[{"2", " ", "\[Pi]", " ", 
+      SqrtBox[
+       RowBox[{
+        SubscriptBox["L", "1"], 
+        SubscriptBox["C", "1"], " "}]]}]]}], TraditionalForm]], "InlineMath"],
+ ",  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", 
+     SubscriptBox["r", "2"]], "=", 
+    FractionBox["1", 
+     RowBox[{"2", " ", "\[Pi]", " ", 
+      SqrtBox[
+       RowBox[{
+        SubscriptBox["L", "2"], 
+        SubscriptBox["C", "2"], " "}]]}]]}], TraditionalForm]], "InlineMath"],
+ ",  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", "rs"], "=", 
+    FractionBox["1", 
+     RowBox[{"2", " ", "\[Pi]", " ", 
+      SqrtBox[
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SubscriptBox["L", "1"], "+", 
+           SubscriptBox["L", "2"]}], ")"}], " ", "[", 
+         RowBox[{"1", "/", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"1", "/", 
+             SubscriptBox["C", "1"]}], "+", 
+            RowBox[{"1", "/", 
+             SubscriptBox["C", "2"]}]}], ")"}]}], "]"}], " "}]]}]]}], 
+   TraditionalForm]], "InlineMath"],
+ ",  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", "rp"], "=", 
+    FractionBox["1", 
+     RowBox[{"2", " ", "\[Pi]", " ", 
+      SqrtBox[
+       RowBox[{
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            SubscriptBox["L", "1"], "+", 
+            SubscriptBox["L", "2"]}], ")"}], "/", "2"}], "]"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          SubscriptBox["C", "1"], "+", 
+          SubscriptBox["C", "2"]}], ")"}], " "}]]}]]}], TraditionalForm]], 
+  "InlineMath"],
+ ".\[LineSeparator]These are indicated by vertical lines in the graphics. The \
+displayed frequency range is set so as to include these frequencies. The \
+following tendencies are noticed in the frequency characteristics."
+}], "DetailNotes",
+ CellChangeTimes->{{3.6253940200776973`*^9, 3.625394210086031*^9}, {
+   3.6253943254482336`*^9, 3.6253944052111735`*^9}, {3.625394436224028*^9, 
+   3.625394668414836*^9}, {3.6253947180853233`*^9, 3.6253947839798393`*^9}, {
+   3.6253948211703043`*^9, 3.6253949835821896`*^9}, {3.6253951583492966`*^9, 
+   3.625395250233458*^9}, {3.6253952894519267`*^9, 3.625395335316007*^9}, {
+   3.6253953913201056`*^9, 3.625395402193325*^9}, {3.6253954499450088`*^9, 
+   3.625395675397605*^9}, {3.6253957116676683`*^9, 3.625395755800146*^9}, {
+   3.6253957997454233`*^9, 3.625395814471849*^9}, {3.6253958475127068`*^9, 
+   3.625395935184861*^9}, {3.6253960542836704`*^9, 3.6253960748601065`*^9}, {
+   3.6255386361359777`*^9, 3.625538697862508*^9}, {3.6255388256708183`*^9, 
+   3.6255389519710417`*^9}, {3.62553908376158*^9, 3.625539139895791*^9}, {
+   3.6255392372953615`*^9, 3.6255392417676177`*^9}, 3.625719932110749*^9, {
+   3.6258470347953377`*^9, 3.625847035294544*^9}, {3.626972873701851*^9, 
+   3.626972944646502*^9}, {3.626973072413823*^9, 3.626973090334264*^9}},
+ CellID->383092171],
+
+Cell[TextData[{
+ "1. When ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["C", "1"], "\[NotEqual]", 
+    SubscriptBox["C", "2"]}], TraditionalForm]], "InlineMath"],
+ ", two peaks appear around the above resonance frequencies (Snapshot 1)."
+}], "DetailNotes",
+ CellChangeTimes->{{3.6253940200776973`*^9, 3.625394210086031*^9}, {
+   3.6253943254482336`*^9, 3.6253944052111735`*^9}, {3.625394436224028*^9, 
+   3.625394668414836*^9}, {3.6253947180853233`*^9, 3.6253947839798393`*^9}, {
+   3.6253948211703043`*^9, 3.6253949835821896`*^9}, {3.6253951583492966`*^9, 
+   3.625395250233458*^9}, {3.6253952894519267`*^9, 3.625395335316007*^9}, {
+   3.6253953913201056`*^9, 3.625395402193325*^9}, {3.6253954499450088`*^9, 
+   3.625395675397605*^9}, {3.6253957116676683`*^9, 3.625395755800146*^9}, {
+   3.6253957997454233`*^9, 3.625395814471849*^9}, {3.6253958475127068`*^9, 
+   3.625395935184861*^9}, {3.6253960542836704`*^9, 3.6253960748601065`*^9}, {
+   3.6255386361359777`*^9, 3.625538697862508*^9}, {3.6255388256708183`*^9, 
+   3.6255389519710417`*^9}, {3.62553908376158*^9, 3.625539139895791*^9}, {
+   3.6255392372953615`*^9, 3.6255392417676177`*^9}, 3.625719932110749*^9, {
+   3.6258470347953377`*^9, 3.625847035294544*^9}, {3.626972873701851*^9, 
+   3.626972944646502*^9}, {3.626973072413823*^9, 3.626973132348845*^9}, {
+   3.627047923003078*^9, 3.627047923282567*^9}},
+ CellID->1879125043],
+
+Cell[TextData[{
+ "2. When ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["C", "1"], "=", " ", 
+    SubscriptBox["C", "2"]}], TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", 
+    SubscriptBox["r", "12"]], TraditionalForm]], "InlineMath"],
+ " can differ from ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", 
+     SubscriptBox["r", "1"]], "=", 
+    SubscriptBox["f", 
+     SubscriptBox["r", "2"]]}], TraditionalForm]], "InlineMath"],
+ " for small ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]], "InlineMath"],
+ ", resulting in the two-peak profile (Snapshot 2)."
+}], "DetailNotes",
+ CellChangeTimes->{{3.6253940200776973`*^9, 3.625394210086031*^9}, {
+   3.6253943254482336`*^9, 3.6253944052111735`*^9}, {3.625394436224028*^9, 
+   3.625394668414836*^9}, {3.6253947180853233`*^9, 3.6253947839798393`*^9}, {
+   3.6253948211703043`*^9, 3.6253949835821896`*^9}, {3.6253951583492966`*^9, 
+   3.625395250233458*^9}, {3.6253952894519267`*^9, 3.625395335316007*^9}, {
+   3.6253953913201056`*^9, 3.625395402193325*^9}, {3.6253954499450088`*^9, 
+   3.625395675397605*^9}, {3.6253957116676683`*^9, 3.625395755800146*^9}, {
+   3.6253957997454233`*^9, 3.625395814471849*^9}, {3.6253958475127068`*^9, 
+   3.625395935184861*^9}, {3.6253960542836704`*^9, 3.6253960748601065`*^9}, {
+   3.6255386361359777`*^9, 3.625538697862508*^9}, {3.6255388256708183`*^9, 
+   3.6255389519710417`*^9}, {3.62553908376158*^9, 3.625539139895791*^9}, {
+   3.6255392372953615`*^9, 3.6255392417676177`*^9}, 3.625719932110749*^9, {
+   3.6258470347953377`*^9, 3.625847035294544*^9}, {3.626972873701851*^9, 
+   3.626972944646502*^9}, {3.626973072413823*^9, 3.6269732307376432`*^9}, {
+   3.627047935703443*^9, 3.627048004135676*^9}, {3.627051923371275*^9, 
+   3.627051926242784*^9}},
+ CellID->458641156],
+
+Cell[TextData[{
+ "3. When ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["C", "1"], "=", " ", 
+    SubscriptBox["C", "2"]}], TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]], "InlineMath"],
+ " is large, all three resonance frequencies are similar, resulting in the \
+one-peak profile, especially for larger output resistance ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["r", "o"], TraditionalForm]], "InlineMath"],
+ " (Snapshot 3)."
+}], "DetailNotes",
+ CellChangeTimes->{{3.6253940200776973`*^9, 3.625394210086031*^9}, {
+   3.6253943254482336`*^9, 3.6253944052111735`*^9}, {3.625394436224028*^9, 
+   3.625394668414836*^9}, {3.6253947180853233`*^9, 3.6253947839798393`*^9}, {
+   3.6253948211703043`*^9, 3.6253949835821896`*^9}, {3.6253951583492966`*^9, 
+   3.625395250233458*^9}, {3.6253952894519267`*^9, 3.625395335316007*^9}, {
+   3.6253953913201056`*^9, 3.625395402193325*^9}, {3.6253954499450088`*^9, 
+   3.625395675397605*^9}, {3.6253957116676683`*^9, 3.625395755800146*^9}, {
+   3.6253957997454233`*^9, 3.625395814471849*^9}, {3.6253958475127068`*^9, 
+   3.625395935184861*^9}, {3.6253960542836704`*^9, 3.6253960748601065`*^9}, {
+   3.6255386361359777`*^9, 3.625538697862508*^9}, {3.6255388256708183`*^9, 
+   3.6255389519710417`*^9}, {3.62553908376158*^9, 3.625539139895791*^9}, {
+   3.6255392372953615`*^9, 3.6255392417676177`*^9}, 3.625719932110749*^9, {
+   3.6258470347953377`*^9, 3.625847035294544*^9}, {3.626972873701851*^9, 
+   3.626972944646502*^9}, {3.626973072413823*^9, 3.6269732307376432`*^9}, {
+   3.627047935703443*^9, 3.627048004135676*^9}, 3.627051923371275*^9},
+ CellID->525753302],
+
+Cell["\<\
+An example of the electromagnetic field around the two coils is displayed in \
+the companion Demonstration: \"Electromagnetic Field In Wireless Power \
+Transmission.\"\
+\>", "DetailNotes",
+ CellChangeTimes->{{3.625601498876959*^9, 3.625601589887519*^9}, {
+   3.625601621695975*^9, 3.6256017081201267`*^9}, 3.625719796752511*^9, 
+   3.6257199375863585`*^9, 3.626973241665287*^9, {3.627048041913672*^9, 
+   3.627048070623056*^9}, {3.627048900522853*^9, 3.6270489019721737`*^9}},
+ CellID->500837156],
+
+Cell["References", "DetailNotes",
+ CellChangeTimes->{{3.605847015390625*^9, 3.60584701965625*^9}, 
+   3.605922046875733*^9, 3.6257194656721296`*^9},
+ CellID->627621408],
+
+Cell[TextData[{
+ "[1] J. Garnica, R. A. Chinga, and J. Lin, \"Wireless Power Transmission: \
+From Far Field to Near Field,\" ",
+ StyleBox["Proceedings of the IEEE",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["101",
+  FontWeight->"Bold"],
+ "(6), 2013 pp. 1321\[Dash]1331. ",
+ ButtonBox["doi:10.1109/JPROC.2013.2251411",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1109/JPROC.2013.2251411"], None},
+  ButtonNote->"http://dx.doi.org/10.1109/JPROC.2013.2251411"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.6253940200776973`*^9, 3.625394210086031*^9}, {
+   3.6253943254482336`*^9, 3.6253944052111735`*^9}, {3.625394436224028*^9, 
+   3.625394668414836*^9}, {3.6253947180853233`*^9, 3.6253947839798393`*^9}, {
+   3.6253948211703043`*^9, 3.6253949835821896`*^9}, {3.6253951583492966`*^9, 
+   3.625395250233458*^9}, {3.6253952894519267`*^9, 3.625395335316007*^9}, {
+   3.6253953913201056`*^9, 3.625395402193325*^9}, {3.6253954499450088`*^9, 
+   3.625395675397605*^9}, {3.6253957116676683`*^9, 3.625395755800146*^9}, {
+   3.6253957997454233`*^9, 3.625395814471849*^9}, {3.6253958475127068`*^9, 
+   3.625395935184861*^9}, {3.6253960542836704`*^9, 3.6253960809441175`*^9}, {
+   3.6256014460552664`*^9, 3.6256014495028725`*^9}, 3.6257195411606617`*^9, {
+   3.626972839864953*^9, 3.6269728520478067`*^9}, {3.6270481189318933`*^9, 
+   3.6270481346015377`*^9}, {3.62704821843816*^9, 3.627048264201488*^9}},
+ CellID->24155475],
+
+Cell[TextData[{
+ "[2] J. D. Jackson, ",
+ StyleBox["Classical Electrodynamics",
+  FontSlant->"Italic"],
+ ", 3rd ed., New York: Wiley, 1999."
+}], "DetailNotes",
+ CellChangeTimes->{{3.625601498876959*^9, 3.625601589887519*^9}, {
+   3.625601621695975*^9, 3.6256017081201267`*^9}, {3.625719423271255*^9, 
+   3.6257194247064576`*^9}, 3.6257194629577246`*^9, {3.6269728566378527`*^9, 
+   3.6269728651415777`*^9}, {3.627048481764737*^9, 3.62704848575771*^9}},
+ CellID->296710332]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.626973246873665*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.626973254143384*^9},
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.6256020959378076`*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.626973248489606*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.6256020926618023`*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Wireless power transmission", "SearchTerms",
+ CellChangeTimes->{{3.6256019338535233`*^9, 3.625601952152355*^9}},
+ CellID->1089949],
+
+Cell["Frequency characteristic", "SearchTerms",
+ CellChangeTimes->{{3.6256019995296383`*^9, 3.6256020059724493`*^9}},
+ CellID->885312875]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Y. Shibuya",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Y.+Shibuya"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Y.+Shibuya"]
+}], "Author",
+ CellChangeTimes->{{3.6059129836361322`*^9, 3.6059129875361376`*^9}},
+ CellID->27118654]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{979, 859},
+WindowMargins->{{116, Automatic}, {Automatic, 26}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[176526, 4004, 353, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[176882, 4015, 719, 17, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[177604, 4034, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[177947, 4047, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[178587, 4064, 887, 22, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[179477, 4088, 393, 10, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[179873, 4100, 1507, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[181383, 4134, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 183519, 4203},
+ {"RotateAndZoomIn3D", 183629, 4206},
+ {"DragLocators", 183740, 4209},
+ {"CreateAndDeleteLocators", 183857, 4212},
+ {"SliderZoom", 183972, 4215},
+ {"GamepadControls", 184079, 4218},
+ {"AutomaticAnimation", 184194, 4221},
+ {"BookmarkAnimation", 184312, 4224}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 114, 1, 74, "DemoTitle"],
+Cell[696, 25, 33, 0, 287, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[754, 29, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[808, 33, 62415, 1396, 2143, "Input"],
+Cell[63226, 1431, 19088, 430, 523, "Output",
+ CellID->1838973846]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[82360, 1867, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[82399, 1869, 3080, 54, 69, "ManipulateCaption",
+ CellID->161053412],
+Cell[85482, 1925, 3749, 81, 70, "ManipulateCaption",
+ CellID->368977363]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[89268, 2011, 28, 0, 173, "ThumbnailSection"],
+Cell[89299, 2013, 19092, 430, 523, "Output",
+ CellID->1048782098]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[108428, 2448, 28, 0, 143, "SnapshotsSection"],
+Cell[108459, 2450, 19091, 430, 523, "Output",
+ CellID->334946510],
+Cell[127553, 2882, 19083, 430, 523, "Output",
+ CellID->891354783],
+Cell[146639, 3314, 19087, 430, 523, "Output",
+ CellID->153916409]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[165763, 3749, 26, 0, 336, "DetailsSection"],
+Cell[165792, 3751, 3173, 85, 84, "DetailNotes",
+ CellID->383092171],
+Cell[168968, 3838, 1396, 24, 23, "DetailNotes",
+ CellID->1879125043],
+Cell[170367, 3864, 1827, 41, 27, "DetailNotes",
+ CellID->458641156],
+Cell[172197, 3907, 1656, 32, 39, "DetailNotes",
+ CellID->525753302],
+Cell[173856, 3941, 506, 9, 37, "DetailNotes",
+ CellID->500837156],
+Cell[174365, 3952, 168, 3, 22, "DetailNotes",
+ CellID->627621408],
+Cell[174536, 3957, 1439, 28, 37, "DetailNotes",
+ CellID->24155475],
+Cell[175978, 3987, 471, 10, 22, "DetailNotes",
+ CellID->296710332]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[176486, 4002, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[176526, 4004, 353, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[176882, 4015, 719, 17, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[177604, 4034, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[177947, 4047, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[178587, 4064, 887, 22, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[179477, 4088, 393, 10, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[179873, 4100, 1507, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[181383, 4134, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[182328, 4160, 30, 0, 155, "SearchTermsSection"],
+Cell[182361, 4162, 136, 2, 22, "SearchTerms",
+ CellID->1089949],
+Cell[182500, 4166, 137, 2, 22, "SearchTerms",
+ CellID->885312875]
+}, Open  ]],
+Cell[182652, 4171, 31, 0, 141, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[182708, 4175, 25, 0, 129, "AuthorSection"],
+Cell[182736, 4177, 379, 11, 22, "Author",
+ CellID->27118654]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,21 @@
+Nome comercial
+Bitola (MCM)
+Num. de Fios de Al.
+Diâmetro dos Fios de Al. (mm)
+Num. de Fios de Aço
+Diâmetro dos Fios de Aço (mm)
+Seção transversal de Al (mm^2)
+Seção transversal do cond. (mm^2)
+Diâmetro do cond. (mm)
+Diâmetro da Alma de Aço (mm)
+Peso Nominal do Al (aprox.) (kg/km)
+Peso nominal do Aço (aprox.) (kg/km)
+Massa (aprox.) (kg/km)
+Carga de ruptura (Classe A) (kgf)
+Carga de ruptura (Classe B) (kgf)
+Ampacidade (A)
+Raio médio geométrico (m)
+Resistência elétrica máxima CC a 20ºC (Ohm/km)
+Resistência elétrica máxima CA @ 60 Hz e 75ºC (Ohm/km)
+Reatância indutiva (Ohm/km)
+Reatância capacitiva (Mohm/km)

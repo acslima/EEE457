@@ -1,0 +1,108 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3324,        100]
+NotebookOptionsPosition[      2327,         74]
+NotebookOutlinePosition[      2718,         90]
+CellTagsIndexPosition[      2675,         87]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Informa\[CCedilla]\[OTilde]es sobre condutores ACSR", "Title",
+ CellChangeTimes->{{3.921679212302577*^9, 
+  3.921679226672161*^9}},ExpressionUUID->"45bea277-32ac-4fdf-a727-\
+0211eda69ab1"],
+
+Cell["\<\
+Antonio C S Lima
+Escola Polit\[EAcute]cnica
+Departamento de Engenharia El\[EAcute]trica
+EEE457 Transmiss\[ATilde]o de Energia El\[EAcute]trica\
+\>", "Subtitle",
+ CellChangeTimes->{{3.921679230197494*^9, 
+  3.921679262344667*^9}},ExpressionUUID->"f7061393-4f69-4b32-9c28-\
+6d15ccd3d7aa"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.921679263968261*^9, 3.921679274158784*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"ebec9481-1a7b-401d-88f9-1c837093e25a"],
+
+Cell[BoxData["\<\"/Users/acsl/Library/CloudStorage/Dropbox/[07] \
+Codes/[EEE457]_codes\"\>"], "Output",
+ CellChangeTimes->{3.921679299348529*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"136d024a-547d-4923-9926-d747a183b4eb"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"base", "=", 
+   RowBox[{"Import", "[", "\"\<condutores-acsr.csv\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.921679301068592*^9, 3.921679314960463*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"155c1b36-7c9d-4934-bc61-63dc628525c4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dimensions", "[", "base", "]"}]], "Input",
+ CellChangeTimes->{{3.921679316835677*^9, 3.921679321035818*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"a1691bd4-7dda-433f-ae70-ba30831f9e21"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"67", ",", "21"}], "}"}]], "Output",
+ CellChangeTimes->{3.9216793216266727`*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"4b67b208-9c7f-4de4-82b8-4faa5be77d32"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"13.3 for Mac OS X ARM (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ec18d39d-27ac-4e20-b392-37f1a0be9726"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 194, 3, 98, "Title",ExpressionUUID->"45bea277-32ac-4fdf-a727-0211eda69ab1"],
+Cell[777, 27, 296, 8, 149, "Subtitle",ExpressionUUID->"f7061393-4f69-4b32-9c28-6d15ccd3d7aa"],
+Cell[CellGroupData[{
+Cell[1098, 39, 248, 4, 30, "Input",ExpressionUUID->"ebec9481-1a7b-401d-88f9-1c837093e25a"],
+Cell[1349, 45, 223, 3, 34, "Output",ExpressionUUID->"136d024a-547d-4923-9926-d747a183b4eb"]
+}, Open  ]],
+Cell[1587, 51, 277, 6, 30, "Input",ExpressionUUID->"155c1b36-7c9d-4934-bc61-63dc628525c4"],
+Cell[CellGroupData[{
+Cell[1889, 61, 210, 3, 30, "Input",ExpressionUUID->"a1691bd4-7dda-433f-ae70-ba30831f9e21"],
+Cell[2102, 66, 197, 4, 82, "Output",ExpressionUUID->"4b67b208-9c7f-4de4-82b8-4faa5be77d32"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,140 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      3629,        130]
+NotebookOptionsPosition[      3089,        106]
+NotebookOutlinePosition[      3430,        121]
+CellTagsIndexPosition[      3387,        118]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Correntes em sistemas de cabos isolados", "Section",
+ CellChangeTimes->{{3.498483965948844*^9, 3.498483973374164*^9}}],
+
+Cell[TextData[{
+ "Formulando as equa\[CCedilla]\[OTilde]es em termos das equa\[CCedilla]\
+\[OTilde]es das correntes do la\[CCedilla]o temos um sistema do tipo\n\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", "\[NoBreak]", GridBox[{
+      {"Ic"},
+      {
+       RowBox[{"Is", "\[IndentingNewLine]", "Ia"}]}
+     }], "\[NoBreak]", ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "=",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"A", "(", "\[NoBreak]", GridBox[{
+       {
+        SubscriptBox["I", "1"]},
+       {
+        RowBox[{
+         SubscriptBox["I", "2"], "\[IndentingNewLine]", 
+         SubscriptBox["I", "3"]}]}
+      }], "\[NoBreak]", ")"}], " "}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "\nonde a matriz A apresenta a estrutura abaixo. Como o objetivo \[EAcute] \
+escrever as equa\[CCedilla]\[OTilde]es pelas condi\[CCedilla]\[OTilde]es \
+terminais temos que inverter a matriz A o que leva  ao resultado abaixo que \
+concorda com o apresentado no artigo."
+}], "Text",
+ CellChangeTimes->{{3.4984840599540777`*^9, 3.498484176214559*^9}, {
+  3.498484219066988*^9, 3.4984844111882353`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"A", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", "1", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.498483795923192*^9, 3.498483811368681*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "1"}], ",", "1", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.49848381290156*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Inverse", "[", "A", "]"}]], "Input",
+ CellChangeTimes->{{3.498483813852763*^9, 3.498483816399939*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.498483817018158*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{640, 707},
+WindowMargins->{{341, Automatic}, {33, Automatic}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 124, 1, 67, "Section"],
+Cell[694, 25, 1129, 30, 138, "Text"],
+Cell[CellGroupData[{
+Cell[1848, 59, 399, 12, 27, "Input"],
+Cell[2250, 73, 343, 11, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2630, 89, 126, 2, 27, "Input"],
+Cell[2759, 93, 302, 9, 27, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

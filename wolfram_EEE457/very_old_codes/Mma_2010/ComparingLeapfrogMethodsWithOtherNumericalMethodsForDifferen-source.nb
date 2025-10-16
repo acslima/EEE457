@@ -1,0 +1,2402 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     96806,       2392]
+NotebookOptionsPosition[     95102,       2333]
+NotebookOutlinePosition[     95779,       2358]
+CellTagsIndexPosition[     95736,       2355]
+WindowTitle->Comparing Leapfrog Methods with Other Numerical Methods for \
+Differential Equations - Source
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Comparing Leapfrog Methods with Other Numerical Methods for Differential \
+Equations\
+\>", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f1", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", "y"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f2", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+   RowBox[{"-", "y"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f3", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"-", "x"}], " ", 
+    SuperscriptBox["y", "2"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f4", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", " ", 
+   RowBox[{
+    SuperscriptBox["x", "2"], "-", "y"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f5", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"Cos", "[", "x", "]"}], " ", "y"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f6", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+   RowBox[{
+    SuperscriptBox["y", "2"], 
+    RowBox[{"(", 
+     RowBox[{"x", "-", 
+      SuperscriptBox["x", "3"]}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"f7", "[", 
+     RowBox[{"x_", ",", "y_"}], "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "20"}], " ", "y"}], "+", 
+     RowBox[{"20", " ", "x"}], "+", "21"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"combPair", "[", 
+   RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{"x", ",", "y"}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"combList", "[", 
+   RowBox[{"x_List", ",", "y_List"}], "]"}], ":=", 
+  RowBox[{"MapThread", "[", 
+   RowBox[{"combPair", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "y"}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"exsol", "[", 
+   RowBox[{"a_", ",", "f_", ",", "y0_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"DSolve", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "'"}], "[", "t", "]"}], "==", 
+       RowBox[{"f", "[", 
+        RowBox[{"t", ",", 
+         RowBox[{"y", "[", "t", "]"}]}], "]"}]}], ",", 
+      RowBox[{
+       RowBox[{"y", "[", "a", "]"}], "\[Equal]", "y0"}]}], "}"}], ",", "y", 
+    ",", "t"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"plotoptions", "=", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"PlotRangePadding", "\[Rule]", "0.25"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "400"}]}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eulerex", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"h", ",", "x", ",", " ", "y", ",", "lsg"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"h", "=", 
+      FractionBox[
+       RowBox[{"b", "-", "a"}], "n"]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"x", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"a", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"i", "-", "1"}], ")"}], "h"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", 
+         RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"y", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Do", " ", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "=", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", "-", "1"}], "]"}], "]"}], "+", 
+         RowBox[{"h", " ", 
+          RowBox[{"f", "[", 
+           RowBox[{
+            RowBox[{"x", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"y", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], "]"}]}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "2", ",", 
+         RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"lsg", "=", 
+      RowBox[{"combList", "[", 
+       RowBox[{"x", ",", "y"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"eulerimp", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"h", ",", "x", ",", " ", "y", ",", "lsg", ",", "sol"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"h", "=", 
+      FractionBox[
+       RowBox[{"b", "-", "a"}], "n"]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"x", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"a", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"i", "-", "1"}], ")"}], "h"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"y", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Do", " ", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"lsg", "=", 
+         RowBox[{"Solve", "[", 
+          RowBox[{
+           RowBox[{"sol", "==", 
+            RowBox[{
+             RowBox[{"y", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "-", "1"}], "]"}], "]"}], "+", 
+             RowBox[{"h", " ", 
+              RowBox[{"f", "[", " ", 
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], " ", ",", "sol"}], 
+               "]"}]}]}]}], ",", "sol"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "=", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"lsg", "===", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"y", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", "-", "1"}], "]"}], "]"}], ",", 
+           RowBox[{"sol", "/.", 
+            RowBox[{"lsg", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "2", ",", 
+         RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"lsg", "=", 
+      RowBox[{"combList", "[", 
+       RowBox[{"x", ",", "y"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"rkgenStep", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"y0_", ",", "x0_", ",", "h_", ",", "f_"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"A_", ",", "b_", ",", "c_"}], "}"}]}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s", "=", 
+      RowBox[{"Length", "[", "b", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"k", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "s"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"k", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "=", 
+      RowBox[{"f", "[", 
+       RowBox[{"x0", ",", "y0"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"k", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "=", 
+        RowBox[{"f", "[", " ", 
+         RowBox[{
+          RowBox[{"x0", "+", 
+           RowBox[{
+            RowBox[{"c", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "h"}]}], ",", " ", 
+          RowBox[{"y0", "+", 
+           RowBox[{"h", " ", 
+            RowBox[{"Sum", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"A", "[", 
+                RowBox[{"[", 
+                 RowBox[{
+                  RowBox[{"i", "-", "1"}], ",", "j"}], "]"}], "]"}], " ", 
+               RowBox[{"k", "[", 
+                RowBox[{"[", "j", "]"}], "]"}]}], ",", 
+              RowBox[{"{", 
+               RowBox[{"j", ",", "1", ",", 
+                RowBox[{"i", "-", "1"}]}], "}"}]}], "]"}]}]}]}], " ", "]"}]}],
+        ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "2", ",", "s"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"ynext", "=", " ", 
+      RowBox[{"y0", "+", 
+       RowBox[{"h", " ", 
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"b", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], " ", 
+           RowBox[{"k", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "s"}], "}"}]}], "]"}]}]}]}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"rkgen", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "r_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_", ",", 
+    
+    RowBox[{"{", 
+     RowBox[{"A_", ",", "b_", ",", "c_"}], "}"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"h", ",", "x", ",", " ", "y", ",", "lsg", ",", "i"}], "}"}], ",",
+     "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"h", "=", 
+      FractionBox[
+       RowBox[{"r", "-", "a"}], "n"]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"x", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"a", "+", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"i", "-", "1"}], ")"}], "h"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"y", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "=", 
+        RowBox[{"rkgenStep", "[", " ", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"y", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"x", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}], ",", "h", ",", "f"}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"A", ",", "b", ",", "c"}], "}"}]}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "2", ",", 
+         RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"lsg", "=", 
+      RowBox[{"combList", "[", 
+       RowBox[{"x", ",", "y"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"rkheun", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "r_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"A", ",", "b", ",", "c"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"A", "=", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        FractionBox["1", "2"], "}"}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"b", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"c", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        FractionBox["1", "2"]}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"rkgen", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", ",", "r"}], "}"}], ",", "f", ",", "y0", ",", "n", ",", 
+       RowBox[{"{", 
+        RowBox[{"A", ",", "b", ",", "c"}], "}"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"rk4", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "r_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"A", ",", "b", ",", "c"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"A", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         FractionBox["1", "2"], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          FractionBox["1", "2"]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"b", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        FractionBox["1", "6"], ",", 
+        FractionBox["1", "3"], ",", 
+        FractionBox["1", "3"], ",", 
+        FractionBox["1", "6"]}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"c", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        FractionBox["1", "2"], ",", 
+        FractionBox["1", "2"], ",", "1"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"rkgen", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", ",", "r"}], "}"}], ",", "f", ",", "y0", ",", "n", ",", 
+       RowBox[{"{", 
+        RowBox[{"A", ",", "b", ",", "c"}], "}"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.410061864849578*^9, 3.410061867314378*^9}, {
+   3.410061906782378*^9, 3.410062003096778*^9}, {3.410062077867578*^9, 
+   3.410062273382378*^9}, {3.410062304098778*^9, 3.4100623291679783`*^9}, {
+   3.410062376593978*^9, 3.410062379058778*^9}, {3.410062453158778*^9, 
+   3.410062472143978*^9}, {3.410062517321978*^9, 3.410062525387178*^9}, {
+   3.4100626357349777`*^9, 3.410062650898178*^9}, {3.4100628586155777`*^9, 
+   3.410063011183578*^9}, {3.4100630678915777`*^9, 3.410063170913978*^9}, {
+   3.410063212472378*^9, 3.410063213252378*^9}, {3.410063253658778*^9, 
+   3.410063289384778*^9}, {3.4100633258449783`*^9, 3.4100633268901777`*^9}, {
+   3.410063548862578*^9, 3.410063562793378*^9}, {3.410064022645578*^9, 
+   3.410064024361578*^9}, {3.4100640836415777`*^9, 3.4100640930951777`*^9}, 
+   3.4100655312325783`*^9, {3.4100664681475782`*^9, 3.4100664720787783`*^9}, {
+   3.4100666664235783`*^9, 3.410066709931978*^9}, {3.410066873405978*^9, 
+   3.410066903919578*^9}, {3.410066946601178*^9, 3.4100669468975782`*^9}, {
+   3.410067038019178*^9, 3.4100670616843777`*^9}, {3.410067363750978*^9, 
+   3.4100673697725782`*^9}, {3.410067473219178*^9, 3.410067485246778*^9}, {
+   3.410068049726178*^9, 3.410068061972178*^9}, {3.410068111907778*^9, 
+   3.4100682006717777`*^9}, 3.410069338859578*^9, {3.410073546210578*^9, 
+   3.410073632806178*^9}, {3.410073671917378*^9, 3.410073692696578*^9}, {
+   3.4100738039783783`*^9, 3.4100738044463778`*^9}, {3.4100738806679783`*^9, 
+   3.4100738930387783`*^9}, 3.410073958920578*^9, {3.410073992304578*^9, 
+   3.410073994535378*^9}, 3.410074044074778*^9, {3.4100741618547783`*^9, 
+   3.410074162182378*^9}, {3.4100743007033777`*^9, 3.410074820542178*^9}, {
+   3.410075196088778*^9, 3.410075276169778*^9}, {3.410075462255578*^9, 
+   3.410075483565178*^9}, {3.410075544467578*^9, 3.410075609082778*^9}, 
+   3.410075768049778*^9, {3.410076570962378*^9, 3.4100765741447783`*^9}, {
+   3.410076624251978*^9, 3.410076659336378*^9}, {3.410077027778178*^9, 
+   3.410077029962178*^9}, 3.410077201896778*^9, {3.410077259929778*^9, 
+   3.410077261567778*^9}, 3.410077314157778*^9, {3.4100776507693777`*^9, 
+   3.4100776598329782`*^9}, {3.410079034145978*^9, 3.4100790431939783`*^9}, {
+   3.410079088605578*^9, 3.410079089619578*^9}, {3.4100791209755783`*^9, 
+   3.410079131864378*^9}, {3.4100791956527777`*^9, 3.410079235245578*^9}, {
+   3.410079268645178*^9, 3.410079323884778*^9}, {3.410079411361978*^9, 
+   3.410079419193178*^9}, {3.410079476398378*^9, 3.4100794814643784`*^9}, {
+   3.4100871318275795`*^9, 3.4100871462263794`*^9}, {3.410087180546379*^9, 
+   3.4100874190079794`*^9}, {3.4100879977869797`*^9, 
+   3.4100880227469797`*^9}, {3.4100882604285793`*^9, 3.410088563614579*^9}, {
+   3.4100885996661797`*^9, 3.4100887456977797`*^9}, {3.4100887931997795`*^9, 
+   3.4100888014521794`*^9}, {3.410088843369379*^9, 3.4100888770873795`*^9}, {
+   3.4100889610645795`*^9, 3.4100890581035795`*^9}, {3.410092368599079*^9, 
+   3.4100924167440796`*^9}, {3.410092515349079*^9, 3.4100925434830794`*^9}, {
+   3.4100929218330793`*^9, 3.4100929254990797`*^9}, {3.4100932665703793`*^9, 
+   3.4100932690553794`*^9}, 3.410093421164379*^9, {3.4101015675006*^9, 
+   3.4101015852066*^9}, {3.4101021493962*^9, 3.4101021695982*^9}, {
+   3.4101035851164*^9, 3.4101035987508*^9}, {3.4101036316823997`*^9, 
+   3.4101036321036*^9}, {3.4101041003688*^9, 3.4101041047836*^9}, {
+   3.4101041892264*^9, 3.4101041905992002`*^9}, 3.4101042331716003`*^9, {
+   3.410236834016163*^9, 3.410236840692963*^9}, {3.4102373401621633`*^9, 
+   3.410237347384963*^9}, {3.4102374402813635`*^9, 3.4102374514041634`*^9}, {
+   3.410237589778163*^9, 3.410237615440163*^9}, {3.410237646390563*^9, 
+   3.410237657372963*^9}, {3.410237731414363*^9, 3.410237731866763*^9}, {
+   3.410237818245963*^9, 3.410237855139963*^9}, {3.410237920098363*^9, 
+   3.410237920472763*^9}, {3.4102379918739634`*^9, 3.410237993901963*^9}, {
+   3.410238943396963*^9, 3.4102389440053635`*^9}, {3.410239016670163*^9, 
+   3.410239019072563*^9}, 3.411729594760832*^9, 3.411729740201432*^9, 
+   3.411732174306432*^9, {3.4117359821533923`*^9, 3.4117359850439987`*^9}, {
+   3.412002527619*^9, 3.4120026240944*^9}, {3.4120054264888*^9, 
+   3.4120054318328*^9}, 3.4120066743248*^9, 3.4120073226762*^9, {
+   3.4928558245625*^9, 3.49285585121875*^9}, {3.492855982796875*^9, 
+   3.492855994265625*^9}, 3.49285617465625*^9, {3.49285740378125*^9, 
+   3.492857425484375*^9}, {3.492857637734375*^9, 3.492857696875*^9}, 
+   3.49285806875*^9, 3.49285838009375*^9, 3.492858446875*^9, {
+   3.49285856434375*^9, 3.492858569578125*^9}, {3.49286655603125*^9, 
+   3.492866598453125*^9}, 3.492867375328125*^9, 3.49286752965625*^9, {
+   3.49286759775*^9, 3.4928676120625*^9}, {3.4928677775*^9, 
+   3.492867784078125*^9}, {3.492868405484375*^9, 3.49286841328125*^9}, {
+   3.4928684560625*^9, 3.492868506265625*^9}, 3.49286855390625*^9, 
+   3.492922309921875*^9, {3.49292234903125*^9, 3.4929223701875*^9}, 
+   3.4930490166479263`*^9},
+ CellID->44981821],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"leapfrog", " ", "method"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"second", " ", "order", " ", "explicit", " ", "method"}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"one", " ", "f"}], "-", 
+    RowBox[{"evaluation", " ", "per", " ", "time", " ", "step"}]}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"lf", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+      "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"h", ",", "h2", ",", "x", ",", "y"}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"h", "=", 
+         FractionBox[
+          RowBox[{"b", "-", "a"}], "n"]}], ";", " ", 
+        RowBox[{"h2", "=", 
+         RowBox[{"2", " ", "h"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"x", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"y", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", " ", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "a"}], ";", " ", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "=", 
+         RowBox[{"a", "+", "h"}]}], ";", " ", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "=", 
+         RowBox[{"y0", "+", 
+          RowBox[{
+           RowBox[{"f", "[", 
+            RowBox[{"a", ",", "y0"}], "]"}], " ", "h"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Do", " ", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", 
+            RowBox[{
+             RowBox[{"x", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "-", "2"}], "]"}], "]"}], "+", "h2"}]}], ";", " ",
+            "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", 
+            RowBox[{
+             RowBox[{"y", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "-", "2"}], "]"}], "]"}], "+", 
+             RowBox[{"h2", " ", 
+              RowBox[{"f", "[", 
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "-", "1"}], "]"}], "]"}], ",", 
+                RowBox[{"y", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "-", "1"}], "]"}], "]"}]}], "]"}]}]}]}]}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "3", ",", 
+            RowBox[{"n", "+", "1"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"combList", "[", 
+         RowBox[{"x", ",", "y"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"densified", " ", "leapfrog", " ", "method"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"second", " ", "order", " ", "explicit", " ", "method"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"two", " ", "f"}], "-", 
+      RowBox[{"evaluations", " ", "per", " ", "time", " ", "step"}]}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dlf", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+      "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "h", ",", "hh", ",", "xh", ",", "yh", ",", "xp", ",", "yp", ",", "x", 
+         ",", "y"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"h", "=", 
+         FractionBox[
+          RowBox[{"b", "-", "a"}], "n"]}], ";", 
+        RowBox[{"hh", "=", 
+         RowBox[{"h", "/", "2"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"x", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"y", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", " ", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "a"}], ";", " ", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"xh", "=", 
+         RowBox[{
+          RowBox[{"x", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", "hh"}]}], ";", " ", 
+        RowBox[{"yh", "=", 
+         RowBox[{
+          RowBox[{"y", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", 
+          RowBox[{"hh", " ", 
+           RowBox[{"f", "[", " ", 
+            RowBox[{
+             RowBox[{"x", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", 
+             RowBox[{"y", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], " ", "]"}]}]}]}], " ", ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"x", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", "h"}]}], ";", " ", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "=", 
+         RowBox[{
+          RowBox[{"y", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "+", 
+          RowBox[{"h", " ", 
+           RowBox[{"f", "[", 
+            RowBox[{"xh", ",", "yh"}], "]"}]}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Do", " ", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"xp", "=", 
+            RowBox[{"xh", "+", "h"}]}], ";", " ", 
+           RowBox[{"yp", "=", 
+            RowBox[{"yh", "+", 
+             RowBox[{"h", " ", 
+              RowBox[{"f", "[", 
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "-", "1"}], "]"}], "]"}], ",", 
+                RowBox[{"y", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", "-", "1"}], "]"}], "]"}]}], "]"}]}]}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", 
+            RowBox[{"xp", "+", "hh"}]}], ";", " ", 
+           RowBox[{
+            RowBox[{"y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", 
+            RowBox[{
+             RowBox[{"y", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", "-", "1"}], "]"}], "]"}], "+", 
+             RowBox[{"h", " ", 
+              RowBox[{"f", "[", 
+               RowBox[{"xp", ",", "yp"}], "]"}]}]}]}], ";", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"xh", "=", "xp"}], ";", " ", 
+           RowBox[{"yh", "=", "yp"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "3", ",", 
+            RowBox[{"n", "+", "1"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"combList", "[", 
+         RowBox[{"x", ",", "y"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"asynchronous", " ", "leapfrog", " ", "method"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"second", " ", "order", " ", "explicit", " ", "method"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"one", " ", "f"}], "-", 
+      RowBox[{"evaluation", " ", "per", " ", "time", " ", "step"}]}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"additional", " ", "data", " ", 
+       RowBox[{"(", 
+        RowBox[{"velocity", " ", "v"}], ")"}], " ", "and", " ", "one", " ", 
+       "additional", " ", "f"}], "-", 
+      RowBox[{"evaluation", " ", "for"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"the", " ", "first", " ", "time", " ", "step"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"alf", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+      "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\[Tau]", ",", "x", ",", "y", ",", "v", ",", "xi", ",", "yi", ",", 
+         "vi"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"\[Tau]", "=", 
+         FractionBox[
+          RowBox[{"b", "-", "a"}], 
+          RowBox[{"2", "*", "n"}]]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"x", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"y", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", " ", 
+        RowBox[{"v", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "a"}], ";", " ", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", " ", 
+        RowBox[{
+         RowBox[{"v", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", 
+         RowBox[{"f", "[", 
+          RowBox[{"a", ",", "y0"}], "]"}]}], ";", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{"additional", " ", "data", " ", "v", " ", "and", " ", "f"}],
+           "-", "evaluation"}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"Do", " ", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"xi", "=", 
+            RowBox[{"x", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], ";", " ", 
+           RowBox[{"yi", "=", 
+            RowBox[{"y", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], ";", 
+           RowBox[{"vi", "=", 
+            RowBox[{"v", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"xi", "+=", "\[Tau]"}], ";", 
+           RowBox[{"yi", "+=", 
+            RowBox[{"\[Tau]", "*", "vi"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"vi", "+=", 
+            RowBox[{"2", "*", 
+             RowBox[{"(", " ", 
+              RowBox[{
+               RowBox[{"f", "[", 
+                RowBox[{"xi", ",", "yi"}], "]"}], "-", "vi"}], ")"}]}]}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{"xi", "+=", "\[Tau]"}], ";", 
+           RowBox[{"yi", "+=", 
+            RowBox[{"\[Tau]", "*", "vi"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", "xi"}], ";", 
+           RowBox[{
+            RowBox[{"y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", "yi"}], ";", 
+           RowBox[{
+            RowBox[{"v", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", "vi"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+            RowBox[{"inelegant", " ", "data", " ", "re"}], "-", "shuffling"}],
+            " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "2", ",", 
+            RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", " ", 
+        RowBox[{"combList", "[", 
+         RowBox[{"x", ",", "y"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+    ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "densified", " ", "asynchronous", " ", "leapfrog", " ", "method"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"second", " ", "order", " ", "explicit", " ", "method"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"two", " ", "f"}], "-", 
+      RowBox[{"evaluations", " ", "per", " ", "time", " ", "step"}]}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"additional", " ", "data", " ", 
+       RowBox[{"(", 
+        RowBox[{"velocity", " ", "v"}], ")"}], " ", "and", " ", "one", " ", 
+       "additional", " ", "f"}], "-", 
+      RowBox[{"evaluation", " ", "for"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"the", " ", "first", " ", "time", " ", "step"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dalf", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_", ",", "y0_", ",", "n_"}], 
+      "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\[Tau]", ",", "\[Tau]2", ",", "x", ",", "y", ",", "v", ",", "xi", 
+         ",", "yi", ",", "vi"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"\[Tau]", "=", 
+         FractionBox[
+          RowBox[{"b", "-", "a"}], 
+          RowBox[{"4", "*", "n"}]]}], ";", " ", 
+        RowBox[{"\[Tau]2", "=", 
+         RowBox[{"2", " ", "\[Tau]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"x", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"y", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", " ", 
+        RowBox[{"v", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", "+", "1"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "a"}], ";", " ", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", "y0"}], ";", " ", 
+        RowBox[{
+         RowBox[{"v", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "=", 
+         RowBox[{"f", "[", 
+          RowBox[{"a", ",", "y0"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Do", " ", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"xi", "=", 
+            RowBox[{"x", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], ";", " ", 
+           RowBox[{"yi", "=", 
+            RowBox[{"y", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], ";", 
+           RowBox[{"vi", "=", 
+            RowBox[{"v", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "-", "1"}], "]"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"xi", "+=", "\[Tau]"}], ";", 
+           RowBox[{"yi", "+=", 
+            RowBox[{"\[Tau]", "*", "vi"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"vi", "+=", 
+            RowBox[{"2", "*", 
+             RowBox[{"(", " ", 
+              RowBox[{
+               RowBox[{"f", "[", 
+                RowBox[{"xi", ",", "yi"}], "]"}], "-", "vi"}], ")"}]}]}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{"xi", "+=", "\[Tau]2"}], ";", 
+           RowBox[{"yi", "+=", 
+            RowBox[{"\[Tau]2", "*", "vi"}]}], ";", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             RowBox[{"two", " ", "\[Tau]"}], "-", 
+             RowBox[{"steps", " ", "contracted"}]}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"vi", "+=", 
+            RowBox[{"2", "*", 
+             RowBox[{"(", " ", 
+              RowBox[{
+               RowBox[{"f", "[", 
+                RowBox[{"xi", ",", "yi"}], "]"}], "-", "vi"}], ")"}]}]}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{"xi", "+=", "\[Tau]"}], ";", 
+           RowBox[{"yi", "+=", 
+            RowBox[{"\[Tau]", "*", "vi"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", "xi"}], ";", 
+           RowBox[{
+            RowBox[{"y", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", "yi"}], ";", 
+           RowBox[{
+            RowBox[{"v", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "=", "vi"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "2", ",", 
+            RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{"combList", "[", 
+         RowBox[{"x", ",", "y"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+    ";", "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{
+      RowBox[{"{", " ", 
+       RowBox[{
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"Evaluate", "[", 
+           RowBox[{
+            RowBox[{"y", "[", "t", "]"}], "/.", 
+            RowBox[{"exsol", "[", 
+             RowBox[{"a", ",", "f", ",", "c", ",", "t"}], "]"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "a", ",", 
+            RowBox[{"b", "+", "0.1"}]}], "}"}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"Thickness", "[", "0.005", "]"}]}], ",", 
+          RowBox[{"Evaluate", "[", "plotoptions", "]"}], ",", 
+          RowBox[{"AxesOrigin", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+          RowBox[{"PlotLabel", "\[Rule]", 
+           RowBox[{"Row", "[", 
+            RowBox[{"{", 
+             RowBox[{"\"\<step size: \>\"", ",", 
+              FractionBox[
+               RowBox[{"b", "-", "a"}], "nn"]}], "}"}], "]"}]}]}], "]"}], ",",
+         "\[IndentingNewLine]", 
+        RowBox[{"ListPlot", " ", "[", 
+         RowBox[{
+          RowBox[{"Tooltip", "[", 
+           RowBox[{"Check", "[", 
+            RowBox[{
+             RowBox[{"method", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"a", ",", "b"}], "}"}], ",", "f", ",", "c", ",", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"MemberQ", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"f3", ",", "f5", ",", "f6"}], "}"}], ",", "f"}], 
+                  "]"}], ",", 
+                 RowBox[{"N", "[", "nn", "]"}], ",", "nn"}], "]"}]}], "]"}], 
+             ",", 
+             RowBox[{"{", "a", "}"}]}], "]"}], "]"}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"ColorData", "[", 
+              RowBox[{"1", ",", "2"}], "]"}], ",", 
+             RowBox[{"PointSize", "[", "0.02", "]"}]}], "}"}]}]}], "]"}], ",",
+         "\[IndentingNewLine]", 
+        RowBox[{"ListLinePlot", "[", 
+         RowBox[{
+          RowBox[{"Check", "[", 
+           RowBox[{
+            RowBox[{"method", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"a", ",", "b"}], "}"}], ",", "f", ",", "c", ",", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"MemberQ", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"f3", ",", "f5", ",", "f6"}], "}"}], ",", "f"}], 
+                 "]"}], ",", 
+                RowBox[{"N", "[", "nn", "]"}], ",", "nn"}], "]"}]}], "]"}], 
+            ",", 
+            RowBox[{"{", 
+             RowBox[{"a", ",", "c"}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"ColorData", "[", 
+             RowBox[{"1", ",", "2"}], "]"}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"ImageSize", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+      RowBox[{"ImagePadding", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"10", ",", "10"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"10", ",", "40"}], "}"}]}], "}"}]}]}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"f", ",", "f4", ",", "\"\<y' =\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"f1", "\[Rule]", "\"\<y\>\""}], ",", 
+       RowBox[{"f2", "\[Rule]", "\"\<-y\>\""}], ",", 
+       RowBox[{
+       "f3", "\[Rule]", "\"\<-x \!\(\*SuperscriptBox[\(y\), \(2\)]\)\>\""}], 
+       ",", 
+       RowBox[{
+       "f4", "\[Rule]", "\"\<\!\(\*SuperscriptBox[\(x\), \(2\)]\) - y\>\""}], 
+       ",", 
+       RowBox[{"f5", "\[Rule]", "\"\<cos(x) y\>\""}], ",", 
+       RowBox[{
+       "f6", "\[Rule]", 
+        "\"\<\!\(\*SuperscriptBox[\(y\), \(2\)]\)(x - \
+\!\(\*SuperscriptBox[\(x\), \(3\)]\))\>\""}], ",", 
+       RowBox[{"f7", "\[Rule]", "\"\<-20y + 20x + 21\>\""}]}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "PopupMenu"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "0"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"-", "1"}], "/", "2"}], ",", 
+     RowBox[{"1", "/", "2"}], ",", 
+     RowBox[{"1", "/", "4"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"b", ",", "2"}], "}"}], ",", "1", ",", "3", ",", 
+     RowBox[{"1", "/", "4"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "c", ",", "1", ",", "\"\<\!\(\*SubscriptBox[\(y\), \(0\)]\)\>\""}], 
+      "}"}], ",", 
+     RowBox[{"1", "/", "4"}], ",", 
+     RowBox[{"3", "/", "2"}], ",", 
+     RowBox[{"1", "/", "4"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"Exclusions", "\[Rule]", "0"}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"nn", ",", "3", ",", "\"\<steps\>\""}], "}"}], ",", "1", ",", 
+     "50", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"method", ",", "dalf", ",", "\"\<method\>\""}], "}"}], ",", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"eulerex", "\[Rule]", "\"\<explicit Euler\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"eulerimp", "\[Rule]", "\"\<implicit Euler\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"rkheun", "\[Rule]", "\"\<Heun\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"rk4", "\[Rule]", "\"\<classical Runge-Kutta\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"lf", "\[Rule]", "\"\<leapfrog\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"alf", "\[Rule]", "\"\<aynchronous leapfrog\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"dlf", "\[Rule]", "\"\<densified leapfrog\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+       "dalf", "\[Rule]", "\"\<densified asynchronous leapfrog\>\""}]}], 
+      "\[IndentingNewLine]", "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"TrackedSymbols", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+   
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", "6", "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.492866736546875*^9, 3.492866754453125*^9}, {
+   3.492866892640625*^9, 3.4928668934375*^9}, 3.492866936875*^9, 
+   3.492866985109375*^9, {3.49286704646875*^9, 3.492867048453125*^9}, 
+   3.492867155078125*^9, {3.49286842921875*^9, 3.4928684298125*^9}, {
+   3.4928685790625*^9, 3.492868597859375*^9}, {3.49286864684375*^9, 
+   3.49286867184375*^9}, {3.492868940984375*^9, 3.49286897621875*^9}, 
+   3.492869093171875*^9, 3.492918591953125*^9, {3.492921441484375*^9, 
+   3.49292145825*^9}, {3.49292149396875*^9, 3.49292154625*^9}, {
+   3.492922325828125*^9, 3.492922329765625*^9}, {3.4929238334375*^9, 
+   3.49292385228125*^9}, {3.49292503621875*^9, 3.492925043734375*^9}, {
+   3.492925086515625*^9, 3.49292514740625*^9}, {3.4930489053312473`*^9, 
+   3.493048905751272*^9}, {3.493049016682928*^9, 3.4930490167079296`*^9}, {
+   3.4936602402208977`*^9, 3.493660289454958*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0, $CellContext`b$$ = 
+    2, $CellContext`c$$ = 
+    1, $CellContext`f$$ = $CellContext`f4, $CellContext`method$$ = \
+$CellContext`dalf, $CellContext`nn$$ = 3, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`f$$], $CellContext`f4, "y' ="}, {$CellContext`f1 -> 
+       "y", $CellContext`f2 -> "-y", $CellContext`f3 -> 
+       "-x \!\(\*SuperscriptBox[\(y\), \(2\)]\)", $CellContext`f4 -> 
+       "\!\(\*SuperscriptBox[\(x\), \(2\)]\) - y", $CellContext`f5 -> 
+       "cos(x) y", $CellContext`f6 -> 
+       "\!\(\*SuperscriptBox[\(y\), \(2\)]\)(x - \!\(\*SuperscriptBox[\(x\), \
+\(3\)]\))", $CellContext`f7 -> "-20y + 20x + 21"}}, {{
+       Hold[$CellContext`a$$], 0}, 
+      Rational[-1, 2], 
+      Rational[1, 2], 
+      Rational[1, 4]}, {{
+       Hold[$CellContext`b$$], 2}, 1, 3, 
+      Rational[1, 4]}, {{
+       Hold[$CellContext`c$$], 1, "\!\(\*SubscriptBox[\(y\), \(0\)]\)"}, 
+      Rational[1, 4], 
+      Rational[3, 2], 
+      Rational[1, 4]}, {{
+       Hold[$CellContext`nn$$], 3, "steps"}, 1, 50, 1}, {{
+       Hold[$CellContext`method$$], $CellContext`dalf, 
+       "method"}, {$CellContext`eulerex -> 
+       "explicit Euler", $CellContext`eulerimp -> 
+       "implicit Euler", $CellContext`rkheun -> "Heun", $CellContext`rk4 -> 
+       "classical Runge-Kutta", $CellContext`lf -> 
+       "leapfrog", $CellContext`alf -> 
+       "aynchronous leapfrog", $CellContext`dlf -> 
+       "densified leapfrog", $CellContext`dalf -> 
+       "densified asynchronous leapfrog"}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`f$112642$$ = 
+    False, $CellContext`a$112643$$ = 0, $CellContext`b$112644$$ = 
+    0, $CellContext`c$112645$$ = 0, $CellContext`nn$112646$$ = 
+    0, $CellContext`method$112647$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0, $CellContext`b$$ = 
+        2, $CellContext`c$$ = 
+        1, $CellContext`f$$ = $CellContext`f4, $CellContext`method$$ = \
+$CellContext`dalf, $CellContext`nn$$ = 3}, "ControllerVariables" :> {
+        Hold[$CellContext`f$$, $CellContext`f$112642$$, False], 
+        Hold[$CellContext`a$$, $CellContext`a$112643$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$112644$$, 0], 
+        Hold[$CellContext`c$$, $CellContext`c$112645$$, 0], 
+        Hold[$CellContext`nn$$, $CellContext`nn$112646$$, 0], 
+        Hold[$CellContext`method$$, $CellContext`method$112647$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ($CellContext`lf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`h, $CellContext`h2, $CellContext`x, \
+$CellContext`y}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`h2 = 
+           2 $CellContext`h; $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Part[$CellContext`x, 2] = $CellContext`a + $CellContext`h; 
+          Part[$CellContext`y, 
+             2] = $CellContext`y0 + $CellContext`f[$CellContext`a, \
+$CellContext`y0] $CellContext`h; 
+          Do[Part[$CellContext`x, $CellContext`i] = 
+             Part[$CellContext`x, $CellContext`i - 2] + $CellContext`h2; 
+            Part[$CellContext`y, $CellContext`i] = 
+             Part[$CellContext`y, $CellContext`i - 
+                2] + $CellContext`h2 $CellContext`f[
+                 Part[$CellContext`x, $CellContext`i - 1], 
+                 Part[$CellContext`y, $CellContext`i - 1]], {$CellContext`i, 
+             3, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]]; \
+$CellContext`dlf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`h, $CellContext`hh, $CellContext`xh, \
+$CellContext`yh, $CellContext`xp, $CellContext`yp, $CellContext`x, \
+$CellContext`y}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`hh = $CellContext`h/
+            2; $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; $CellContext`xh = 
+           Part[$CellContext`x, 1] + $CellContext`hh; $CellContext`yh = 
+           Part[$CellContext`y, 1] + $CellContext`hh $CellContext`f[
+               Part[$CellContext`x, 1], 
+               Part[$CellContext`y, 1]]; 
+          Part[$CellContext`x, 2] = Part[$CellContext`x, 1] + $CellContext`h; 
+          Part[$CellContext`y, 2] = 
+           Part[$CellContext`y, 
+              1] + $CellContext`h $CellContext`f[$CellContext`xh, \
+$CellContext`yh]; 
+          Do[$CellContext`xp = $CellContext`xh + $CellContext`h; \
+$CellContext`yp = $CellContext`yh + $CellContext`h $CellContext`f[
+                 Part[$CellContext`x, $CellContext`i - 1], 
+                 Part[$CellContext`y, $CellContext`i - 1]]; 
+            Part[$CellContext`x, $CellContext`i] = $CellContext`xp + \
+$CellContext`hh; 
+            Part[$CellContext`y, $CellContext`i] = 
+             Part[$CellContext`y, $CellContext`i - 
+                
+                1] + $CellContext`h $CellContext`f[$CellContext`xp, \
+$CellContext`yp]; $CellContext`xh = $CellContext`xp; $CellContext`yh = \
+$CellContext`yp, {$CellContext`i, 3, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]]; \
+$CellContext`alf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`\[Tau], $CellContext`x, $CellContext`y, \
+$CellContext`v, $CellContext`xi, $CellContext`yi, $CellContext`vi}, \
+$CellContext`\[Tau] = ($CellContext`b - $CellContext`a)/(
+            2 $CellContext`n); $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`v = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Part[$CellContext`v, 
+             1] = $CellContext`f[$CellContext`a, $CellContext`y0]; 
+          Do[$CellContext`xi = 
+             Part[$CellContext`x, $CellContext`i - 1]; $CellContext`yi = 
+             Part[$CellContext`y, $CellContext`i - 1]; $CellContext`vi = 
+             Part[$CellContext`v, $CellContext`i - 1]; 
+            AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            AddTo[$CellContext`vi, 
+              2 ($CellContext`f[$CellContext`xi, $CellContext`yi] - \
+$CellContext`vi)]; AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            Part[$CellContext`x, $CellContext`i] = $CellContext`xi; 
+            Part[$CellContext`y, $CellContext`i] = $CellContext`yi; 
+            Part[$CellContext`v, $CellContext`i] = $CellContext`vi, \
+{$CellContext`i, 2, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]]; \
+$CellContext`dalf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`\[Tau], $CellContext`\[Tau]2, $CellContext`x, \
+$CellContext`y, $CellContext`v, $CellContext`xi, $CellContext`yi, \
+$CellContext`vi}, $CellContext`\[Tau] = ($CellContext`b - $CellContext`a)/(
+            4 $CellContext`n); $CellContext`\[Tau]2 = 
+           2 $CellContext`\[Tau]; $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`v = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Part[$CellContext`v, 
+             1] = $CellContext`f[$CellContext`a, $CellContext`y0]; 
+          Do[$CellContext`xi = 
+             Part[$CellContext`x, $CellContext`i - 1]; $CellContext`yi = 
+             Part[$CellContext`y, $CellContext`i - 1]; $CellContext`vi = 
+             Part[$CellContext`v, $CellContext`i - 1]; 
+            AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            AddTo[$CellContext`vi, 
+              2 ($CellContext`f[$CellContext`xi, $CellContext`yi] - \
+$CellContext`vi)]; AddTo[$CellContext`xi, $CellContext`\[Tau]2]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau]2 $CellContext`vi]; 
+            AddTo[$CellContext`vi, 
+              2 ($CellContext`f[$CellContext`xi, $CellContext`yi] - \
+$CellContext`vi)]; AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            Part[$CellContext`x, $CellContext`i] = $CellContext`xi; 
+            Part[$CellContext`y, $CellContext`i] = $CellContext`yi; 
+            Part[$CellContext`v, $CellContext`i] = $CellContext`vi, \
+{$CellContext`i, 2, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]]; 
+       Show[{
+          Plot[
+           Evaluate[
+            ReplaceAll[
+             $CellContext`y[$CellContext`t], 
+             $CellContext`exsol[$CellContext`a$$, $CellContext`f$$, \
+$CellContext`c$$, $CellContext`t]]], {$CellContext`t, $CellContext`a$$, \
+$CellContext`b$$ + 0.1}, PlotStyle -> Thickness[0.005], 
+           Evaluate[$CellContext`plotoptions], AxesOrigin -> {0, 0}, 
+           PlotRange -> All, PlotLabel -> 
+           Row[{"step size: ", ($CellContext`b$$ - \
+$CellContext`a$$)/$CellContext`nn$$}]], 
+          ListPlot[
+           Tooltip[
+            Check[
+             $CellContext`method$$[{$CellContext`a$$, $CellContext`b$$}, \
+$CellContext`f$$, $CellContext`c$$, 
+              If[
+               
+               MemberQ[{$CellContext`f3, $CellContext`f5, $CellContext`f6}, \
+$CellContext`f$$], 
+               
+               N[$CellContext`nn$$], $CellContext`nn$$]], \
+{$CellContext`a$$}]], PlotStyle -> {
+             ColorData[1, 2], 
+             PointSize[0.02]}], 
+          ListLinePlot[
+           Check[
+            $CellContext`method$$[{$CellContext`a$$, $CellContext`b$$}, \
+$CellContext`f$$, $CellContext`c$$, 
+             If[
+              
+              MemberQ[{$CellContext`f3, $CellContext`f5, $CellContext`f6}, \
+$CellContext`f$$], 
+              
+              N[$CellContext`nn$$], $CellContext`nn$$]], {$CellContext`a$$, \
+$CellContext`c$$}], PlotStyle -> {
+             ColorData[1, 2]}, PlotRange -> All]}, ImageSize -> {400, 400}, 
+         ImagePadding -> {{10, 10}, {10, 40}}]), 
+      "Specifications" :> {{{$CellContext`f$$, $CellContext`f4, 
+          "y' ="}, {$CellContext`f1 -> "y", $CellContext`f2 -> 
+          "-y", $CellContext`f3 -> 
+          "-x \!\(\*SuperscriptBox[\(y\), \(2\)]\)", $CellContext`f4 -> 
+          "\!\(\*SuperscriptBox[\(x\), \(2\)]\) - y", $CellContext`f5 -> 
+          "cos(x) y", $CellContext`f6 -> 
+          "\!\(\*SuperscriptBox[\(y\), \(2\)]\)(x - \
+\!\(\*SuperscriptBox[\(x\), \(3\)]\))", $CellContext`f7 -> "-20y + 20x + 21"},
+          ControlType -> PopupMenu}, {{$CellContext`a$$, 0}, 
+         Rational[-1, 2], 
+         Rational[1, 2], 
+         Rational[1, 4], Appearance -> "Labeled", ControlPlacement -> Left, 
+         ImageSize -> Tiny}, {{$CellContext`b$$, 2}, 1, 3, 
+         Rational[1, 4], Appearance -> "Labeled", ControlPlacement -> Left, 
+         ImageSize -> 
+         Tiny}, {{$CellContext`c$$, 1, "\!\(\*SubscriptBox[\(y\), \(0\)]\)"}, 
+         
+         Rational[1, 4], 
+         Rational[3, 2], 
+         Rational[1, 4], Appearance -> "Labeled", Exclusions -> 0, 
+         ControlPlacement -> Left, ImageSize -> 
+         Tiny}, {{$CellContext`nn$$, 3, "steps"}, 1, 50, 1, Appearance -> 
+         "Labeled", ControlPlacement -> Left, ImageSize -> 
+         Tiny}, {{$CellContext`method$$, $CellContext`dalf, 
+          "method"}, {$CellContext`eulerex -> 
+          "explicit Euler", $CellContext`eulerimp -> 
+          "implicit Euler", $CellContext`rkheun -> "Heun", $CellContext`rk4 -> 
+          "classical Runge-Kutta", $CellContext`lf -> 
+          "leapfrog", $CellContext`alf -> 
+          "aynchronous leapfrog", $CellContext`dlf -> 
+          "densified leapfrog", $CellContext`dalf -> 
+          "densified asynchronous leapfrog"}}}, 
+      "Options" :> {TrackedSymbols -> True, AutorunSequencing -> {6}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{596., {255., 260.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(({$CellContext`lf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`h, $CellContext`h2, $CellContext`x, \
+$CellContext`y}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`h2 = 
+           2 $CellContext`h; $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Part[$CellContext`x, 2] = $CellContext`a + $CellContext`h; 
+          Part[$CellContext`y, 
+             2] = $CellContext`y0 + $CellContext`f[$CellContext`a, \
+$CellContext`y0] $CellContext`h; 
+          Do[Part[$CellContext`x, $CellContext`i] = 
+             Part[$CellContext`x, $CellContext`i - 2] + $CellContext`h2; 
+            Part[$CellContext`y, $CellContext`i] = 
+             Part[$CellContext`y, $CellContext`i - 
+                2] + $CellContext`h2 $CellContext`f[
+                 Part[$CellContext`x, $CellContext`i - 1], 
+                 Part[$CellContext`y, $CellContext`i - 1]], {$CellContext`i, 
+             3, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]], \
+$CellContext`combList[
+          Pattern[$CellContext`x, 
+           Blank[List]], 
+          Pattern[$CellContext`y, 
+           Blank[List]]] := 
+        MapThread[$CellContext`combPair, {$CellContext`x, $CellContext`y}], \
+$CellContext`combPair[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := {$CellContext`x, $CellContext`y}, $CellContext`dlf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`h, $CellContext`hh, $CellContext`xh, \
+$CellContext`yh, $CellContext`xp, $CellContext`yp, $CellContext`x, \
+$CellContext`y}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`hh = $CellContext`h/
+            2; $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; $CellContext`xh = 
+           Part[$CellContext`x, 1] + $CellContext`hh; $CellContext`yh = 
+           Part[$CellContext`y, 1] + $CellContext`hh $CellContext`f[
+               Part[$CellContext`x, 1], 
+               Part[$CellContext`y, 1]]; 
+          Part[$CellContext`x, 2] = Part[$CellContext`x, 1] + $CellContext`h; 
+          Part[$CellContext`y, 2] = 
+           Part[$CellContext`y, 
+              1] + $CellContext`h $CellContext`f[$CellContext`xh, \
+$CellContext`yh]; 
+          Do[$CellContext`xp = $CellContext`xh + $CellContext`h; \
+$CellContext`yp = $CellContext`yh + $CellContext`h $CellContext`f[
+                 Part[$CellContext`x, $CellContext`i - 1], 
+                 Part[$CellContext`y, $CellContext`i - 1]]; 
+            Part[$CellContext`x, $CellContext`i] = $CellContext`xp + \
+$CellContext`hh; 
+            Part[$CellContext`y, $CellContext`i] = 
+             Part[$CellContext`y, $CellContext`i - 
+                1] + $CellContext`h $CellContext`f[$CellContext`xp, \
+$CellContext`yp]; $CellContext`xh = $CellContext`xp; $CellContext`yh = \
+$CellContext`yp, {$CellContext`i, 3, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]], \
+$CellContext`alf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`\[Tau], $CellContext`x, $CellContext`y, \
+$CellContext`v, $CellContext`xi, $CellContext`yi, $CellContext`vi}, \
+$CellContext`\[Tau] = ($CellContext`b - $CellContext`a)/(
+            2 $CellContext`n); $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`v = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Part[$CellContext`v, 
+             1] = $CellContext`f[$CellContext`a, $CellContext`y0]; 
+          Do[$CellContext`xi = 
+             Part[$CellContext`x, $CellContext`i - 1]; $CellContext`yi = 
+             Part[$CellContext`y, $CellContext`i - 1]; $CellContext`vi = 
+             Part[$CellContext`v, $CellContext`i - 1]; 
+            AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            AddTo[$CellContext`vi, 
+              2 ($CellContext`f[$CellContext`xi, $CellContext`yi] - \
+$CellContext`vi)]; AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            Part[$CellContext`x, $CellContext`i] = $CellContext`xi; 
+            Part[$CellContext`y, $CellContext`i] = $CellContext`yi; 
+            Part[$CellContext`v, $CellContext`i] = $CellContext`vi, \
+{$CellContext`i, 2, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]], \
+$CellContext`dalf[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`\[Tau], $CellContext`\[Tau]2, $CellContext`x, \
+$CellContext`y, $CellContext`v, $CellContext`xi, $CellContext`yi, \
+$CellContext`vi}, $CellContext`\[Tau] = ($CellContext`b - $CellContext`a)/(
+            4 $CellContext`n); $CellContext`\[Tau]2 = 
+           2 $CellContext`\[Tau]; $CellContext`x = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`y = 
+           Table[0, {$CellContext`n + 1}]; $CellContext`v = 
+           Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`x, 1] = $CellContext`a; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Part[$CellContext`v, 
+             1] = $CellContext`f[$CellContext`a, $CellContext`y0]; 
+          Do[$CellContext`xi = 
+             Part[$CellContext`x, $CellContext`i - 1]; $CellContext`yi = 
+             Part[$CellContext`y, $CellContext`i - 1]; $CellContext`vi = 
+             Part[$CellContext`v, $CellContext`i - 1]; 
+            AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            AddTo[$CellContext`vi, 
+              2 ($CellContext`f[$CellContext`xi, $CellContext`yi] - \
+$CellContext`vi)]; AddTo[$CellContext`xi, $CellContext`\[Tau]2]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau]2 $CellContext`vi]; 
+            AddTo[$CellContext`vi, 
+              2 ($CellContext`f[$CellContext`xi, $CellContext`yi] - \
+$CellContext`vi)]; AddTo[$CellContext`xi, $CellContext`\[Tau]]; 
+            AddTo[$CellContext`yi, $CellContext`\[Tau] $CellContext`vi]; 
+            Part[$CellContext`x, $CellContext`i] = $CellContext`xi; 
+            Part[$CellContext`y, $CellContext`i] = $CellContext`yi; 
+            Part[$CellContext`v, $CellContext`i] = $CellContext`vi, \
+{$CellContext`i, 2, $CellContext`n + 
+             1}]; $CellContext`combList[$CellContext`x, $CellContext`y]], \
+$CellContext`exsol[
+          Pattern[$CellContext`a, 
+           Blank[]], 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`t, 
+           Blank[]]] := 
+        DSolve[{Derivative[
+            1][$CellContext`y][$CellContext`t] == \
+$CellContext`f[$CellContext`t, 
+             $CellContext`y[$CellContext`t]], $CellContext`y[$CellContext`a] == \
+$CellContext`y0}, $CellContext`y, $CellContext`t], 
+        Attributes[Derivative] = {
+         NHoldAll, ReadProtected}, $CellContext`plotoptions = {
+         PlotRangePadding -> 0.25, ImageSize -> 400}, 
+        Attributes[PlotRange] = {ReadProtected}, $CellContext`f3[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := (-$CellContext`x) $CellContext`y^2, $CellContext`f5[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := Cos[$CellContext`x] $CellContext`y, $CellContext`f6[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           
+           Blank[]]] := $CellContext`y^2 ($CellContext`x - $CellContext`x^3), \
+$CellContext`f4[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := $CellContext`x^2 - $CellContext`y, $CellContext`f1[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := $CellContext`y, $CellContext`f2[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := -$CellContext`y, $CellContext`f7[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]] := (-20) $CellContext`y + 20 $CellContext`x + 
+         21, $CellContext`eulerex[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`h, $CellContext`x, $CellContext`y, \
+$CellContext`lsg}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`x = 
+           Table[$CellContext`a + ($CellContext`i - 
+               1) $CellContext`h, {$CellContext`i, 1, $CellContext`n + 
+              1}]; $CellContext`y = Table[0, {$CellContext`n + 1}]; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Do[Part[$CellContext`y, $CellContext`i] = 
+            Part[$CellContext`y, $CellContext`i - 
+               1] + $CellContext`h $CellContext`f[
+                Part[$CellContext`x, $CellContext`i - 1], 
+                Part[$CellContext`y, $CellContext`i - 1]], {$CellContext`i, 
+             2, $CellContext`n + 
+             1}]; $CellContext`lsg = $CellContext`combList[$CellContext`x, \
+$CellContext`y]], $CellContext`eulerimp[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`h, $CellContext`x, $CellContext`y, \
+$CellContext`lsg, $CellContext`sol}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`x = 
+           Table[$CellContext`a + ($CellContext`i - 
+               1) $CellContext`h, {$CellContext`i, 1, $CellContext`n + 
+              1}]; $CellContext`y = 
+           Table[0, {$CellContext`i, 1, $CellContext`n + 1}]; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Do[$CellContext`lsg = 
+             Solve[$CellContext`sol == 
+               Part[$CellContext`y, $CellContext`i - 
+                  1] + $CellContext`h $CellContext`f[
+                   
+                   Part[$CellContext`x, $CellContext`i], $CellContext`sol], \
+$CellContext`sol]; 
+            Part[$CellContext`y, $CellContext`i] = If[$CellContext`lsg === {}, 
+               Part[$CellContext`y, $CellContext`i - 1], 
+               ReplaceAll[$CellContext`sol, 
+                Part[$CellContext`lsg, 1]]], {$CellContext`i, 
+             2, $CellContext`n + 
+             1}]; $CellContext`lsg = $CellContext`combList[$CellContext`x, \
+$CellContext`y]], $CellContext`rkheun[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`r, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`A, $CellContext`b, $CellContext`c}, \
+$CellContext`A = {{1/2}}; $CellContext`b = {0, 1}; $CellContext`c = {
+            0, 1/2}; $CellContext`rkgen[{$CellContext`a, $CellContext`r}, \
+$CellContext`f, $CellContext`y0, $CellContext`n, {$CellContext`A, \
+$CellContext`b, $CellContext`c}]], $CellContext`rkgen[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`r, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]], {
+           Pattern[$CellContext`A, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]], 
+           Pattern[$CellContext`c, 
+            Blank[]]}] := 
+        Module[{$CellContext`h, $CellContext`x, $CellContext`y, \
+$CellContext`lsg, $CellContext`i}, $CellContext`h = ($CellContext`r - \
+$CellContext`a)/$CellContext`n; $CellContext`x = 
+           Table[$CellContext`a + ($CellContext`i - 
+               1) $CellContext`h, {$CellContext`i, 1, $CellContext`n + 
+              1}]; $CellContext`y = 
+           Table[0, {$CellContext`i, 1, $CellContext`n + 1}]; 
+          Part[$CellContext`y, 1] = $CellContext`y0; 
+          Do[Part[$CellContext`y, $CellContext`i] = $CellContext`rkgenStep[{
+               Part[$CellContext`y, $CellContext`i - 1], 
+               
+               Part[$CellContext`x, $CellContext`i - 
+                1], $CellContext`h, $CellContext`f}, {$CellContext`A, \
+$CellContext`b, $CellContext`c}], {$CellContext`i, 2, $CellContext`n + 
+             1}]; $CellContext`lsg = $CellContext`combList[$CellContext`x, \
+$CellContext`y]], $CellContext`rkgenStep[{
+           Pattern[$CellContext`y0, 
+            Blank[]], 
+           Pattern[$CellContext`x0, 
+            Blank[]], 
+           Pattern[$CellContext`h, 
+            Blank[]], 
+           Pattern[$CellContext`f, 
+            Blank[]]}, {
+           Pattern[$CellContext`A, 
+            Blank[]], 
+           Pattern[$CellContext`b, 
+            Blank[]], 
+           Pattern[$CellContext`c, 
+            Blank[]]}] := 
+        Module[{$CellContext`s, $CellContext`k}, $CellContext`s = 
+           Length[$CellContext`b]; $CellContext`k = 
+           Table[0, {$CellContext`i, 1, $CellContext`s}]; 
+          Part[$CellContext`k, 
+             1] = $CellContext`f[$CellContext`x0, $CellContext`y0]; 
+          Do[Part[$CellContext`k, $CellContext`i] = \
+$CellContext`f[$CellContext`x0 + 
+              Part[$CellContext`c, $CellContext`i] $CellContext`h, \
+$CellContext`y0 + $CellContext`h 
+               Sum[Part[$CellContext`A, $CellContext`i - 1, $CellContext`j] 
+                 Part[$CellContext`k, $CellContext`j], {$CellContext`j, 
+                  1, $CellContext`i - 1}]], {$CellContext`i, 
+             2, $CellContext`s}]; $CellContext`ynext = $CellContext`y0 + \
+$CellContext`h 
+             Sum[Part[$CellContext`b, $CellContext`i] 
+               Part[$CellContext`k, $CellContext`i], {$CellContext`i, 
+                1, $CellContext`s}]], $CellContext`ynext = 
+        0.24336682915085428`, $CellContext`rk4[{
+           Pattern[$CellContext`a, 
+            Blank[]], 
+           Pattern[$CellContext`r, 
+            Blank[]]}, 
+          Pattern[$CellContext`f, 
+           Blank[]], 
+          Pattern[$CellContext`y0, 
+           Blank[]], 
+          Pattern[$CellContext`n, 
+           Blank[]]] := 
+        Module[{$CellContext`A, $CellContext`b, $CellContext`c}, \
+$CellContext`A = {{1/2}, {0, 1/2}, {0, 0, 1}}; $CellContext`b = {
+            1/6, 1/3, 1/3, 1/6}; $CellContext`c = {
+            0, 1/2, 1/2, 
+             1}; $CellContext`rkgen[{$CellContext`a, $CellContext`r}, \
+$CellContext`f, $CellContext`y0, $CellContext`n, {$CellContext`A, \
+$CellContext`b, $CellContext`c}]]}; Typeset`initDone$$ = True); 
+     ReleaseHold[{{
+         HoldComplete[$CellContext`f1[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              Blank[]]] := $CellContext`y; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`f2[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              Blank[]]] := -$CellContext`y; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`f3[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              Blank[]]] := (-$CellContext`x) $CellContext`y^2; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`f4[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              Blank[]]] := $CellContext`x^2 - $CellContext`y; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`f5[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              Blank[]]] := Cos[$CellContext`x] $CellContext`y; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`f6[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              
+              Blank[]]] := $CellContext`y^2 ($CellContext`x - \
+$CellContext`x^3); Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`f7[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Pattern[$CellContext`y, 
+              Blank[]]] := (-20) $CellContext`y + 20 $CellContext`x + 21; 
+          Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`combPair[
+            Pattern[$CellContext`x, 
+             Blank[]], 
+            Pattern[$CellContext`y, 
+             Blank[]]] := {$CellContext`x, $CellContext`y}], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`combList[
+            Pattern[$CellContext`x, 
+             Blank[List]], 
+            Pattern[$CellContext`y, 
+             Blank[List]]] := 
+          MapThread[$CellContext`combPair, {$CellContext`x, $CellContext`y}]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`exsol[
+            Pattern[$CellContext`a, 
+             Blank[]], 
+            Pattern[$CellContext`f, 
+             Blank[]], 
+            Pattern[$CellContext`y0, 
+             Blank[]], 
+            Pattern[$CellContext`t, 
+             Blank[]]] := 
+          DSolve[{Derivative[
+              1][$CellContext`y][$CellContext`t] == \
+$CellContext`f[$CellContext`t, 
+               $CellContext`y[$CellContext`t]], \
+$CellContext`y[$CellContext`a] == $CellContext`y0}, $CellContext`y, \
+$CellContext`t]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`plotoptions = {
+            PlotRangePadding -> 0.25, ImageSize -> 400}; Null], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`eulerex[{
+             Pattern[$CellContext`a, 
+              Blank[]], 
+             Pattern[$CellContext`b, 
+              Blank[]]}, 
+            Pattern[$CellContext`f, 
+             Blank[]], 
+            Pattern[$CellContext`y0, 
+             Blank[]], 
+            Pattern[$CellContext`n, 
+             Blank[]]] := 
+          Module[{$CellContext`h, $CellContext`x, $CellContext`y, \
+$CellContext`lsg}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`x = 
+             Table[$CellContext`a + ($CellContext`i - 
+                 1) $CellContext`h, {$CellContext`i, 1, $CellContext`n + 
+                1}]; $CellContext`y = Table[0, {$CellContext`n + 1}]; 
+            Part[$CellContext`y, 1] = $CellContext`y0; 
+            Do[Part[$CellContext`y, $CellContext`i] = 
+              Part[$CellContext`y, $CellContext`i - 
+                 1] + $CellContext`h $CellContext`f[
+                  Part[$CellContext`x, $CellContext`i - 1], 
+                  Part[$CellContext`y, $CellContext`i - 1]], {$CellContext`i, 
+               2, $CellContext`n + 
+               1}]; $CellContext`lsg = $CellContext`combList[$CellContext`x, \
+$CellContext`y]]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`eulerimp[{
+             Pattern[$CellContext`a, 
+              Blank[]], 
+             Pattern[$CellContext`b, 
+              Blank[]]}, 
+            Pattern[$CellContext`f, 
+             Blank[]], 
+            Pattern[$CellContext`y0, 
+             Blank[]], 
+            Pattern[$CellContext`n, 
+             Blank[]]] := 
+          Module[{$CellContext`h, $CellContext`x, $CellContext`y, \
+$CellContext`lsg, $CellContext`sol}, $CellContext`h = ($CellContext`b - \
+$CellContext`a)/$CellContext`n; $CellContext`x = 
+             Table[$CellContext`a + ($CellContext`i - 
+                 1) $CellContext`h, {$CellContext`i, 1, $CellContext`n + 
+                1}]; $CellContext`y = 
+             Table[0, {$CellContext`i, 1, $CellContext`n + 1}]; 
+            Part[$CellContext`y, 1] = $CellContext`y0; 
+            Do[$CellContext`lsg = 
+               Solve[$CellContext`sol == 
+                 Part[$CellContext`y, $CellContext`i - 
+                    1] + $CellContext`h $CellContext`f[
+                    
+                    Part[$CellContext`x, $CellContext`i], $CellContext`sol], \
+$CellContext`sol]; 
+              Part[$CellContext`y, $CellContext`i] = 
+               If[$CellContext`lsg === {}, 
+                 Part[$CellContext`y, $CellContext`i - 1], 
+                 ReplaceAll[$CellContext`sol, 
+                  Part[$CellContext`lsg, 1]]], {$CellContext`i, 
+               2, $CellContext`n + 
+               1}]; $CellContext`lsg = $CellContext`combList[$CellContext`x, \
+$CellContext`y]]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`rkgenStep[{
+             Pattern[$CellContext`y0, 
+              Blank[]], 
+             Pattern[$CellContext`x0, 
+              Blank[]], 
+             Pattern[$CellContext`h, 
+              Blank[]], 
+             Pattern[$CellContext`f, 
+              Blank[]]}, {
+             Pattern[A, 
+              Blank[]], 
+             Pattern[$CellContext`b, 
+              Blank[]], 
+             Pattern[$CellContext`c, 
+              Blank[]]}] := 
+          Module[{$CellContext`s, $CellContext`k}, $CellContext`s = 
+             Length[$CellContext`b]; $CellContext`k = 
+             Table[0, {$CellContext`i, 1, $CellContext`s}]; 
+            Part[$CellContext`k, 
+               1] = $CellContext`f[$CellContext`x0, $CellContext`y0]; 
+            Do[Part[$CellContext`k, $CellContext`i] = \
+$CellContext`f[$CellContext`x0 + 
+                Part[$CellContext`c, $CellContext`i] $CellContext`h, \
+$CellContext`y0 + $CellContext`h 
+                 Sum[Part[A, $CellContext`i - 1, $CellContext`j] 
+                   Part[$CellContext`k, $CellContext`j], {$CellContext`j, 
+                    1, $CellContext`i - 1}]], {$CellContext`i, 
+               2, $CellContext`s}]; $CellContext`ynext = $CellContext`y0 + \
+$CellContext`h Sum[
+                Part[$CellContext`b, $CellContext`i] 
+                 Part[$CellContext`k, $CellContext`i], {$CellContext`i, 
+                  1, $CellContext`s}]]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`rkgen[{
+             Pattern[$CellContext`a, 
+              Blank[]], 
+             Pattern[$CellContext`r, 
+              Blank[]]}, 
+            Pattern[$CellContext`f, 
+             Blank[]], 
+            Pattern[$CellContext`y0, 
+             Blank[]], 
+            Pattern[$CellContext`n, 
+             Blank[]], {
+             Pattern[A, 
+              Blank[]], 
+             Pattern[$CellContext`b, 
+              Blank[]], 
+             Pattern[$CellContext`c, 
+              Blank[]]}] := 
+          Module[{$CellContext`h, $CellContext`x, $CellContext`y, \
+$CellContext`lsg, $CellContext`i}, $CellContext`h = ($CellContext`r - \
+$CellContext`a)/$CellContext`n; $CellContext`x = 
+             Table[$CellContext`a + ($CellContext`i - 
+                 1) $CellContext`h, {$CellContext`i, 1, $CellContext`n + 
+                1}]; $CellContext`y = 
+             Table[0, {$CellContext`i, 1, $CellContext`n + 1}]; 
+            Part[$CellContext`y, 1] = $CellContext`y0; 
+            Do[Part[$CellContext`y, $CellContext`i] = $CellContext`rkgenStep[{
+                
+                 Part[$CellContext`y, $CellContext`i - 1], 
+                 
+                 Part[$CellContext`x, $CellContext`i - 
+                  1], $CellContext`h, $CellContext`f}, {
+                A, $CellContext`b, $CellContext`c}], {$CellContext`i, 
+               2, $CellContext`n + 
+               1}]; $CellContext`lsg = $CellContext`combList[$CellContext`x, \
+$CellContext`y]]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`rkheun[{
+             Pattern[$CellContext`a, 
+              Blank[]], 
+             Pattern[$CellContext`r, 
+              Blank[]]}, 
+            Pattern[$CellContext`f, 
+             Blank[]], 
+            Pattern[$CellContext`y0, 
+             Blank[]], 
+            Pattern[$CellContext`n, 
+             Blank[]]] := 
+          Module[{A, $CellContext`b, $CellContext`c}, 
+            A = {{1/2}}; $CellContext`b = {0, 1}; $CellContext`c = {
+              0, 1/2}; $CellContext`rkgen[{$CellContext`a, $CellContext`r}, \
+$CellContext`f, $CellContext`y0, $CellContext`n, {
+              A, $CellContext`b, $CellContext`c}]]], 
+         HoldComplete[Null], 
+         HoldComplete[$CellContext`rk4[{
+             Pattern[$CellContext`a, 
+              Blank[]], 
+             Pattern[$CellContext`r, 
+              Blank[]]}, 
+            Pattern[$CellContext`f, 
+             Blank[]], 
+            Pattern[$CellContext`y0, 
+             Blank[]], 
+            Pattern[$CellContext`n, 
+             Blank[]]] := 
+          Module[{A, $CellContext`b, $CellContext`c}, 
+            A = {{1/2}, {0, 1/2}, {0, 0, 1}}; $CellContext`b = {
+              1/6, 1/3, 1/3, 1/6}; $CellContext`c = {
+              0, 1/2, 1/2, 
+               1}; $CellContext`rkgen[{$CellContext`a, $CellContext`r}, \
+$CellContext`f, $CellContext`y0, $CellContext`n, {
+              A, $CellContext`b, $CellContext`c}]]]}}]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->159200821],
+
+Cell[CellGroupData[{
+
+Cell["Caption", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell["\<\
+This Demonstration shows the exact and the numerical solution of some ODEs \
+using a variety of numerical methods. Four of these methods are well-known \
+simple standard methods. Additional methods are the well-known leapfrog \
+method and the less-known asynchronous leapfrog method. Further, a \
+straightforward derivative of each of these two methods is considered. Use \
+the dropdown menus to vary the differential equation and the method. Use the \
+sliders to vary the initial value or to change the number and size of the \
+integration steps. \
+\>", "Text"]
+}, Close]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Details", "Section",
+ CellFrameColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108],
+ FontColor->RGBColor[
+  0.6449835965514611, 0.758632791638056, 0.2516823071641108]],
+
+Cell["\<\
+In comparing the performance of numerical methods for differential equations, \
+one has to take into account the computational complexity of the underlying \
+algorithms. A simple measure (and for many practical applications the most \
+relevant one) counts how often the right-hand side of the differential \
+equation has to be evaluated in one integration step. The leapfrog and \
+asynchronous leapfrog methods excel in needing only one such evaluation and \
+thus compare directly only with the explicit Euler method, which they \
+outperform in a spectacular way. Since the leapfrog methods are second-order \
+methods, they are most naturally compared with the second-order \
+Runge\[Dash]Kutta method, which is also known as Heun's method. Since Heun's \
+method does two right-hand side evaluations, it is fair to compare one Heun \
+step with a composition of two leapfrog steps of half the step size. To allow \
+such a fair comparison without having to change the step size, such combined \
+half-steps are implemented. They are referred to as densified methods. \
+\>", "Text"],
+
+Cell["\<\
+Snapshots 1 and 2: behavior for a stiff differential equation; here, the \
+Runge\[Dash]Kutta methods are superior to the leapfrog methods\
+\>", "Text"],
+
+Cell["\<\
+Snapshots 3 and 4: behavior for non-stiff differential equations; the \
+densified asynchronous leapfrog method seems to be in most cases more \
+accurate than Heun's method\
+\>", "Text"],
+
+Cell["\<\
+The leapfrog methods were added by the present author to a program by Edda \
+Eich-Soellner (see Related Links). Apart from additions, virtually no changes \
+have been made to the program of this instructive Demonstration. \
+\>", "Text"],
+
+Cell["References", "Text"],
+
+Cell[TextData[{
+ "[1] U. Mutze. \"An Asynchronous Leap-Frog Method.\" (2008) ",
+ ButtonBox["http://www.ma.utexas.edu/mp_arc/c/08/08-197.pdf",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.ma.utexas.edu/mp_arc/c/08/08-197.pdf"], None},
+  ButtonNote->"http://www.ma.utexas.edu/mp_arc/c/08/08-197.pdf"],
+ "."
+}], "Text"],
+
+Cell[TextData[{
+ "[2] Alternate link for [1]: ",
+ ButtonBox["http://www.ulrichmutze.de/articles/leapfrog4.pdf",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.ulrichmutze.de/articles/leapfrog4.pdf"], None},
+  ButtonNote->"http://www.ulrichmutze.de/articles/leapfrog4.pdf"],
+ "."
+}], "Text"]
+}, Close]],
+
+Cell[CellGroupData[{
+
+Cell["THIS NOTEBOOK IS THE SOURCE CODE FROM", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "\"",
+ ButtonBox["Comparing Leapfrog Methods with Other Numerical Methods for \
+Differential Equations",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/\
+ComparingLeapfrogMethodsWithOtherNumericalMethodsForDifferen/"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/\
+ComparingLeapfrogMethodsWithOtherNumericalMethodsForDifferen/"],
+ "\"",
+ " from ",
+ ButtonBox["The Wolfram Demonstrations Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+ "\[ParagraphSeparator]\[NonBreakingSpace]",
+ ButtonBox["http://demonstrations.wolfram.com/\
+ComparingLeapfrogMethodsWithOtherNumericalMethodsForDifferen/",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/\
+ComparingLeapfrogMethodsWithOtherNumericalMethodsForDifferen/"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/\
+ComparingLeapfrogMethodsWithOtherNumericalMethodsForDifferen/"]
+}], "Text",
+ CellMargins->{{48, Inherited}, {0, Inherited}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.5]],
+
+Cell[" ", "Text",
+ CellFrame->{{0, 0}, {0, 1}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.691905, 0.790311, 0.300252],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.691905, 0.790311, 0.300252]],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Ulrich Mutze",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ulrich+Mutze"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ulrich+Mutze"]
+}], "Text",
+ CellDingbat->"\[FilledSmallSquare]",
+ CellMargins->{{66, 48}, {2, 4}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.6]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "A full-function Wolfram ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " system (Version 6 or higher) is required to edit this notebook.\n",
+ StyleBox[ButtonBox["GET WOLFRAM MATHEMATICA \[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.wolfram.com/products/mathematica/"], None},
+  ButtonNote->"http://www.wolfram.com/products/mathematica/"],
+  FontFamily->"Helvetica",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->RGBColor[1, 0.42, 0]]
+}], "Text",
+ CellFrame->True,
+ CellMargins->{{48, 68}, {8, 28}},
+ CellFrameMargins->12,
+ CellFrameColor->RGBColor[0.865507, 0.90634, 0.680751],
+ CellChangeTimes->{3.3750111182355957`*^9},
+ ParagraphSpacing->{1., 1.},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.411765],
+ Background->RGBColor[0.986023, 0.991363, 0.969818]],
+
+Cell[TextData[{
+ "\[Copyright] ",
+ StyleBox[ButtonBox["The Wolfram Demonstrations Project & Contributors",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Terms of Use",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/termsofuse.html"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/termsofuse.html"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Make a new version of this Demonstration \
+\[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/participate/upload.jsp?id=\
+ComparingLeapfrogMethodsWithOtherNumericalMethodsForDifferen"], None},
+  ButtonNote->None],
+  FontColor->GrayLevel[0.6]]
+}], "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellMargins->{{48, 10}, {20, 50}},
+ CellFrameMargins->{{6, 0}, {6, 6}},
+ CellFrameColor->GrayLevel[0.6],
+ FontFamily->"Verdana",
+ FontSize->9,
+ FontColor->GrayLevel[0.6]]
+}, Open  ]]
+}, Open  ]]
+},
+Editable->True,
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{776, 650},
+WindowMargins->{{Inherited, Inherited}, {Inherited, 0}},
+WindowElements->{
+ "StatusArea", "MemoryMonitor", "MagnificationPopUp", "VerticalScrollBar", 
+  "MenuBar"},
+WindowTitle->"Comparing Leapfrog Methods with Other Numerical Methods for \
+Differential Equations - Source",
+DockedCells->{},
+CellContext->Notebook,
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[674, 24, 284, 7, 70, "Section"],
+Cell[961, 33, 18837, 499, 70, "Input",
+ InitializationCell->True,
+ CellID->44981821],
+Cell[19801, 534, 25954, 664, 70, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45792, 1203, 41384, 903, 70, "Output",
+ CellID->159200821],
+Cell[CellGroupData[{
+Cell[87201, 2110, 199, 4, 70, "Section"],
+Cell[87403, 2116, 572, 9, 70, "Text"]
+}, Close]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[88023, 2131, 199, 4, 70, "Section"],
+Cell[88225, 2137, 1087, 15, 70, "Text"],
+Cell[89315, 2154, 161, 3, 70, "Text"],
+Cell[89479, 2159, 195, 4, 70, "Text"],
+Cell[89677, 2165, 246, 4, 70, "Text"],
+Cell[89926, 2171, 26, 0, 70, "Text"],
+Cell[89955, 2173, 333, 8, 70, "Text"],
+Cell[90291, 2183, 305, 8, 70, "Text"]
+}, Close]],
+Cell[CellGroupData[{
+Cell[90632, 2196, 373, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[91008, 2207, 1179, 32, 70, "Text"],
+Cell[92190, 2241, 337, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[92530, 2252, 433, 14, 70, "Text"],
+Cell[CellGroupData[{
+Cell[92988, 2270, 847, 24, 70, "Text"],
+Cell[93838, 2296, 1236, 33, 70, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature eQj9aV91XhEcbDpdZs7pJa1@ *)
