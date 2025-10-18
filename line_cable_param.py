@@ -46,7 +46,7 @@ def zint_tubo(omega, rhoc, rf, rint, mur=1.0, mu=MU0):
     complex : Internal impedance (Ohm/m)
     """
     eta_c = np.sqrt(1j * omega * mur * mu / rhoc)
-    ri = rint + 1e-9  # Small offset to avoid singularity
+    ri = rint + 1e-6  # Small offset to avoid singularity
     
     # Modified Bessel functions
     k1_ri = kv(1, eta_c * ri)
@@ -289,10 +289,15 @@ def kron_reduction(matrix, nc, npr):
     This reduces the system size by eliminating ground wires while
     preserving their effects on phase conductors.
     
+    IMPORTANT: This function is only used for IMPEDANCE matrices.
+    For ADMITTANCE/CAPACITANCE, use a different approach: invert the 
+    full potential coefficient matrix first, then extract the phase-only
+    submatrix (do NOT use Kron reduction).
+    
     Parameters:
     -----------
     matrix : ndarray
-        Full impedance or potential coefficient matrix
+        Full impedance matrix (or potential coefficient for impedance calculation)
     nc : int
         Total number of conductors (phases + ground wires)
     npr : int
@@ -463,9 +468,7 @@ def compute_potential_coefficients_vectorized(x, y, rf, rpr, npr):
 # ============================================================================
 # MAIN Z AND Y MATRIX CALCULATION FUNCTIONS
 # ============================================================================
-# These functions cover different configurations of overhead lines
-# with or without ground wires and bundled conductors.
-# case 1: bundled conductors with ground wires
+
 def czyl_overhead_bundled(omega, x, y, sigma_s, rdc, rf, rint, 
                           npr, rdcpr, rpr, nb):
     """
@@ -544,16 +547,20 @@ def czyl_overhead_bundled(omega, x, y, sigma_s, rdc, rf, rint,
     # Potential coefficient matrix for capacitance calculation
     mp = compute_potential_coefficients_vectorized(x, y, rf, rpr, npr)
     
-    # Apply reductions to potential coefficient matrix
-    mp_reduced = kron_reduction(mp, nc, npr)
-    y_reduced = bundle_reduction(mp_reduced, nb, nf)
+    # For admittance: invert full matrix first, then extract phase-only part
+    # This is different from Kron reduction!
+    C_full = np.linalg.inv(mp)
+    C_phase = C_full[:nc-npr, :nc-npr]
+    
+    # Apply bundle reduction to capacitance matrix
+    C_reduced = bundle_reduction(C_phase, nb, nf)
     
     # Admittance matrix (small conductance added for numerical stability)
-    Y = 3.0e-12 * np.eye(nf) + 1j * omega * 2 * np.pi * EPSILON0 * y_reduced
+    Y = 3.0e-12 * np.eye(nf) + 1j * omega * 2 * np.pi * EPSILON0 * C_reduced
     
     return Z, Y
 
-# case 2: overhead line with ground wires (no bundles)
+
 def czyl_overhead(omega, x, y, sigma_s, rdc, rf, rint, npr, rdcpr, rpr):
     """
     Calculate Z and Y matrices for overhead line with ground wires (unbundled conductors).
@@ -624,12 +631,16 @@ def czyl_overhead(omega, x, y, sigma_s, rdc, rf, rint, npr, rdcpr, rpr):
     # Potential coefficient matrix
     mp = compute_potential_coefficients_vectorized(x, y, rf, rpr, npr)
     
-    mp_reduced = kron_reduction(mp, nc, npr)
-    Y = 3.0e-12 * np.eye(nf) + 1j * omega * 2 * np.pi * EPSILON0 * np.linalg.inv(mp_reduced)
+    # For admittance: invert full matrix first, then extract phase-only part
+    # This is NOT the same as Kron reduction
+    C_full = np.linalg.inv(mp)
+    C_phase = C_full[:nc-npr, :nc-npr]
+    
+    Y = 3.0e-12 * np.eye(nf) + 1j * omega * 2 * np.pi * EPSILON0 * C_phase
     
     return Z, Y
 
-# case 3: simple overhead line (no ground wires or bundles)
+
 def czyl_simple(omega, x, y, sigma_s, rdc, rf, rint):
     """
     Calculate Z and Y matrices for simple overhead line (no ground wires or bundles).
@@ -1025,8 +1036,8 @@ if __name__ == "__main__":
     print("\nSeries Impedance Matrix (Ohm/km):")
     print(Z * 1000)
     
-    print("\nShunt Admittance Matrix (S/km):")
-    print(Y * 1000)
+    print("\nShunt Admittance Matrix (μS/km):")
+    print(Y * 1000 * 1e6)  # Convert to microsiemens for readability
     
     print("\nSelf Impedance (diagonal):")
     print(f"  Real: {np.real(Z[0,0]) * 1000:.6f} Ohm/km")
@@ -1036,6 +1047,9 @@ if __name__ == "__main__":
     print(f"  Real: {np.real(Z[0,1]) * 1000:.6f} Ohm/km")
     print(f"  Imag: {np.imag(Z[0,1]) * 1000:.6f} Ohm/km")
     
+    print("\nSelf Admittance (diagonal):")
+    print(f"  Imag: {np.imag(Y[0,0]) * 1000 * 1e6:.6f} μS/km")
+    
     # Example 2: Nodal admittance for power flow
     print("\n" + "="*70)
     print("Example 2: Nodal Admittance for 50 km Line")
@@ -1044,11 +1058,11 @@ if __name__ == "__main__":
     line_length = 50000  # 50 km in meters
     y11, y12 = yn_lt(Z, Y, line_length)
     
-    print("\nNodal Admittance Y11 (self):")
-    print(y11)
+    print("\nNodal Admittance Y11 (self) - magnitude:")
+    print(f"  Diagonal: {np.abs(y11[0,0]):.6f} S")
     
-    print("\nNodal Admittance Y12 (mutual):")
-    print(y12)
+    print("\nNodal Admittance Y12 (mutual) - magnitude:")
+    print(f"  Diagonal: {np.abs(y12[0,0]):.6f} S")
     
     # Example 3: Sequence impedances
     print("\n" + "="*70)
@@ -1079,6 +1093,18 @@ if __name__ == "__main__":
     print(f"\nCalculated parameters for {len(freqs)} frequencies")
     print(f"\nSelf Impedance at 1 Hz: {results['Z'][0, 0, 0] * 1000:.6f} Ohm/km")
     print(f"Self Impedance at 1 kHz: {results['Z'][-1, 0, 0] * 1000:.6f} Ohm/km")
+    print(f"\nSelf Admittance at 60 Hz: {np.imag(results['Y'][3, 0, 0]) * 1000 * 1e6:.6f} μS/km")
+    
+    # Example 5: Verify admittance calculation
+    print("\n" + "="*70)
+    print("Example 5: Admittance Calculation Verification")
+    print("-" * 70)
+    
+    # For a typical 230 kV line, shunt admittance should be around 3-5 μS/km
+    print(f"\nShunt susceptance (imaginary part of Y):")
+    print(f"  Self: {np.imag(Y[0,0]) * 1000 * 1e6:.4f} μS/km")
+    print(f"  Mutual: {np.imag(Y[0,1]) * 1000 * 1e6:.4f} μS/km")
+    print(f"\nTypical range for overhead lines: 3-6 μS/km")
     
     print("\n" + "="*70)
     print("All examples completed successfully!")
