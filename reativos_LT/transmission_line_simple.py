@@ -238,7 +238,7 @@ if __name__ == "__main__":
     
     # Create comparison plots
     fig = create_comparison_plots(line, results)
-    plt.savefig('/mnt/user-data/outputs/transmission_line_comparison.png', 
+    plt.savefig('transmission_line_comparison.png', 
                 dpi=300, bbox_inches='tight')
     print(f"\n{'=' * 70}")
     print("✓ Comparison plot saved to: transmission_line_comparison.png")
@@ -246,7 +246,7 @@ if __name__ == "__main__":
     
     # Additional parametric study
     print("\n" + "=" * 70)
-    print("PARAMETRIC STUDY - Load Factor Sweep")
+    print("PARAMETRIC STUDY - Load Ratio Sweep")
     print("=" * 70)
     
     load_factors = np.linspace(0.1, 3.0, 30)
@@ -264,7 +264,7 @@ if __name__ == "__main__":
     
     ax = axes[0, 0]
     ax.plot(load_factors, [r['vs_pu'] for r in parametric_results], linewidth=2)
-    ax.set_xlabel('Load Factor')
+    ax.set_xlabel('Load Ratio')
     ax.set_ylabel('Sending Voltage (pu)')
     ax.set_title('Sending Voltage vs Load')
     ax.grid(True, alpha=0.3)
@@ -273,7 +273,7 @@ if __name__ == "__main__":
     
     ax = axes[0, 1]
     ax.plot(load_factors, [r['Ps'] for r in parametric_results], linewidth=2)
-    ax.set_xlabel('Load Factor')
+    ax.set_xlabel('Load Ratio')
     ax.set_ylabel('Sending Active Power (MW)')
     ax.set_title('Active Power vs Load')
     ax.grid(True, alpha=0.3)
@@ -281,7 +281,7 @@ if __name__ == "__main__":
     ax = axes[1, 0]
     ax.plot(load_factors, [r['Qs'] for r in parametric_results], linewidth=2)
     ax.axhline(y=0, color='k', linestyle='--', alpha=0.3)
-    ax.set_xlabel('Load Factor')
+    ax.set_xlabel('Load Ratio')
     ax.set_ylabel('Sending Reactive Power (MVAr)')
     ax.set_title('Reactive Power vs Load')
     ax.grid(True, alpha=0.3)
@@ -289,13 +289,13 @@ if __name__ == "__main__":
     ax = axes[1, 1]
     ax.plot(load_factors, [r['voltage_reg'] for r in parametric_results], linewidth=2)
     ax.axhline(y=0, color='k', linestyle='--', alpha=0.3)
-    ax.set_xlabel('Load Factor')
+    ax.set_xlabel('Load Ratio')
     ax.set_ylabel('Voltage Regulation (%)')
     ax.set_title('Voltage Regulation vs Load')
     ax.grid(True, alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig('/mnt/user-data/outputs/parametric_study.png', 
+    plt.savefig('parametric_study.png', 
                 dpi=300, bbox_inches='tight')
     print("✓ Parametric study plot saved to: parametric_study.png")
     print("=" * 70)

@@ -97,7 +97,7 @@ def analyze_scenario(scenario_name, vr, ir_factor):
 scenarios = []
 
 print("=" * 70)
-print("CENÁRIO 1: CARREGAMENTO NOMINAL (Loading Factor = 1.0)")
+print("CENÁRIO 1: CARREGAMENTO NOMINAL (Load/Nominal Load Ratio = 1.0)")
 print("=" * 70)
 vr1 = 1.0 * vb
 result1 = analyze_scenario("Nominal Loading", vr1, 1.0)
@@ -120,7 +120,7 @@ print(f"Losses: {result1['losses_p']:.2f} MW, {result1['losses_q']:.2f} MVAr")
 print()
 
 print("=" * 70)
-print("CENÁRIO 2: CARGA ABAIXO DA NOMINAL (Loading Factor = 0.5)")
+print("CENÁRIO 2: CARGA ABAIXO DA NOMINAL (Loading Ratio = 0.5)")
 print("=" * 70)
 vr2 = 1.0 * vb
 result2 = analyze_scenario("Below Nominal (50%)", vr2, 2.0)
@@ -143,7 +143,7 @@ print(f"Losses: {result2['losses_p']:.2f} MW, {result2['losses_q']:.2f} MVAr")
 print()
 
 print("=" * 70)
-print("CENÁRIO 3: CARGA ACIMA DA NOMINAL (Loading Factor = 2.0)")
+print("CENÁRIO 3: CARGA ACIMA DA NOMINAL (Loading Ratio = 2.0)")
 print("=" * 70)
 vr3 = 1.0 * vb
 result3 = analyze_scenario("Above Nominal (200%)", vr3, 0.5)
