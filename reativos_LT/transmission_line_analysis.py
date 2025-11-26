@@ -4,7 +4,7 @@ from plotly.subplots import make_subplots
 import pandas as pd
 
 # Transmission line parameters
-z1 = 1j * 0.3179  # Series impedance per unit length (Ω/km)
+z1 = 0.0175 + 1j * 0.3179  # Series impedance per unit length (Ω/km)
 y1 = 1j * 5.1833e-6  # Shunt admittance per unit length (S/km)
 L = 200.0  # Line length (km)
 
@@ -23,7 +23,7 @@ ABCD = np.array([[a, b], [c, d]])
 
 # Base values
 vb = 500.0 / np.sqrt(3)  # Base voltage (kV)
-Sb = abs(vb**2 / Zc)  # Base power (MVA) - take absolute value
+Sb = vb**2 / np.real(Zc)  # Base power (MVA) - take absolute value
 ib = Sb / (3 * vb)  # Base current (kA)
 
 print(f"=== Transmission Line Parameters ===")
@@ -322,14 +322,14 @@ fig.update_yaxes(title_text="Losses (MW/MVAr)", row=3, col=1)
 fig.update_yaxes(title_text="Efficiency (%)", row=3, col=2)
 
 # Save the interactive dashboard
-output_file = '/mnt/user-data/outputs/transmission_line_dashboard.html'
+output_file = 'transmission_line_dashboard.html'
 fig.write_html(output_file)
 print(f"\n✓ Interactive dashboard saved to: {output_file}")
 
 # Also create a detailed comparison table
 df_comparison = pd.DataFrame(scenarios)
 df_comparison = df_comparison.round(4)
-csv_file = '/mnt/user-data/outputs/transmission_line_results.csv'
+csv_file = 'transmission_line_results.csv'
 df_comparison.to_csv(csv_file, index=False)
 print(f"✓ Results table saved to: {csv_file}")
 
