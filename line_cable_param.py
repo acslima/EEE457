@@ -625,6 +625,8 @@ def czyl_overhead(omega, x, y, sigma_s, rdc, rf, rint, npr, rdcpr, rpr):
     
     # Total impedance with Kron reduction
     z_total = zin_matrix + ze
+    print("Total impedance matrix (including ground wires):")
+    print(z_total)
     Z_inv = kron_reduction(z_total, nc, npr)
     Z = np.linalg.inv(Z_inv)
     
