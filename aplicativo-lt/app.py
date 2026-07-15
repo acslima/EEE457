@@ -93,8 +93,14 @@ def matriz_para_csv(M: np.ndarray) -> str:
     return buf.getvalue()
 
 
-def grafico_estrutura(x, y, centers, gw_positions, nb, npr):
-    """Desenha a silhueta da torre com os condutores nas alturas médias."""
+def grafico_estrutura(x, y, centers, gw_positions, nb, npr,
+                      phase_offsets=None, draw_bundle_outline=True):
+    """Desenha a silhueta da torre com os condutores nas alturas médias.
+
+    Se ``phase_offsets`` for informado (lista com 3 arrays (nb,2) para A, B, C),
+    o contorno (círculo ou elipse) de cada feixe é traçado como guia visual —
+    apenas quando ``draw_bundle_outline`` é True (para geometrias paramétricas).
+    """
     fig, ax = plt.subplots(figsize=(6.2, 5.0))
     nf = 3
     rot_fase = ["A", "B", "C"]
@@ -106,10 +112,24 @@ def grafico_estrutura(x, y, centers, gw_positions, nb, npr):
         ax.scatter(x[ini:fim], y[ini:fim], s=55, color=cores[k],
                    zorder=3, label=f"Fase {rot_fase[k]}")
         cx, cy = centers[k]
-        ax.scatter([cx], [cy], s=30, marker="x", color=cores[k], alpha=0.6)
+        # centro do feixe na altura MEDIA (não na fixação) para ficar sobre os pontos
+        cy_med = np.mean(y[ini:fim]) if nb >= 1 else cy
+        ax.scatter([cx], [cy_med], s=30, marker="x",
+                   color=cores[k], alpha=0.6)
         ax.annotate(rot_fase[k], (np.mean(x[ini:fim]), np.mean(y[ini:fim])),
-                    textcoords="offset points", xytext=(8, 6),
+                    textcoords="offset points", xytext=(10, 8),
                     fontsize=11, color=cores[k])
+        # contorno do feixe
+        if nb >= 2 and phase_offsets is not None and draw_bundle_outline:
+            offs = np.asarray(phase_offsets[k])
+            dx_max = np.max(np.abs(offs[:, 0]))
+            dy_max = np.max(np.abs(offs[:, 1]))
+            if dx_max > 1e-9 or dy_max > 1e-9:
+                t = np.linspace(0, 2 * np.pi, 200)
+                a = dx_max if dx_max > 1e-9 else dy_max
+                b = dy_max if dy_max > 1e-9 else dx_max
+                ax.plot(cx + a * np.cos(t), cy_med + b * np.sin(t),
+                        color=cores[k], ls=":", lw=0.9, alpha=0.6, zorder=1)
 
     # para-raios
     if npr > 0:
@@ -117,7 +137,7 @@ def grafico_estrutura(x, y, centers, gw_positions, nb, npr):
         yg = y[nf * nb:]
         ax.scatter(xg, yg, s=70, marker="^", color=OKABE["preto"],
                    zorder=3, label="Para-raios")
-        for j, (gx, gy) in enumerate(gw_positions):
+        for (gx, gy) in gw_positions:
             ax.scatter([gx], [gy], s=30, marker="x",
                        color=OKABE["preto"], alpha=0.5)
 
@@ -223,26 +243,98 @@ else:
     flecha_direta = st.sidebar.number_input(
         "Flecha de fase (m)", 0.5, 60.0, 19.1, 0.1)
 
-st.sidebar.header("4. Feixe de condutores")
+st.sidebar.header("4. Feixe de subcondutores")
 nb = st.sidebar.number_input("Subcondutores por fase (nb)", 1, 8, 2, 1)
-if nb > 1:
-    espac = st.sidebar.number_input(
-        "Espaçamento entre subcondutores (m)", 0.05, 2.0, 0.4572, 0.0001,
-        format="%.4f")
-    ang0 = st.sidebar.number_input(
-        "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0, 0.0, 15.0)
-else:
-    espac, ang0 = 0.0, 0.0
 
-st.sidebar.header("5. Geometria das fases")
-st.sidebar.caption("Coordenadas do CENTRO de cada feixe (ponto de fixação).")
+# variaveis de saida (offsets por fase, alem de descritores para o grafico)
+tipo_feixe = "circular"
+espac = 0.0
+ang0 = 0.0
+# semi-eixos (a, b) por grupo de fase
+a_lat = b_lat = a_cent = b_cent = 0.0
+
+if nb > 1:
+    tipo_feixe = st.sidebar.radio(
+        "Geometria do feixe",
+        ["Circular (mesma em todas as fases)",
+         "Elíptico (fase central distinta das laterais)",
+         "Manual (coordenadas de cada subcondutor)"],
+        help="Circular: polígono regular com espaçamento uniforme. "
+             "Elíptico: subcondutores sobre uma elipse de semi-eixos (a, b), "
+             "com fase central podendo diferir das laterais. "
+             "Manual: você informa diretamente os deslocamentos (dx, dy) "
+             "de cada subcondutor em relação ao centro do feixe de cada fase.")
+
+    if tipo_feixe.startswith("Circular"):
+        ang0 = st.sidebar.number_input(
+            "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0, 0.0, 15.0)
+        espac = st.sidebar.number_input(
+            "Espaçamento entre subcondutores adjacentes (m)",
+            0.05, 2.0, 0.4572, 0.0001, format="%.4f")
+    elif tipo_feixe.startswith("Elíptico"):
+        ang0 = st.sidebar.number_input(
+            "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0, 0.0, 15.0)
+        st.sidebar.markdown("**Semi-eixos das fases laterais (A e C)**")
+        a_lat = st.sidebar.number_input(
+            "a\u2097 - horizontal (m)", 0.01, 2.0, 0.2286, 0.001, format="%.4f",
+            key="a_lat")
+        b_lat = st.sidebar.number_input(
+            "b\u2097 - vertical (m)", 0.01, 2.0, 0.2286, 0.001, format="%.4f",
+            key="b_lat")
+        st.sidebar.markdown("**Semi-eixos da fase central (B)**")
+        a_cent = st.sidebar.number_input(
+            "a\u1D9C - horizontal (m)", 0.01, 2.0, 0.3000, 0.001, format="%.4f",
+            key="a_cent")
+        b_cent = st.sidebar.number_input(
+            "b\u1D9C - vertical (m)", 0.01, 2.0, 0.1500, 0.001, format="%.4f",
+            key="b_cent")
+        st.sidebar.caption(
+            "Feixe circular como caso particular: informe a = b "
+            "(igual ao raio do polígono usual).")
+    else:  # Manual
+        st.sidebar.caption(
+            "Informe as coordenadas **(x, y)** de cada subcondutor no **ponto "
+            "de fixação** da torre. A altura média usada no cálculo é obtida "
+            "de  y_média = y_fixação \u2212 (2/3)·flecha. Neste modo a seção 5 "
+            "é ignorada.")
+
+        # Ponto de partida: layout do notebook (feixe circular nb=2 s=0.4572)
+        offs_default = core.bundle_offsets(nb, 0.4572, 0.0)
+        centros_default = [(-8.5, 28.4), (0.0, 29.25), (8.5, 28.4)]
+        subcond_labels = [f"sub {k+1}" for k in range(nb)]
+
+        def _tabela_coords(fase_label: str, centro, key: str) -> pd.DataFrame:
+            xc, yc = centro
+            df0 = pd.DataFrame({
+                "Sub": subcond_labels,
+                "x (m)":         np.round(xc + offs_default[:, 0], 4),
+                "y fixação (m)": np.round(yc + offs_default[:, 1], 4),
+            })
+            st.sidebar.markdown(f"**Fase {fase_label}**")
+            return st.sidebar.data_editor(
+                df0, hide_index=True, disabled=["Sub"], key=key,
+                num_rows="fixed")
+
+        tab_A = _tabela_coords("A", centros_default[0], key=f"manA_nb{nb}")
+        tab_B = _tabela_coords("B", centros_default[1], key=f"manB_nb{nb}")
+        tab_C = _tabela_coords("C", centros_default[2], key=f"manC_nb{nb}")
+
+modo_manual = tipo_feixe.startswith("Manual")
+
 fases_padrao = pd.DataFrame({
     "Fase": ["A", "B", "C"],
     "x (m)": [-8.5, 0.0, 8.5],
     "y fixação (m)": [28.4, 29.25, 28.4],
 })
-fases_edit = st.sidebar.data_editor(
-    fases_padrao, hide_index=True, disabled=["Fase"], key="fases")
+if not modo_manual:
+    st.sidebar.header("5. Geometria das fases")
+    st.sidebar.caption("Coordenadas do CENTRO de cada feixe (ponto de fixação).")
+    fases_edit = st.sidebar.data_editor(
+        fases_padrao, hide_index=True, disabled=["Fase"], key="fases")
+else:
+    # No modo Manual, a seção 5 é ignorada — usamos o default só para não quebrar
+    # eventuais referências.
+    fases_edit = fases_padrao
 
 st.sidebar.header("6. Cabos para-raios")
 npr = st.sidebar.selectbox("Número de para-raios", [0, 1, 2], index=2)
@@ -320,13 +412,49 @@ else:
     flecha_gw = 0.0
 
 # --- coordenadas de todos os condutores ---
-centers = [(float(r["x (m)"]), float(r["y fixação (m)"]))
-           for _, r in fases_edit.iterrows()]
 gw_positions = [(float(r["x (m)"]), float(r["y fixação (m)"]))
                 for _, r in gw_edit.iterrows()] if npr > 0 else []
 
-x, y = core.build_coordinates(centers, flecha_fase, gw_positions, flecha_gw,
-                              nb=nb, spacing=espac, angle0_deg=ang0)
+if modo_manual:
+    # Coordenadas absolutas de cada subcondutor (fixação); flecha aplicada aqui.
+    def _extrair(tab):
+        return tab[["x (m)", "y fixação (m)"]].to_numpy(dtype=float)
+
+    fix_A = _extrair(tab_A)
+    fix_B = _extrair(tab_B)
+    fix_C = _extrair(tab_C)
+
+    # Centro de cada feixe = centroide dos subcondutores (apenas para o gráfico)
+    centers = [tuple(fix_A.mean(axis=0)),
+               tuple(fix_B.mean(axis=0)),
+               tuple(fix_C.mean(axis=0))]
+
+    # Offsets relativos ao centroide, para renderização e para uso uniforme
+    off_A = fix_A - np.asarray(centers[0])
+    off_B = fix_B - np.asarray(centers[1])
+    off_C = fix_C - np.asarray(centers[2])
+    phase_offsets = [off_A, off_B, off_C]
+
+    x, y = core.build_coordinates_per_phase(
+        centers, phase_offsets, flecha_fase, gw_positions, flecha_gw)
+else:
+    centers = [(float(r["x (m)"]), float(r["y fixação (m)"]))
+               for _, r in fases_edit.iterrows()]
+
+    # offsets de subcondutor por fase (A, B, C)
+    if nb == 1:
+        off_all = np.zeros((1, 2))
+        phase_offsets = [off_all, off_all, off_all]
+    elif tipo_feixe.startswith("Circular"):
+        off_all = core.bundle_offsets(nb, espac, ang0)
+        phase_offsets = [off_all, off_all, off_all]
+    else:  # Elíptico
+        off_lat_arr = core.elliptical_bundle_offsets(nb, a_lat, b_lat, ang0)
+        off_cent_arr = core.elliptical_bundle_offsets(nb, a_cent, b_cent, ang0)
+        phase_offsets = [off_lat_arr, off_cent_arr, off_lat_arr]
+
+    x, y = core.build_coordinates_per_phase(
+        centers, phase_offsets, flecha_fase, gw_positions, flecha_gw)
 
 # --- matrizes Z e Y ---
 erro_calc = None
@@ -406,7 +534,9 @@ if erro_calc is not None:
 # --- gráficos ---
 g1, g2 = st.columns([1, 1])
 with g1:
-    st.pyplot(grafico_estrutura(x, y, centers, gw_positions, nb, npr))
+    st.pyplot(grafico_estrutura(x, y, centers, gw_positions, nb, npr,
+                                phase_offsets=phase_offsets,
+                                draw_bundle_outline=not tipo_feixe.startswith("Manual")))
 with g2:
     h_fase_med = np.mean([c[1] for c in centers])
     h_gw_med = np.mean([g[1] for g in gw_positions]) if npr > 0 else 0.0
@@ -454,16 +584,48 @@ with sc2:
                             fmt_complex(seq["y2"] * 1e6, 4)]},
     ), hide_index=True, width='stretch')
 
-m1, m2, m3, m4 = st.columns(4)
-m1.metric("R\u2081  (\u03a9/km)", f"{seq['z1'].real:.5f}")
-m2.metric("X\u2081  (\u03a9/km)", f"{seq['z1'].imag:.5f}")
-m3.metric("Z\u2080  carac. (\u03a9)", f"{np.real(seq['zc']):.2f}")
-m4.metric(f"Pot. natural @ {Vn:.0f} kV (MW)", f"{seq['Pn']:.1f}")
+# destaque para Z1, Y1 e desempenho do circuito
+st.markdown("**Sequência positiva \u2014 destaque**")
+
+# linha 1: Z1
+z1 = seq["z1"]
+mod_z1 = abs(z1)
+ang_z1 = np.degrees(np.angle(z1))
+r1, r2, r3, r4 = st.columns(4)
+r1.metric("R\u2081  (\u03a9/km)", f"{z1.real:.5f}")
+r2.metric("X\u2081  (\u03a9/km)", f"{z1.imag:.5f}")
+r3.metric("|Z\u2081|  (\u03a9/km)", f"{mod_z1:.5f}")
+r4.metric("\u2220 Z\u2081  (\u00b0)", f"{ang_z1:.2f}")
+
+# linha 2: Y1 (em uS/km, como no notebook)
+y1_us = seq["y1"] * 1e6
+mod_y1 = abs(y1_us)
+ang_y1 = np.degrees(np.angle(y1_us))
+q1, q2, q3, q4 = st.columns(4)
+q1.metric("G\u2081  (\u03bcS/km)", f"{y1_us.real:.4f}")
+q2.metric("B\u2081  (\u03bcS/km)", f"{y1_us.imag:.4f}")
+q3.metric("|Y\u2081|  (\u03bcS/km)", f"{mod_y1:.4f}")
+q4.metric("\u2220 Y\u2081  (\u00b0)", f"{ang_y1:.2f}")
+
+# linha 3: desempenho do circuito (Zc, Pn, capacitância aparente, velocidade)
+# Zc (Ohm) - impedancia caracteristica; velocidade v = 1/sqrt(LC)
+# a partir de z1 = R + jωL e y1 = G + jωC:
+omega_rad = 2.0 * np.pi * freq
+L_km = z1.imag / omega_rad      # H/km
+C_km = seq["y1"].imag / omega_rad  # F/km
+v_prop = 1.0 / np.sqrt(max(L_km * C_km, 1e-30)) if L_km > 0 and C_km > 0 else 0.0
+n1, n2, n3, n4 = st.columns(4)
+n1.metric("Z\u2080  carac. (\u03a9)", f"{np.real(seq['zc']):.2f}")
+n2.metric(f"P\u2099 @ {Vn:.0f} kV (MW)", f"{seq['Pn']:.1f}")
+n3.metric("L\u2081 (mH/km)", f"{L_km*1e3:.4f}")
+n4.metric("v de propagação (km/s)", f"{v_prop:.0f}")
 
 st.caption(
-    "Impedância característica  Z\u2080 = \u221a(z\u2081/y\u2081)  e potência "
-    "natural (SIL)  P\u2099 = V\u2099\u00b2 / Re(Z\u2080), ambas para a sequência "
-    "positiva, conforme o notebook de referência."
+    "Z\u2081 e Y\u2081 são os autovalores da sequência positiva das matrizes "
+    "de fase. Z\u2080 = \u221a(z\u2081/y\u2081), P\u2099 = V\u2099\u00b2/Re(Z\u2080). "
+    "A capacitância e a indutância unitárias, bem como a velocidade de "
+    "propagação  v = 1/\u221a(L\u2081C\u2081),  são deduzidas de Im(z\u2081)/\u03c9 "
+    "e Im(y\u2081)/\u03c9."
 )
 
 with st.expander("Detalhes \u2014 matrizes de sequência completas"):

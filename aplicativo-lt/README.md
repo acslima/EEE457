@@ -53,14 +53,39 @@ O navegador abre em `http://localhost:8501`.
    `T_pr = 6980 kgf`, `W_pr = 410 kg/km` e tração de **25 % da RTS** — o que
    resulta em **8,887 m para um vão de 550 m**. A flecha também pode ser
    informada diretamente.
-4. **Monta as coordenadas** de todos os subcondutores. A altura média de cada
+4. **Feixe de subcondutores** — três modos:
+   - **Circular**: os subcondutores são vértices de um polígono regular; basta
+     informar o espaçamento entre subcondutores adjacentes.
+   - **Elíptico**: os subcondutores caem sobre uma elipse de semi-eixos
+     `(a, b)` — `a` horizontal e `b` vertical —, com posições
+     `(x_k, y_k) = (a·cos(t_k), b·sin(t_k))` e `t_k = t₀ + 2πk/nb`. As **fases
+     laterais** (A e C) usam um par `(aₗ, bₗ)` e a **fase central** (B) usa um
+     par independente `(aᶜ, bᶜ)`. Fazendo `a = b` recupera-se o feixe circular
+     de raio `a`.
+   - **Manual**: você entra diretamente com uma tabela por fase (A, B, C)
+     contendo as coordenadas **(x, y)** absolutas de cada subcondutor no
+     **ponto de fixação** da torre. A flecha continua sendo aplicada
+     automaticamente (`y_média = y_fixação − (2/3)·flecha`). Nesse modo a
+     seção 5 (centro dos feixes) é ignorada — útil quando as coordenadas
+     vêm de desenhos de fabricante e não seguem uma parametrização simples.
+
+   Em todos os modos o número de subcondutores por fase (`nb`) é o mesmo nas
+   três fases — limitação da rotina `czyl_overhead_bundled`.
+5. **Monta as coordenadas** de todos os subcondutores. A altura média de cada
    condutor é `y = y_fixação − (2/3)·flecha`.
-5. **Calcula Z e Y** com `czyl_overhead_bundled` (impedância externa de Carson,
+6. **Calcula Z e Y** com `czyl_overhead_bundled` (impedância externa de Carson,
    impedância interna de condutor tubular, redução de Kron dos para-raios e
    redução de feixe).
-6. **Apresenta** as matrizes em Ω/km e μS/km, as componentes de sequência, a
-   impedância característica `Z₀ = √(z₁/y₁)` e a potência natural
-   `Pₙ = Vₙ²/Re(Z₀)`, além dos gráficos da estrutura e do perfil de catenária.
+7. **Apresenta** as matrizes em Ω/km e μS/km, as componentes de sequência e,
+   em destaque, os valores unitários da **sequência positiva**:
+   - **Z₁**: R₁, X₁, |Z₁| e ∠Z₁
+   - **Y₁**: G₁, B₁, |Y₁| e ∠Y₁ (em μS/km)
+   - **Desempenho do circuito**: impedância característica `Z_c = √(z₁/y₁)`,
+     potência natural `Pₙ = Vₙ²/Re(Z_c)`, indutância unitária `L₁ = X₁/ω` e
+     velocidade de propagação `v = 1/√(L₁C₁)`.
+
+   Também mostra os gráficos da estrutura (com o contorno da elipse ou do
+   círculo de cada feixe) e do perfil de catenária.
 
 ## Reproduzindo o notebook
 

@@ -216,7 +216,7 @@ def conductor_props(row: pd.Series, temp_c: float = 20.0) -> dict:
 # 3. GEOMETRIA DO FEIXE E DAS ESTRUTURAS
 # ===========================================================================
 def bundle_offsets(nb: int, spacing: float, angle0_deg: float = 0.0) -> np.ndarray:
-    """Deslocamentos (dx, dy) dos subcondutores de um feixe.
+    """Deslocamentos (dx, dy) dos subcondutores de um feixe circular.
 
     Para nb >= 2 os subcondutores são dispostos sobre um polígono regular.
     O espaçamento ``spacing`` é a distância entre subcondutores adjacentes;
@@ -232,31 +232,63 @@ def bundle_offsets(nb: int, spacing: float, angle0_deg: float = 0.0) -> np.ndarr
     return np.column_stack([R * np.cos(ang), R * np.sin(ang)])
 
 
+def elliptical_bundle_offsets(nb: int, a: float, b: float,
+                              angle0_deg: float = 0.0) -> np.ndarray:
+    """Deslocamentos (dx, dy) dos subcondutores de um feixe ELÍPTICO.
+
+    Os ``nb`` subcondutores são igualmente espaçados no parâmetro angular
+    ``t`` sobre a elipse de semi-eixos ``a`` (horizontal) e ``b`` (vertical):
+
+        (x_k, y_k) = ( a cos(t0 + 2π k/nb),  b sin(t0 + 2π k/nb) )
+
+    Se ``a == b``, recai no feixe circular de raio ``a``. Para ``nb = 2`` e
+    ``angle0 = 0``, obtém-se um par horizontal em (± a, 0).
+    """
+    if nb < 1:
+        raise ValueError("nb deve ser >= 1.")
+    if nb == 1:
+        return np.zeros((1, 2))
+    if a <= 0 or b <= 0:
+        raise ValueError("Semi-eixos a e b devem ser positivos.")
+    ang = np.deg2rad(angle0_deg) + np.arange(nb) * 2.0 * np.pi / nb
+    return np.column_stack([a * np.cos(ang), b * np.sin(ang)])
+
+
 def build_coordinates(phase_centers, phase_sag, gw_positions, gw_sag,
                       nb, spacing, angle0_deg=0.0):
-    """Monta os vetores x, y de TODOS os condutores para o czyl.
+    """Monta os vetores x, y de TODOS os condutores para o czyl (feixe CIRCULAR).
 
-    Ordenação esperada por ``czyl_overhead_bundled``:
-    subcondutores da fase A, depois B, depois C e, por fim, os para-raios.
+    Mantida por compatibilidade. Para geometrias distintas por fase (feixes
+    elípticos ou fase central diferente das laterais), use
+    ``build_coordinates_per_phase``.
 
-    A altura média de cada condutor é  y = y_fixação - (2/3) * flecha,
-    regra empregada no notebook de referência.
-
-    Parâmetros
-    ----------
-    phase_centers : lista de 3 pares (x, y_fixação) dos centros de feixe (m)
-    phase_sag     : flecha dos condutores de fase (m) - escalar
-    gw_positions  : lista de pares (x, y_fixação) dos para-raios (m)
-    gw_sag        : flecha dos para-raios (m) - escalar
-    nb, spacing, angle0_deg : parâmetros do feixe
-
-    Retorna
-    -------
-    (x, y) : np.ndarray de coordenadas (m)
+    Ordenação exigida por ``czyl_overhead_bundled``: subcondutores da fase A,
+    depois B, depois C e, por fim, os para-raios. A altura média de cada
+    condutor é  y = y_fixação - (2/3) * flecha.
     """
     offs = bundle_offsets(nb, spacing, angle0_deg)
+    return build_coordinates_per_phase(
+        phase_centers, [offs, offs, offs], phase_sag,
+        gw_positions, gw_sag)
+
+
+def build_coordinates_per_phase(phase_centers, phase_offsets, phase_sag,
+                                gw_positions, gw_sag):
+    """Monta x, y quando cada fase tem seu próprio conjunto de offsets.
+
+    ``phase_offsets`` é uma lista com 3 arrays (nb, 2) — offsets de subcondutor
+    das fases A, B e C, nessa ordem. Todos os arrays devem ter o mesmo nb
+    (limitação de ``czyl_overhead_bundled``: um único nb global).
+    """
+    if len(phase_offsets) != len(phase_centers):
+        raise ValueError("phase_offsets e phase_centers devem ter o mesmo comprimento.")
+    nbs = {len(o) for o in phase_offsets}
+    if len(nbs) != 1:
+        raise ValueError(
+            "Todas as fases devem ter o mesmo número de subcondutores nb "
+            f"(recebido: {sorted(nbs)}).")
     xs, ys = [], []
-    for (xc, yc) in phase_centers:
+    for (xc, yc), offs in zip(phase_centers, phase_offsets):
         y_med = yc - (2.0 / 3.0) * phase_sag
         for dx, dy in offs:
             xs.append(xc + dx)
