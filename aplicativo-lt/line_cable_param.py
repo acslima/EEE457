@@ -625,8 +625,8 @@ def czyl_overhead(omega, x, y, sigma_s, rdc, rf, rint, npr, rdcpr, rpr):
     
     # Total impedance with Kron reduction
     z_total = zin_matrix + ze
-    Z = kron_reduction(z_total, nc, npr)
-    # Z = np.linalg.inv(Z_inv)
+    Z_inv = kron_reduction(z_total, nc, npr)
+    Z = np.linalg.inv(Z_inv)
     
     # Potential coefficient matrix
     mp = compute_potential_coefficients_vectorized(x, y, rf, rpr, npr)
