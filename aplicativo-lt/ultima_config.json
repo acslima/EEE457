@@ -1,0 +1,151 @@
+{
+  "timestamp": "2026-07-16T09:40:34",
+  "fonte_condutores": "condutores-caa.csv",
+  "condutor_fase": "RAIL",
+  "operacao": {
+    "frequencia_hz": 60.0,
+    "resistividade_solo_ohm_m": 1000.0,
+    "temperatura_condutor_c": 20.0,
+    "tensao_nominal_kv": 500.0
+  },
+  "vao_tracao": {
+    "vao_m": 500.0,
+    "modo_flecha": "Catenária (vão + tração)",
+    "fracao_rts_pct": 20.0,
+    "flecha_direta_m": null
+  },
+  "feixe": {
+    "nb": 4,
+    "tipo_feixe": "Manual (coordenadas de cada subcondutor)",
+    "modo_manual": true,
+    "angulo_orientacao_graus": 0.0,
+    "espacamento_m": 0.0,
+    "semi_eixos_laterais": {
+      "a": 0.0,
+      "b": 0.0
+    },
+    "semi_eixos_central": {
+      "a": 0.0,
+      "b": 0.0
+    },
+    "subcondutores_manuais": {
+      "A": [
+        {
+          "Sub": "sub 1",
+          "x (m)": -7.229,
+          "y fixação (m)": 35.839
+        },
+        {
+          "Sub": "sub 2",
+          "x (m)": -7.229,
+          "y fixação (m)": 37.7
+        },
+        {
+          "Sub": "sub 3",
+          "x (m)": -6.771,
+          "y fixação (m)": 37.7
+        },
+        {
+          "Sub": "sub 4",
+          "x (m)": -6.771,
+          "y fixação (m)": 35.839
+        }
+      ],
+      "B": [
+        {
+          "Sub": "sub 1",
+          "x (m)": -0.229,
+          "y fixação (m)": 37.076
+        },
+        {
+          "Sub": "sub 2",
+          "x (m)": -0.229,
+          "y fixação (m)": 37.7
+        },
+        {
+          "Sub": "sub 3",
+          "x (m)": 0.229,
+          "y fixação (m)": 37.7
+        },
+        {
+          "Sub": "sub 4",
+          "x (m)": 0.229,
+          "y fixação (m)": 37.076
+        }
+      ],
+      "C": [
+        {
+          "Sub": "sub 1",
+          "x (m)": 7.229,
+          "y fixação (m)": 35.839
+        },
+        {
+          "Sub": "sub 2",
+          "x (m)": 7.229,
+          "y fixação (m)": 37.7
+        },
+        {
+          "Sub": "sub 3",
+          "x (m)": 6.771,
+          "y fixação (m)": 37.7
+        },
+        {
+          "Sub": "sub 4",
+          "x (m)": 6.771,
+          "y fixação (m)": 35.839
+        }
+      ]
+    }
+  },
+  "geometria_fases": [
+    {
+      "Fase": "A",
+      "x (m)": -8.5,
+      "y fixação (m)": 28.4
+    },
+    {
+      "Fase": "B",
+      "x (m)": 0.0,
+      "y fixação (m)": 29.25
+    },
+    {
+      "Fase": "C",
+      "x (m)": 8.5,
+      "y fixação (m)": 28.4
+    }
+  ],
+  "para_raios": {
+    "numero": 2,
+    "raio_m": 0.00457,
+    "resistencia_cc_ohm_m": 0.00419,
+    "modo_flecha": "Catenária (tração + peso)",
+    "carga_ruptura_kgf": 6980.0,
+    "peso_kg_km": 410.0,
+    "fracao_rts_pct": 25.0,
+    "flecha_direta_m": null,
+    "posicoes": [
+      {
+        "Para-raios": "PR-1",
+        "x (m)": -5.0,
+        "y fixação (m)": 47.7
+      },
+      {
+        "Para-raios": "PR-2",
+        "x (m)": 5.0,
+        "y fixação (m)": 47.7
+      }
+    ]
+  },
+  "resultados": {
+    "flecha_fase_m": 21.305186351160295,
+    "flecha_para_raios_m": 7.3445182451925595,
+    "z1_ohm_por_km": {
+      "re": 15.394097532918531,
+      "im": 251.62591081702035
+    },
+    "y1_uS_por_km": {
+      "re": 3.0000000000007137,
+      "im": 6526.530466322215
+    }
+  }
+}

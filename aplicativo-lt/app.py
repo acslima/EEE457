@@ -23,7 +23,9 @@ pasta deste script.
 from __future__ import annotations
 
 import io
+import json
 import os
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -59,6 +61,72 @@ plt.rcParams.update({
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PADRAO = os.path.join(DIR, "condutores-caa.csv")
+CONFIG_PADRAO = os.path.join(DIR, "ultima_config.json")
+
+
+def _json_default(o):
+    """Converte tipos numpy/pandas para tipos nativos ao serializar em JSON."""
+    if isinstance(o, np.integer):
+        return int(o)
+    if isinstance(o, np.floating):
+        return float(o)
+    if isinstance(o, np.ndarray):
+        return o.tolist()
+    return str(o)
+
+
+def _df_para_registros(df: pd.DataFrame) -> list:
+    """Serializa um DataFrame como lista de registros (dicionarios)."""
+    return df.to_dict(orient="records")
+
+
+def salvar_ultima_config(caminho: str, config: dict) -> None:
+    """Grava a ultima configuracao executada em um arquivo JSON."""
+    with open(caminho, "w", encoding="utf-8") as f:
+        json.dump(config, f, ensure_ascii=False, indent=2, default=_json_default)
+
+
+def carregar_ultima_config(caminho: str) -> dict:
+    """Le a ultima configuracao salva; retorna {} se ausente ou invalida."""
+    if not os.path.exists(caminho):
+        return {}
+    try:
+        with open(caminho, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _cfg(caminho: str, padrao):
+    """Busca um valor aninhado na config inicial (ex.: 'operacao.frequencia_hz').
+
+    Retorna ``padrao`` quando a chave nao existe ou o valor salvo e None.
+    """
+    no = st.session_state.get("cfg_inicial") or {}
+    for chave in caminho.split("."):
+        if isinstance(no, dict) and chave in no:
+            no = no[chave]
+        else:
+            return padrao
+    return padrao if no is None else no
+
+
+def _indice(opcoes: list, valor, padrao: int = 0) -> int:
+    """Indice de ``valor`` em ``opcoes`` (para restaurar radios/selectbox)."""
+    return opcoes.index(valor) if valor in opcoes else padrao
+
+
+def _df_from_registros(registros, colunas, padrao: pd.DataFrame) -> pd.DataFrame:
+    """Reconstroi um DataFrame a partir de registros salvos em JSON."""
+    if not registros:
+        return padrao
+    try:
+        df = pd.DataFrame(registros)
+        if not set(colunas).issubset(df.columns):
+            return padrao
+        return df[colunas].reset_index(drop=True)
+    except (ValueError, KeyError):
+        return padrao
 
 
 # ---------------------------------------------------------------------------
@@ -199,6 +267,27 @@ st.caption(
 # ===========================================================================
 # BARRA LATERAL - ENTRADAS
 # ===========================================================================
+# Carrega UMA vez por sessao a ultima configuracao salva, para servir de valor
+# inicial dos widgets. O arquivo e reescrito a cada execucao, por isso so lemos
+# no inicio da sessao (evita "resetar" o que o usuario altera durante o uso).
+if "cfg_inicial" not in st.session_state:
+    st.session_state.cfg_inicial = carregar_ultima_config(CONFIG_PADRAO)
+    st.session_state.cfg_carregada = bool(st.session_state.cfg_inicial)
+
+if st.session_state.get("cfg_carregada"):
+    _ts_carregado = _cfg("timestamp", "")
+    st.sidebar.success(
+        "\u21a9\ufe0f Configuração inicial carregada de `ultima_config.json`"
+        + (f" ({_ts_carregado})." if _ts_carregado else "."))
+    if st.sidebar.button("Restaurar padrões de fábrica"):
+        try:
+            if os.path.exists(CONFIG_PADRAO):
+                os.remove(CONFIG_PADRAO)
+        except OSError:
+            pass
+        st.session_state.clear()
+        st.rerun()
+
 st.sidebar.header("1. Tabela de condutores")
 arq = st.sidebar.file_uploader("Arquivo CSV de condutores CAA", type=["csv"])
 if arq is not None:
@@ -213,38 +302,53 @@ else:
 st.sidebar.caption(f"Fonte: {fonte}  \u2014  {len(df_cond)} condutores")
 
 nomes = df_cond[core.COL["nome"]].astype(str).tolist()
-nome_sel = st.sidebar.selectbox(
-    "Condutor de fase", nomes,
-    index=nomes.index("TERN") if "TERN" in nomes else 0)
+_cond_salvo = _cfg("condutor_fase", "TERN")
+if _cond_salvo in nomes:
+    _idx_cond = nomes.index(_cond_salvo)
+else:
+    _idx_cond = nomes.index("TERN") if "TERN" in nomes else 0
+nome_sel = st.sidebar.selectbox("Condutor de fase", nomes, index=_idx_cond)
 linha_cond = df_cond[df_cond[core.COL["nome"]] == nome_sel].iloc[0]
 
 st.sidebar.header("2. Condições de operação")
-freq = st.sidebar.number_input("Frequência (Hz)", 1.0, 1000.0, 60.0, 1.0)
+freq = st.sidebar.number_input(
+    "Frequência (Hz)", 1.0, 1000.0,
+    float(_cfg("operacao.frequencia_hz", 60.0)), 1.0)
 rho_solo = st.sidebar.number_input(
-    "Resistividade do solo (\u03a9\u00b7m)", 1.0, 1.0e5, 1000.0, 50.0)
+    "Resistividade do solo (\u03a9\u00b7m)", 1.0, 1.0e5,
+    float(_cfg("operacao.resistividade_solo_ohm_m", 1000.0)), 50.0)
 temp_op = st.sidebar.number_input(
-    "Temperatura do condutor (\u00b0C)", -20.0, 150.0, 20.0, 5.0,
+    "Temperatura do condutor (\u00b0C)", -20.0, 150.0,
+    float(_cfg("operacao.temperatura_condutor_c", 20.0)), 5.0,
     help="Corrige a resistência CC a partir do valor tabelado a 20 °C. "
          "O efeito pelicular é incluído pelo modelo de impedância interna.")
-Vn = st.sidebar.number_input("Tensão nominal (kV)", 1.0, 1500.0, 345.0, 1.0)
+Vn = st.sidebar.number_input(
+    "Tensão nominal (kV)", 1.0, 1500.0,
+    float(_cfg("operacao.tensao_nominal_kv", 345.0)), 1.0)
 
 st.sidebar.header("3. Vão e tração (catenária)")
-span = st.sidebar.number_input("Vão entre estruturas (m)", 50.0, 2000.0, 400.0, 10.0)
+span = st.sidebar.number_input(
+    "Vão entre estruturas (m)", 50.0, 2000.0,
+    float(_cfg("vao_tracao.vao_m", 400.0)), 10.0)
+_opc_flecha = ["Catenária (vão + tração)", "Flecha direta (m)"]
 modo_flecha = st.sidebar.radio(
-    "Flecha dos condutores de fase",
-    ["Catenária (vão + tração)", "Flecha direta (m)"])
+    "Flecha dos condutores de fase", _opc_flecha,
+    index=_indice(_opc_flecha, _cfg("vao_tracao.modo_flecha", _opc_flecha[0])))
 if modo_flecha.startswith("Catenária"):
     frac_rts = st.sidebar.slider(
-        "Tração horizontal (% da carga de ruptura)", 5.0, 50.0, 20.0, 0.5,
+        "Tração horizontal (% da carga de ruptura)", 5.0, 50.0,
+        float(_cfg("vao_tracao.fracao_rts_pct", 20.0)), 0.5,
         help="Tração de trabalho (EDS). Valores típicos: 18 % a 25 % da RTS.")
     flecha_direta = None
 else:
     frac_rts = None
     flecha_direta = st.sidebar.number_input(
-        "Flecha de fase (m)", 0.5, 60.0, 19.1, 0.1)
+        "Flecha de fase (m)", 0.5, 60.0,
+        float(_cfg("vao_tracao.flecha_direta_m", 19.1)), 0.1)
 
 st.sidebar.header("4. Feixe de subcondutores")
-nb = st.sidebar.number_input("Subcondutores por fase (nb)", 1, 8, 2, 1)
+nb = st.sidebar.number_input(
+    "Subcondutores por fase (nb)", 1, 8, int(_cfg("feixe.nb", 2)), 1)
 
 # variaveis de saida (offsets por fase, alem de descritores para o grafico)
 tipo_feixe = "circular"
@@ -254,11 +358,12 @@ ang0 = 0.0
 a_lat = b_lat = a_cent = b_cent = 0.0
 
 if nb > 1:
+    _opc_feixe = ["Circular (mesma em todas as fases)",
+                  "Elíptico (fase central distinta das laterais)",
+                  "Manual (coordenadas de cada subcondutor)"]
     tipo_feixe = st.sidebar.radio(
-        "Geometria do feixe",
-        ["Circular (mesma em todas as fases)",
-         "Elíptico (fase central distinta das laterais)",
-         "Manual (coordenadas de cada subcondutor)"],
+        "Geometria do feixe", _opc_feixe,
+        index=_indice(_opc_feixe, _cfg("feixe.tipo_feixe", _opc_feixe[0])),
         help="Circular: polígono regular com espaçamento uniforme. "
              "Elíptico: subcondutores sobre uma elipse de semi-eixos (a, b), "
              "com fase central podendo diferir das laterais. "
@@ -267,27 +372,34 @@ if nb > 1:
 
     if tipo_feixe.startswith("Circular"):
         ang0 = st.sidebar.number_input(
-            "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0, 0.0, 15.0)
+            "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0,
+            float(_cfg("feixe.angulo_orientacao_graus", 0.0)), 15.0)
         espac = st.sidebar.number_input(
             "Espaçamento entre subcondutores adjacentes (m)",
-            0.05, 2.0, 0.4572, 0.0001, format="%.4f")
+            0.05, 2.0, float(_cfg("feixe.espacamento_m", 0.4572)), 0.0001,
+            format="%.4f")
     elif tipo_feixe.startswith("Elíptico"):
         ang0 = st.sidebar.number_input(
-            "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0, 0.0, 15.0)
+            "Ângulo de orientação do feixe (\u00b0)", 0.0, 360.0,
+            float(_cfg("feixe.angulo_orientacao_graus", 0.0)), 15.0)
         st.sidebar.markdown("**Semi-eixos das fases laterais (A e C)**")
         a_lat = st.sidebar.number_input(
-            "a\u2097 - horizontal (m)", 0.01, 2.0, 0.2286, 0.001, format="%.4f",
-            key="a_lat")
+            "a\u2097 - horizontal (m)", 0.01, 2.0,
+            float(_cfg("feixe.semi_eixos_laterais.a", 0.2286)), 0.001,
+            format="%.4f", key="a_lat")
         b_lat = st.sidebar.number_input(
-            "b\u2097 - vertical (m)", 0.01, 2.0, 0.2286, 0.001, format="%.4f",
-            key="b_lat")
+            "b\u2097 - vertical (m)", 0.01, 2.0,
+            float(_cfg("feixe.semi_eixos_laterais.b", 0.2286)), 0.001,
+            format="%.4f", key="b_lat")
         st.sidebar.markdown("**Semi-eixos da fase central (B)**")
         a_cent = st.sidebar.number_input(
-            "a\u1D9C - horizontal (m)", 0.01, 2.0, 0.3000, 0.001, format="%.4f",
-            key="a_cent")
+            "a\u1D9C - horizontal (m)", 0.01, 2.0,
+            float(_cfg("feixe.semi_eixos_central.a", 0.3000)), 0.001,
+            format="%.4f", key="a_cent")
         b_cent = st.sidebar.number_input(
-            "b\u1D9C - vertical (m)", 0.01, 2.0, 0.1500, 0.001, format="%.4f",
-            key="b_cent")
+            "b\u1D9C - vertical (m)", 0.01, 2.0,
+            float(_cfg("feixe.semi_eixos_central.b", 0.1500)), 0.001,
+            format="%.4f", key="b_cent")
         st.sidebar.caption(
             "Feixe circular como caso particular: informe a = b "
             "(igual ao raio do polígono usual).")
@@ -302,6 +414,8 @@ if nb > 1:
         offs_default = core.bundle_offsets(nb, 0.4572, 0.0)
         centros_default = [(-8.5, 28.4), (0.0, 29.25), (8.5, 28.4)]
         subcond_labels = [f"sub {k+1}" for k in range(nb)]
+        _man_salvo = _cfg("feixe.subcondutores_manuais", {})
+        _cols_man = ["Sub", "x (m)", "y fixação (m)"]
 
         def _tabela_coords(fase_label: str, centro, key: str) -> pd.DataFrame:
             xc, yc = centro
@@ -310,6 +424,10 @@ if nb > 1:
                 "x (m)":         np.round(xc + offs_default[:, 0], 4),
                 "y fixação (m)": np.round(yc + offs_default[:, 1], 4),
             })
+            # Restaura coordenadas salvas apenas quando o n de subcondutores casa.
+            reg = _man_salvo.get(fase_label) if isinstance(_man_salvo, dict) else None
+            if reg and len(reg) == nb:
+                df0 = _df_from_registros(reg, _cols_man, df0)
             st.sidebar.markdown(f"**Fase {fase_label}**")
             return st.sidebar.data_editor(
                 df0, hide_index=True, disabled=["Sub"], key=key,
@@ -326,18 +444,24 @@ fases_padrao = pd.DataFrame({
     "x (m)": [-8.5, 0.0, 8.5],
     "y fixação (m)": [28.4, 29.25, 28.4],
 })
+fases_inicial = _df_from_registros(
+    _cfg("geometria_fases", None),
+    ["Fase", "x (m)", "y fixação (m)"], fases_padrao)
 if not modo_manual:
     st.sidebar.header("5. Geometria das fases")
     st.sidebar.caption("Coordenadas do CENTRO de cada feixe (ponto de fixação).")
     fases_edit = st.sidebar.data_editor(
-        fases_padrao, hide_index=True, disabled=["Fase"], key="fases")
+        fases_inicial, hide_index=True, disabled=["Fase"], key="fases")
 else:
     # No modo Manual, a seção 5 é ignorada — usamos o default só para não quebrar
     # eventuais referências.
     fases_edit = fases_padrao
 
 st.sidebar.header("6. Cabos para-raios")
-npr = st.sidebar.selectbox("Número de para-raios", [0, 1, 2], index=2)
+_opc_npr = [0, 1, 2]
+npr = st.sidebar.selectbox(
+    "Número de para-raios", _opc_npr,
+    index=_indice(_opc_npr, int(_cfg("para_raios.numero", 2)), 2))
 if npr > 0:
     st.sidebar.caption("Considerados 3/8\" EHS.")
     gw_padrao_full = pd.DataFrame({
@@ -345,35 +469,48 @@ if npr > 0:
         "x (m)": [-6.25, 6.25],
         "y fixação (m)": [35.9, 35.9],
     })
+    gw_inicial = gw_padrao_full.iloc[:npr].reset_index(drop=True)
+    _gw_salvo = _cfg("para_raios.posicoes", None)
+    gw_inicial = _df_from_registros(
+        _gw_salvo, ["Para-raios", "x (m)", "y fixação (m)"], gw_inicial)
+    if len(gw_inicial) != npr:  # config salva com outro n de para-raios
+        gw_inicial = gw_padrao_full.iloc[:npr].reset_index(drop=True)
     gw_edit = st.sidebar.data_editor(
-        gw_padrao_full.iloc[:npr].reset_index(drop=True),
-        hide_index=True, disabled=["Para-raios"], key=f"gw{npr}")
+        gw_inicial, hide_index=True, disabled=["Para-raios"], key=f"gw{npr}")
     rpr = st.sidebar.number_input(
-        "Raio do para-raios (m)", 1e-3, 2e-2, core.GW_RADIUS_DEFAULT,
+        "Raio do para-raios (m)", 1e-3, 2e-2,
+        float(_cfg("para_raios.raio_m", core.GW_RADIUS_DEFAULT)),
         1e-4, format="%.5f")
     rdcpr = st.sidebar.number_input(
         "Resistência CC do para-raios (\u03a9/m)", 1e-4, 5e-2,
-        core.GW_RDC_DEFAULT, 1e-4, format="%.5f")
+        float(_cfg("para_raios.resistencia_cc_ohm_m", core.GW_RDC_DEFAULT)),
+        1e-4, format="%.5f")
+    _opc_flecha_gw = ["Catenária (tração + peso)", "Flecha direta (m)"]
     modo_flecha_gw = st.sidebar.radio(
-        "Flecha dos para-raios",
-        ["Catenária (tração + peso)", "Flecha direta (m)"])
+        "Flecha dos para-raios", _opc_flecha_gw,
+        index=_indice(_opc_flecha_gw,
+                      _cfg("para_raios.modo_flecha", _opc_flecha_gw[0])))
     if modo_flecha_gw.startswith("Catenária"):
         Tpr = st.sidebar.number_input(
             "Carga de ruptura do para-raios  T_pr (kgf)",
-            500.0, 50000.0, core.GW_RTS_DEFAULT, 10.0)
+            500.0, 50000.0,
+            float(_cfg("para_raios.carga_ruptura_kgf", core.GW_RTS_DEFAULT)), 10.0)
         Wpr = st.sidebar.number_input(
             "Peso do para-raios  W_pr (kg/km)",
-            50.0, 3000.0, core.GW_WEIGHT_DEFAULT, 5.0)
+            50.0, 3000.0,
+            float(_cfg("para_raios.peso_kg_km", core.GW_WEIGHT_DEFAULT)), 5.0)
         frac_rts_gw = st.sidebar.slider(
             "Tração horizontal do para-raios (% da RTS)",
-            5.0, 50.0, core.GW_TENSION_FRAC_DEFAULT, 0.5,
-            help="H_pr = (fração) \u00b7 T_pr.  Valor usual: 25 % da RTS.")
+            5.0, 50.0,
+            float(_cfg("para_raios.fracao_rts_pct", core.GW_TENSION_FRAC_DEFAULT)),
+            0.5, help="H_pr = (fração) \u00b7 T_pr.  Valor usual: 25 % da RTS.")
         flecha_gw_direta = None
     else:
         Tpr, Wpr, frac_rts_gw = (core.GW_RTS_DEFAULT, core.GW_WEIGHT_DEFAULT,
                                  core.GW_TENSION_FRAC_DEFAULT)
         flecha_gw_direta = st.sidebar.number_input(
-            "Flecha dos para-raios (m)", 0.5, 60.0, 8.887, 0.1)
+            "Flecha dos para-raios (m)", 0.5, 60.0,
+            float(_cfg("para_raios.flecha_direta_m", 8.887)), 0.1)
 else:
     gw_edit = pd.DataFrame(columns=["Para-raios", "x (m)", "y fixação (m)"])
     rpr, rdcpr = core.GW_RADIUS_DEFAULT, core.GW_RDC_DEFAULT
@@ -530,6 +667,75 @@ st.divider()
 if erro_calc is not None:
     st.error(f"Erro no cálculo das matrizes: {erro_calc}")
     st.stop()
+
+# ===========================================================================
+# PERSISTÊNCIA - última configuração executada (ultima_config.json)
+# ===========================================================================
+config_atual = {
+    "timestamp": datetime.now().isoformat(timespec="seconds"),
+    "fonte_condutores": fonte,
+    "condutor_fase": nome_sel,
+    "operacao": {
+        "frequencia_hz": freq,
+        "resistividade_solo_ohm_m": rho_solo,
+        "temperatura_condutor_c": temp_op,
+        "tensao_nominal_kv": Vn,
+    },
+    "vao_tracao": {
+        "vao_m": span,
+        "modo_flecha": modo_flecha,
+        "fracao_rts_pct": frac_rts,
+        "flecha_direta_m": flecha_direta,
+    },
+    "feixe": {
+        "nb": nb,
+        "tipo_feixe": tipo_feixe,
+        "modo_manual": modo_manual,
+        "angulo_orientacao_graus": ang0,
+        "espacamento_m": espac,
+        "semi_eixos_laterais": {"a": a_lat, "b": b_lat},
+        "semi_eixos_central": {"a": a_cent, "b": b_cent},
+    },
+    "geometria_fases": _df_para_registros(fases_edit),
+    "para_raios": {
+        "numero": npr,
+        "raio_m": rpr,
+        "resistencia_cc_ohm_m": rdcpr,
+        "modo_flecha": modo_flecha_gw,
+        "carga_ruptura_kgf": Tpr,
+        "peso_kg_km": Wpr,
+        "fracao_rts_pct": frac_rts_gw,
+        "flecha_direta_m": flecha_gw_direta,
+        "posicoes": _df_para_registros(gw_edit) if npr > 0 else [],
+    },
+    "resultados": {
+        "flecha_fase_m": flecha_fase,
+        "flecha_para_raios_m": flecha_gw,
+        "z1_ohm_por_km": {"re": (seq["z1"] * 1000.0).real,
+                          "im": (seq["z1"] * 1000.0).imag},
+        "y1_uS_por_km": {"re": (seq["y1"] * 1e6 * 1000.0).real,
+                         "im": (seq["y1"] * 1e6 * 1000.0).imag},
+    },
+}
+if modo_manual:
+    config_atual["feixe"]["subcondutores_manuais"] = {
+        "A": _df_para_registros(tab_A),
+        "B": _df_para_registros(tab_B),
+        "C": _df_para_registros(tab_C),
+    }
+
+try:
+    salvar_ultima_config(CONFIG_PADRAO, config_atual)
+    st.sidebar.caption(
+        f"\U0001F4BE Configuração salva em `ultima_config.json` "
+        f"({config_atual['timestamp']}).")
+except OSError as exc:  # pragma: no cover
+    st.sidebar.warning(f"Não foi possível salvar a configuração: {exc}")
+
+st.sidebar.download_button(
+    "Baixar última configuração (JSON)",
+    json.dumps(config_atual, ensure_ascii=False, indent=2, default=_json_default),
+    "ultima_config.json", "application/json")
 
 # --- gráficos ---
 g1, g2 = st.columns([1, 1])
