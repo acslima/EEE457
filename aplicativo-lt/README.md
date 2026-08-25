@@ -2,7 +2,9 @@
 
 Frontend em Python (Streamlit) para o cálculo das matrizes de impedância (**Z**)
 e admitância (**Y**) por unidade de comprimento de linhas aéreas, a partir da
-tabela de condutores CAA (ACSR). Desenvolvido para a disciplina
+tabela de condutores CAA (ACSR). Suporta de **1 a 3 circuitos trifásicos em
+paralelo**, no mesmo nível de tensão, compartilhando o corredor (mesma torre ou
+torres lado a lado). Desenvolvido para a disciplina
 **EEE 457 — Transmissão de Energia Elétrica** (Escola Politécnica / COPPE — UFRJ).
 
 A metodologia de cálculo reproduz a do notebook
@@ -36,6 +38,35 @@ streamlit run app.py
 ```
 
 O navegador abre em `http://localhost:8501`.
+
+## Circuitos em paralelo (novo)
+
+Na seção **2 — Circuitos em paralelo** da barra lateral escolhe-se o número de
+circuitos (1, 2 ou 3). Convenções e comportamento:
+
+- **Ordenação das fases**: C1-A, C1-B, C1-C, C2-A, …, C3-C. Para arranjos com
+  transposição de barras (ex.: ABC/CBA no circuito duplo), basta editar as
+  coordenadas da seção 6 de acordo — a fase "A" de cada circuito é, por
+  definição, a primeira linha daquele circuito na tabela.
+- **Geometrias padrão**: 1 circuito → configuração horizontal do notebook;
+  2 circuitos → torre de circuito duplo com fases em disposição vertical;
+  3 circuitos → três torres lado a lado (25 m entre eixos). Tudo editável.
+- **Limitações herdadas de `czyl_overhead_bundled`**: todos os circuitos usam
+  o **mesmo condutor**, o **mesmo `nb`** e a **mesma tensão nominal**. A mesma
+  flecha de fase é aplicada a todos os circuitos (mesmo condutor e tração).
+- **Cálculo**: a rotina `czyl_overhead_bundled` é aplicada uma única vez ao
+  conjunto completo de condutores do corredor (3·n fases + até 4 para-raios),
+  de modo que o **acoplamento eletromagnético entre circuitos** (retorno pelo
+  solo e capacitâncias mútuas) é capturado naturalmente nas matrizes
+  (3n × 3n) de fase.
+- **Sequências**: a transformação de Fortescue é aplicada em blocos
+  (T = I ⊗ A). O app mostra as impedâncias/admitâncias de sequência
+  **próprias de cada circuito**, as matrizes de **acoplamento entre circuitos**
+  M₀ (sequência zero — tipicamente significativa) e M₁ (positiva) e o
+  **equivalente dos circuitos em paralelo** (mesmos barramentos):
+  `z_eq = 1/(1ᵀ M₁⁻¹ 1)` (série) e `y_eq = 1ᵀ N₁ 1` (shunt). Z_c, Pₙ (SIL),
+  L₁ e a velocidade de propagação são calculados a partir do equivalente.
+  Com 1 circuito, tudo se reduz exatamente ao comportamento anterior.
 
 ## O que o aplicativo faz
 

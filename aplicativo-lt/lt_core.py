@@ -362,3 +362,94 @@ def sequence_analysis(Z, Y, Vn_kv):
         "zc": zc,
         "Pn": Pn,
     }
+
+
+def multi_circuit_sequence_analysis(Z, Y, Vn_kv, ncirc):
+    """Análise de sequência para ``ncirc`` circuitos trifásicos em paralelo.
+
+    ``Z`` e ``Y`` são as matrizes de fase completas (3·ncirc × 3·ncirc), em
+    por-metro, na ordenação C1-A, C1-B, C1-C, C2-A, ... A transformação de
+    Fortescue é aplicada em blocos:  T = I_ncirc ⊗ A,
+    Ẑ = T⁻¹ Z T  e  Ŷ = T⁻¹ Y T.
+
+    Para cada circuito ``i``, as impedâncias/admitâncias próprias de sequência
+    são os elementos diagonais do bloco 3×3 correspondente de Ẑ (Ŷ).
+
+    O acoplamento entre circuitos é resumido nas matrizes ncirc × ncirc
+    ``M0`` e ``M1`` (impedância) e ``N0`` e ``N1`` (admitância), cujo elemento
+    (i, j) é o termo de sequência zero (resp. positiva) que liga o circuito i
+    ao circuito j.
+
+    EQUIVALENTE PARALELO — circuitos ligados aos MESMOS barramentos e no
+    mesmo nível de tensão: a queda de tensão de sequência é comum a todos e a
+    corrente total é a soma das correntes de cada circuito. Assim,
+
+        z_eq = 1 / (1ᵀ M⁻¹ 1)      (série)
+        y_eq = 1ᵀ N 1              (shunt)
+
+    com 1 = vetor de uns. Para ncirc = 1 recupera-se ``sequence_analysis``.
+
+    Retorna um dicionário com grandezas por circuito (/km), matrizes de
+    acoplamento (/km), equivalente paralelo, Z_c equivalente e SIL (MW).
+    """
+    Z = np.asarray(Z, dtype=complex)
+    Y = np.asarray(Y, dtype=complex)
+    if Z.shape != (3 * ncirc, 3 * ncirc):
+        raise ValueError(
+            f"Z deve ser {3*ncirc}x{3*ncirc} para {ncirc} circuito(s); "
+            f"recebido {Z.shape}.")
+
+    A, A_inv = fortescue_matrices()
+    T = np.kron(np.eye(ncirc), A)
+    T_inv = np.kron(np.eye(ncirc), A_inv)
+    Z_seq = T_inv @ Z @ T
+    Y_seq = T_inv @ Y @ T
+
+    # --- grandezas próprias de cada circuito (blocos diagonais) ---
+    per_circuit = []
+    for i in range(ncirc):
+        zb = np.diag(Z_seq[3 * i:3 * i + 3, 3 * i:3 * i + 3])
+        yb = np.diag(Y_seq[3 * i:3 * i + 3, 3 * i:3 * i + 3])
+        zc_i = np.sqrt(zb[1] / yb[1])
+        per_circuit.append({
+            "z0": zb[0] * 1000.0, "z1": zb[1] * 1000.0, "z2": zb[2] * 1000.0,
+            "y0": yb[0] * 1000.0, "y1": yb[1] * 1000.0, "y2": yb[2] * 1000.0,
+            "zc": zc_i,
+            "Pn": Vn_kv**2 / np.real(zc_i),
+        })
+
+    # --- matrizes de acoplamento de sequência entre circuitos ---
+    def _coupling(Mseq, k):
+        return np.array([[Mseq[3 * i + k, 3 * j + k] for j in range(ncirc)]
+                         for i in range(ncirc)], dtype=complex)
+
+    M0 = _coupling(Z_seq, 0)      # sequência zero  (Ohm/m)
+    M1 = _coupling(Z_seq, 1)      # sequência positiva
+    N0 = _coupling(Y_seq, 0)      # (S/m)
+    N1 = _coupling(Y_seq, 1)
+
+    # --- equivalente dos circuitos em paralelo (mesmos barramentos) ---
+    ones = np.ones(ncirc)
+    z1_eq = 1.0 / (ones @ np.linalg.inv(M1) @ ones)
+    z0_eq = 1.0 / (ones @ np.linalg.inv(M0) @ ones)
+    y1_eq = ones @ N1 @ ones
+    y0_eq = ones @ N0 @ ones
+
+    zc_eq = np.sqrt(z1_eq / y1_eq)
+    Pn_eq = Vn_kv**2 / np.real(zc_eq)
+
+    return {
+        "Z_seq": Z_seq,
+        "Y_seq": Y_seq,
+        "per_circuit": per_circuit,
+        "M0": M0 * 1000.0,        # Ohm/km
+        "M1": M1 * 1000.0,
+        "N0": N0 * 1000.0,        # S/km
+        "N1": N1 * 1000.0,
+        "z0_eq": z0_eq * 1000.0,  # Ohm/km
+        "z1_eq": z1_eq * 1000.0,
+        "y0_eq": y0_eq * 1000.0,  # S/km
+        "y1_eq": y1_eq * 1000.0,
+        "zc": zc_eq,
+        "Pn": Pn_eq,
+    }
